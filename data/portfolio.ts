@@ -1,15 +1,8 @@
 import {
     Github,
     Linkedin,
-    Twitter,
     Mail,
-    ExternalLink,
-    Code2,
-    Palette,
-    Database,
-    Globe,
-    Smartphone,
-    Zap,
+    Cloud,
 } from "lucide-react";
 import {
     Project,
@@ -18,6 +11,7 @@ import {
     SocialLink,
     Experience,
     NavItem,
+    Certification,
 } from "@/types";
 import { getOptimizedProjectImage, getOptimizedAvatarImage } from "@/lib/images";
 
@@ -28,6 +22,7 @@ export const navigationItems: NavItem[] = [
     { href: "#projects", label: "Projects" },
     { href: "#skills", label: "Skills" },
     { href: "#experience", label: "Experience" },
+    { href: "#certifications", label: "Certifications" },
     { href: "#contact", label: "Contact" },
 ];
 
@@ -42,7 +37,7 @@ export const personalInfo = {
     phone: "+91 (995) 079-4448",
     bio: "Crafting Scalable E-commerce Solutions with 9+ Years of Salesforce Commerce Cloud Expertise, Delivering high- performance digital commerce experiences tailored for growth.",
     avatar: getOptimizedAvatarImage("Sumit Jangid"),
-    resume: "/resume.pdf",
+    resume: "/resume/SumitJangid_Resume_2025.docx",
 };
 
 /**
@@ -325,36 +320,39 @@ export const experiences: Experience[] = [
 ];
 
 /**
- * Client testimonials
+ * Professional certifications
  */
-export const testimonials: Testimonial[] = [
+export const certifications: Certification[] = [
     {
         id: "1",
-        name: "Sarah Chen",
-        position: "Product Manager",
-        company: "TechCorp Solutions",
-        avatar: getOptimizedAvatarImage("Sarah Chen"),
-        content: "Alex consistently delivers high-quality work and has an exceptional eye for detail. His technical skills and collaborative approach make him invaluable to our team.",
-        rating: 5,
+        name: "Salesforce Certified B2C Commerce Developer",
+        issuer: "Salesforce",
+        dateEarned: new Date(2018, 3, 15), // September 15, 2018
+        verificationUrl: "https://www.salesforce.com/trailblazer/sjangir3",
+        badgeUrl: "/images/badges/B2CDeveloperBadge.png",
+        description: "Demonstrates expertise in developing and customizing Salesforce B2C Commerce Cloud solutions, including storefront development, business logic implementation, and integration capabilities.",
+        skills: ["SFRA", "JavaScript", "ISML", "SGJC", "REST APIs", "OCAPI"]
     },
     {
         id: "2",
-        name: "Michael Rodriguez",
-        position: "CEO",
-        company: "Startup Inc.",
-        avatar: getOptimizedAvatarImage("Michael Rodriguez"),
-        content: "Working with Alex was a game-changer for our startup. He brought our vision to life with incredible attention to user experience and performance.",
-        rating: 5,
+        name: "Salesforce Certified B2C Commerce Architect",
+        issuer: "Salesforce",
+        dateEarned: new Date(2025, 0, 22), // June 22, 2021
+        verificationUrl: "https://www.salesforce.com/trailblazer/sjangir3",
+        badgeUrl: "/images/badges/B2CArchitectBadge.png",
+        description: "Validates advanced skills in designing and implementing complex B2C Commerce Cloud solutions, including architecture decisions, performance optimization, and enterprise-level integrations.",
+        skills: ["Solution Architecture", "Performance Optimization", "Enterprise Integration", "SCAPI", "PWA Kit", "Microservices"]
     },
     {
         id: "3",
-        name: "Emily Davis",
-        position: "Design Director",
-        company: "Creative Studio",
-        avatar: getOptimizedAvatarImage("Emily Davis"),
-        content: "Alex has an amazing ability to translate complex designs into beautiful, functional interfaces. His code is clean, maintainable, and performant.",
-        rating: 5,
-    },
+        name: "Salesforce Certified Agentforce Specialist",
+        issuer: "Salesforce",
+        dateEarned: new Date(2025, 6, 10), // March 10, 2020
+        verificationUrl: "https://www.salesforce.com/trailblazer/sjangir3",
+        badgeUrl: "/images/badges/SalesforceAgentForce.png",
+        description: "Certifies proficiency in JavaScript programming within the Salesforce ecosystem, including modern JavaScript features, asynchronous programming, and Lightning Web Components development.",
+        skills: ["JavaScript ES6+", "Lightning Web Components", "Asynchronous Programming", "DOM Manipulation", "Testing", "Modern Web APIs"]
+    }
 ];
 
 /**
@@ -402,7 +400,12 @@ export const socialLinks: SocialLink[] = [
     },
     {
         platform: "Email",
-        url: "mailto:s.jangir129@gmail.com",
+        url: "mailto:s.jangir129@gmail.com?subject=Portfolio%20Inquiry%20-%20Let's%20Connect&body=Hi%20Sumit,%0D%0A%0D%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20potential%20opportunity.%0D%0A%0D%0ABest%20regards",
         icon: Mail,
+    },
+    {
+        platform: "Salesforce Profile",
+        url: "https://www.salesforce.com/trailblazer/sjangir3",
+        icon: Cloud,
     },
 ];

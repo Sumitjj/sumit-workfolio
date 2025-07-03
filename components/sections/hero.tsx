@@ -5,7 +5,7 @@ import Image from "next/image";
 import { ChevronDown, ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { personalInfo, socialLinks } from "@/data/portfolio";
-import { scrollToElement } from "@/lib/utils";
+import { scrollToElement, handleEmailClick } from "@/lib/utils";
 
 /**
  * Hero section with CSS animations and modern responsive design
@@ -56,7 +56,7 @@ export function HeroSection() {
                   priority
                 />
               </div>
-              
+
               {/* Sparkle Icon */}
               <div className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 p-1.5 sm:p-2 bg-primary text-primary-foreground rounded-full shadow-lg animate-spin-slow">
                 <Sparkles className="w-3 h-3 sm:w-4 sm:h-4" />
@@ -70,7 +70,7 @@ export function HeroSection() {
               <span
                 key={index}
                 className="inline-block animate-fade-in"
-                style={{ 
+                style={{
                   animationDelay: `${0.6 + index * 0.1}s`,
                   opacity: 0,
                   animationFillMode: "forwards"
@@ -81,10 +81,10 @@ export function HeroSection() {
             ))}
           </h1>
 
-          {/* Animated Title */}
+          {/* Animated Title - Salesforce Branded */}
           <div className="mb-4 sm:mb-6 animate-slide-up" style={{ animationDelay: "0.8s" }}>
-            <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground font-medium leading-relaxed">
-              <span className="inline-block bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent animate-gradient">
+            <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium leading-relaxed">
+              <span className="inline-block bg-gradient-to-r from-[#0176d3] via-[#00d924] to-[#0176d3] bg-clip-text text-transparent animate-gradient font-semibold">
                 {personalInfo.title}
               </span>
             </h2>
@@ -105,7 +105,7 @@ export function HeroSection() {
               View My Work
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>
-            
+
             <Button
               variant="outline"
               size="lg"
@@ -118,19 +118,41 @@ export function HeroSection() {
 
           {/* Social Links */}
           <div className="flex items-center justify-center space-x-3 sm:space-x-4 mb-12 sm:mb-16 animate-slide-up" style={{ animationDelay: "1.4s" }}>
-            {socialLinks.map((social, index) => (
-              <a
-                key={social.platform}
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2.5 sm:p-3 rounded-full bg-background/50 backdrop-blur-sm border border-border/50 text-muted-foreground hover:text-foreground hover:bg-accent transition-all duration-200 hover-lift animate-fade-in"
-                style={{ animationDelay: `${1.6 + index * 0.1}s` }}
-                aria-label={`Visit ${social.platform}`}
-              >
-                <social.icon className="w-4 h-4 sm:w-5 sm:h-5" />
-              </a>
-            ))}
+            {socialLinks.map((social, index) => {
+              const isEmail = social.platform === "Email";
+
+              if (isEmail) {
+                return (
+                  <button
+                    key={social.platform}
+                    onClick={() => handleEmailClick(
+                      "s.jangir129@gmail.com",
+                      "Portfolio Inquiry - Let's Connect",
+                      "Hi Sumit,\n\nI came across your portfolio and would like to discuss a potential opportunity.\n\nBest regards"
+                    )}
+                    className="p-2.5 sm:p-3 rounded-full bg-background/50 backdrop-blur-sm border border-border/50 text-muted-foreground hover:text-foreground hover:bg-accent transition-all duration-200 hover-lift animate-fade-in"
+                    style={{ animationDelay: `${1.6 + index * 0.1}s` }}
+                    aria-label={`Send email to ${social.platform}`}
+                  >
+                    <social.icon className="w-4 h-4 sm:w-5 sm:h-5" />
+                  </button>
+                );
+              }
+
+              return (
+                <a
+                  key={social.platform}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2.5 sm:p-3 rounded-full bg-background/50 backdrop-blur-sm border border-border/50 text-muted-foreground hover:text-foreground hover:bg-accent transition-all duration-200 hover-lift animate-fade-in"
+                  style={{ animationDelay: `${1.6 + index * 0.1}s` }}
+                  aria-label={`Visit ${social.platform}`}
+                >
+                  <social.icon className="w-4 h-4 sm:w-5 sm:h-5" />
+                </a>
+              );
+            })}
           </div>
 
         </div>

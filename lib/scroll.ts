@@ -257,3 +257,4 @@ export function createNavigationHandler(
         window.location.assign(href);
     };
 }
+ 

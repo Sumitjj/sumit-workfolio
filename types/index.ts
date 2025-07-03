@@ -54,6 +54,21 @@ export interface Experience {
 }
 
 /**
+ * Certification data structure
+ */
+export interface Certification {
+    id: string;
+    name: string;
+    issuer: string;
+    dateEarned: Date;
+    credentialId?: string;
+    verificationUrl?: string;
+    badgeUrl: string;
+    description: string;
+    skills: string[];
+}
+
+/**
  * Testimonial data structure
  */
 export interface Testimonial {
