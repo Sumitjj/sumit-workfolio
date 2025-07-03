@@ -137,120 +137,43 @@
   border-color: hsl(var(--border));
 }
 
-/* ===== MOBILE NAVIGATION FIXES ===== */
-/* Ensure mobile menu is always visible and properly layered */
-.mobile-menu-backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 40;
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-}
-
-.mobile-menu-panel {
-  position: fixed;
-  left: 1rem;
-  right: 1rem;
-  top: 4rem;
-  z-index: 50;
-  background-color: hsl(var(--background)) !important;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid hsl(var(--border));
-  border-radius: 0.75rem;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-}
-
-/* Enhanced mobile menu content visibility for all themes */
-.mobile-menu-panel {
-  /* Ensure solid background in all themes */
-  background-color: hsl(var(--background)) !important;
-  color: hsl(var(--foreground)) !important;
-}
-
-.mobile-menu-panel * {
-  color: hsl(var(--foreground)) !important;
-}
-
-.mobile-menu-panel a {
-  color: hsl(var(--foreground)) !important;
-  background-color: transparent !important;
-  text-decoration: none !important;
-}
-
-.mobile-menu-panel a:hover {
-  background-color: hsl(var(--accent)) !important;
-  color: hsl(var(--accent-foreground)) !important;
-}
-
-.mobile-menu-panel button {
-  color: hsl(var(--foreground)) !important;
-}
-
-/* Dark theme specific fixes */
-.dark .mobile-menu-panel {
-  background-color: hsl(var(--background)) !important;
-  border-color: hsl(var(--border)) !important;
-}
-
-.dark .mobile-menu-panel * {
-  color: hsl(var(--foreground)) !important;
-}
-
-/* Light theme specific fixes */
-:root:not(.dark) .mobile-menu-panel {
-  background-color: hsl(var(--background)) !important;
-  border-color: hsl(var(--border)) !important;
-}
-
-:root:not(.dark) .mobile-menu-panel * {
-  color: hsl(var(--foreground)) !important;
-}
-
-/* Additional visibility enforcement */
+/* ===== MOBILE NAVIGATION - RESPONSIVE ONLY ===== */
+/* Mobile menu optimizations for responsive design only */
 @media (max-width: 767px) {
-  .mobile-menu-panel {
-    opacity: 1 !important;
-    visibility: visible !important;
-    display: block !important;
-  }
-  
-  .mobile-menu-panel a,
-  .mobile-menu-panel button,
-  .mobile-menu-panel span {
-    opacity: 1 !important;
-    visibility: visible !important;
+  /* Ensure mobile menu hamburger button is always visible */
+  button[aria-label="Toggle navigation menu"] {
+    background-color: hsl(var(--background) / 0.9) !important;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid hsl(var(--border) / 0.5) !important;
     color: hsl(var(--foreground)) !important;
+    z-index: 60 !important;
+  }
+
+  button[aria-label="Toggle navigation menu"]:hover {
+    background-color: hsl(var(--background)) !important;
+    transform: scale(1.05);
+  }
+
+  /* Force mobile menu positioning and visibility */
+  .mobile-nav-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    z-index: 999 !important;
+    pointer-events: auto !important;
   }
 }
 
-/* Mobile menu button visibility fixes */
-.mobile-menu-button {
-  background-color: hsl(var(--background) / 0.9) !important;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid hsl(var(--border) / 0.5);
-}
-
-.mobile-menu-button:hover {
-  background-color: hsl(var(--background)) !important;
-  transform: scale(1.05);
-}
-
-/* Prevent body scroll when mobile menu is open */
-body.mobile-menu-open {
-  overflow: hidden !important;
-  position: fixed !important;
-  width: 100% !important;
-}
-
-/* Ensure desktop scroll is always restored */
+/* Desktop - ensure no mobile menu interference */
 @media (min-width: 768px) {
-  body.mobile-menu-open {
-    overflow: unset !important;
+  body {
+    overflow: auto !important;
     position: unset !important;
     width: unset !important;
+    height: unset !important;
   }
 }
 

@@ -77,36 +77,44 @@ export function Navigation() {
 
     if (isOpen) {
       // Store original overflow value
-      originalOverflow.current = document.body.style.overflow || 'unset';
+      originalOverflow.current = document.body.style.overflow || 'auto';
 
       // Only block scroll on small screens
       if (window.innerWidth < 768) {
         document.body.style.overflow = "hidden";
+        document.body.style.position = "fixed";
+        document.body.style.width = "100%";
+        document.body.style.height = "100%";
       }
 
       document.addEventListener("keydown", handleEscape);
       window.addEventListener("resize", handleResize);
     } else {
       // Always restore scroll when menu closes
-      document.body.style.overflow = originalOverflow.current || 'unset';
+      document.body.style.overflow = originalOverflow.current || 'auto';
+      document.body.style.position = 'unset';
+      document.body.style.width = 'unset';
+      document.body.style.height = 'unset';
     }
 
     return () => {
       document.removeEventListener("keydown", handleEscape);
       window.removeEventListener("resize", handleResize);
       // Ensure scroll is always restored on cleanup
-      if (originalOverflow.current) {
-        document.body.style.overflow = originalOverflow.current;
-      } else {
-        document.body.style.overflow = 'unset';
-      }
+      document.body.style.overflow = originalOverflow.current || 'auto';
+      document.body.style.position = 'unset';
+      document.body.style.width = 'unset';
+      document.body.style.height = 'unset';
     };
   }, [isOpen]);
 
   // Cleanup on unmount to prevent scroll lock
   useEffect(() => {
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = 'auto';
+      document.body.style.position = 'unset';
+      document.body.style.width = 'unset';
+      document.body.style.height = 'unset';
     };
   }, []);
 
@@ -184,18 +192,18 @@ export function Navigation() {
               </Button>
             </div>
 
-            {/* Mobile menu button - FIXED VISIBILITY */}
+            {/* Mobile menu button - Enhanced visibility */}
             <div className="md:hidden flex items-center space-x-2">
               <ThemeToggle />
-              <Button
-                variant="ghost"
-                size="icon"
+              <button
                 onClick={() => setIsOpen(!isOpen)}
                 aria-label="Toggle navigation menu"
+                aria-expanded={isOpen}
                 className={cn(
-                  "relative border border-border/50 transition-all duration-300 transform-gpu",
-                  "bg-background/90 backdrop-blur-sm hover:bg-background hover:scale-105",
-                  isOpen && "bg-background border-primary/50"
+                  "relative p-2 rounded-lg transition-all duration-300 transform-gpu",
+                  "bg-background/90 backdrop-blur-sm border border-border/50",
+                  "hover:bg-background hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/50",
+                  isOpen && "bg-background border-primary/50 scale-105"
                 )}
                 style={{ transformOrigin: 'center center', contain: 'layout style' }}
               >
@@ -209,62 +217,105 @@ export function Navigation() {
                     <Menu className="h-5 w-5 text-foreground" />
                   )}
                 </div>
-              </Button>
+              </button>
             </div>
           </div>
         </nav>
       </header>
 
-      {/* Mobile Navigation Menu - FIXED POSITIONING AND VISIBILITY */}
+      {/* Mobile Navigation Menu - Completely redesigned for responsive only */}
       {isOpen && (
-        <>
-          {/* Backdrop */}
+        <div className="md:hidden">
+          {/* Backdrop with blur */}
           <div
-            className="mobile-menu-backdrop fixed inset-0 z-40 bg-black/50 md:hidden animate-fade-in"
+            className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
+            style={{
+              backdropFilter: 'blur(8px)',
+              WebkitBackdropFilter: 'blur(8px)',
+            }}
             onClick={() => setIsOpen(false)}
+            aria-hidden="true"
           />
 
-          {/* Mobile Menu Panel - FIXED POSITIONING AND VISIBILITY */}
+          {/* Mobile Menu Panel - Black filled design */}
           <div
-            className={cn(
-              "fixed inset-x-0 z-50 mx-4 md:hidden animate-slide-down",
-              "top-16" // Consistent positioning regardless of scroll
-            )}
+            className="fixed inset-x-4 top-20 z-50 rounded-xl shadow-2xl"
+            style={{
+              background: 'rgba(0, 0, 0, 0.95)',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05)',
+            }}
           >
-            <div className="mobile-menu-panel bg-background border border-border shadow-2xl rounded-xl p-6">
-              <div className="space-y-2">
+            <div className="p-6">
+              {/* Navigation Links */}
+              <nav className="space-y-2">
                 {navigationItems.map((item) => (
                   <a
                     key={item.href}
                     href={item.href}
                     onClick={(e) => handleNavClick(item.href, e)}
-                    className="relative block px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 transform-gpu hover:scale-105 text-foreground hover:bg-accent hover:shadow-md"
-                    style={{ transformOrigin: 'center center', contain: 'layout style' }}
+                    className="block px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 transform-gpu hover:scale-105"
+                    style={{
+                      color: 'rgba(255, 255, 255, 0.9)',
+                      backgroundColor: 'transparent',
+                      transformOrigin: 'center center',
+                      contain: 'layout style'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                      e.currentTarget.style.color = 'rgba(255, 255, 255, 1)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                      e.currentTarget.style.color = 'rgba(255, 255, 255, 0.9)';
+                    }}
                   >
                     {item.label}
                   </a>
                 ))}
-              </div>
+              </nav>
 
-              {/* Mobile Actions */}
-              <div className="mt-6 pt-4 border-t border-border">
-                <Button
-                  variant="outline"
-                  className="relative w-full bg-gradient-to-r from-primary/10 to-secondary/10 border-border hover:bg-gradient-to-r hover:from-primary hover:to-primary hover:text-primary-foreground hover:border-primary transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/25 transform-gpu group overflow-hidden"
-                  style={{ transformOrigin: 'center center', contain: 'layout style' }}
-                  onClick={() => {
-                    downloadResume();
-                    setIsOpen(false);
-                  }}
-                >
-                  <Download className="h-4 w-4 mr-2 group-hover:animate-bounce" />
-                  <span className="font-medium">Download Resume</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out" />
-                </Button>
-              </div>
+              {/* Divider */}
+              <div
+                className="my-6 h-px"
+                style={{
+                  background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent)'
+                }}
+              />
+
+              {/* Resume Download Button */}
+              <button
+                onClick={() => {
+                  downloadResume();
+                  setIsOpen(false);
+                }}
+                className="w-full px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 transform-gpu hover:scale-105 flex items-center justify-center space-x-2"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05))',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  color: 'rgba(255, 255, 255, 0.9)',
+                  transformOrigin: 'center center',
+                  contain: 'layout style'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1))';
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                  e.currentTarget.style.color = 'rgba(255, 255, 255, 1)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05))';
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                  e.currentTarget.style.color = 'rgba(255, 255, 255, 0.9)';
+                }}
+              >
+                <Download className="h-4 w-4" />
+                <span>Download Resume</span>
+              </button>
             </div>
           </div>
-        </>
+        </div>
       )}
     </>
   );
