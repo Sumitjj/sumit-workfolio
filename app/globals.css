@@ -137,6 +137,123 @@
   border-color: hsl(var(--border));
 }
 
+/* ===== MOBILE NAVIGATION FIXES ===== */
+/* Ensure mobile menu is always visible and properly layered */
+.mobile-menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.mobile-menu-panel {
+  position: fixed;
+  left: 1rem;
+  right: 1rem;
+  top: 4rem;
+  z-index: 50;
+  background-color: hsl(var(--background)) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.75rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Enhanced mobile menu content visibility for all themes */
+.mobile-menu-panel {
+  /* Ensure solid background in all themes */
+  background-color: hsl(var(--background)) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+.mobile-menu-panel * {
+  color: hsl(var(--foreground)) !important;
+}
+
+.mobile-menu-panel a {
+  color: hsl(var(--foreground)) !important;
+  background-color: transparent !important;
+  text-decoration: none !important;
+}
+
+.mobile-menu-panel a:hover {
+  background-color: hsl(var(--accent)) !important;
+  color: hsl(var(--accent-foreground)) !important;
+}
+
+.mobile-menu-panel button {
+  color: hsl(var(--foreground)) !important;
+}
+
+/* Dark theme specific fixes */
+.dark .mobile-menu-panel {
+  background-color: hsl(var(--background)) !important;
+  border-color: hsl(var(--border)) !important;
+}
+
+.dark .mobile-menu-panel * {
+  color: hsl(var(--foreground)) !important;
+}
+
+/* Light theme specific fixes */
+:root:not(.dark) .mobile-menu-panel {
+  background-color: hsl(var(--background)) !important;
+  border-color: hsl(var(--border)) !important;
+}
+
+:root:not(.dark) .mobile-menu-panel * {
+  color: hsl(var(--foreground)) !important;
+}
+
+/* Additional visibility enforcement */
+@media (max-width: 767px) {
+  .mobile-menu-panel {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+  }
+  
+  .mobile-menu-panel a,
+  .mobile-menu-panel button,
+  .mobile-menu-panel span {
+    opacity: 1 !important;
+    visibility: visible !important;
+    color: hsl(var(--foreground)) !important;
+  }
+}
+
+/* Mobile menu button visibility fixes */
+.mobile-menu-button {
+  background-color: hsl(var(--background) / 0.9) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid hsl(var(--border) / 0.5);
+}
+
+.mobile-menu-button:hover {
+  background-color: hsl(var(--background)) !important;
+  transform: scale(1.05);
+}
+
+/* Prevent body scroll when mobile menu is open */
+body.mobile-menu-open {
+  overflow: hidden !important;
+  position: fixed !important;
+  width: 100% !important;
+}
+
+/* Ensure desktop scroll is always restored */
+@media (min-width: 768px) {
+  body.mobile-menu-open {
+    overflow: unset !important;
+    position: unset !important;
+    width: unset !important;
+  }
+}
+
 html {
   scroll-behavior: auto;
   -webkit-overflow-scrolling: touch; /* iOS smooth scrolling */
@@ -280,10 +397,13 @@ body::after {
   will-change: transform;
   transform: translateZ(0);
   -webkit-transform: translate3d(0, 0, 0);
+  contain: layout style;
+  isolation: isolate;
 }
 
 .hover-scale:hover {
   transform: translate3d(0, 0, 0) scale(1.05);
+  transform-origin: center center;
 }
 
 /* Optimized scroll performance utilities */
@@ -615,8 +735,72 @@ body::after {
   background-size: 300% 300%;
 }
 
+/* ===== PRODUCTION-READY TRANSFORM FIXES ===== */
+
+/* Proper scaling with containment - prevents layout expansion */
 .hover\:scale-102:hover {
   transform: scale(1.02);
+  transform-origin: center center;
+  contain: layout style;
+}
+
+.hover\:scale-105:hover,
+.group:hover .group-hover\:scale-105 {
+  transform: scale(1.05);
+  transform-origin: center center;
+  contain: layout style;
+}
+
+.hover\:scale-110:hover,
+.group:hover .group-hover\:scale-110 {
+  transform: scale(1.1);
+  transform-origin: center center;
+  contain: layout style;
+}
+
+/* Container constraints for proper layout containment */
+.container {
+  contain: layout style;
+  isolation: isolate;
+}
+
+/* Grid layout containment */
+.grid {
+  contain: layout style;
+  isolation: isolate;
+}
+
+/* Card and interactive element containment */
+.group {
+  contain: layout;
+  isolation: isolate;
+}
+
+/* Ensure transform elements don't affect layout */
+[class*="hover:scale"],
+[class*="group-hover:scale"] {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Layout containment utility classes */
+.contain-layout {
+  contain: layout;
+  isolation: isolate;
+}
+
+.contain-layout-style {
+  contain: layout style;
+  isolation: isolate;
+}
+
+/* Fix for react-parallax-tilt scaling issues */
+.react-parallax-tilt-wrapper,
+[data-tilt] {
+  contain: layout style;
+  isolation: isolate;
+  transform-origin: center center;
 }
 
 /* ===== SALESFORCE OFFICIAL BRAND COLORS ===== */
@@ -987,8 +1171,40 @@ h1, h2, h3, h4, h5, h6 {
 .hero-section {
   min-height: 100vh;
   min-height: 100dvh;
-  padding-top: 5rem; /* 80px to account for header */
+  padding-top: 0.5rem; /* Much closer to header */
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+/* Move hero banner higher on mobile/responsive */
+@media (max-width: 768px) {
+  .hero-section {
+    padding-top: 0;
+    justify-content: flex-start;
+    padding-bottom: 2rem;
+  }
+  
+  .hero-section .container {
+    padding-top: 1rem;
+  }
+}
+
+/* Remove all borders and outlines from theme toggle */
+button[aria-label="Toggle theme"] {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+}
+
+button[aria-label="Toggle theme"]:focus,
+button[aria-label="Toggle theme"]:focus-visible,
+button[aria-label="Toggle theme"]:active {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  ring: none !important;
 }

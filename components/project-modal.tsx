@@ -6,7 +6,6 @@ import { ExternalLink, Github, X, Tag, Code2, Layers, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Modal } from "@/components/ui/modal";
 import { Project } from "@/types";
-import { cn } from "@/lib/utils";
 
 interface ProjectModalProps {
     project: Project | null;

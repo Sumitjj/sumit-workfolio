@@ -33,13 +33,13 @@ export function Footer() {
               <div className="flex items-center space-x-2">
                 <span>© {currentYear} {personalInfo.name}.</span>
                 <span className="hidden sm:inline">Crafted with</span>
-                <Heart className="w-4 h-4 text-red-500 animate-pulse hidden sm:inline" />
+                <Heart className="w-4 h-4 text-red-500 fill-red-500 animate-pulse hidden sm:inline" />
               </div>
 
               {/* Tech Stack - Responsive */}
               <div className="flex items-center justify-center space-x-2 text-xs sm:text-sm">
                 <span className="sm:hidden">Made with</span>
-                <Heart className="w-3 h-3 text-red-500 animate-pulse sm:hidden" />
+                <Heart className="w-3 h-3 text-red-500 fill-red-500 animate-pulse sm:hidden" />
                 <span className="font-medium text-primary">Next.js</span>
                 <span className="text-muted-foreground/60">•</span>
                 <span className="font-medium text-blue-500">TypeScript</span>
