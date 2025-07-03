@@ -57,6 +57,15 @@
   --font-size-3xl: 1.875rem;
   --font-size-4xl: 2.25rem;
   --font-size-5xl: 3rem;
+
+  /* Salesforce Official Brand Colors */
+  --salesforce-blue: 0 112 210; /* #0070d2 - Official Salesforce Blue */
+  --salesforce-blue-light: 87 163 240; /* #57a3f0 - Light variant */
+  --salesforce-blue-dark: 0 95 178; /* #005fb2 - Dark variant */
+  --salesforce-white: 255 255 255; /* #ffffff */
+  --salesforce-gray: 116 116 116; /* #747474 */
+  --salesforce-success: 75 202 129; /* #4bca81 - Success Green */
+  --salesforce-warning: 254 147 57; /* #fe9339 - Warning Orange */
 }
 
 /* Dark theme */
@@ -407,6 +416,15 @@ body::after {
   }
 }
 
+@keyframes gradient {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
 @keyframes spinSlow {
   from {
     transform: rotate(0deg);
@@ -591,6 +609,148 @@ body::after {
 
 .animate-glow {
   animation: glow 2s ease-in-out infinite;
+}
+
+.bg-300\% {
+  background-size: 300% 300%;
+}
+
+.hover\:scale-102:hover {
+  transform: scale(1.02);
+}
+
+/* ===== SALESFORCE OFFICIAL BRAND COLORS ===== */
+/* Override Tailwind colors with official Salesforce brand colors */
+
+/* Primary Salesforce Blue (#0070d2) */
+.text-blue-600,
+.text-blue-600:hover {
+  color: rgb(var(--salesforce-blue)) !important;
+}
+
+.dark .text-blue-400 {
+  color: rgb(var(--salesforce-blue-light)) !important;
+}
+
+.bg-blue-600 {
+  background-color: rgb(var(--salesforce-blue)) !important;
+}
+
+.border-blue-600\/20 {
+  border-color: rgb(var(--salesforce-blue) / 0.2) !important;
+}
+
+.from-blue-600 {
+  --tw-gradient-from: rgb(var(--salesforce-blue)) !important;
+}
+
+.to-blue-600 {
+  --tw-gradient-to: rgb(var(--salesforce-blue)) !important;
+}
+
+.from-blue-600\/10 {
+  --tw-gradient-from: rgb(var(--salesforce-blue) / 0.1) !important;
+}
+
+.to-blue-600\/5 {
+  --tw-gradient-to: rgb(var(--salesforce-blue) / 0.05) !important;
+}
+
+.from-blue-600\/5 {
+  --tw-gradient-from: rgb(var(--salesforce-blue) / 0.05) !important;
+}
+
+.to-blue-400 {
+  --tw-gradient-to: rgb(var(--salesforce-blue-light)) !important;
+}
+
+/* Salesforce Success Green (#4bca81) */
+.text-green-500,
+.text-green-500:hover {
+  color: rgb(var(--salesforce-success)) !important;
+}
+
+.dark .text-green-400 {
+  color: rgb(var(--salesforce-success)) !important;
+}
+
+.bg-green-500 {
+  background-color: rgb(var(--salesforce-success)) !important;
+}
+
+.border-green-500\/20 {
+  border-color: rgb(var(--salesforce-success) / 0.2) !important;
+}
+
+.from-green-500 {
+  --tw-gradient-from: rgb(var(--salesforce-success)) !important;
+}
+
+.to-green-500 {
+  --tw-gradient-to: rgb(var(--salesforce-success)) !important;
+}
+
+.from-green-500\/10 {
+  --tw-gradient-from: rgb(var(--salesforce-success) / 0.1) !important;
+}
+
+.to-green-500\/5 {
+  --tw-gradient-to: rgb(var(--salesforce-success) / 0.05) !important;
+}
+
+.from-green-500\/5 {
+  --tw-gradient-from: rgb(var(--salesforce-success) / 0.05) !important;
+}
+
+/* Salesforce Warning Orange (#fe9339) */
+.text-orange-500,
+.text-orange-500:hover {
+  color: rgb(var(--salesforce-warning)) !important;
+}
+
+.dark .text-orange-400 {
+  color: rgb(var(--salesforce-warning)) !important;
+}
+
+.bg-orange-500 {
+  background-color: rgb(var(--salesforce-warning)) !important;
+}
+
+.border-orange-500\/20 {
+  border-color: rgb(var(--salesforce-warning) / 0.2) !important;
+}
+
+.from-orange-500 {
+  --tw-gradient-from: rgb(var(--salesforce-warning)) !important;
+}
+
+.to-orange-500 {
+  --tw-gradient-to: rgb(var(--salesforce-warning)) !important;
+}
+
+.from-orange-500\/10 {
+  --tw-gradient-from: rgb(var(--salesforce-warning) / 0.1) !important;
+}
+
+.to-orange-500\/5 {
+  --tw-gradient-to: rgb(var(--salesforce-warning) / 0.05) !important;
+}
+
+.from-orange-500\/5 {
+  --tw-gradient-from: rgb(var(--salesforce-warning) / 0.05) !important;
+}
+
+/* Force color application on all skill card elements */
+.skills-section .text-blue-600 * {
+  color: rgb(var(--salesforce-blue)) !important;
+}
+
+.skills-section .text-green-500 * {
+  color: rgb(var(--salesforce-success)) !important;
+}
+
+.skills-section .text-orange-500 * {
+  color: rgb(var(--salesforce-warning)) !important;
 }
 
 /* Animation delays */

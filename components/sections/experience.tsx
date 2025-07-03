@@ -1,23 +1,25 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Fade } from "react-awesome-reveal";
 import {
     Calendar,
     MapPin,
     Briefcase,
-    CheckCircle,
-    Clock,
     Building2,
     Code2,
-    ArrowRight,
+    Clock,
     TrendingUp,
     Award,
     Users,
+    ChevronRight,
     Zap
 } from "lucide-react";
 import { experiences } from "@/data/portfolio";
 import { cn } from "@/lib/utils";
+
+// Salesforce theme color
+const SALESFORCE_BLUE = "#0070d2";
 
 /**
  * Format date to readable string
@@ -48,125 +50,12 @@ function calculateDuration(startDate: Date, endDate?: Date): string {
     } else if (displayMonths === 0) {
         return `${displayYears} year${displayYears !== 1 ? 's' : ''}`;
     } else {
-        return `${displayYears} year${displayYears !== 1 ? 's' : ''} ${displayMonths} month${displayMonths !== 1 ? 's' : ''}`;
+        return `${displayYears}y ${displayMonths}m`;
     }
 }
 
 /**
- * Animated Counter Component
- */
-interface AnimatedCounterProps {
-    end: number;
-    duration?: number;
-    suffix?: string;
-}
-
-function AnimatedCounter({ end, duration = 2000, suffix = "" }: AnimatedCounterProps) {
-    const [count, setCount] = useState(0);
-
-    useEffect(() => {
-        let startTime: number;
-        let animationId: number;
-
-        const animate = (currentTime: number) => {
-            if (!startTime) startTime = currentTime;
-            const progress = Math.min((currentTime - startTime) / duration, 1);
-
-            setCount(Math.floor(progress * end));
-
-            if (progress < 1) {
-                animationId = requestAnimationFrame(animate);
-            }
-        };
-
-        animationId = requestAnimationFrame(animate);
-        return () => cancelAnimationFrame(animationId);
-    }, [end, duration]);
-
-    return <span>{count}{suffix}</span>;
-}
-
-/**
- * Technology Skill Meter Component
- */
-interface SkillMeterProps {
-    technologies: string[];
-    isVisible: boolean;
-}
-
-function SkillMeter({ technologies, isVisible }: SkillMeterProps) {
-    const topTechnologies = technologies.slice(0, 5); // Show top 5 technologies
-
-    // Predefined skill levels for consistent SSR/hydration
-    const skillLevels: Record<string, number> = {
-        // Backend Technologies
-        'Node.js': 95,
-        'Express.js': 90,
-        'PHP': 88,
-        'Laravel': 85,
-        'Python': 80,
-        'Django': 78,
-        'MongoDB': 85,
-        'MySQL': 90,
-        'PostgreSQL': 82,
-        'Redis': 75,
-
-        // Frontend Technologies
-        'React': 92,
-        'Next.js': 88,
-        'Vue.js': 85,
-        'JavaScript': 95,
-        'TypeScript': 88,
-        'HTML': 95,
-        'CSS': 92,
-        'Tailwind CSS': 90,
-        'SCSS': 85,
-
-        // Mobile & Other
-        'React Native': 80,
-        'Flutter': 75,
-        'Docker': 82,
-        'AWS': 78,
-        'Git': 90,
-        'GraphQL': 75,
-        'REST API': 92,
-        'Microservices': 80,
-        'CI/CD': 75,
-        'Testing': 82,
-
-        // Default for unknown technologies
-        'default': 80
-    };
-
-    return (
-        <div className="space-y-3">
-            {topTechnologies.map((tech, index) => {
-                const skillLevel = skillLevels[tech] || skillLevels['default'];
-
-                return (
-                    <div key={tech} className="space-y-1">
-                        <div className="flex justify-between text-xs">
-                            <span className="text-muted-foreground">{tech}</span>
-                            <span className="text-primary font-medium">{skillLevel}%</span>
-                        </div>
-                        <div className="w-full bg-muted/30 rounded-full h-1.5 overflow-hidden">
-                            <div
-                                className="h-full bg-gradient-to-r from-primary to-secondary rounded-full transition-all duration-1000 ease-out"
-                                style={{
-                                    width: isVisible ? `${skillLevel}%` : '0%',
-                                    transitionDelay: `${index * 100}ms`
-                                }}
-                            />
-                        </div>
-                    </div>
-                );
-            })}
-        </div>
-    );
-}
-
-/**
- * Enhanced Experience Card Component
+ * Modern Experience Card Component
  */
 interface ExperienceCardProps {
     experience: typeof experiences[0];
@@ -175,200 +64,113 @@ interface ExperienceCardProps {
 }
 
 function ExperienceCard({ experience, index, isLast }: ExperienceCardProps) {
-    const [isHovered, setIsHovered] = useState(false);
-    const [skillsVisible, setSkillsVisible] = useState(false);
     const duration = calculateDuration(experience.startDate, experience.endDate);
     const dateRange = `${formatDate(experience.startDate)} - ${experience.current ? 'Present' : formatDate(experience.endDate!)}`;
-    const isEven = index % 2 === 0;
-
-    useEffect(() => {
-        const timer = setTimeout(() => setSkillsVisible(true), 800 + index * 200);
-        return () => clearTimeout(timer);
-    }, [index]);
 
     return (
-        <Fade direction="up" delay={index * 200} triggerOnce>
-            <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-                {/* Timeline Center Column */}
-                <div className="absolute left-4 lg:left-1/2 lg:transform lg:-translate-x-1/2 top-0 bottom-0 w-0.5 z-10">
-                    <div className="absolute inset-0 bg-gradient-to-b from-primary/50 via-primary/30 to-primary/20 rounded-full" />
-                    {!isLast && (
-                        <div className="absolute top-0 w-full h-full bg-gradient-to-b from-primary/40 to-transparent animate-pulse rounded-full" />
-                    )}
-                </div>
-
-                {/* Timeline Dot */}
-                <div className="absolute left-2 lg:left-1/2 lg:transform lg:-translate-x-1/2 top-8 w-6 h-6 z-20">
-                    <div className="relative w-full h-full">
-                        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary via-primary/80 to-secondary border-4 border-background shadow-xl">
-                            <div className="absolute inset-1 rounded-full bg-gradient-to-br from-white/20 to-transparent" />
-                        </div>
-                        <div className="absolute inset-0 rounded-full bg-primary/30 animate-ping" />
-                        <div className="absolute inset-2 rounded-full bg-white/40 animate-pulse" />
-                    </div>
-                </div>
-
-                {/* Card Content */}
-                <div className={cn(
-                    "ml-12 lg:ml-0",
-                    isEven ? "lg:order-1 lg:text-right lg:pr-8" : "lg:order-2 lg:pl-8"
-                )}>
+        <Fade direction="up" delay={index * 100} triggerOnce>
+            <div className="relative group">
+                {/* Timeline Line */}
+                {!isLast && (
                     <div
-                        className={cn(
-                            "relative overflow-hidden rounded-3xl transition-all duration-700 hover:shadow-2xl hover:shadow-primary/20",
-                            "bg-gradient-to-br from-background/90 via-background/80 to-background/70 backdrop-blur-xl",
-                            "border border-border/30 hover:border-primary/40",
-                            "p-6 sm:p-8 hover:-translate-y-2 hover:scale-[1.02] group",
-                            isHovered ? "shadow-2xl shadow-primary/20" : ""
-                        )}
-                        onMouseEnter={() => setIsHovered(true)}
-                        onMouseLeave={() => setIsHovered(false)}
-                    >
-                        {/* Animated Background Particles */}
-                        <div className="absolute inset-0 overflow-hidden">
-                            <div className="absolute top-4 right-4 w-20 h-20 bg-gradient-to-br from-primary/10 to-transparent rounded-full animate-pulse" />
-                            <div className="absolute bottom-6 left-6 w-16 h-16 bg-gradient-to-tr from-secondary/10 to-transparent rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
-                            <div className="absolute top-1/2 left-1/3 w-2 h-2 bg-primary/20 rounded-full animate-bounce" style={{ animationDelay: '0.5s' }} />
-                            <div className="absolute top-1/4 right-1/4 w-1 h-1 bg-secondary/30 rounded-full animate-ping" style={{ animationDelay: '1.5s' }} />
-                        </div>
+                        className="absolute left-4 top-12 w-0.5 h-full -mb-8"
+                        style={{
+                            background: `linear-gradient(to bottom, ${SALESFORCE_BLUE}, ${SALESFORCE_BLUE}40)`
+                        }}
+                    />
+                )}
 
-                        {/* Enhanced Background Pattern */}
-                        <div className="absolute inset-0 opacity-[0.03]">
+                {/* Timeline Node */}
+                <div className="flex items-start gap-4">
+                    {/* Compact Node */}
+                    <div className="relative flex-shrink-0 mt-3">
+                        <div
+                            className="w-8 h-8 rounded-lg flex items-center justify-center shadow-md relative z-10"
+                            style={{ backgroundColor: SALESFORCE_BLUE }}
+                        >
+                            <Building2 className="w-4 h-4 text-white" />
+                        </div>
+                        {experience.current && (
                             <div
-                                className="absolute inset-0"
-                                style={{
-                                    backgroundImage: `
-                                        radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 50%), 
-                                        radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
-                                        radial-gradient(circle at 40% 60%, rgba(34, 197, 94, 0.15) 0%, transparent 50%)
-                                    `,
-                                    backgroundSize: '200px 200px, 150px 150px, 180px 180px'
-                                }}
+                                className="absolute inset-0 w-8 h-8 rounded-lg animate-pulse"
+                                style={{ backgroundColor: `${SALESFORCE_BLUE}30` }}
                             />
-                        </div>
+                        )}
+                    </div>
 
-                        {/* Enhanced Status Badges */}
-                        <div className={cn(
-                            "absolute top-4 flex flex-col gap-2",
-                            isEven ? "lg:left-4" : "right-4"
-                        )}>
-                            {experience.current && (
-                                <div className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-500/10 text-green-600 border border-green-500/20 animate-pulse">
-                                    <Clock className="w-3 h-3 mr-1" />
-                                    Current
+                    {/* Compact Experience Card */}
+                    <div className="flex-1 pb-6">
+                        <div className="relative overflow-hidden rounded-xl border border-border/50 bg-card/50 backdrop-blur-sm hover:bg-card/80 transition-all duration-300 group-hover:shadow-lg group-hover:border-primary/30">
+
+                            {/* Compact Card Content */}
+                            <div className="p-4 sm:p-5">
+                                {/* Status & Duration - Inline */}
+                                <div className="flex flex-wrap items-center gap-2 mb-3">
+                                    {experience.current && (
+                                        <div className="flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-green-100 dark:bg-green-950/30 text-green-700 dark:text-green-300">
+                                            <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                                            Current
+                                        </div>
+                                    )}
+                                    <div
+                                        className="flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium text-white"
+                                        style={{ backgroundColor: SALESFORCE_BLUE }}
+                                    >
+                                        <Clock className="w-3 h-3" />
+                                        {duration}
+                                    </div>
                                 </div>
-                            )}
-                            <div className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
-                                <TrendingUp className="w-3 h-3 mr-1" />
-                                {duration}
-                            </div>
-                        </div>
 
-                        {/* Enhanced Header Section */}
-                        <div className="relative z-10 mb-8">
-                            <div className="mb-4">
-                                <h3 className={cn(
-                                    "text-xl sm:text-2xl lg:text-3xl font-bold mb-2 transition-all duration-300",
-                                    "bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent",
-                                    "group-hover:from-primary group-hover:via-secondary group-hover:to-primary"
-                                )}>
+                                {/* Position & Company - Compact */}
+                                <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2 leading-tight">
                                     {experience.position}
                                 </h3>
 
-                                <div className={cn(
-                                    "flex flex-wrap items-center gap-4 text-muted-foreground",
-                                    isEven ? "lg:justify-end" : "lg:justify-start"
-                                )}>
-                                    <div className="flex items-center">
-                                        <Building2 className="w-4 h-4 mr-2 text-primary" />
-                                        <span className="font-semibold text-foreground text-lg">{experience.company}</span>
+                                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-3">
+                                    <div className="flex items-center gap-2">
+                                        <Building2 className="w-4 h-4" style={{ color: SALESFORCE_BLUE }} />
+                                        <span className="font-semibold text-foreground">{experience.company}</span>
                                     </div>
-                                    <div className="flex items-center">
-                                        <Calendar className="w-4 h-4 mr-2 text-primary" />
-                                        <span className="text-sm">{dateRange}</span>
+                                    <div className="flex items-center gap-1 text-muted-foreground text-sm">
+                                        <Calendar className="w-3 h-3" />
+                                        <span>{dateRange}</span>
                                     </div>
                                 </div>
-                            </div>
 
-                            <p className={cn(
-                                "text-muted-foreground leading-relaxed text-base",
-                                isEven ? "lg:text-right" : "lg:text-left"
-                            )}>
-                                {experience.description}
-                            </p>
-                        </div>
+                                {/* Compact Description */}
+                                <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                                    {experience.description}
+                                </p>
 
-                        {/* Enhanced Technologies Section */}
-                        <div className="relative z-10 space-y-6">
-                            {/* Technology Tags */}
-                            <div>
-                                <div className={cn(
-                                    "flex items-center mb-4",
-                                    isEven ? "lg:justify-end" : "lg:justify-start"
-                                )}>
-                                    <Code2 className="w-5 h-5 mr-2 text-primary" />
-                                    <span className="text-base font-semibold text-foreground">Core Technologies</span>
-                                </div>
-                                <div className={cn(
-                                    "flex flex-wrap gap-2",
-                                    isEven ? "lg:justify-end" : "lg:justify-start"
-                                )}>
-                                    {experience.technologies.map((tech, techIndex) => (
+                                {/* Compact Technologies */}
+                                <div className="flex flex-wrap gap-1.5">
+                                    {experience.technologies.slice(0, 6).map((tech) => (
                                         <span
                                             key={tech}
-                                            className={cn(
-                                                "inline-flex items-center px-4 py-2 rounded-full text-sm font-medium transition-all duration-500",
-                                                "bg-gradient-to-r from-primary/10 to-secondary/10 text-foreground border border-primary/20",
-                                                "hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-primary-foreground",
-                                                "hover:scale-110 hover:shadow-lg hover:shadow-primary/25 hover:-translate-y-1"
-                                            )}
-                                            style={{
-                                                animationDelay: `${techIndex * 100}ms`,
-                                                transitionDelay: `${techIndex * 50}ms`
-                                            }}
+                                            className="px-2 py-1 rounded-md text-xs font-medium bg-muted/60 text-muted-foreground hover:bg-primary/10 hover:text-primary transition-all duration-200"
                                         >
                                             {tech}
                                         </span>
                                     ))}
+                                    {experience.technologies.length > 6 && (
+                                        <span className="px-2 py-1 rounded-md text-xs font-medium text-muted-foreground">
+                                            +{experience.technologies.length - 6} more
+                                        </span>
+                                    )}
                                 </div>
                             </div>
 
-                            {/* Skill Progress Meters */}
-                            <div className={cn(
-                                "transition-all duration-500 overflow-hidden",
-                                isHovered ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-                            )}>
-                                <div className={cn(
-                                    "flex items-center mb-3",
-                                    isEven ? "lg:justify-end" : "lg:justify-start"
-                                )}>
-                                    <Zap className="w-4 h-4 mr-2 text-secondary" />
-                                    <span className="text-sm font-medium text-foreground">Proficiency Overview</span>
-                                </div>
-                                <SkillMeter technologies={experience.technologies} isVisible={skillsVisible && isHovered} />
+                            {/* Bottom Accent */}
+                            <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-muted/30">
+                                <div
+                                    className="h-full transition-all duration-1000 ease-out"
+                                    style={{
+                                        backgroundColor: SALESFORCE_BLUE,
+                                        width: experience.current ? '100%' : '85%'
+                                    }}
+                                />
                             </div>
                         </div>
-
-                        {/* Enhanced Hover Effects */}
-                        <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-700 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5" />
-
-                        {/* Multi-layered Shine Effect */}
-                        <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-1000 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%]" />
-                        <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-1200 bg-gradient-to-r from-transparent via-primary/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%]" style={{ transitionDelay: '200ms' }} />
-                    </div>
-                </div>
-
-                {/* Empty Column for Alternating Layout - Desktop Only */}
-                <div className={cn(
-                    "hidden lg:block",
-                    isEven ? "lg:order-2" : "lg:order-1"
-                )}>
-                    {/* Connection Line */}
-                    <div className={cn(
-                        "w-8 h-0.5 bg-gradient-to-r from-primary/50 to-primary/30 mt-8",
-                        isEven ? "ml-auto" : "mr-auto"
-                    )}>
-                        <div className="absolute inset-0 bg-gradient-to-r from-primary/30 to-primary/60 animate-pulse" />
                     </div>
                 </div>
             </div>
@@ -377,78 +179,108 @@ function ExperienceCard({ experience, index, isLast }: ExperienceCardProps) {
 }
 
 /**
- * Enhanced Professional Experience Section
+ * Experience Stats Component
  */
-export function ExperienceSection() {
+function ExperienceStats() {
     const totalExperience = calculateDuration(new Date(2016, 0, 1));
-    const totalYears = parseInt(totalExperience.split(' ')[0]);
+    const totalYears = parseInt(totalExperience.split('y')[0]) || parseInt(totalExperience.split(' ')[0]);
+
+    const stats = [
+        {
+            icon: TrendingUp,
+            label: "Years Experience",
+            value: `${totalYears}+`,
+            color: SALESFORCE_BLUE
+        },
+        {
+            icon: Building2,
+            label: "Organizations",
+            value: experiences.length,
+            color: SALESFORCE_BLUE
+        },
+        {
+            icon: Award,
+            label: "Leadership Roles",
+            value: "3",
+            color: SALESFORCE_BLUE
+        },
+        {
+            icon: Zap,
+            label: "Major Projects",
+            value: "15+",
+            color: SALESFORCE_BLUE
+        }
+    ];
 
     return (
-        <section id="experience" className="relative py-12 sm:py-16 lg:py-20 overflow-hidden">
-            {/* Enhanced Premium Background */}
-            <div className="absolute inset-0">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-background/5 to-secondary/8" />
-
-                {/* Multiple Animated Gradient Orbs */}
-                <div className="absolute top-0 right-1/4 w-96 h-96 bg-gradient-to-br from-primary/15 to-transparent rounded-full blur-3xl animate-pulse" />
-                <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-gradient-to-tl from-secondary/15 to-transparent rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '4s' }} />
-
-                {/* Floating Background Elements */}
-                <div className="absolute top-20 left-10 w-2 h-2 bg-primary/20 rounded-full animate-bounce" style={{ animationDuration: '4s' }} />
-                <div className="absolute top-40 right-20 w-1 h-1 bg-secondary/30 rounded-full animate-ping" style={{ animationDelay: '1s' }} />
-                <div className="absolute bottom-40 left-1/3 w-1.5 h-1.5 bg-primary/25 rounded-full animate-bounce" style={{ animationDelay: '2s', animationDuration: '5s' }} />
-            </div>
-
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                {/* Enhanced Section Header */}
-                <Fade direction="up" triggerOnce>
-                    <div className="text-center mb-16 sm:mb-20">
-                        <div className="flex items-center justify-center mb-8">
-                            <div className="relative">
-                                <Briefcase className="w-12 h-12 text-primary animate-pulse" />
-                                <div className="absolute inset-0 w-12 h-12 bg-primary/20 rounded-full blur-lg animate-pulse" />
-                                <div className="absolute -top-1 -right-1 w-4 h-4 bg-secondary rounded-full animate-bounce" />
+        <Fade direction="up" delay={100} triggerOnce>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-8">
+                {stats.map((stat, index) => (
+                    <div
+                        key={stat.label}
+                        className="flex items-center gap-3 p-3 sm:p-4 rounded-xl border border-border/50 bg-card/30 backdrop-blur-sm hover:bg-card/60 transition-all duration-300"
+                    >
+                        <div
+                            className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center flex-shrink-0"
+                            style={{ backgroundColor: `${stat.color}15` }}
+                        >
+                            <stat.icon className="w-5 h-5 sm:w-6 sm:h-6" style={{ color: stat.color }} />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                            <div
+                                className="text-xl sm:text-2xl font-bold leading-tight"
+                                style={{ color: stat.color }}
+                            >
+                                {stat.value}
                             </div>
-                            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold ml-6 bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
-                                Experience
+                            <div className="text-xs text-muted-foreground font-medium leading-tight">
+                                {stat.label}
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </Fade>
+    );
+}
+
+/**
+ * Professional Experience Section - Redesigned
+ */
+export function ExperienceSection() {
+    return (
+        <section id="experience" className="py-8 sm:py-12">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                {/* Compact Section Header */}
+                <Fade direction="up" triggerOnce>
+                    <div className="text-center mb-8">
+                        <div className="flex items-center justify-center gap-3 mb-4">
+                            <div
+                                className="p-2 rounded-xl border"
+                                style={{
+                                    backgroundColor: `${SALESFORCE_BLUE}10`,
+                                    borderColor: `${SALESFORCE_BLUE}30`
+                                }}
+                            >
+                                <Briefcase className="w-6 h-6" style={{ color: SALESFORCE_BLUE }} />
+                            </div>
+                            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground">
+                                Professional Journey
                             </h2>
                         </div>
 
-                        {/* Animated Statistics */}
-                        <div className="flex justify-center items-center gap-8 mb-6">
-                            <div className="text-center">
-                                <div className="text-3xl sm:text-4xl font-bold text-primary">
-                                    <AnimatedCounter end={totalYears} suffix="+" />
-                                </div>
-                                <p className="text-sm text-muted-foreground">Years</p>
-                            </div>
-                            <div className="w-px h-12 bg-gradient-to-b from-transparent via-border to-transparent" />
-                            <div className="text-center">
-                                <div className="text-3xl sm:text-4xl font-bold text-secondary">
-                                    <AnimatedCounter end={experiences.length} />
-                                </div>
-                                <p className="text-sm text-muted-foreground">Companies</p>
-                            </div>
-                            <div className="w-px h-12 bg-gradient-to-b from-transparent via-border to-transparent" />
-                            <div className="text-center">
-                                <div className="text-3xl sm:text-4xl font-bold text-green-500">
-                                    <AnimatedCounter end={50} suffix="+" />
-                                </div>
-                                <p className="text-sm text-muted-foreground">Projects</p>
-                            </div>
-                        </div>
-
-                        <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-8">
-                            Journey through my professional evolution, building scalable solutions and leading innovative development teams
+                        <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
+                            Transforming e-commerce experiences through innovative Salesforce Commerce Cloud solutions
                         </p>
-                        <div className="w-24 h-1 bg-gradient-to-r from-primary via-secondary to-primary mx-auto rounded-full animate-pulse" />
                     </div>
                 </Fade>
 
-                {/* Enhanced Experience Timeline */}
-                <div className="max-w-6xl mx-auto">
-                    <div className="space-y-16 sm:space-y-20 lg:space-y-24">
+                {/* Experience Stats */}
+                <ExperienceStats />
+
+                {/* Experience Timeline */}
+                <div className="max-w-4xl mx-auto">
+                    <div className="relative">
                         {experiences.map((experience, index) => (
                             <ExperienceCard
                                 key={experience.id}

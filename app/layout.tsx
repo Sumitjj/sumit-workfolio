@@ -37,6 +37,8 @@ export const metadata: Metadata = {
     "salesforce b2c commerce cloud technical lead",
     "salesforce b2c commerce cloud solution architect",
     "SFCC",
+    "demandware",
+    "agentforce",
     "UI/UX designer",
     "React",
     "Next.js",

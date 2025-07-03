@@ -5,7 +5,7 @@ import { Menu, X, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-switcher";
 import { navigationItems, personalInfo } from "@/data/portfolio";
-import { cn } from "@/lib/utils";
+import { cn, downloadResume } from "@/lib/utils";
 import {
   useScrollPosition,
   createNavigationHandler
@@ -131,11 +131,12 @@ export function Navigation() {
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => window.open(personalInfo.resume, "_blank")}
-                className="relative overflow-hidden border-border/30 bg-background/20 backdrop-blur-sm hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300 hover:scale-105 hover:shadow-lg transform-gpu"
+                onClick={downloadResume}
+                className="relative overflow-hidden border-border/30 bg-gradient-to-r from-primary/10 to-secondary/10 backdrop-blur-sm hover:bg-gradient-to-r hover:from-primary hover:to-primary hover:text-primary-foreground hover:border-primary transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/25 transform-gpu group"
               >
-                <Download className="h-4 w-4 mr-2" />
-                Resume
+                <Download className="h-4 w-4 mr-2 group-hover:animate-bounce" />
+                <span className="font-medium">Resume</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out" />
               </Button>
             </div>
 
@@ -198,14 +199,15 @@ export function Navigation() {
               <div className="mt-6 pt-4 border-t border-border/30">
                 <Button
                   variant="outline"
-                  className="w-full bg-background/20 backdrop-blur-sm border-border/30 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300 hover:scale-105 hover:shadow-lg transform-gpu"
+                  className="w-full bg-gradient-to-r from-primary/10 to-secondary/10 backdrop-blur-sm border-border/30 hover:bg-gradient-to-r hover:from-primary hover:to-primary hover:text-primary-foreground hover:border-primary transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/25 transform-gpu group"
                   onClick={() => {
-                    window.open(personalInfo.resume, "_blank");
+                    downloadResume();
                     setIsOpen(false);
                   }}
                 >
-                  <Download className="h-4 w-4 mr-2" />
-                  Download Resume
+                  <Download className="h-4 w-4 mr-2 group-hover:animate-bounce" />
+                  <span className="font-medium">Download Resume</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out" />
                 </Button>
               </div>
             </div>
