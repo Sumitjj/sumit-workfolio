@@ -127,9 +127,7 @@ export function Navigation() {
 
             {/* Desktop Actions */}
             <div className="hidden md:flex items-center space-x-3">
-              <div className="p-1 rounded-lg bg-background/20 backdrop-blur-sm border border-border/30">
-                <ThemeToggle />
-              </div>
+              <ThemeToggle />
               <Button
                 variant="outline"
                 size="sm"
@@ -143,9 +141,7 @@ export function Navigation() {
 
             {/* Mobile menu button */}
             <div className="md:hidden flex items-center space-x-2">
-              <div className="p-1 rounded-lg bg-background/20 backdrop-blur-sm border border-border/30">
-                <ThemeToggle />
-              </div>
+              <ThemeToggle />
               <Button
                 variant="ghost"
                 size="icon"
@@ -181,7 +177,7 @@ export function Navigation() {
 
           {/* Mobile Menu Panel */}
           <div className="fixed top-16 inset-x-0 z-50 mx-4 md:hidden animate-slide-down">
-            <div 
+            <div
               className="bg-background/95 backdrop-blur-xl rounded-xl shadow-2xl border border-border/30 p-6 ring-1 ring-white/10"
               style={{ backdropFilter: 'blur(25px) saturate(180%)' }}
             >

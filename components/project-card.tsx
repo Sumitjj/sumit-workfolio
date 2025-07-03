@@ -44,7 +44,7 @@ export function ProjectCard({ project, onClick, className }: ProjectCardProps) {
       checkScrollable();
       container.addEventListener('scroll', checkScrollable);
       window.addEventListener('resize', checkScrollable);
-      
+
       return () => {
         container.removeEventListener('scroll', checkScrollable);
         window.removeEventListener('resize', checkScrollable);
@@ -87,7 +87,7 @@ export function ProjectCard({ project, onClick, className }: ProjectCardProps) {
                 src={project.image}
                 alt={project.title}
                 fill
-                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                className="object-cover"
                 priority={false}
               />
             </div>
@@ -128,13 +128,13 @@ export function ProjectCard({ project, onClick, className }: ProjectCardProps) {
                   )}
                 </div>
               </div>
-              
+
               {/* Description */}
               <p className="text-muted-foreground text-sm sm:text-base line-clamp-3 leading-relaxed">
                 {project.description}
               </p>
             </div>
-            
+
             {/* Footer Section - Technologies */}
             <div className="mt-auto px-5 sm:px-6 pt-4 pb-5 sm:pb-6 border-t border-border/30">
               <div className="relative">
@@ -154,13 +154,13 @@ export function ProjectCard({ project, onClick, className }: ProjectCardProps) {
                       {tech}
                     </span>
                   ))}
-                  
+
                   {/* Spacer when scroll indicator is shown */}
                   {showScrollIndicator && (
                     <div className="w-6 flex-shrink-0" />
                   )}
                 </div>
-                
+
                 {/* Scroll Indicator - Fade Gradient */}
                 {showScrollIndicator && (
                   <div className="absolute right-0 top-0 bottom-0 w-8 pointer-events-none">
