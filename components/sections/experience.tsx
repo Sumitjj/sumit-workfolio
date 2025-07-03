@@ -97,10 +97,51 @@ interface SkillMeterProps {
 function SkillMeter({ technologies, isVisible }: SkillMeterProps) {
     const topTechnologies = technologies.slice(0, 5); // Show top 5 technologies
 
+    // Predefined skill levels for consistent SSR/hydration
+    const skillLevels: Record<string, number> = {
+        // Backend Technologies
+        'Node.js': 95,
+        'Express.js': 90,
+        'PHP': 88,
+        'Laravel': 85,
+        'Python': 80,
+        'Django': 78,
+        'MongoDB': 85,
+        'MySQL': 90,
+        'PostgreSQL': 82,
+        'Redis': 75,
+
+        // Frontend Technologies
+        'React': 92,
+        'Next.js': 88,
+        'Vue.js': 85,
+        'JavaScript': 95,
+        'TypeScript': 88,
+        'HTML': 95,
+        'CSS': 92,
+        'Tailwind CSS': 90,
+        'SCSS': 85,
+
+        // Mobile & Other
+        'React Native': 80,
+        'Flutter': 75,
+        'Docker': 82,
+        'AWS': 78,
+        'Git': 90,
+        'GraphQL': 75,
+        'REST API': 92,
+        'Microservices': 80,
+        'CI/CD': 75,
+        'Testing': 82,
+
+        // Default for unknown technologies
+        'default': 80
+    };
+
     return (
         <div className="space-y-3">
             {topTechnologies.map((tech, index) => {
-                const skillLevel = Math.floor(Math.random() * 30) + 70; // Random skill level between 70-100%
+                const skillLevel = skillLevels[tech] || skillLevels['default'];
 
                 return (
                     <div key={tech} className="space-y-1">
