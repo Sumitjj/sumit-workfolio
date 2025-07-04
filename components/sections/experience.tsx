@@ -4,19 +4,15 @@ import React from "react";
 import { Fade } from "react-awesome-reveal";
 import {
     Calendar,
-    MapPin,
     Briefcase,
     Building2,
-    Code2,
     Clock,
     TrendingUp,
     Award,
-    Users,
-    ChevronRight,
     Zap
 } from "lucide-react";
 import { experiences } from "@/data/portfolio";
-import { cn } from "@/lib/utils";
+
 
 // Salesforce theme color
 const SALESFORCE_BLUE = "#0070d2";
@@ -215,7 +211,7 @@ function ExperienceStats() {
     return (
         <Fade direction="up" delay={100} triggerOnce>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-8">
-                {stats.map((stat, index) => (
+                {stats.map((stat) => (
                     <div
                         key={stat.label}
                         className="flex items-center gap-3 p-3 sm:p-4 rounded-xl border border-border/50 bg-card/30 backdrop-blur-sm hover:bg-card/60 transition-all duration-300"

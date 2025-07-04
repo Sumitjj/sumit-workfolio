@@ -14,7 +14,7 @@ import {
   AlertCircle
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { personalInfo, contactConfig } from "@/data/portfolio";
+import { contactConfig } from "@/data/portfolio";
 import { cn } from "@/lib/utils";
 
 // Form data interface
@@ -308,7 +308,7 @@ function ContactForm() {
         </Button>
 
         {/* Response Promise - Mobile Optimized */}
-        <div className="pt-4 sm:pt-6 border-t border-border/20">
+        <div className="pt-4 sm:pt-6">
           {/* Response Promise */}
           <div className="relative">
             {/* Connection Line - Hidden on small screens */}
@@ -358,7 +358,7 @@ function ContactForm() {
  */
 export function ContactSection() {
   return (
-    <section id="contact" className="relative py-16 sm:py-20 lg:py-24 xl:py-32 overflow-hidden">
+    <section id="contact" className="relative pt-8 sm:pt-12 lg:pt-16 pb-8 sm:pb-12 lg:pb-16 overflow-hidden">
       {/* Premium Gradient Background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5" />
@@ -370,7 +370,7 @@ export function ContactSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Responsive Section Header */}
         <Fade direction="up" triggerOnce>
-          <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+          <div className="text-center mb-8 sm:mb-10 lg:mb-12">
             <div className="flex items-center justify-center mb-6 sm:mb-8">
               <div className="relative">
                 <Mail className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-primary" />
@@ -383,7 +383,6 @@ export function ContactSection() {
             <p className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-2xl lg:max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
               Ready to turn your vision into reality? Let&apos;s collaborate and create something extraordinary together.
             </p>
-            <div className="w-16 sm:w-20 lg:w-24 h-0.5 bg-gradient-to-r from-primary to-secondary mx-auto mt-6 sm:mt-8 rounded-full" />
           </div>
         </Fade>
 

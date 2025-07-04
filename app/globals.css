@@ -137,6 +137,46 @@
   border-color: hsl(var(--border));
 }
 
+/* ===== MOBILE NAVIGATION - RESPONSIVE ONLY ===== */
+/* Mobile menu optimizations for responsive design only */
+@media (max-width: 767px) {
+  /* Ensure mobile menu hamburger button is always visible */
+  button[aria-label="Toggle navigation menu"] {
+    background-color: hsl(var(--background) / 0.9) !important;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid hsl(var(--border) / 0.5) !important;
+    color: hsl(var(--foreground)) !important;
+    z-index: 60 !important;
+  }
+
+  button[aria-label="Toggle navigation menu"]:hover {
+    background-color: hsl(var(--background)) !important;
+    transform: scale(1.05);
+  }
+
+  /* Force mobile menu positioning and visibility */
+  .mobile-nav-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    z-index: 999 !important;
+    pointer-events: auto !important;
+  }
+}
+
+/* Desktop - ensure no mobile menu interference */
+@media (min-width: 768px) {
+  body {
+    overflow: auto !important;
+    position: unset !important;
+    width: unset !important;
+    height: unset !important;
+  }
+}
+
 html {
   scroll-behavior: auto;
   -webkit-overflow-scrolling: touch; /* iOS smooth scrolling */
@@ -280,10 +320,13 @@ body::after {
   will-change: transform;
   transform: translateZ(0);
   -webkit-transform: translate3d(0, 0, 0);
+  contain: layout style;
+  isolation: isolate;
 }
 
 .hover-scale:hover {
   transform: translate3d(0, 0, 0) scale(1.05);
+  transform-origin: center center;
 }
 
 /* Optimized scroll performance utilities */
@@ -615,8 +658,72 @@ body::after {
   background-size: 300% 300%;
 }
 
+/* ===== PRODUCTION-READY TRANSFORM FIXES ===== */
+
+/* Proper scaling with containment - prevents layout expansion */
 .hover\:scale-102:hover {
   transform: scale(1.02);
+  transform-origin: center center;
+  contain: layout style;
+}
+
+.hover\:scale-105:hover,
+.group:hover .group-hover\:scale-105 {
+  transform: scale(1.05);
+  transform-origin: center center;
+  contain: layout style;
+}
+
+.hover\:scale-110:hover,
+.group:hover .group-hover\:scale-110 {
+  transform: scale(1.1);
+  transform-origin: center center;
+  contain: layout style;
+}
+
+/* Container constraints for proper layout containment */
+.container {
+  contain: layout style;
+  isolation: isolate;
+}
+
+/* Grid layout containment */
+.grid {
+  contain: layout style;
+  isolation: isolate;
+}
+
+/* Card and interactive element containment */
+.group {
+  contain: layout;
+  isolation: isolate;
+}
+
+/* Ensure transform elements don't affect layout */
+[class*="hover:scale"],
+[class*="group-hover:scale"] {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Layout containment utility classes */
+.contain-layout {
+  contain: layout;
+  isolation: isolate;
+}
+
+.contain-layout-style {
+  contain: layout style;
+  isolation: isolate;
+}
+
+/* Fix for react-parallax-tilt scaling issues */
+.react-parallax-tilt-wrapper,
+[data-tilt] {
+  contain: layout style;
+  isolation: isolate;
+  transform-origin: center center;
 }
 
 /* ===== SALESFORCE OFFICIAL BRAND COLORS ===== */
@@ -987,8 +1094,40 @@ h1, h2, h3, h4, h5, h6 {
 .hero-section {
   min-height: 100vh;
   min-height: 100dvh;
-  padding-top: 5rem; /* 80px to account for header */
+  padding-top: 0.5rem; /* Much closer to header */
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+/* Move hero banner higher on mobile/responsive */
+@media (max-width: 768px) {
+  .hero-section {
+    padding-top: 0;
+    justify-content: flex-start;
+    padding-bottom: 2rem;
+  }
+  
+  .hero-section .container {
+    padding-top: 1rem;
+  }
+}
+
+/* Remove all borders and outlines from theme toggle */
+button[aria-label="Toggle theme"] {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+}
+
+button[aria-label="Toggle theme"]:focus,
+button[aria-label="Toggle theme"]:focus-visible,
+button[aria-label="Toggle theme"]:active {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  ring: none !important;
 }

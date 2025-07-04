@@ -13,7 +13,7 @@ import {
     Star
 } from "lucide-react";
 import { certifications } from "@/data/portfolio";
-import { cn } from "@/lib/utils";
+
 import Image from "next/image";
 
 /**
@@ -45,7 +45,10 @@ function CertificationCard({ certification, index }: CertificationCardProps) {
                     <div className="relative p-8 pb-6 bg-gradient-to-br from-primary/5 via-transparent to-transparent">
                         {/* Centered Extra Large Badge */}
                         <div className="flex justify-center">
-                            <div className="relative transition-transform duration-300 ease-out group-hover:scale-105">
+                            <div
+                                className="relative transition-transform duration-300 ease-out group-hover:scale-105"
+                                style={{ transformOrigin: 'center center', contain: 'layout style' }}
+                            >
                                 <div className="absolute inset-0 bg-gradient-to-r from-primary/30 to-secondary/30 rounded-3xl blur-2xl opacity-40 group-hover:opacity-70 transition-opacity duration-300" />
                                 <div className="relative w-36 h-36 sm:w-40 sm:h-40 lg:w-44 lg:h-44 rounded-3xl bg-white dark:bg-gray-900 border-2 border-primary/20 shadow-xl flex items-center justify-center overflow-hidden transition-shadow duration-300 group-hover:shadow-2xl">
                                     {!imageError ? (
@@ -128,7 +131,7 @@ function CertificationCard({ certification, index }: CertificationCardProps) {
  */
 export function CertificationsSection() {
     return (
-        <section id="certifications" className="py-16 sm:py-20 lg:py-24">
+        <section id="certifications" className="pt-16 sm:pt-20 lg:pt-24 pb-8 sm:pb-12 lg:pb-16">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
                 <Fade direction="up" triggerOnce>
@@ -150,7 +153,10 @@ export function CertificationsSection() {
                         <div className="flex flex-wrap justify-center items-center gap-8 sm:gap-12">
                             {/* Salesforce Certified Stat */}
                             <div className="group cursor-pointer">
-                                <div className="relative bg-gradient-to-br from-blue-500/10 via-blue-600/5 to-purple-600/10 backdrop-blur-sm border border-blue-500/20 rounded-3xl p-8 transition-all duration-300 ease-out hover:shadow-xl hover:shadow-blue-500/15 hover:scale-102 hover:border-blue-500/30">
+                                <div
+                                    className="relative bg-gradient-to-br from-blue-500/10 via-blue-600/5 to-purple-600/10 backdrop-blur-sm border border-blue-500/20 rounded-3xl p-8 transition-all duration-300 ease-out hover:shadow-xl hover:shadow-blue-500/15 hover:scale-102 hover:border-blue-500/30"
+                                    style={{ transformOrigin: 'center center', contain: 'layout style' }}
+                                >
                                     {/* Animated background gradient */}
                                     <div className="absolute inset-0 bg-gradient-to-r from-blue-500/3 via-purple-500/3 to-blue-500/3 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
@@ -185,7 +191,10 @@ export function CertificationsSection() {
 
                             {/* Years Experience Stat */}
                             <div className="group cursor-pointer">
-                                <div className="relative bg-gradient-to-br from-emerald-500/10 via-green-600/5 to-teal-600/10 backdrop-blur-sm border border-emerald-500/20 rounded-3xl p-8 transition-all duration-300 ease-out hover:shadow-xl hover:shadow-emerald-500/15 hover:scale-102 hover:border-emerald-500/30">
+                                <div
+                                    className="relative bg-gradient-to-br from-emerald-500/10 via-green-600/5 to-teal-600/10 backdrop-blur-sm border border-emerald-500/20 rounded-3xl p-8 transition-all duration-300 ease-out hover:shadow-xl hover:shadow-emerald-500/15 hover:scale-102 hover:border-emerald-500/30"
+                                    style={{ transformOrigin: 'center center', contain: 'layout style' }}
+                                >
                                     {/* Animated background gradient */}
                                     <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/3 via-teal-500/3 to-emerald-500/3 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 

@@ -15,10 +15,10 @@ export default function HomePage() {
       <Navigation />
       <main>
         <HeroSection />
-        <SkillsSection />
         <ProjectsSection />
         <ExperienceSection />
         <CertificationsSection />
+        <SkillsSection />
         <ContactSection />
       </main>
     </>

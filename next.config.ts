@@ -1,9 +1,29 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Modern experimental features
   experimental: {
-    optimizePackageImports: ['lucide-react'],
+    optimizePackageImports: ['lucide-react', 'class-variance-authority', 'clsx', 'tailwind-merge'],
   },
+
+  // Turbopack configuration (replaces experimental.turbo)
+  turbopack: {
+    rules: {
+      '*.woff2': {
+        loaders: ['file-loader'],
+      },
+      '*.woff': {
+        loaders: ['file-loader'],
+      },
+    },
+  },
+
+  // Compiler optimizations
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
+
+  // Image optimization with modern remotePatterns
   images: {
     remotePatterns: [
       {
@@ -31,7 +51,10 @@ const nextConfig: NextConfig = {
         pathname: '/**',
       },
     ],
+    formats: ['image/webp', 'image/avif'],
   },
+
+  // Security headers
   async headers() {
     return [
       {

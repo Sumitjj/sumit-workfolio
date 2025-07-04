@@ -23,8 +23,7 @@ const techCategories = {
   }
 };
 
-// Get all technologies for stats
-const allTechnologies = Object.values(techCategories).flatMap(cat => cat.technologies);
+
 
 /**
  * Technology Badge Component - Ultra Minimal
@@ -41,7 +40,9 @@ function TechBadge({ technology, index }: TechBadgeProps) {
         className="px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 hover:scale-105 cursor-pointer"
         style={{
           backgroundColor: SALESFORCE_BLUE,
-          color: "white"
+          color: "white",
+          transformOrigin: 'center center',
+          contain: 'layout style'
         }}
       >
         {technology}

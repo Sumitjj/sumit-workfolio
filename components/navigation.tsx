@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import { Menu, X, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-switcher";
@@ -16,15 +16,18 @@ import {
  */
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+  const originalOverflow = useRef<string>('');
 
   // Use optimized scroll hooks for better performance
-  const { isScrolled } = useScrollPosition(50);
+  const { isScrolled } = useScrollPosition(20);
 
   // Debug: Alternative scroll detection as fallback
   const [debugScrolled, setDebugScrolled] = useState(false);
   useEffect(() => {
     const handleScroll = () => {
-      setDebugScrolled(window.scrollY > 50);
+      const scrollPosition = window.scrollY;
+      setDebugScrolled(scrollPosition > 20); // More sensitive scroll detection
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -52,7 +55,12 @@ export function Navigation() {
     [sections]
   );
 
-  // Close mobile menu on escape key
+  // Track mount state to prevent hydration issues
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Enhanced mobile menu management with proper scroll handling
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -60,29 +68,70 @@ export function Navigation() {
       }
     };
 
+    const handleResize = () => {
+      // Close mobile menu when resizing to desktop
+      if (window.innerWidth >= 768) {
+        setIsOpen(false);
+      }
+    };
+
     if (isOpen) {
+      // Store original overflow value
+      originalOverflow.current = document.body.style.overflow || 'auto';
+
+      // Only block scroll on small screens
+      if (window.innerWidth < 768) {
+        document.body.style.overflow = "hidden";
+        document.body.style.position = "fixed";
+        document.body.style.width = "100%";
+        document.body.style.height = "100%";
+      }
+
       document.addEventListener("keydown", handleEscape);
-      document.body.style.overflow = "hidden";
+      window.addEventListener("resize", handleResize);
     } else {
-      document.body.style.overflow = "unset";
+      // Always restore scroll when menu closes
+      document.body.style.overflow = originalOverflow.current || 'auto';
+      document.body.style.position = 'unset';
+      document.body.style.width = 'unset';
+      document.body.style.height = 'unset';
     }
 
     return () => {
       document.removeEventListener("keydown", handleEscape);
-      document.body.style.overflow = "unset";
+      window.removeEventListener("resize", handleResize);
+      // Ensure scroll is always restored on cleanup
+      document.body.style.overflow = originalOverflow.current || 'auto';
+      document.body.style.position = 'unset';
+      document.body.style.width = 'unset';
+      document.body.style.height = 'unset';
     };
   }, [isOpen]);
+
+  // Cleanup on unmount to prevent scroll lock
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = 'auto';
+      document.body.style.position = 'unset';
+      document.body.style.width = 'unset';
+      document.body.style.height = 'unset';
+    };
+  }, []);
+
+  if (!isMounted) {
+    return null; // Prevent hydration mismatch
+  }
 
   return (
     <>
       {/* Main Navigation Header */}
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out",
-          "backdrop-blur-md border-b",
+          "sticky top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out",
+          "backdrop-blur-md will-change-transform",
           headerScrolled
-            ? "bg-background/90 shadow-xl border-border/20 supports-[backdrop-filter]:bg-background/75"
-            : "bg-background/10 border-transparent supports-[backdrop-filter]:bg-background/5"
+            ? "bg-background/95 shadow-lg supports-[backdrop-filter]:bg-background/80 transform translate-y-0"
+            : "bg-background/5 supports-[backdrop-filter]:bg-background/5 transform translate-y-0"
         )}
         style={{
           backdropFilter: headerScrolled ? 'blur(20px) saturate(180%)' : 'blur(10px) saturate(120%)',
@@ -96,7 +145,8 @@ export function Navigation() {
               <a
                 href="#"
                 onClick={(e) => handleNavClick("#", e)}
-                className="text-xl font-bold tracking-tight text-foreground hover:text-primary transition-all duration-300 hover:scale-105 transform-gpu"
+                className="text-xl font-bold tracking-tight text-foreground hover:text-primary transition-all duration-300 hover:scale-105 transform-gpu origin-center"
+                style={{ transformOrigin: 'center center', contain: 'layout style' }}
               >
                 {personalInfo.name.split(" ").map((word, index) => (
                   <span key={index}>
@@ -118,6 +168,7 @@ export function Navigation() {
                     href={item.href}
                     onClick={(e) => handleNavClick(item.href, e)}
                     className="relative px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 transform-gpu hover:scale-105 hover:shadow-lg backdrop-blur-sm text-muted-foreground hover:text-foreground hover:bg-background/80 hover:shadow-md"
+                    style={{ transformOrigin: 'center center', contain: 'layout style' }}
                   >
                     {item.label}
                   </a>
@@ -133,6 +184,7 @@ export function Navigation() {
                 size="sm"
                 onClick={downloadResume}
                 className="relative overflow-hidden border-border/30 bg-gradient-to-r from-primary/10 to-secondary/10 backdrop-blur-sm hover:bg-gradient-to-r hover:from-primary hover:to-primary hover:text-primary-foreground hover:border-primary transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/25 transform-gpu group"
+                style={{ transformOrigin: 'center center', contain: 'layout style' }}
               >
                 <Download className="h-4 w-4 mr-2 group-hover:animate-bounce" />
                 <span className="font-medium">Resume</span>
@@ -140,79 +192,130 @@ export function Navigation() {
               </Button>
             </div>
 
-            {/* Mobile menu button */}
+            {/* Mobile menu button - Enhanced visibility */}
             <div className="md:hidden flex items-center space-x-2">
               <ThemeToggle />
-              <Button
-                variant="ghost"
-                size="icon"
+              <button
                 onClick={() => setIsOpen(!isOpen)}
                 aria-label="Toggle navigation menu"
-                className="relative bg-background/20 backdrop-blur-sm border border-border/30 hover:bg-background/40 hover:scale-105 transition-all duration-300 transform-gpu"
+                aria-expanded={isOpen}
+                className={cn(
+                  "relative p-2 rounded-lg transition-all duration-300 transform-gpu",
+                  "bg-background/90 backdrop-blur-sm border border-border/50",
+                  "hover:bg-background hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/50",
+                  isOpen && "bg-background border-primary/50 scale-105"
+                )}
+                style={{ transformOrigin: 'center center', contain: 'layout style' }}
               >
                 <div className={cn(
                   "transition-transform duration-300",
                   isOpen && "rotate-90"
                 )}>
                   {isOpen ? (
-                    <X className="h-5 w-5" />
+                    <X className="h-5 w-5 text-foreground" />
                   ) : (
-                    <Menu className="h-5 w-5" />
+                    <Menu className="h-5 w-5 text-foreground" />
                   )}
                 </div>
-              </Button>
+              </button>
             </div>
           </div>
         </nav>
       </header>
 
-      {/* Mobile Navigation Menu */}
+      {/* Mobile Navigation Menu - Completely redesigned for responsive only */}
       {isOpen && (
-        <>
-          {/* Backdrop */}
+        <div className="md:hidden">
+          {/* Backdrop with blur */}
           <div
-            className="fixed inset-0 z-40 bg-black/20 backdrop-blur-md md:hidden animate-fade-in"
+            className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
+            style={{
+              backdropFilter: 'blur(8px)',
+              WebkitBackdropFilter: 'blur(8px)',
+            }}
             onClick={() => setIsOpen(false)}
-            style={{ backdropFilter: 'blur(15px) saturate(150%)' }}
+            aria-hidden="true"
           />
 
-          {/* Mobile Menu Panel */}
-          <div className="fixed top-16 inset-x-0 z-50 mx-4 md:hidden animate-slide-down">
-            <div
-              className="bg-background/95 backdrop-blur-xl rounded-xl shadow-2xl border border-border/30 p-6 ring-1 ring-white/10"
-              style={{ backdropFilter: 'blur(25px) saturate(180%)' }}
-            >
-              <div className="space-y-2">
+          {/* Mobile Menu Panel - Black filled design */}
+          <div
+            className="fixed inset-x-4 top-20 z-50 rounded-xl shadow-2xl"
+            style={{
+              background: 'rgba(0, 0, 0, 0.95)',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05)',
+            }}
+          >
+            <div className="p-6">
+              {/* Navigation Links */}
+              <nav className="space-y-2">
                 {navigationItems.map((item) => (
                   <a
                     key={item.href}
                     href={item.href}
                     onClick={(e) => handleNavClick(item.href, e)}
-                    className="relative block px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 transform-gpu hover:scale-105 text-foreground hover:bg-background/60 hover:shadow-md"
+                    className="block px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 transform-gpu hover:scale-105"
+                    style={{
+                      color: 'rgba(255, 255, 255, 0.9)',
+                      backgroundColor: 'transparent',
+                      transformOrigin: 'center center',
+                      contain: 'layout style'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                      e.currentTarget.style.color = 'rgba(255, 255, 255, 1)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                      e.currentTarget.style.color = 'rgba(255, 255, 255, 0.9)';
+                    }}
                   >
                     {item.label}
                   </a>
                 ))}
-              </div>
+              </nav>
 
-              {/* Mobile Actions */}
-              <div className="mt-6 pt-4 border-t border-border/30">
-                <Button
-                  variant="outline"
-                  className="w-full bg-gradient-to-r from-primary/10 to-secondary/10 backdrop-blur-sm border-border/30 hover:bg-gradient-to-r hover:from-primary hover:to-primary hover:text-primary-foreground hover:border-primary transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/25 transform-gpu group"
-                  onClick={() => {
-                    downloadResume();
-                    setIsOpen(false);
-                  }}
-                >
-                  <Download className="h-4 w-4 mr-2 group-hover:animate-bounce" />
-                  <span className="font-medium">Download Resume</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out" />
-                </Button>
-              </div>
+              {/* Divider */}
+              <div
+                className="my-6 h-px"
+                style={{
+                  background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent)'
+                }}
+              />
+
+              {/* Resume Download Button */}
+              <button
+                onClick={() => {
+                  downloadResume();
+                  setIsOpen(false);
+                }}
+                className="w-full px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 transform-gpu hover:scale-105 flex items-center justify-center space-x-2"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05))',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  color: 'rgba(255, 255, 255, 0.9)',
+                  transformOrigin: 'center center',
+                  contain: 'layout style'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1))';
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                  e.currentTarget.style.color = 'rgba(255, 255, 255, 1)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05))';
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                  e.currentTarget.style.color = 'rgba(255, 255, 255, 0.9)';
+                }}
+              >
+                <Download className="h-4 w-4" />
+                <span>Download Resume</span>
+              </button>
             </div>
           </div>
-        </>
+        </div>
       )}
     </>
   );

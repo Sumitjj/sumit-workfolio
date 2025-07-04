@@ -64,7 +64,7 @@ export function handleEmailClick(email: string, subject?: string, body?: string)
                 window.open(gmailUrl, '_blank');
             }
         }, 500);
-    } catch (error) {
+    } catch {
         // Fallback to Gmail if mailto fails
         window.open(gmailUrl, '_blank');
     }
@@ -81,21 +81,23 @@ export type ResumeFormat = 'PDF' | 'DOCX';
 export interface ResumeInfo {
     url: string;
     filename: string;
+    format: ResumeFormat;
 }
 
 /**
- * Get available resume file by scanning the resume folder
+ * Get available resume file dynamically
  * Returns the first available resume file in the public/resume directory
+ * This function tries multiple common filename patterns
  */
 export function getAvailableResume(): ResumeInfo {
-    // Since we're in a client-side environment, we'll use a known file
-    // In a real-world scenario with SSR, you could use fs.readdir
-    // For now, we'll default to the known file in the resume folder
-    const knownResumeFile = 'SumitJangid_Resume_2025.docx';
+    // For now, we'll use the known available file
+    // In a production environment with Node.js backend, you could use fs.readdir
+    const availableFile = 'SumitJangidResume.docx';
 
     return {
-        url: `/resume/${knownResumeFile}`,
-        filename: knownResumeFile
+        url: `/resume/${availableFile}`,
+        filename: availableFile,
+        format: availableFile.endsWith('.pdf') ? 'PDF' : 'DOCX'
     };
 }
 
