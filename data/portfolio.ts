@@ -48,9 +48,9 @@ export const projects: Project[] = [
         id: "1",
         longDescription: "Complete e-commerce solution with user authentication, product management, cart functionality, and secure payment processing. Features include admin dashboard, inventory management, and real-time analytics.",
         categories: ["Web Development", "E-Commerce"],
-        title: "Full Beauty Brands",
+        title: "FullBeauty Brands",
         description:
-            "Full Beauty",
+            "Enterprise e-commerce platform serving millions of customers with advanced product catalog, personalized shopping experiences, and seamless checkout processes.",
         image: getOptimizedProjectImage("Full Beauty FBB"),
         technologies: ["NextJs", "NestJs", "Commerce-SDK", "REST APIs", "SCAPI", "OCAPI", "SFRA", "SGJC"],
         liveUrl: "https://www.fullbeauty.com/",
@@ -61,7 +61,7 @@ export const projects: Project[] = [
         id: "2",
         title: "Aquasana Water Filters",
         description:
-            "AOSmith",
+            "Comprehensive water filtration e-commerce platform featuring advanced product configurators, subscription management, and integrated customer support systems.",
         image: getOptimizedProjectImage("AOSmith"),
         technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
         liveUrl: "https://www.aquasana.com/",
@@ -74,7 +74,7 @@ export const projects: Project[] = [
         id: "3",
         title: "Lane Bryant",
         description:
-            "Ascena",
+            "Fashion retail platform with size-inclusive shopping experience, advanced fitting guides, and personalized style recommendations for plus-size customers.",
         image: getOptimizedProjectImage("Ascena LaneBryant"),
         technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
         liveUrl: "https://www.lanebryant.com/",
@@ -87,7 +87,7 @@ export const projects: Project[] = [
         id: "4",
         title: "Loreal",
         description:
-            "Loreal",
+            "Premium beauty and cosmetics platform with virtual try-on features, skin analysis tools, and personalized product recommendations.",
         image: getOptimizedProjectImage("Loreal"),
         technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
         liveUrl: "http://lancome-usa.com/",
@@ -100,7 +100,7 @@ export const projects: Project[] = [
         id: "5",
         title: "Camping World",
         description:
-            "Camping World",
+            "Outdoor recreation e-commerce platform with extensive RV and camping gear catalog, installation services, and membership programs.",
         image: getOptimizedProjectImage("Camping World"),
         technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
         liveUrl: "https://www.campingworld.com/",
@@ -113,7 +113,7 @@ export const projects: Project[] = [
         id: "6",
         title: "Saje Natural Wellness",
         description:
-            "Saje",
+            "Natural wellness and aromatherapy e-commerce platform featuring essential oils, wellness products, and educational content for holistic health.",
         image: getOptimizedProjectImage("Camping World"),
         technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
         liveUrl: "https://www.campingworld.com/",
@@ -126,7 +126,7 @@ export const projects: Project[] = [
         id: "7",
         title: "Hotwater",
         description:
-            "AOSmith",
+            "Water heating solutions platform with product configurators, energy efficiency calculators, and professional installation network integration.",
         image: getOptimizedProjectImage("AOSmith"),
         technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
         liveUrl: "https://www.aquasana.com/",
@@ -139,7 +139,7 @@ export const projects: Project[] = [
         id: "8",
         title: "State Water Heaters",
         description:
-            "AOSmith",
+            "Commercial and residential water heating solutions with advanced product selection tools, warranty management, and dealer locator systems.",
         image: getOptimizedProjectImage("AOSmith"),
         technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
         liveUrl: "https://www.aquasana.com/",
@@ -152,7 +152,7 @@ export const projects: Project[] = [
         id: "9",
         title: "Reliance Water Heaters",
         description:
-            "AOSmith",
+            "Reliable water heating solutions platform with energy-efficient products, smart home integration, and comprehensive customer support.",
         image: getOptimizedProjectImage("AOSmith Hotwater"),
         technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
         liveUrl: "https://www.hotwater.com/",
@@ -165,7 +165,7 @@ export const projects: Project[] = [
         id: "10",
         title: "American Water Heaters",
         description:
-            "AOSmith",
+            "Professional-grade water heating systems with advanced controls, energy monitoring, and maintenance scheduling for commercial applications.",
         image: getOptimizedProjectImage("AOSmith Hotwater"),
         technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
         liveUrl: "https://www.hotwater.com/",
@@ -178,7 +178,7 @@ export const projects: Project[] = [
         id: "11",
         title: "Lochinvar",
         description:
-            "AOSmith",
+            "High-efficiency commercial water heating and boiler systems with smart controls, remote monitoring, and predictive maintenance capabilities.",
         image: getOptimizedProjectImage("AOSmith Hotwater"),
         technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
         liveUrl: "https://www.hotwater.com/",
@@ -191,7 +191,7 @@ export const projects: Project[] = [
         id: "12",
         title: "AO Smith Corp",
         description:
-            "AOSmith",
+            "Global water technology solutions with innovative products, smart connectivity, and comprehensive service networks for residential and commercial markets.",
         image: getOptimizedProjectImage("AOSmith"),
         technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
         liveUrl: "https://www.aquasana.com/",
@@ -204,7 +204,7 @@ export const projects: Project[] = [
         id: "13",
         title: "London Drugs",
         description:
-            "London Drugs",
+            "Multi-category retail platform with pharmacy services, electronics, home goods, and health products with integrated loyalty programs.",
         image: getOptimizedProjectImage("Camping World"),
         technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
         liveUrl: "https://www.campingworld.com/",
@@ -217,7 +217,7 @@ export const projects: Project[] = [
         id: "14",
         title: "Uniqlo",
         description:
-            "Uniqlo",
+            "Global fashion retailer with innovative clothing technology, sustainable practices, and seamless omnichannel shopping experiences.",
         image: getOptimizedProjectImage("Camping World"),
         technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
         liveUrl: "https://www.campingworld.com/",

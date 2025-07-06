@@ -369,22 +369,24 @@ body::after {
 
 /* ===== CUSTOM KEYFRAME ANIMATIONS ===== */
 @keyframes fadeIn {
-  from {
+  0% {
     opacity: 0;
+    transform: translateY(8px);
   }
-  to {
+  100% {
     opacity: 1;
+    transform: translateY(0);
   }
 }
 
 @keyframes slideUp {
-  from {
+  0% {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(30px) scale(0.98);
   }
-  to {
+  100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -599,23 +601,76 @@ body::after {
 
 /* ===== ANIMATION UTILITY CLASSES ===== */
 .animate-fade-in {
-  animation: fadeIn 0.8s ease-out forwards;
+  animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   opacity: 0;
 }
 
 .animate-slide-up {
-  animation: slideUp 0.8s ease-out forwards;
+  animation: slideUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   opacity: 0;
 }
 
 .animate-slide-down {
-  animation: slideDown 0.6s ease-out forwards;
+  animation: slideDown 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   opacity: 0;
 }
 
 .animate-slide-left {
-  animation: slideLeft 0.8s ease-out forwards;
+  animation: slideLeft 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   opacity: 0;
+}
+
+/* ===== HERO SECTION SPECIFIC ANIMATIONS ===== */
+.hero-fade-in {
+  animation: heroFadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+
+.hero-slide-up {
+  animation: heroSlideUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+
+.hero-letter {
+  animation: heroLetterIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+
+@keyframes heroFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes heroSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes heroLetterIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) rotateX(90deg);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(10px) rotateX(45deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg);
+  }
 }
 
 .animate-slide-right {
@@ -1130,4 +1185,452 @@ button[aria-label="Toggle theme"]:active {
   outline: none !important;
   box-shadow: none !important;
   ring: none !important;
+}
+
+button[aria-label="Toggle theme"]:focus,
+button[aria-label="Toggle theme"]:hover {
+  background-color: hsl(var(--accent)) !important;
+  color: hsl(var(--accent-foreground)) !important;
+  border-color: hsl(var(--border)) !important;
+}
+
+/* ===== PROJECT CARD CONSISTENCY ===== */
+/* Ensure all project cards have consistent heights */
+.project-card-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card-grid {
+  display: grid;
+  grid-template-rows: 1fr;
+  gap: 1.5rem;
+}
+
+/* Featured projects grid with consistent heights */
+.featured-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  grid-auto-rows: 1fr;
+  align-items: stretch;
+}
+
+@media (min-width: 768px) {
+  .featured-projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .featured-projects-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Remaining projects grid with consistent heights */
+.remaining-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  grid-auto-rows: 1fr;
+  align-items: stretch;
+}
+
+@media (min-width: 640px) {
+  .remaining-projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .remaining-projects-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .remaining-projects-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 1536px) {
+  .remaining-projects-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* Force equal heights for all project cards */
+.project-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 100%;
+}
+
+.project-card-wrapper > * {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Project card content layout optimization */
+.project-card-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  flex: 1;
+}
+
+.project-card-header {
+  flex-shrink: 0;
+}
+
+.project-card-description {
+  flex-grow: 1;
+  display: flex;
+  align-items: flex-start;
+  overflow: hidden;
+}
+
+.project-card-footer {
+  flex-shrink: 0;
+  margin-top: auto;
+}
+
+/* Ensure consistent image aspect ratios */
+.project-card-image {
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/* Enhanced hover effects for project cards */
+.project-card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, box-shadow;
+}
+
+.project-card-hover:hover {
+  transform: translateY(-2px);
+}
+
+/* Grid layout fixes for equal heights */
+.projects-grid-container {
+  display: contents;
+}
+
+.projects-grid-item {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.projects-grid-item > * {
+  flex: 1;
+  height: 100%;
+}
+
+/* Responsive text sizing for project cards */
+@media (max-width: 640px) {
+  .project-card-title {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+  
+  .project-card-description {
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .project-card-title {
+    font-size: 1.125rem;
+    line-height: 1.4;
+  }
+  
+  .project-card-description {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+}
+
+@media (min-width: 1025px) {
+  .project-card-title {
+    font-size: 1.25rem;
+    line-height: 1.3;
+  }
+  
+  .project-card-description {
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+}
+
+/* Technology tags responsive behavior */
+.tech-tags-container {
+  display: flex;
+  gap: 0.375rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.tech-tag {
+  flex-shrink: 0;
+  white-space: nowrap;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 0.375rem;
+  background-color: hsl(var(--muted) / 0.6);
+  color: hsl(var(--muted-foreground));
+  transition: background-color 0.2s ease;
+}
+
+.tech-tag:hover {
+  background-color: hsl(var(--muted));
+}
+
+/* Ensure proper spacing in project grid layouts */
+.projects-section {
+  padding: 4rem 0;
+}
+
+@media (min-width: 640px) {
+  .projects-section {
+    padding: 5rem 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .projects-section {
+    padding: 6rem 0;
+  }
+}
+
+/* Force grid items to have equal heights */
+.grid-equal-height {
+  display: grid;
+  grid-auto-rows: 1fr;
+  align-items: stretch;
+}
+
+.grid-equal-height > * {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+/* Specific height fixes for project cards */
+.project-card-fixed-height {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 280px;
+}
+
+@media (min-width: 640px) {
+  .project-card-fixed-height {
+    min-height: 300px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .project-card-fixed-height {
+    min-height: 320px;
+  }
+}
+
+/* Featured project cards - larger height */
+.featured-project-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 480px;
+}
+
+@media (min-width: 640px) {
+  .featured-project-card {
+    min-height: 520px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .featured-project-card {
+    min-height: 560px;
+  }
+}
+
+/* Remaining project cards - increased height for better visibility */
+.remaining-project-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 420px;
+}
+
+@media (min-width: 640px) {
+  .remaining-project-card {
+    min-height: 440px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .remaining-project-card {
+    min-height: 460px;
+  }
+}
+
+/* Dynamic shadow effects for project cards based on image colors */
+.project-card-wrapper:hover {
+  /* Default shadow */
+  box-shadow: 0 20px 40px -12px rgba(0, 112, 210, 0.3);
+}
+
+/* Featured project specific shadows */
+.featured-project-card .project-card-wrapper:hover {
+  box-shadow: 0 25px 50px -12px rgba(0, 112, 210, 0.4);
+}
+
+/* Remaining project specific shadows */
+.remaining-project-card .project-card-wrapper:hover {
+  box-shadow: 0 15px 30px -8px rgba(0, 112, 210, 0.25);
+}
+
+/* Project-specific shadow colors */
+/* Full Beauty Brands - Purple/Pink tones */
+.project-card-wrapper[data-project="Full Beauty Brands"]:hover {
+  box-shadow: 0 20px 40px -12px rgba(147, 51, 234, 0.3);
+}
+
+/* Aquasana Water Filters - Blue/Teal tones */
+.project-card-wrapper[data-project="Aquasana Water Filters"]:hover {
+  box-shadow: 0 20px 40px -12px rgba(6, 182, 212, 0.3);
+}
+
+/* Lane Bryant - Fashion/Pink tones */
+.project-card-wrapper[data-project="Lane Bryant"]:hover {
+  box-shadow: 0 20px 40px -12px rgba(236, 72, 153, 0.3);
+}
+
+/* Loreal - Gold/Orange tones */
+.project-card-wrapper[data-project="Loreal"]:hover {
+  box-shadow: 0 20px 40px -12px rgba(251, 146, 60, 0.3);
+}
+
+/* Camping World - Green/Nature tones */
+.project-card-wrapper[data-project="Camping World"]:hover {
+  box-shadow: 0 20px 40px -12px rgba(34, 197, 94, 0.3);
+}
+
+/* Saje Natural Wellness - Green/Natural tones */
+.project-card-wrapper[data-project="Saje Natural Wellness"]:hover {
+  box-shadow: 0 20px 40px -12px rgba(16, 185, 129, 0.3);
+}
+
+/* Hotwater - Orange/Red tones */
+.project-card-wrapper[data-project="Hotwater"]:hover {
+  box-shadow: 0 20px 40px -12px rgba(239, 68, 68, 0.3);
+}
+
+/* State Water Heaters - Blue/Industrial tones */
+.project-card-wrapper[data-project="State Water Heaters"]:hover {
+  box-shadow: 0 20px 40px -12px rgba(59, 130, 246, 0.3);
+}
+
+/* Reliance Water Heaters - Red/Reliable tones */
+.project-card-wrapper[data-project="Reliance Water Heaters"]:hover {
+  box-shadow: 0 20px 40px -12px rgba(220, 38, 38, 0.3);
+}
+
+/* American Water Heaters - Blue/Patriotic tones */
+.project-card-wrapper[data-project="American Water Heaters"]:hover {
+  box-shadow: 0 20px 40px -12px rgba(37, 99, 235, 0.3);
+}
+
+/* Lochinvar - Industrial/Gray tones */
+.project-card-wrapper[data-project="Lochinvar"]:hover {
+  box-shadow: 0 20px 40px -12px rgba(75, 85, 99, 0.3);
+}
+
+/* AO Smith Corp - Corporate blue */
+.project-card-wrapper[data-project="AO Smith Corp"]:hover {
+  box-shadow: 0 20px 40px -12px rgba(30, 64, 175, 0.3);
+}
+
+/* London Drugs - Pharmacy green */
+.project-card-wrapper[data-project="London Drugs"]:hover {
+  box-shadow: 0 20px 40px -12px rgba(5, 150, 105, 0.3);
+}
+
+/* Uniqlo - Fashion red */
+.project-card-wrapper[data-project="Uniqlo"]:hover {
+  box-shadow: 0 20px 40px -12px rgba(220, 38, 38, 0.3);
+}
+
+/* Smooth transitions for all shadow effects */
+.project-card-wrapper {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Force minimum heights with higher specificity */
+#projects .featured-project-card {
+  min-height: 480px !important;
+}
+
+#projects .remaining-project-card {
+  min-height: 420px !important;
+}
+
+/* Also force the card wrapper inside */
+#projects .featured-project-card .project-card-wrapper {
+  min-height: 480px !important;
+}
+
+#projects .remaining-project-card .project-card-wrapper {
+  min-height: 420px !important;
+}
+
+@media (min-width: 640px) {
+  #projects .featured-project-card {
+    min-height: 520px !important;
+  }
+  
+  #projects .remaining-project-card {
+    min-height: 440px !important;
+  }
+  
+  #projects .featured-project-card .project-card-wrapper {
+    min-height: 520px !important;
+  }
+  
+  #projects .remaining-project-card .project-card-wrapper {
+    min-height: 440px !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  #projects .featured-project-card {
+    min-height: 560px !important;
+  }
+  
+  #projects .remaining-project-card {
+    min-height: 460px !important;
+  }
+  
+  #projects .featured-project-card .project-card-wrapper {
+    min-height: 560px !important;
+  }
+  
+  #projects .remaining-project-card .project-card-wrapper {
+    min-height: 460px !important;
+  }
 }
