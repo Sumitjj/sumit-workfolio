@@ -104,12 +104,6 @@ function ExperienceCard({ experience, index, isLast }: ExperienceCardProps) {
                             <div className="p-4 sm:p-5">
                                 {/* Status & Duration - Inline */}
                                 <div className="flex flex-wrap items-center gap-2 mb-3">
-                                    {experience.current && (
-                                        <div className="flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-green-100 dark:bg-green-950/30 text-green-700 dark:text-green-300">
-                                            <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                                            Current
-                                        </div>
-                                    )}
                                     <div
                                         className="flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium text-white"
                                         style={{ backgroundColor: SALESFORCE_BLUE }}
@@ -117,6 +111,12 @@ function ExperienceCard({ experience, index, isLast }: ExperienceCardProps) {
                                         <Clock className="w-3 h-3" />
                                         {duration}
                                     </div>
+                                    {experience.current && (
+                                        <div className="flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-green-100 dark:bg-green-950/30 text-green-700 dark:text-green-300">
+                                            <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                                            Current
+                                        </div>
+                                    )}
                                 </div>
 
                                 {/* Position & Company - Compact */}
@@ -182,52 +182,52 @@ function ExperienceCard({ experience, index, isLast }: ExperienceCardProps) {
 function ExperienceStats() {
     const stats = [
         {
-            number: "01",
             icon: TrendingUp,
             label: "Years Experience",
             value: "9+",
-            color: SALESFORCE_BLUE,
+            color: "#3b82f6",
             gradient: "from-blue-500/10 via-blue-600/5 to-purple-600/10",
             border: "border-blue-500/20",
             hoverBorder: "hover:border-blue-500/30",
             hoverShadow: "hover:shadow-blue-500/15",
-            iconGradient: "from-blue-500 to-purple-600"
+            iconGradient: "from-blue-500 to-purple-600",
+            textGradient: "linear-gradient(to right, #3b82f6, #8b5cf6, #3b82f6)"
         },
         {
-            number: "02",
             icon: Building2,
             label: "Organizations",
             value: "3",
-            color: SALESFORCE_BLUE,
+            color: "#10b981",
             gradient: "from-emerald-500/10 via-green-600/5 to-teal-600/10",
             border: "border-emerald-500/20",
             hoverBorder: "hover:border-emerald-500/30",
             hoverShadow: "hover:shadow-emerald-500/15",
-            iconGradient: "from-emerald-500 to-teal-600"
+            iconGradient: "from-emerald-500 to-green-600",
+            textGradient: "linear-gradient(to right, #10b981, #059669, #10b981)"
         },
         {
-            number: "03",
             icon: Award,
             label: "Leadership Roles",
             value: "3",
-            color: SALESFORCE_BLUE,
+            color: "#8b5cf6",
             gradient: "from-violet-500/10 via-purple-600/5 to-fuchsia-600/10",
             border: "border-violet-500/20",
             hoverBorder: "hover:border-violet-500/30",
             hoverShadow: "hover:shadow-violet-500/15",
-            iconGradient: "from-violet-500 to-fuchsia-600"
+            iconGradient: "from-violet-500 to-fuchsia-600",
+            textGradient: "linear-gradient(to right, #8b5cf6, #d946ef, #8b5cf6)"
         },
         {
-            number: "04",
             icon: Zap,
             label: "Major Projects",
             value: "15+",
-            color: SALESFORCE_BLUE,
+            color: "#f59e0b",
             gradient: "from-amber-500/10 via-orange-600/5 to-yellow-600/10",
             border: "border-amber-500/20",
             hoverBorder: "hover:border-amber-500/30",
             hoverShadow: "hover:shadow-amber-500/15",
-            iconGradient: "from-amber-500 to-yellow-600"
+            iconGradient: "from-amber-500 to-orange-600",
+            textGradient: "linear-gradient(to right, #f59e0b, #d97706, #f59e0b)"
         }
     ];
 
@@ -246,30 +246,23 @@ function ExperienceStats() {
                             {/* Animated background gradient */}
                             <div className={`absolute inset-0 bg-gradient-to-r ${stat.gradient} rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
 
-                            {/* Number */}
-                            <div className="absolute top-4 left-4 text-sm font-bold opacity-40 group-hover:opacity-60 transition-opacity">
-                                {stat.number}
-                            </div>
-
                             <div className="relative text-center">
                                 {/* Icon with glow effect */}
-                                <div className={`mx-auto mb-4 w-14 h-14 bg-gradient-to-br ${stat.iconGradient} rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-${stat.color}/40 transition-all duration-300 ease-out`}>
+                                <div
+                                    className="mx-auto mb-4 w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg transition-all duration-300 ease-out"
+                                    style={{
+                                        background: stat.textGradient,
+                                        boxShadow: `0 8px 24px -8px ${stat.color}40`
+                                    }}
+                                >
                                     <stat.icon className="w-7 h-7 text-white" />
                                 </div>
 
                                 {/* Number with animated gradient */}
                                 <div className="text-3xl sm:text-4xl font-black mb-2">
                                     <span
-                                        className={`bg-gradient-to-r bg-clip-text text-transparent bg-300% animate-gradient`}
-                                        style={{
-                                            backgroundImage: stat.number === "01" ?
-                                                "linear-gradient(to right, #3b82f6, #8b5cf6, #3b82f6)" :
-                                                stat.number === "02" ?
-                                                    "linear-gradient(to right, #10b981, #059669, #10b981)" :
-                                                    stat.number === "03" ?
-                                                        "linear-gradient(to right, #8b5cf6, #d946ef, #8b5cf6)" :
-                                                        "linear-gradient(to right, #f59e0b, #d97706, #f59e0b)"
-                                        }}
+                                        className="bg-gradient-to-r bg-clip-text text-transparent bg-300% animate-gradient"
+                                        style={{ backgroundImage: stat.textGradient }}
                                     >
                                         {stat.value}
                                     </span>

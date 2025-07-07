@@ -162,7 +162,7 @@ export function CertificationsSection() {
 
                         {/* Catchy Achievement Stats */}
                         <div className="flex flex-wrap justify-center items-center gap-8 sm:gap-12">
-                            {/* Salesforce Certified Stat */}
+                            {/* Total Certifications */}
                             <div className="group cursor-pointer">
                                 <div
                                     className="relative bg-gradient-to-br from-blue-500/10 via-blue-600/5 to-purple-600/10 backdrop-blur-sm border border-blue-500/20 rounded-3xl p-8 transition-all duration-300 ease-out hover:shadow-xl hover:shadow-blue-500/15 hover:scale-102 hover:border-blue-500/30"
@@ -186,7 +186,7 @@ export function CertificationsSection() {
 
                                         {/* Label */}
                                         <div className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-                                            Salesforce Certified
+                                            Certified Expert
                                         </div>
                                     </div>
 
@@ -200,7 +200,7 @@ export function CertificationsSection() {
                                 </div>
                             </div>
 
-                            {/* Years Experience Stat */}
+                            {/* Commerce Specialization */}
                             <div className="group cursor-pointer">
                                 <div
                                     className="relative bg-gradient-to-br from-emerald-500/10 via-green-600/5 to-teal-600/10 backdrop-blur-sm border border-emerald-500/20 rounded-3xl p-8 transition-all duration-300 ease-out hover:shadow-xl hover:shadow-emerald-500/15 hover:scale-102 hover:border-emerald-500/30"
@@ -212,25 +212,25 @@ export function CertificationsSection() {
                                     <div className="relative text-center">
                                         {/* Icon with glow effect */}
                                         <div className="mx-auto mb-4 w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-emerald-500/40 transition-all duration-300 ease-out">
-                                            <Calendar className="w-8 h-8 text-white" />
+                                            <Building2 className="w-8 h-8 text-white" />
                                         </div>
 
-                                        {/* Number with animated gradient */}
-                                        <div className="text-4xl sm:text-5xl font-black mb-2">
+                                        {/* Text with animated gradient */}
+                                        <div className="text-2xl sm:text-3xl font-black mb-2">
                                             <span className="bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600 bg-clip-text text-transparent bg-300% animate-gradient">
-                                                {new Date().getFullYear() - 2016}+
+                                                B2C
                                             </span>
                                         </div>
 
                                         {/* Label */}
                                         <div className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-                                            Years Experience
+                                            Commerce Expert
                                         </div>
                                     </div>
 
                                     {/* Decorative elements */}
                                     <div className="absolute top-3 right-3 opacity-30 group-hover:opacity-60 transition-opacity">
-                                        <Trophy className="w-5 h-5 text-emerald-500" />
+                                        <Star className="w-5 h-5 text-emerald-500" />
                                     </div>
                                     <div className="absolute bottom-3 left-3 opacity-20 group-hover:opacity-40 transition-opacity">
                                         <Sparkles className="w-4 h-4 text-teal-500" />
