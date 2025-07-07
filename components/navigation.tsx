@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import { Menu, X, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "@/components/theme-switcher";
+// import { ThemeToggle } from "@/components/theme-switcher";
 import { navigationItems, personalInfo } from "@/data/portfolio";
 import { cn, downloadResume } from "@/lib/utils";
 import {
@@ -178,7 +178,7 @@ export function Navigation() {
 
             {/* Desktop Actions */}
             <div className="hidden md:flex items-center space-x-3">
-              <ThemeToggle />
+              {/* <ThemeToggle /> */}
               <Button
                 variant="outline"
                 size="sm"
@@ -194,7 +194,7 @@ export function Navigation() {
 
             {/* Mobile menu button - Enhanced visibility */}
             <div className="md:hidden flex items-center space-x-2">
-              <ThemeToggle />
+              {/* <ThemeToggle /> */}
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 aria-label="Toggle navigation menu"
