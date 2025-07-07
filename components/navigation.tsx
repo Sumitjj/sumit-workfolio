@@ -311,7 +311,7 @@ export function Navigation() {
                 }}
               >
                 <Download className="h-4 w-4" />
-                <span>Download Resume</span>
+                <span>View Resume</span>
               </button>
             </div>
           </div>

@@ -48,12 +48,30 @@ export function Footer() {
               </div>
             </div>
 
-            {/* Social Links - Enhanced for Mobile */}
+            {/* Social Links - Enhanced with Catchy Effects */}
             <div className="order-1 lg:order-2">
               <div className="flex items-center justify-center space-x-3 sm:space-x-4">
                 {socialLinks.map((social) => {
                   const IconComponent = social.icon;
                   const isEmail = social.platform === "Email";
+
+                  // Platform-specific colors for footer
+                  const getPlatformColors = (platform: string) => {
+                    switch (platform) {
+                      case "GitHub":
+                        return "hover:bg-gray-900 hover:border-gray-900 hover:text-white hover:shadow-gray-500/30 dark:hover:bg-gray-100 dark:hover:text-gray-900 dark:hover:border-gray-100";
+                      case "LinkedIn":
+                        return "hover:bg-blue-600 hover:border-blue-600 hover:text-white hover:shadow-blue-500/30";
+                      case "Email":
+                        return "hover:bg-red-500 hover:border-red-500 hover:text-white hover:shadow-red-500/30";
+                      case "Salesforce Profile":
+                        return "hover:bg-blue-500 hover:border-blue-500 hover:text-white hover:shadow-blue-500/30";
+                      default:
+                        return "hover:bg-primary hover:border-primary hover:text-primary-foreground hover:shadow-primary/30";
+                    }
+                  };
+
+                  const platformColors = getPlatformColors(social.platform);
 
                   if (isEmail) {
                     return (
@@ -65,14 +83,21 @@ export function Footer() {
                           "Hi Sumit,\n\nI came across your portfolio and would like to discuss a potential opportunity.\n\nBest regards"
                         )}
                         className={cn(
-                          "w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 group",
+                          "group relative w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 rounded-xl flex items-center justify-center transition-all duration-500 ease-out transform-gpu hover:scale-110 hover:rotate-6 overflow-hidden",
                           "bg-gradient-to-br from-background/80 to-background/40 border border-border/30",
-                          "hover:bg-primary hover:border-primary hover:text-primary-foreground hover:shadow-lg hover:shadow-primary/25",
+                          platformColors,
                           "active:scale-95 touch-manipulation"
                         )}
+                        style={{ transformOrigin: 'center center', willChange: 'transform' }}
                         aria-label={`Send email to ${social.platform}`}
                       >
-                        <IconComponent className="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:scale-110" />
+                        {/* Shimmer effect */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
+
+                        {/* Pulse ring on hover */}
+                        <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 group-hover:animate-ping" style={{ boxShadow: '0 0 0 2px currentColor' }} />
+
+                        <IconComponent className="relative w-4 h-4 sm:w-5 sm:h-5 transition-all duration-300 group-hover:scale-110 group-hover:rotate-12" />
                       </button>
                     );
                   }
@@ -84,14 +109,21 @@ export function Footer() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className={cn(
-                        "w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 group",
+                        "group relative w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 rounded-xl flex items-center justify-center transition-all duration-500 ease-out transform-gpu hover:scale-110 hover:rotate-6 overflow-hidden",
                         "bg-gradient-to-br from-background/80 to-background/40 border border-border/30",
-                        "hover:bg-primary hover:border-primary hover:text-primary-foreground hover:shadow-lg hover:shadow-primary/25",
+                        platformColors,
                         "active:scale-95 touch-manipulation"
                       )}
+                      style={{ transformOrigin: 'center center', willChange: 'transform' }}
                       aria-label={`Visit ${social.platform}`}
                     >
-                      <IconComponent className="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:scale-110" />
+                      {/* Shimmer effect */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
+
+                      {/* Pulse ring on hover */}
+                      <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 group-hover:animate-ping" style={{ boxShadow: '0 0 0 2px currentColor' }} />
+
+                      <IconComponent className="relative w-4 h-4 sm:w-5 sm:h-5 transition-all duration-300 group-hover:scale-110 group-hover:rotate-12" />
                     </a>
                   );
                 })}

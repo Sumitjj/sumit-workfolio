@@ -56,6 +56,7 @@ export const projects: Project[] = [
         liveUrl: "https://www.fullbeauty.com/",
         featured: true,
         year: 2024,
+        organization: "Merkle",
     },
     {
         id: "2",
@@ -69,6 +70,7 @@ export const projects: Project[] = [
         categories: ["Web Development", "AI/ML"],
         featured: true,
         year: 2024,
+        organization: "Merkle",
     },
     {
         id: "3",
@@ -82,6 +84,7 @@ export const projects: Project[] = [
         categories: ["Web Development", "Real-time"],
         featured: true,
         year: 2023,
+        organization: "Merkle",
     },
     {
         id: "4",
@@ -95,6 +98,7 @@ export const projects: Project[] = [
         categories: ["Web Development", "Productivity"],
         featured: false,
         year: 2023,
+        organization: "Publicis Sapient",
     },
     {
         id: "5",
@@ -108,6 +112,7 @@ export const projects: Project[] = [
         categories: ["Web Development", "Education"],
         featured: false,
         year: 2022,
+        organization: "PFSWeb",
     },
     {
         id: "6",
@@ -121,6 +126,7 @@ export const projects: Project[] = [
         categories: ["Web Development", "Education"],
         featured: false,
         year: 2022,
+        organization: "PFSWeb",
     },
     {
         id: "7",
@@ -134,6 +140,7 @@ export const projects: Project[] = [
         categories: ["Web Development", "AI/ML"],
         featured: false,
         year: 2024,
+        organization: "Merkle",
     },
     {
         id: "8",
@@ -147,6 +154,7 @@ export const projects: Project[] = [
         categories: ["Web Development", "AI/ML"],
         featured: false,
         year: 2024,
+        organization: "Merkle",
     },
     {
         id: "9",
@@ -160,6 +168,7 @@ export const projects: Project[] = [
         categories: ["Mobile Development", "Fintech"],
         featured: false,
         year: 2023,
+        organization: "Merkle",
     },
     {
         id: "10",
@@ -173,6 +182,7 @@ export const projects: Project[] = [
         categories: ["Mobile Development", "Fintech"],
         featured: false,
         year: 2023,
+        organization: "Merkle",
     },
     {
         id: "11",
@@ -186,6 +196,7 @@ export const projects: Project[] = [
         categories: ["Mobile Development", "Fintech"],
         featured: false,
         year: 2023,
+        organization: "Merkle",
     },
     {
         id: "12",
@@ -199,6 +210,7 @@ export const projects: Project[] = [
         categories: ["Web Development", "AI/ML"],
         featured: true,
         year: 2024,
+        organization: "Merkle",
     },
     {
         id: "13",
@@ -212,6 +224,7 @@ export const projects: Project[] = [
         categories: ["Web Development", "Education"],
         featured: false,
         year: 2022,
+        organization: "PFSWeb",
     },
     {
         id: "14",
@@ -225,6 +238,7 @@ export const projects: Project[] = [
         categories: ["Web Development", "Education"],
         featured: false,
         year: 2022,
+        organization: "PFSWeb",
     },
 ];
 
@@ -282,6 +296,7 @@ export const experiences: Experience[] = [
             "Commerce SDK",
             "SCAPI/OCAPI"
         ],
+        projects: ["FullBeauty Brands", "Aquasana Water Filters", "Hotwater", "State Water Heaters", "Reliance Water Heaters", "American Water Heaters", "Lochinvar", "AO Smith Corp", "Lane Bryant"]
     },
     {
         id: "2",
@@ -300,6 +315,7 @@ export const experiences: Experience[] = [
             "Webpack",
             "SFRA"
         ],
+        projects: ["Loreal"]
     },
     {
         id: "3",
@@ -316,6 +332,7 @@ export const experiences: Experience[] = [
             "Javascript",
             "JQuery",
         ],
+        projects: ["Camping World", "Saje Natural Wellness", "London Drugs", "Uniqlo"]
     },
 ];
 

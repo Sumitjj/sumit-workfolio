@@ -562,6 +562,47 @@ body::after {
   }
 }
 
+/* Futuristic Experience Card Animations */
+@keyframes holographic {
+  0%, 100% { 
+    background-position: 0% 50%; 
+    opacity: 0;
+  }
+  50% { 
+    background-position: 100% 50%; 
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(var(--primary), 0.2);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(var(--primary), 0.4);
+  }
+}
+
+@keyframes liquid-glow {
+  0%, 100% {
+    filter: blur(4px);
+    opacity: 0.3;
+  }
+  50% {
+    filter: blur(8px);
+    opacity: 0.6;
+  }
+}
+
+@keyframes neon-pulse {
+  0%, 100% {
+    text-shadow: 0 0 5px rgba(var(--primary), 0.5);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(var(--primary), 0.8), 0 0 30px rgba(var(--primary), 0.6);
+  }
+}
+
 @keyframes modalOut {
   from {
     opacity: 1;

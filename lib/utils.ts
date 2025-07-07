@@ -102,22 +102,22 @@ export function getAvailableResume(): ResumeInfo {
 }
 
 /**
- * Enhanced resume download function
- * Downloads the first available resume file from the resume folder
+ * Enhanced resume view/download function
+ * Opens the resume in a new tab with print options, allowing users to view or download
  */
-export function downloadResume(): void {
+export function openResume(): void {
     const resume = getAvailableResume();
 
-    // Create a temporary link element for download
-    const link = document.createElement('a');
-    link.href = resume.url;
-    link.download = resume.filename;
-    link.target = '_blank';
+    // Open resume in new tab for viewing/printing
+    window.open(resume.url, '_blank', 'noopener,noreferrer');
+}
 
-    // Trigger the download
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+/**
+ * Legacy download function for compatibility
+ * @deprecated Use openResume() instead for better UX
+ */
+export function downloadResume(): void {
+    openResume();
 }
 
 /**

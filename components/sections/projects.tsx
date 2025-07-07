@@ -108,7 +108,7 @@ export function ProjectsSection() {
         {/* Remaining Projects - Smaller Height with Technologies */}
         {remainingProjects.length > 0 && (
           <div className="mb-10 sm:mb-12">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 sm:gap-6 grid-equal-height">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-6 grid-equal-height">
               {remainingProjects.map((project, index) => (
                 <div
                   key={project.id}

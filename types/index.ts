@@ -27,6 +27,7 @@ export interface Project {
     liveUrl?: string;
     featured: boolean;
     year: number;
+    organization?: string;
 }
 
 /**
@@ -51,6 +52,7 @@ export interface Experience {
     description: string;
     technologies: string[];
     current: boolean;
+    projects: string[];
 }
 
 /**
