@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { ChevronDown, ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { personalInfo } from "@/data/portfolio";
+import { personalInfo, socialLinks } from "@/data/portfolio";
 import { smoothScrollToElement } from "@/lib/helpers/scroll";
 import { SocialFloatingDock } from "@/lib/aceternity/social-floating-dock";
 
@@ -21,6 +21,28 @@ export function HeroSection() {
     { width: 60, height: 60, left: 45, top: 10, delay: 1.8, duration: 5.5 },
     { width: 90, height: 90, left: 55, top: 85, delay: 2.5, duration: 3.5 },
   ];
+
+  function HorizontalSocialIconsMobile() {
+    return (
+      <div className="flex flex-row gap-x-8 sm:gap-x-10 justify-center items-center md:hidden">
+        {socialLinks.map((social) => {
+          const Icon = social.icon;
+          return (
+            <a
+              key={social.platform}
+              href={social.url}
+              aria-label={social.platform}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-neutral-500 dark:text-neutral-300 text-2xl hover:text-primary transition-colors duration-300"
+            >
+              <Icon />
+            </a>
+          );
+        })}
+      </div>
+    );
+  }
 
   return (
     <section className="relative hero-section overflow-hidden px-4 sm:px-6 lg:px-8">
@@ -119,12 +141,15 @@ export function HeroSection() {
               </Button>
             </div>
 
-            {/* Social Links with Floating Dock */}
+            {/* Social Links - Horizontal on mobile, Floating Dock on desktop */}
             <div className="hero-fade-in" style={{ animationDelay: "0.7s" }}>
-              <SocialFloatingDock
-                className="flex justify-center"
-                mobileClassName="translate-y-0"
-              />
+              {/* Mobile: Horizontal social icons */}
+              <HorizontalSocialIconsMobile />
+
+              {/* Desktop: Floating dock */}
+              <div className="hidden md:flex justify-center">
+                <SocialFloatingDock />
+              </div>
             </div>
           </div>
 

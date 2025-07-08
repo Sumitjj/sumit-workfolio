@@ -2,8 +2,9 @@
 
 import React from "react";
 import { Heart, Sparkles } from "lucide-react";
-import { contactConfig, footerContent, personalInfo } from "@/data/portfolio";
+import { contactConfig, footerContent, personalInfo, socialLinks } from "@/data/portfolio";
 import { SocialFloatingDock } from "@/lib/aceternity/social-floating-dock";
+import { FooterSparkles } from "@/lib/aceternity/footer-sparkles";
 
 /**
  * Fully Responsive Footer Component with Modern Design
@@ -11,62 +12,97 @@ import { SocialFloatingDock } from "@/lib/aceternity/social-floating-dock";
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
+  function HorizontalSocialDockMobile() {
+    return (
+      <div className="flex flex-row gap-x-4 justify-center items-center md:hidden mt-4">
+        {socialLinks.map((social) => {
+          const Icon = social.icon;
+          return (
+            <a
+              key={social.platform}
+              href={social.url}
+              aria-label={social.platform}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-neutral-500 dark:text-neutral-300 text-2xl"
+            >
+              <Icon />
+            </a>
+          );
+        })}
+      </div>
+    );
+  }
+
   return (
-    <footer className="relative mt-auto">
+    <footer className="relative mt-auto overflow-hidden">
       {/* Premium Background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-t from-primary/5 via-transparent to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border/50 to-transparent" />
       </div>
 
-      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-8">
+      {/* Footer Sparkles Effect with Lightning Border */}
+      <FooterSparkles className="z-0" />
+
+      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-8 z-20">
         {/* Responsive Footer Layout */}
-        <div className="space-y-6 sm:space-y-0">
-
-          {/* Main Footer Content */}
-          <div className="flex flex-col lg:flex-row items-center justify-between pt-6 border-t border-border/30 gap-6 lg:gap-8">
-
-            {/* Copyright Section - Mobile First */}
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start text-center lg:text-left space-y-2 sm:space-y-0 sm:space-x-2 text-sm text-muted-foreground order-2 lg:order-1">
-
-              {/* Copyright Line */}
-              <div className="flex items-center space-x-2">
-                <span>© {currentYear} {footerContent.copyright} <span className="font-bold">{personalInfo.name}</span></span>
-                <span className="hidden sm:inline">{footerContent.craftedWith}</span>
-                <Heart className="w-4 h-4 text-red-500 fill-red-500 animate-pulse hidden sm:inline" />
-              </div>
-
-              {/* Tech Stack - Responsive */}
-              <div className="flex items-center justify-center space-x-2 text-xs sm:text-sm">
-                <span className="sm:hidden">{footerContent.craftedWith}</span>
-                <Heart className="w-3 h-3 text-red-500 fill-red-500 animate-pulse sm:hidden" />
-                <span className="font-medium text-orange-500">Next.js</span>
-                <span className="text-muted-foreground/60">•</span>
-                <span className="font-medium text-primary">TypeScript</span>
-                <span className="text-muted-foreground/60">•</span>
-                <span className="font-medium text-green-500">Tailwind</span>
+        {/* Mobile layout: crafted with, copyright, gap, social icons, gap, always learning message */}
+        <div className="flex flex-col items-center md:hidden w-full">
+          <div className="text-center text-sm text-muted-foreground mt-8">
+            Crafted with <span className="font-bold text-red-500">❤️</span> <span className="font-medium text-orange-500">Next.js</span> <span className="text-muted-foreground/60">•</span> <span className="font-medium text-primary">TypeScript</span> <span className="text-muted-foreground/60">•</span> <span className="font-medium text-green-500">Tailwind</span>
+          </div>
+          <div className="mt-6 text-center text-sm text-muted-foreground">
+            © {currentYear} <span className="font-bold">Sumit Jangid</span>
+          </div>
+          <div className="mt-4" />
+          <div className="flex flex-row gap-x-8 sm:gap-x-10 items-center justify-center">
+            {socialLinks.map((social) => {
+              const Icon = social.icon;
+              return (
+                <a
+                  key={social.platform}
+                  href={social.url}
+                  aria-label={social.platform}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-neutral-500 dark:text-neutral-300 text-2xl"
+                >
+                  <Icon />
+                </a>
+              );
+            })}
+          </div>
+          <div className="mt-6" />
+          <div className="flex items-center justify-center space-x-2 text-xs text-muted-foreground">
+            <Sparkles className="w-3 h-3 text-primary" />
+            <span>Always learning, always building.</span>
+            <Sparkles className="w-3 h-3 text-primary" />
+          </div>
+        </div>
+        {/* Desktop layout: 3 columns, message centered below */}
+        <div className="hidden md:flex flex-col w-full">
+          <div className="flex flex-row items-center justify-between w-full gap-x-8">
+            {/* Left: Copyright */}
+            <div className="text-left text-sm text-muted-foreground flex-1">
+              © {currentYear} <span className="font-bold">Sumit Jangid</span>
+            </div>
+            {/* Center: Crafted with */}
+            <div className="flex justify-center flex-1">
+              <div className="text-center text-sm text-muted-foreground mt-4">
+                Crafted with <span className="font-bold text-red-500">❤️</span> <span className="font-medium text-orange-500">Next.js</span> <span className="text-muted-foreground/60">•</span> <span className="font-medium text-primary">TypeScript</span> <span className="text-muted-foreground/60">•</span> <span className="font-medium text-green-500">Tailwind</span>
               </div>
             </div>
-
-            {/* Social Links - Floating Dock */}
-            <div className="order-1 lg:order-2 flex items-center">
-              <SocialFloatingDock
-                className="flex justify-center"
-                mobileClassName="translate-y-0"
-              />
-
-              {/* Social Label for Mobile */}
-              <div className="text-center mt-3 sm:hidden">
-                <p className="text-xs text-muted-foreground">{footerContent.connectWith}</p>
+            {/* Right: Social Icons */}
+            <div className="flex justify-end flex-1">
+              <div className="flex flex-row gap-x-4 items-center justify-end">
+                <SocialFloatingDock />
               </div>
             </div>
           </div>
-
-          {/* Additional Mobile Info */}
-          <div className="sm:hidden text-center pt-4 border-t border-border/20">
+          <div className="w-full flex justify-center mt-8 mb-2">
             <div className="flex items-center justify-center space-x-2 text-xs text-muted-foreground">
               <Sparkles className="w-3 h-3 text-primary" />
-              <span>{footerContent.alwaysLearning}</span>
+              <span>Always learning, always building.</span>
               <Sparkles className="w-3 h-3 text-primary" />
             </div>
           </div>
