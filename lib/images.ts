@@ -78,12 +78,22 @@ export function getIconImage(name: string, extension: string = 'svg'): string {
  * These correspond to actual files in public/images/projects/
  */
 export const PROJECT_IMAGES = {
-    'Full Beauty FBB': '/images/projects/full-beauty-fbb.jpg',
+    'Full Beauty FBB': '/images/projects/fullbeauty.jpg',
+    'Aquasana': '/images/projects/aquasana.jpeg',
     'AOSmith': '/images/projects/aosmith.jpg',
+    'LaneBryant': '/images/projects/lanebryant.jpg',
     'AOSmith Hotwater': '/images/projects/aosmith-hotwater.jpg',
     'Ascena LaneBryant': '/images/projects/ascena-lanebryant.jpg',
-    'Loreal': '/images/projects/loreal.jpg',
-    'Camping World': '/images/projects/camping-world.jpg'
+    'Loreal': '/images/projects/loreal.webp',
+    'Camping World': '/images/projects/campingworld.webp',
+    'Saje': '/images/projects/saje.jpg',
+    'Hotwater': '/images/projects/hotwater.jpg',
+    'State': '/images/projects/state.webp',
+    'Reliance': '/images/projects/reliance.jpg',
+    'American': '/images/projects/american.png',
+    'Lochinvar': '/images/projects/lochinvar.jpeg',
+    'LondonDrugs': '/images/projects/londondrugs.jpg',
+    'Uniqlo': '/images/projects/uniqlo.jpeg',
 } as const;
 
 /**
