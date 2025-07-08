@@ -4,9 +4,9 @@ import React from "react";
 import Image from "next/image";
 import { ChevronDown, ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { personalInfo, socialLinks } from "@/data/portfolio";
-import { handleEmailClick } from "@/lib/utils";
-import { smoothScrollToElement } from "@/lib/scroll";
+import { personalInfo } from "@/data/portfolio";
+import { smoothScrollToElement } from "@/lib/helpers/scroll";
+import { SocialFloatingDock } from "@/lib/aceternity/social-floating-dock";
 
 /**
  * Hero section with CSS animations and modern responsive design
@@ -96,69 +96,36 @@ export function HeroSection() {
             {personalInfo.bio}
           </p>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-8 sm:mb-12 hero-slide-up" style={{ animationDelay: "0.6s" }}>
-            <Button
-              size="lg"
-              className="group hover-lift w-full sm:w-auto text-sm sm:text-base"
-              onClick={() => smoothScrollToElement("projects")}
-            >
-              What I've Built
-              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </Button>
+          {/* CTA Buttons and Social Links */}
+          <div className="flex flex-col items-center gap-6 sm:gap-8 mb-8 sm:mb-12 hero-slide-up" style={{ animationDelay: "0.6s" }}>
+            {/* Buttons */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+              <Button
+                size="lg"
+                className="group hover-lift w-full sm:w-auto text-sm sm:text-base"
+                onClick={() => smoothScrollToElement("projects")}
+              >
+                What I've Built
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
 
-            <Button
-              variant="outline"
-              size="lg"
-              className="hover-lift w-full sm:w-auto text-sm sm:text-base"
-              onClick={() => smoothScrollToElement("contact")}
-            >
-              Get In Touch
-            </Button>
-          </div>
+              <Button
+                variant="outline"
+                size="lg"
+                className="hover-lift w-full sm:w-auto text-sm sm:text-base"
+                onClick={() => smoothScrollToElement("contact")}
+              >
+                Get In Touch
+              </Button>
+            </div>
 
-          {/* Social Links with Enhanced Hover Effects */}
-          <div className="flex items-center justify-center space-x-3 sm:space-x-4 mb-12 sm:mb-16 hero-fade-in" style={{ animationDelay: "0.7s" }}>
-            {socialLinks.map((social, index) => {
-              const isEmail = social.platform === "Email";
-              if (isEmail) {
-                return (
-                  <button
-                    key={social.platform}
-                    onClick={() => handleEmailClick(
-                      "s.jangir129@gmail.com",
-                      "Portfolio Inquiry - Let's Connect",
-                      "Hi Sumit,\n\nI came across your portfolio and would like to discuss a potential opportunity.\n\nBest regards"
-                    )}
-                    className={`group relative p-2.5 sm:p-3 flex items-center justify-center transition-all duration-300 ease-out hero-fade-in transform-gpu hover:scale-125`}
-                    style={{
-                      animationDelay: `${0.8 + index * 0.05}s`,
-                      transformOrigin: 'center center'
-                    }}
-                    aria-label={`Send email to ${social.platform}`}
-                  >
-                    <social.icon className="w-4.5 h-4.5 sm:w-5.5 sm:h-5.5 transition-all duration-300" />
-                  </button>
-                );
-              }
-
-              return (
-                <a
-                  key={social.platform}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`group relative p-2.5 sm:p-3 flex items-center justify-center transition-all duration-300 ease-out hero-fade-in transform-gpu hover:scale-125`}
-                  style={{
-                    animationDelay: `${0.8 + index * 0.05}s`,
-                    transformOrigin: 'center center'
-                  }}
-                  aria-label={`Visit ${social.platform}`}
-                >
-                  <social.icon className="w-4.5 h-4.5 sm:w-5.5 sm:h-5.5 transition-all duration-300" />
-                </a>
-              );
-            })}
+            {/* Social Links with Floating Dock */}
+            <div className="hero-fade-in" style={{ animationDelay: "0.7s" }}>
+              <SocialFloatingDock
+                className="flex justify-center"
+                mobileClassName="translate-y-0"
+              />
+            </div>
           </div>
 
         </div>

@@ -2,8 +2,8 @@
 
 import React from "react";
 import { Heart, Sparkles } from "lucide-react";
-import { contactConfig, footerContent, personalInfo, socialLinks } from "@/data/portfolio";
-import { cn, handleEmailClick } from "@/lib/utils";
+import { contactConfig, footerContent, personalInfo } from "@/data/portfolio";
+import { SocialFloatingDock } from "@/lib/aceternity/social-floating-dock";
 
 /**
  * Fully Responsive Footer Component with Modern Design
@@ -48,51 +48,12 @@ export function Footer() {
               </div>
             </div>
 
-            {/* Social Links - Enhanced with Catchy Effects */}
-            <div className="order-1 lg:order-2">
-              <div className="flex items-center justify-center space-x-1 sm:space-x-1">
-                {socialLinks.map((social) => {
-                  const IconComponent = social.icon;
-                  const isEmail = social.platform === "Email";
-                  if (isEmail) {
-                    return (
-                      <button
-                        key={social.platform}
-                        onClick={() => handleEmailClick(
-                          personalInfo.email,
-                          contactConfig.subjects.default,
-                          contactConfig.defaultBody
-                        )}
-                        className={cn(
-                          "group relative w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 flex items-center justify-center transition-all duration-200 ease-out transform-gpu hover:scale-105",
-                          "active:scale-95 touch-manipulation"
-                        )}
-                        style={{ transformOrigin: 'center center' }}
-                        aria-label={`Send email to ${social.platform}`}
-                      >
-                        <IconComponent className="w-4 h-4 sm:w-5 sm:h-5 transition-all duration-200" />
-                      </button>
-                    );
-                  }
-
-                  return (
-                    <a
-                      key={social.platform}
-                      href={social.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={cn(
-                        "group relative w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 flex items-center justify-center transition-all duration-200 ease-out transform-gpu hover:scale-105",
-                        "active:scale-95 touch-manipulation"
-                      )}
-                      style={{ transformOrigin: 'center center' }}
-                      aria-label={`Visit ${social.platform}`}
-                    >
-                      <IconComponent className="w-4 h-4 sm:w-5 sm:h-5 transition-all duration-200" />
-                    </a>
-                  );
-                })}
-              </div>
+            {/* Social Links - Floating Dock */}
+            <div className="order-1 lg:order-2 flex items-center">
+              <SocialFloatingDock
+                className="flex justify-center"
+                mobileClassName="translate-y-0"
+              />
 
               {/* Social Label for Mobile */}
               <div className="text-center mt-3 sm:hidden">

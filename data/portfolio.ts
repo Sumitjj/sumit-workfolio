@@ -15,7 +15,7 @@ import {
     NavItem,
     Certification,
 } from "@/types";
-import { getOptimizedProjectImage, getOptimizedAvatarImage } from "@/lib/images";
+import { getOptimizedProjectImage, getOptimizedAvatarImage } from "@/lib/helpers/images";
 
 /**
  * Navigation items for the portfolio

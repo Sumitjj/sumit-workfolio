@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { contactConfig } from "@/data/portfolio";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/helpers/utils";
 
 // Form data interface
 interface FormData {

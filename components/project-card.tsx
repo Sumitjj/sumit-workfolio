@@ -6,7 +6,7 @@ import { ExternalLink, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CardContent } from "@/components/ui/card";
 import { Project } from "@/types";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/helpers/utils";
 import { Fade } from "react-awesome-reveal";
 
 interface ProjectCardProps {
