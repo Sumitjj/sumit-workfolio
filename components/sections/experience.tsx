@@ -164,7 +164,7 @@ function ExperienceCard({ experience, index, isLast }: ExperienceCardProps) {
                                     className="h-full transition-all duration-1000 ease-out"
                                     style={{
                                         backgroundColor: SALESFORCE_BLUE,
-                                        width: experience.current ? '100%' : '85%'
+                                        width: '100%'
                                     }}
                                 />
                             </div>

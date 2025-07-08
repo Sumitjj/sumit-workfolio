@@ -121,48 +121,8 @@ export function HeroSection() {
             {socialLinks.map((social, index) => {
               const isEmail = social.platform === "Email";
 
-              // Dynamic colors based on platform
-              const getPlatformColors = (platform: string) => {
-                switch (platform) {
-                  case "GitHub":
-                    return {
-                      bg: "hover:bg-gray-900 dark:hover:bg-gray-100",
-                      text: "hover:text-white dark:hover:text-gray-900",
-                      shadow: "hover:shadow-gray-500/50",
-                      glow: "group-hover:shadow-gray-500/30"
-                    };
-                  case "LinkedIn":
-                    return {
-                      bg: "hover:bg-blue-600",
-                      text: "hover:text-white",
-                      shadow: "hover:shadow-blue-500/50",
-                      glow: "group-hover:shadow-blue-500/30"
-                    };
-                  case "Email":
-                    return {
-                      bg: "hover:bg-red-500",
-                      text: "hover:text-white",
-                      shadow: "hover:shadow-red-500/50",
-                      glow: "group-hover:shadow-red-500/30"
-                    };
-                  case "Salesforce Profile":
-                    return {
-                      bg: "hover:bg-blue-500",
-                      text: "hover:text-white",
-                      shadow: "hover:shadow-blue-500/50",
-                      glow: "group-hover:shadow-blue-500/30"
-                    };
-                  default:
-                    return {
-                      bg: "hover:bg-primary",
-                      text: "hover:text-primary-foreground",
-                      shadow: "hover:shadow-primary/50",
-                      glow: "group-hover:shadow-primary/30"
-                    };
-                }
-              };
-
-              const colors = getPlatformColors(social.platform);
+              // No color changes on hover - just zoom effect
+              const colors = {};
 
               if (isEmail) {
                 return (
@@ -173,21 +133,14 @@ export function HeroSection() {
                       "Portfolio Inquiry - Let's Connect",
                       "Hi Sumit,\n\nI came across your portfolio and would like to discuss a potential opportunity.\n\nBest regards"
                     )}
-                    className={`group relative p-2.5 sm:p-3 rounded-full bg-background/50 backdrop-blur-sm border border-border/50 text-muted-foreground transition-all duration-500 ease-out hero-fade-in transform-gpu hover:scale-110 hover:rotate-6 ${colors.bg} ${colors.text} ${colors.shadow} hover:shadow-lg hover:border-transparent overflow-hidden`}
+                    className={`group relative p-2.5 sm:p-3 flex items-center justify-center transition-all duration-300 ease-out hero-fade-in transform-gpu hover:scale-125`}
                     style={{
                       animationDelay: `${2.5 + index * 0.1}s`,
-                      transformOrigin: 'center center',
-                      willChange: 'transform'
+                      transformOrigin: 'center center'
                     }}
                     aria-label={`Send email to ${social.platform}`}
                   >
-                    {/* Rotating gradient background */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
-
-                    {/* Pulse effect on hover */}
-                    <div className={`absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-ping ${colors.glow}`} />
-
-                    <social.icon className="relative w-4 h-4 sm:w-5 sm:h-5 transition-all duration-300 group-hover:scale-110 group-hover:rotate-12" />
+                    <social.icon className="w-4.5 h-4.5 sm:w-5.5 sm:h-5.5 transition-all duration-300" />
                   </button>
                 );
               }
@@ -198,21 +151,14 @@ export function HeroSection() {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`group relative p-2.5 sm:p-3 rounded-full bg-background/50 backdrop-blur-sm border border-border/50 text-muted-foreground transition-all duration-500 ease-out hero-fade-in transform-gpu hover:scale-110 hover:rotate-6 ${colors.bg} ${colors.text} ${colors.shadow} hover:shadow-lg hover:border-transparent overflow-hidden`}
+                  className={`group relative p-2.5 sm:p-3 flex items-center justify-center transition-all duration-300 ease-out hero-fade-in transform-gpu hover:scale-125`}
                   style={{
                     animationDelay: `${2.5 + index * 0.1}s`,
-                    transformOrigin: 'center center',
-                    willChange: 'transform'
+                    transformOrigin: 'center center'
                   }}
                   aria-label={`Visit ${social.platform}`}
                 >
-                  {/* Rotating gradient background */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
-
-                  {/* Pulse effect on hover */}
-                  <div className={`absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-ping ${colors.glow}`} />
-
-                  <social.icon className="relative w-4 h-4 sm:w-5 sm:h-5 transition-all duration-300 group-hover:scale-110 group-hover:rotate-12" />
+                  <social.icon className="w-4.5 h-4.5 sm:w-5.5 sm:h-5.5 transition-all duration-300" />
                 </a>
               );
             })}

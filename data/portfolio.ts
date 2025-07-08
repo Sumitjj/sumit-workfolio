@@ -1,13 +1,15 @@
 import {
-    Github,
-    Linkedin,
-    Mail,
-    Cloud,
-} from "lucide-react";
+    FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaGitAlt, FaJava, FaJenkins, FaGithub, FaLinkedin
+} from "react-icons/fa";
+import {
+    SiJavascript, SiMongodb, SiTailwindcss, SiExpress, SiJest, SiJira,
+    SiJquery
+} from "react-icons/si";
+import { TbBrandNextjs } from "react-icons/tb";
+import { HiOutlineCloud, HiOutlineMail, HiOutlineDesktopComputer, HiOutlineServer, HiOutlineUsers } from "react-icons/hi";
 import {
     Project,
-    Skill,
-    Testimonial,
+    SkillGroup,
     SocialLink,
     Experience,
     NavItem,
@@ -20,22 +22,32 @@ import { getOptimizedProjectImage, getOptimizedAvatarImage } from "@/lib/images"
  */
 export const navigationItems: NavItem[] = [
     { href: "#projects", label: "Projects" },
-    { href: "#skills", label: "Skills" },
     { href: "#experience", label: "Experience" },
     { href: "#certifications", label: "Certifications" },
+    { href: "#skills", label: "Skills" },
     { href: "#contact", label: "Contact" },
 ];
+
+/**
+ * Footer content
+ */
+export const footerContent = {
+    copyright: "Designed & developed by",
+    craftedWith: "Crafted with",
+    connectWith: "Connect with me",
+    alwaysLearning: "Always learning, always building",
+};
 
 /**
  * Personal information and bio
  */
 export const personalInfo = {
     name: "Sumit Jangid",
-    title: "Salesforce Certified B2C Commerce Architect",
+    title: "Salesforce Certified B2C Commerce Lead",
     location: "Bengaluru, India",
     email: "s.jangir129@gmail.com",
     phone: "+91 (995) 079-4448",
-    bio: "Crafting Scalable E-commerce Solutions with 9+ Years of Salesforce Commerce Cloud Expertise, Delivering high- performance digital commerce experiences tailored for growth.",
+    bio: "Transforming e-commerce vision into reality with 9+ years of SFCC mastery. Trusted by brands to build fast, flexible, and future- ready digital storefronts.",
     avatar: getOptimizedAvatarImage("Sumit Jangid"),
     resume: "/resume/SumitJangid_Resume_2025.docx",
     websiteUrl: "https://www.sumitworkfolio.in",
@@ -47,13 +59,13 @@ export const personalInfo = {
 export const projects: Project[] = [
     {
         id: "1",
-        longDescription: "Complete e-commerce solution with user authentication, product management, cart functionality, and secure payment processing. Features include admin dashboard, inventory management, and real-time analytics.",
-        categories: ["Web Development", "E-Commerce"],
+        longDescription: "Completed multiple brands work on full beauty project with specially work experience on checkout redesign in headless commerce using NextJs, NestJs, OCAPI, SCAPI and many more",
+        categories: ["E-Commerce", "Headless Commerce"],
         title: "FullBeauty Brands",
         description:
-            "Enterprise e-commerce platform serving millions of customers with advanced product catalog, personalized shopping experiences, and seamless checkout processes.",
+            "Completed multiple brands work on full beauty project with specially work experience on checkout redesign in headless commerce using NextJs, NestJs, OCAPI, SCAPI and many more",
         image: getOptimizedProjectImage("Full Beauty FBB"),
-        technologies: ["NextJs", "NestJs", "Commerce-SDK", "REST APIs", "SCAPI", "OCAPI", "SFRA", "SGJC"],
+        technologies: ["NextJs", "NestJs", "B2C Commerce-SDK", "REST APIs", "SCAPI", "OCAPI", "SFRA", "SGJC"],
         liveUrl: "https://www.fullbeauty.com/",
         featured: true,
         year: 2024,
@@ -64,11 +76,11 @@ export const projects: Project[] = [
         title: "Aquasana Water Filters",
         description:
             "Comprehensive water filtration e-commerce platform featuring advanced product configurators, subscription management, and integrated customer support systems.",
-        image: getOptimizedProjectImage("AOSmith"),
+        image: getOptimizedProjectImage("aquasana"),
         technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
         liveUrl: "https://www.aquasana.com/",
         longDescription: "Comprehensive analytics platform featuring machine learning algorithms for predictive analytics, real-time data processing, and interactive visualizations. Built for scalability and performance.",
-        categories: ["Web Development", "AI/ML"],
+        categories: ["E-Commerce"],
         featured: true,
         year: 2024,
         organization: "Merkle",
@@ -244,34 +256,53 @@ export const projects: Project[] = [
 ];
 
 /**
- * Skills and technologies
+ * Skills and technologies, grouped by category
  */
-export const skills: Skill[] = [
-    // Backend
-    { name: "Demandware", level: 5, category: "backend" },
-    { name: "SFRA", level: 5, category: "backend" },
-    { name: "Node JS", level: 5, category: "backend" },
-    { name: "Express Js", level: 5, category: "backend" },
-    { name: "REST APIs", level: 5, category: "backend" },
-    { name: "JavaScript", level: 5, category: "frontend" },
-    { name: "MongoDB", level: 2, category: "backend" },
+export const skillGroups: SkillGroup[] = [
+    {
+        title: "Backend & E-Commerce",
+        icon: HiOutlineServer,
+        skills: [
+            { name: "SFRA", icon: FaNodeJs },
+            { name: "SGJC", icon: FaNodeJs },
+            { name: "OCAPI/SCAPI", icon: FaNodeJs },
+            { name: "Javascript/Typescript", icon: FaNodeJs },
+            { name: "B2C Commerce-SDK", icon: FaNodeJs },
+            { name: "RESTful APIs", icon: FaNodeJs },
+            { name: "Node.js", icon: FaNodeJs },
+            { name: "NEST JS", icon: SiExpress },
+            { name: "Core Java", icon: FaJava },
+            { name: "MongoDB", icon: SiMongodb },
+        ]
+    },
+    {
+        title: "Frontend & Headless",
+        icon: HiOutlineDesktopComputer,
+        skills: [
+            { name: "React Js", icon: FaReact },
+            { name: "Next Js", icon: TbBrandNextjs },
+            { name: "JavaScript/Typescript", icon: SiJavascript },
+            { name: "HTML5", icon: FaHtml5 },
+            { name: "CSS3", icon: FaCss3Alt },
+            { name: "Tailwind CSS", icon: SiTailwindcss },
+            { name: "JQuery", icon: SiJquery },
+            { name: "PWA Kit", icon: FaCss3Alt },
 
-    // Frontend
-    { name: "React", level: 2, category: "frontend" },
-    { name: "Next.js", level: 2, category: "frontend" },
-    { name: "TypeScript", level: 3, category: "frontend" },
-    { name: "HTML/CSS", level: 5, category: "frontend" },
-    { name: "Tailwind CSS", level: 5, category: "frontend" },
-
-    // DevOps
-    { name: "Git", level: 4, category: "other" },
-    { name: "AWS", level: 2, category: "other" },
-
-    // Other
-    { name: "Agile/Scrum", level: 4, category: "other" },
-    { name: "Team Leadership", level: 5, category: "other" },
-    { name: "System Design", level: 4, category: "other" },
-    { name: "Project Management", level: 4, category: "other" },
+        ]
+    },
+    {
+        title: "Leadership & Process",
+        icon: HiOutlineUsers,
+        skills: [
+            { name: "Agile/Scrum", icon: FaGitAlt },
+            { name: "Team Leadership", icon: SiJira },
+            { name: "System Design", icon: FaJenkins },
+            { name: "Project Management", icon: SiJest },
+            { name: "Jira", icon: SiJira },
+            { name: "GitHub", icon: FaGitAlt },
+            { name: "Jenkins", icon: FaJenkins },
+        ]
+    }
 ];
 
 /**
@@ -280,7 +311,7 @@ export const skills: Skill[] = [
 export const experiences: Experience[] = [
     {
         id: "1",
-        position: "Salesforce Certified B2C Commerce Technical Architect",
+        position: "Salesforce Certified B2C Commerce Technical Lead",
         company: "Merkle",
         startDate: new Date(2021, 3, 1),
         current: true,
@@ -290,10 +321,9 @@ export const experiences: Experience[] = [
             "SFRA",
             "SGJC",
             "Node.js",
-            "PWA Kit",
+            "NestJs",
             "JavaScript/TypeScript",
             "NextJs",
-            "MongoDB",
             "Commerce SDK",
             "SCAPI/OCAPI"
         ],
@@ -301,13 +331,13 @@ export const experiences: Experience[] = [
     },
     {
         id: "2",
-        position: "Associate Technology L1",
+        position: "Associate Technology L2",
         company: "Publicis Sapient",
         startDate: new Date(2019, 0, 1),
         endDate: new Date(2021, 2, 31),
         current: false,
         description:
-            "Managed dedicated support for L'Oréal, handling major issue resolution and enhancement requests.",
+            "Managed dedicated support for L'Oréal, handling major issue resolution and enhancement requests. ",
         technologies: [
             "SFCC",
             "SGJC",
@@ -329,6 +359,7 @@ export const experiences: Experience[] = [
             "Delivered multiple SFCC implementations and managed services projects, ensuring robust and scalable solutions.",
         technologies: [
             "SFCC",
+            "Demandware",
             "SGJC",
             "Javascript",
             "JQuery",
@@ -348,8 +379,7 @@ export const certifications: Certification[] = [
         dateEarned: new Date(2018, 3, 15), // September 15, 2018
         verificationUrl: "https://www.salesforce.com/trailblazer/sjangir3",
         badgeUrl: "/images/badges/B2CDeveloperBadge.png",
-        description: "Demonstrates expertise in developing and customizing Salesforce B2C Commerce Cloud solutions, including storefront development, business logic implementation, and integration capabilities.",
-        skills: ["SFRA", "JavaScript", "ISML", "SGJC", "REST APIs", "OCAPI"]
+        description: "Demonstrates expertise in developing and customizing Salesforce B2C Commerce Cloud solutions, including storefront development, business logic implementation, and integration capabilities."
     },
     {
         id: "2",
@@ -358,8 +388,7 @@ export const certifications: Certification[] = [
         dateEarned: new Date(2025, 0, 22), // June 22, 2021
         verificationUrl: "https://www.salesforce.com/trailblazer/sjangir3",
         badgeUrl: "/images/badges/B2CArchitectBadge.png",
-        description: "Validates advanced skills in designing and implementing complex B2C Commerce Cloud solutions, including architecture decisions, performance optimization, and enterprise-level integrations.",
-        skills: ["Solution Architecture", "Performance Optimization", "Enterprise Integration", "SCAPI", "PWA Kit", "Microservices"]
+        description: "Validates advanced skills in designing and implementing complex B2C Commerce Cloud solutions, including architecture decisions, performance optimization, and enterprise-level integrations."
     },
     {
         id: "3",
@@ -368,14 +397,13 @@ export const certifications: Certification[] = [
         dateEarned: new Date(2025, 6, 10), // March 10, 2020
         verificationUrl: "https://www.salesforce.com/trailblazer/sjangir3",
         badgeUrl: "/images/badges/SalesforceAgentForce.png",
-        description: "Certifies proficiency in JavaScript programming within the Salesforce ecosystem, including modern JavaScript features, asynchronous programming, and Lightning Web Components development.",
-        skills: ["JavaScript ES6+", "Lightning Web Components", "Asynchronous Programming", "DOM Manipulation", "Testing", "Modern Web APIs"]
+        description: "Certifies proficiency in JavaScript programming within the Salesforce ecosystem, including modern JavaScript features, asynchronous programming, and Lightning Web Components development."
     }
 ];
 
 /**
  * Contact configuration for email functionality
- * 
+ *
  * To set up EmailJS:
  * 1. Go to https://www.emailjs.com/ and create a free account
  * 2. Create a new service (Gmail, Outlook, etc.)
@@ -398,8 +426,10 @@ export const contactConfig = {
         general: "Portfolio Contact Form - General Inquiry",
         project: "Portfolio Contact Form - Project Inquiry",
         collaboration: "Portfolio Contact Form - Collaboration Opportunity",
-        other: "Portfolio Contact Form - Other"
-    }
+        other: "Portfolio Contact Form - Other",
+        default: "Portfolio Inquiry - Let's Connect"
+    },
+    defaultBody: "Hi Sumit,\n\nI came across your portfolio and would like to discuss a potential opportunity.\n\nBest regards"
 };
 
 /**
@@ -409,21 +439,21 @@ export const socialLinks: SocialLink[] = [
     {
         platform: "GitHub",
         url: "https://github.com/Sumitjj",
-        icon: Github,
+        icon: FaGithub,
     },
     {
         platform: "LinkedIn",
         url: "https://www.linkedin.com/in/sumit-jangid/",
-        icon: Linkedin,
+        icon: FaLinkedin,
     },
     {
         platform: "Email",
         url: "mailto:s.jangir129@gmail.com?subject=Portfolio%20Inquiry%20-%20Let's%20Connect&body=Hi%20Sumit,%0D%0A%0D%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20potential%20opportunity.%0D%0A%0D%0ABest%20regards",
-        icon: Mail,
+        icon: HiOutlineMail,
     },
     {
         platform: "Salesforce Profile",
         url: "https://www.salesforce.com/trailblazer/sjangir3",
-        icon: Cloud,
+        icon: HiOutlineCloud,
     },
 ];

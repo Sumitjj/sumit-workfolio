@@ -33,4 +33,4 @@ try {
   fs.writeFileSync(outputFile, JSON.stringify(fallbackInfo, null, 2));
   console.log('Created a fallback resume-info.json.');
   process.exit(1); // Exit with error code to notify of the issue
-} 
+}

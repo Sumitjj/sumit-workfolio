@@ -31,7 +31,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const updateResolvedTheme = () => {
       let resolved: "light" | "dark" = "light";
-      
+
       if (theme === "system") {
         resolved = window.matchMedia("(prefers-color-scheme: dark)").matches
           ? "dark"
@@ -39,13 +39,13 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       } else {
         resolved = theme as "light" | "dark";
       }
-      
+
       setResolvedTheme(resolved);
-      
+
       // Update document class and CSS variables
       document.documentElement.classList.remove("light", "dark");
       document.documentElement.classList.add(resolved);
-      
+
       // Update CSS custom properties for the theme
       if (resolved === "dark") {
         document.documentElement.style.setProperty("--background", "0 0% 3.9%");
