@@ -1,22 +1,24 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { Fade } from "react-awesome-reveal";
+import React, { useState, useEffect, useCallback } from "react";
 import {
+  ChevronRight,
   Code2,
   Server,
   Monitor,
-  Users,
-  ChevronRight,
-  Star,
-  Sparkles
+  Users
 } from "lucide-react";
+import { Fade } from "react-awesome-reveal";
 import { skills } from "@/data/portfolio";
 
-/**
- * Skill categories with elegant styling
- */
-const skillCategories = {
+interface SkillCategory {
+  title: string;
+  icon: React.ComponentType<{ className?: string }>;
+  description: string;
+  count: number;
+}
+
+const skillCategories: Record<string, SkillCategory> = {
   backend: {
     title: "Backend & Commerce",
     icon: Server,
@@ -127,7 +129,7 @@ function SkillTag({ skill, index, isVisible }: SkillTagProps) {
  * Elegant Category Section Component
  */
 interface CategorySectionProps {
-  categoryKey: keyof typeof skillCategories;
+  categoryKey: string;
   isOpen: boolean;
   onToggle: () => void;
 }
@@ -139,19 +141,11 @@ function CategorySection({ categoryKey, isOpen, onToggle }: CategorySectionProps
   const [maxHeight, setMaxHeight] = useState<number>(0);
 
   // Calculate rows based on viewport breakpoints with increased height
-  const calculateMaxHeight = () => {
-    const width = window.innerWidth;
-
-    // Calculate number of columns based on viewport
-    let columns = 4; // default for lg
-    if (width < 640) columns = 2; // mobile
-    else if (width < 1024) columns = 3; // tablet
-
-    // Calculate rows needed
-    const rows = Math.ceil(categorySkills.length / columns);
-    // Each row is 48px (height) + 12px (gap) = 60px, plus extra padding
-    return rows * 60 + 48; // Increased row height and padding
-  };
+  const calculateMaxHeight = useCallback(() => {
+    const skillHeight = 48; // Approximate height of each skill item
+    const padding = 32; // Additional padding
+    return categorySkills.length * skillHeight + padding;
+  }, [categorySkills.length]);
 
   // Update height on mount and window resize
   useEffect(() => {
@@ -159,15 +153,10 @@ function CategorySection({ categoryKey, isOpen, onToggle }: CategorySectionProps
       setMaxHeight(calculateMaxHeight());
     };
 
-    // Initial calculation
     updateHeight();
-
-    // Update on resize
     window.addEventListener('resize', updateHeight);
-
-    // Cleanup
     return () => window.removeEventListener('resize', updateHeight);
-  }, [categorySkills.length]); // Recalculate if number of skills changes
+  }, [calculateMaxHeight]);
 
   return (
     <div className="w-full">
@@ -241,36 +230,32 @@ function CategorySection({ categoryKey, isOpen, onToggle }: CategorySectionProps
 }
 
 /**
- * Classy Skills Section
+ * Skill Category Section Component
  */
-export function SkillsSection() {
-  // State for tracking which categories are open
-  const [openCategories, setOpenCategories] = useState<Set<keyof typeof skillCategories>>(
-    new Set(['backend']) // Backend open by default
-  );
+export function SkillCategorySection({ categoryKey }: { categoryKey: string }) {
+  const [isOpen, setIsOpen] = useState(false);
 
-  // Toggle function for individual categories
-  const toggleCategory = (categoryKey: keyof typeof skillCategories) => {
-    setOpenCategories(prev => {
-      const newSet = new Set(prev);
-      if (newSet.has(categoryKey)) {
-        newSet.delete(categoryKey);
-      } else {
-        newSet.add(categoryKey);
-      }
-      return newSet;
-    });
-  };
-
-  // Calculate stats
-  const totalSkills = skills.length;
-  const categories = Object.keys(skillCategories).length;
+  const handleToggle = useCallback(() => {
+    setIsOpen(prev => !prev);
+  }, []);
 
   return (
-    <section id="skills" className="pt-20 sm:pt-24 lg:pt-28 pb-12 sm:pb-16 lg:pb-20">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+    <CategorySection
+      categoryKey={categoryKey}
+      isOpen={isOpen}
+      onToggle={handleToggle}
+    />
+  );
+}
 
-        {/* Elegant Section Header */}
+/**
+ * Main Skills Section Component
+ */
+export function SkillsSection() {
+  return (
+    <section id="skills" className="py-16 sm:py-20 lg:py-24">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
         <Fade direction="up" triggerOnce>
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/5 border border-primary/10 rounded-full mb-6">
@@ -278,38 +263,22 @@ export function SkillsSection() {
               <span className="text-sm font-medium text-primary">Technical Expertise</span>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-foreground mb-6 tracking-tight">
-              Skills & <span className="font-normal">Technologies</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+              Skills & Technologies
             </h2>
 
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              A comprehensive overview of my technical capabilities across full-stack development,
-              with specialized expertise in modern e-commerce platforms.
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Specialized in Salesforce Commerce Cloud with expertise in modern web technologies
             </p>
           </div>
         </Fade>
 
         {/* Skills Categories */}
-        <div className="space-y-0">
-          {(Object.keys(skillCategories) as Array<keyof typeof skillCategories>).map((categoryKey, index) => (
-            <Fade key={categoryKey} direction="up" delay={index * 100} triggerOnce>
-              <CategorySection
-                categoryKey={categoryKey}
-                isOpen={openCategories.has(categoryKey)}
-                onToggle={() => toggleCategory(categoryKey)}
-              />
-            </Fade>
+        <div className="grid grid-cols-1 gap-6 sm:gap-8 max-w-5xl mx-auto">
+          {Object.keys(skillCategories).map((categoryKey) => (
+            <SkillCategorySection key={categoryKey} categoryKey={categoryKey} />
           ))}
         </div>
-
-        {/* Elegant Footer */}
-        <Fade direction="up" delay={300} triggerOnce>
-          <div className="mt-16 pt-8 border-t border-border/30 text-center">
-            <p className="text-sm text-muted-foreground">
-              Continuously learning and adapting to emerging technologies in the rapidly evolving digital landscape.
-            </p>
-          </div>
-        </Fade>
       </div>
     </section>
   );

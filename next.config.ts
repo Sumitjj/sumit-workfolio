@@ -97,7 +97,6 @@ const nextConfig: NextConfig = {
   compress: true,
   poweredByHeader: false,
   reactStrictMode: true,
-  swcMinify: true,
 
   // Webpack optimization
   webpack: (config, { isServer }) => {

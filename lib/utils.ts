@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import resumeInfo from './resume-info.json';
 
 /**
  * Utility function to merge Tailwind CSS classes with proper conflict resolution
@@ -20,25 +21,6 @@ export function scrollToElement(elementId: string): void {
             block: "start",
         });
     }
-}
-
-/**
- * Utility function to format date
- */
-export function formatDate(date: Date): string {
-    return new Intl.DateTimeFormat("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-    }).format(date);
-}
-
-/**
- * Utility function to validate email
- */
-export function isValidEmail(email: string): boolean {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
 }
 
 /**
@@ -70,60 +52,17 @@ export function handleEmailClick(email: string, subject?: string, body?: string)
     }
 }
 
-/**
- * Resume format type
- */
-export type ResumeFormat = 'PDF' | 'DOCX';
 
 /**
- * Resume file information
- */
-export interface ResumeInfo {
-    url: string;
-    filename: string;
-    format: ResumeFormat;
-}
-
-/**
- * Get available resume file dynamically
- * Returns the first available resume file in the public/resume directory
- * This function tries multiple common filename patterns
- */
-export function getAvailableResume(): ResumeInfo {
-    // For now, we'll use the known available file
-    // In a production environment with Node.js backend, you could use fs.readdir
-    const availableFile = 'SumitJangidResume.docx';
-
-    return {
-        url: `/resume/${availableFile}`,
-        filename: availableFile,
-        format: availableFile.endsWith('.pdf') ? 'PDF' : 'DOCX'
-    };
-}
-
-/**
- * Enhanced resume view/download function
- * Opens the resume in a new tab with print options, allowing users to view or download
+ * Open resume in new window
  */
 export function openResume(): void {
-    const resume = getAvailableResume();
-
-    // Open resume in new tab for viewing/printing
-    window.open(resume.url, '_blank', 'noopener,noreferrer');
+    window.open(`/resume/${resumeInfo.filename}`, '_blank', 'noopener,noreferrer');
 }
 
 /**
- * Legacy download function for compatibility
- * @deprecated Use openResume() instead for better UX
- */
-export function downloadResume(): void {
-    openResume();
-}
-
-/**
- * Get formatted resume button text based on available format
+ * Get button text
  */
 export function getResumeButtonText(): string {
-    const resume = getAvailableResume();
-    return `Resume (${resume.format})`;
+    return `Resume`;
 }

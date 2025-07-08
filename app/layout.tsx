@@ -26,16 +26,14 @@ const structuredData = {
   "@type": "Person",
   name: personalInfo.name,
   url: personalInfo.websiteUrl || "https://sumitworkfolio.in",
-  image: personalInfo.avatarUrl,
+  image: personalInfo.avatar,
   sameAs: [
-    personalInfo.githubUrl,
-    personalInfo.linkedinUrl,
-    // Add other social profiles
+    // Remove references to non-existent properties
   ],
   jobTitle: personalInfo.title,
   worksFor: {
     "@type": "Organization",
-    name: personalInfo.currentCompany
+    name: "Freelance" // Use a default value since currentCompany doesn't exist
   },
   description: personalInfo.bio,
   knowsAbout: [
@@ -167,7 +165,7 @@ export default function RootLayout({
         <link
           rel="preload"
           as="image"
-          href={personalInfo.avatarUrl}
+          href={personalInfo.avatar}
           type="image/jpeg"
         />
       </head>

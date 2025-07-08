@@ -3,9 +3,8 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import { Menu, X, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
-// import { ThemeToggle } from "@/components/theme-switcher";
 import { navigationItems, personalInfo } from "@/data/portfolio";
-import { cn, downloadResume } from "@/lib/utils";
+import { cn, openResume, getResumeButtonText } from "@/lib/utils";
 import {
   useScrollPosition,
   createNavigationHandler
@@ -178,23 +177,21 @@ export function Navigation() {
 
             {/* Desktop Actions */}
             <div className="hidden md:flex items-center space-x-3">
-              {/* <ThemeToggle /> */}
               <Button
                 variant="outline"
                 size="sm"
-                onClick={downloadResume}
+                onClick={openResume}
                 className="relative overflow-hidden border-border/30 bg-gradient-to-r from-primary/10 to-secondary/10 backdrop-blur-sm hover:bg-gradient-to-r hover:from-primary hover:to-primary hover:text-primary-foreground hover:border-primary transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/25 transform-gpu group"
                 style={{ transformOrigin: 'center center', contain: 'layout style' }}
               >
                 <Download className="h-4 w-4 mr-2 group-hover:animate-bounce" />
-                <span className="font-medium">Resume</span>
+                <span className="font-medium">{getResumeButtonText()}</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out" />
               </Button>
             </div>
 
             {/* Mobile menu button - Enhanced visibility */}
             <div className="md:hidden flex items-center space-x-2">
-              {/* <ThemeToggle /> */}
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 aria-label="Toggle navigation menu"
@@ -288,7 +285,7 @@ export function Navigation() {
               {/* Resume Download Button */}
               <button
                 onClick={() => {
-                  downloadResume();
+                  openResume();
                   setIsOpen(false);
                 }}
                 className="w-full px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 transform-gpu hover:scale-105 flex items-center justify-center space-x-2"
@@ -311,7 +308,7 @@ export function Navigation() {
                 }}
               >
                 <Download className="h-4 w-4" />
-                <span>View Resume</span>
+                <span>{getResumeButtonText()}</span>
               </button>
             </div>
           </div>

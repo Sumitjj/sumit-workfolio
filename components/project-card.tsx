@@ -37,7 +37,6 @@ export function ProjectCard({ project, onClick, className, variant = "featured" 
   };
 
   const isFeatured = variant === "featured";
-  const isCompact = variant === "compact";
 
   return (
     <Fade triggerOnce cascade damping={0.15}>
