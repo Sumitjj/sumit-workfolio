@@ -15,7 +15,6 @@ import {
  */
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
   const originalOverflow = useRef<string>('');
 
   // Use optimized scroll hooks for better performance
@@ -53,11 +52,6 @@ export function Navigation() {
     ),
     [sections]
   );
-
-  // Track mount state to prevent hydration issues
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   // Enhanced mobile menu management with proper scroll handling
   useEffect(() => {
@@ -117,9 +111,7 @@ export function Navigation() {
     };
   }, []);
 
-  if (!isMounted) {
-    return null; // Prevent hydration mismatch
-  }
+
 
   return (
     <>

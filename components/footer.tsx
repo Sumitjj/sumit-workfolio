@@ -54,10 +54,6 @@ export function Footer() {
                 {socialLinks.map((social) => {
                   const IconComponent = social.icon;
                   const isEmail = social.platform === "Email";
-
-                  // No color changes on hover - just zoom effect
-                  const platformColors = "";
-
                   if (isEmail) {
                     return (
                       <button

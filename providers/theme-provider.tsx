@@ -48,21 +48,51 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
       // Update CSS custom properties for the theme
       if (resolved === "dark") {
-        document.documentElement.style.setProperty("--background", "0 0% 3.9%");
-        document.documentElement.style.setProperty("--foreground", "0 0% 98%");
-        document.documentElement.style.setProperty("--primary", "0 0% 98%");
-        document.documentElement.style.setProperty("--primary-foreground", "0 0% 9%");
-        document.documentElement.style.setProperty("--muted", "0 0% 14.9%");
-        document.documentElement.style.setProperty("--muted-foreground", "0 0% 63.9%");
-        document.documentElement.style.setProperty("--border", "0 0% 14.9%");
+        document.documentElement.style.setProperty("--background", "0 0% 0%");
+        document.documentElement.style.setProperty("--foreground", "215 25% 95%");
+        document.documentElement.style.setProperty("--card", "0 0% 3%");
+        document.documentElement.style.setProperty("--card-foreground", "215 25% 95%");
+        document.documentElement.style.setProperty("--popover", "0 0% 0%");
+        document.documentElement.style.setProperty("--popover-foreground", "215 25% 95%");
+        document.documentElement.style.setProperty("--primary", "217 91% 60%");
+        document.documentElement.style.setProperty("--primary-foreground", "210 40% 98%");
+        document.documentElement.style.setProperty("--secondary", "0 0% 6%");
+        document.documentElement.style.setProperty("--secondary-foreground", "215 25% 95%");
+        document.documentElement.style.setProperty("--muted", "0 0% 6%");
+        document.documentElement.style.setProperty("--muted-foreground", "215 25% 65%");
+        document.documentElement.style.setProperty("--accent", "0 0% 6%");
+        document.documentElement.style.setProperty("--accent-foreground", "215 25% 95%");
+        document.documentElement.style.setProperty("--destructive", "0 62.8% 30.6%");
+        document.documentElement.style.setProperty("--destructive-foreground", "0 0% 98%");
+        document.documentElement.style.setProperty("--border", "240 3.7% 15.9%");
+        document.documentElement.style.setProperty("--input", "240 3.7% 15.9%");
+        document.documentElement.style.setProperty("--ring", "240 4.9% 83.9%");
+        document.documentElement.style.setProperty("--gradient-from", "240 40% 8%");
+        document.documentElement.style.setProperty("--gradient-via", "260 40% 10%");
+        document.documentElement.style.setProperty("--gradient-to", "280 40% 12%");
       } else {
         document.documentElement.style.setProperty("--background", "0 0% 100%");
         document.documentElement.style.setProperty("--foreground", "0 0% 3.9%");
+        document.documentElement.style.setProperty("--card", "0 0% 100%");
+        document.documentElement.style.setProperty("--card-foreground", "0 0% 3.9%");
+        document.documentElement.style.setProperty("--popover", "0 0% 100%");
+        document.documentElement.style.setProperty("--popover-foreground", "0 0% 3.9%");
         document.documentElement.style.setProperty("--primary", "0 0% 9%");
         document.documentElement.style.setProperty("--primary-foreground", "0 0% 98%");
+        document.documentElement.style.setProperty("--secondary", "0 0% 96.1%");
+        document.documentElement.style.setProperty("--secondary-foreground", "0 0% 9%");
         document.documentElement.style.setProperty("--muted", "0 0% 96.1%");
         document.documentElement.style.setProperty("--muted-foreground", "0 0% 45.1%");
-        document.documentElement.style.setProperty("--border", "0 0% 89.8%");
+        document.documentElement.style.setProperty("--accent", "0 0% 96.1%");
+        document.documentElement.style.setProperty("--accent-foreground", "0 0% 9%");
+        document.documentElement.style.setProperty("--destructive", "0 84.2% 60.2%");
+        document.documentElement.style.setProperty("--destructive-foreground", "0 0% 98%");
+        document.documentElement.style.setProperty("--border", "240 5.9% 90%");
+        document.documentElement.style.setProperty("--input", "240 5.9% 90%");
+        document.documentElement.style.setProperty("--ring", "240 5.9% 10%");
+        document.documentElement.style.setProperty("--gradient-from", "240 100% 95%");
+        document.documentElement.style.setProperty("--gradient-via", "260 100% 97%");
+        document.documentElement.style.setProperty("--gradient-to", "280 100% 99%");
       }
     };
 

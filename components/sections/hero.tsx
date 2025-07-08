@@ -44,7 +44,7 @@ export function HeroSection() {
       <div className="container mx-auto relative z-10 max-w-6xl flex-1 flex items-center justify-center py-8">
         <div className="text-center w-full">
           {/* Avatar */}
-          <div className="mb-6 sm:mb-8 flex justify-center hero-fade-in" style={{ animationDelay: "0.3s" }}>
+          <div className="mb-6 sm:mb-8 flex justify-center hero-fade-in" style={{ animationDelay: "0.1s" }}>
             <div className="relative">
               <div className="w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40 rounded-full overflow-hidden border-4 border-primary/20 shadow-2xl hover-scale transition-transform duration-300">
                 <Image
@@ -65,13 +65,13 @@ export function HeroSection() {
           </div>
 
           {/* Name Animation */}
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-3 sm:mb-4 text-balance leading-tight hero-slide-up" style={{ animationDelay: "0.6s" }}>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-3 sm:mb-4 text-balance leading-tight hero-slide-up" style={{ animationDelay: "0.2s" }}>
             {personalInfo.name.split("").map((letter, index) => (
               <span
                 key={index}
                 className="inline-block hero-letter"
                 style={{
-                  animationDelay: `${0.9 + index * 0.05}s`,
+                  animationDelay: `${0.3 + index * 0.02}s`,
                   opacity: 0,
                   animationFillMode: "forwards"
                 }}
@@ -82,7 +82,7 @@ export function HeroSection() {
           </h1>
 
           {/* Animated Title - Salesforce Branded */}
-          <div className="mb-4 sm:mb-6 hero-slide-up" style={{ animationDelay: "1.4s" }}>
+          <div className="mb-4 sm:mb-6 hero-slide-up" style={{ animationDelay: "0.4s" }}>
             <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium leading-relaxed">
               <span className="inline-block bg-gradient-to-r from-[#0176d3] via-[#00d924] to-[#0176d3] bg-clip-text text-transparent animate-gradient font-semibold">
                 {personalInfo.title}
@@ -91,12 +91,12 @@ export function HeroSection() {
           </div>
 
           {/* Bio */}
-          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground mb-6 sm:mb-8 max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-3xl mx-auto text-pretty leading-relaxed hero-fade-in" style={{ animationDelay: "1.7s" }}>
+          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground mb-6 sm:mb-8 max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-3xl mx-auto text-pretty leading-relaxed hero-fade-in" style={{ animationDelay: "0.5s" }}>
             {personalInfo.bio}
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-8 sm:mb-12 hero-slide-up" style={{ animationDelay: "2s" }}>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-8 sm:mb-12 hero-slide-up" style={{ animationDelay: "0.6s" }}>
             <Button
               size="lg"
               className="group hover-lift w-full sm:w-auto text-sm sm:text-base"
@@ -117,13 +117,9 @@ export function HeroSection() {
           </div>
 
           {/* Social Links with Enhanced Hover Effects */}
-          <div className="flex items-center justify-center space-x-3 sm:space-x-4 mb-12 sm:mb-16 hero-fade-in" style={{ animationDelay: "2.3s" }}>
+          <div className="flex items-center justify-center space-x-3 sm:space-x-4 mb-12 sm:mb-16 hero-fade-in" style={{ animationDelay: "0.7s" }}>
             {socialLinks.map((social, index) => {
               const isEmail = social.platform === "Email";
-
-              // No color changes on hover - just zoom effect
-              const colors = {};
-
               if (isEmail) {
                 return (
                   <button
@@ -135,7 +131,7 @@ export function HeroSection() {
                     )}
                     className={`group relative p-2.5 sm:p-3 flex items-center justify-center transition-all duration-300 ease-out hero-fade-in transform-gpu hover:scale-125`}
                     style={{
-                      animationDelay: `${2.5 + index * 0.1}s`,
+                      animationDelay: `${0.8 + index * 0.05}s`,
                       transformOrigin: 'center center'
                     }}
                     aria-label={`Send email to ${social.platform}`}
@@ -153,7 +149,7 @@ export function HeroSection() {
                   rel="noopener noreferrer"
                   className={`group relative p-2.5 sm:p-3 flex items-center justify-center transition-all duration-300 ease-out hero-fade-in transform-gpu hover:scale-125`}
                   style={{
-                    animationDelay: `${2.5 + index * 0.1}s`,
+                    animationDelay: `${0.8 + index * 0.05}s`,
                     transformOrigin: 'center center'
                   }}
                   aria-label={`Visit ${social.platform}`}
@@ -168,7 +164,7 @@ export function HeroSection() {
       </div>
 
       {/* Scroll Indicator - Positioned at bottom */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 hero-fade-in" style={{ animationDelay: "2.8s" }}>
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 hero-fade-in" style={{ animationDelay: "0.9s" }}>
         <button
           onClick={() => scrollToElement("projects")}
           className="p-2 text-muted-foreground hover:text-foreground transition-colors animate-bounce"

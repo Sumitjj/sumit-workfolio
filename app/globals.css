@@ -19,15 +19,15 @@
   --accent-foreground: 224 71% 4%;
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 0 0% 100%;
-  --border: 215 20% 90%; /* Softer borders */
-  --input: 215 20% 90%;
-  --ring: 221 83% 53%;
+  --border: 240 5.9% 90%;
+  --input: 240 5.9% 90%;
+  --ring: 240 5.9% 10%;
   --radius: 0.75rem;
 
   /* Gradient colors for modern effects */
-  --gradient-from: 221 83% 95%;
-  --gradient-via: 230 100% 97%;
-  --gradient-to: 240 100% 99%;
+  --gradient-from: 240 100% 95%;
+  --gradient-via: 260 100% 97%;
+  --gradient-to: 280 100% 99%;
 
   /* Glass morphism effects */
   --glass-bg: rgba(255, 255, 255, 0.1);
@@ -71,31 +71,31 @@
 /* Dark theme */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: 224 71% 4%; /* Deep, rich navy */
+    --background: 0 0% 0%; /* Pure black */
     --foreground: 215 25% 95%; /* Off-white for comfort */
-    --card: 224 71% 6%; /* Slightly lighter navy for cards */
+    --card: 0 0% 3%; /* Very dark gray for cards */
     --card-foreground: 215 25% 95%;
-    --popover: 224 71% 4%;
+    --popover: 0 0% 0%;
     --popover-foreground: 215 25% 95%;
     --primary: 217 91% 60%; /* Brighter blue for primary actions */
     --primary-foreground: 210 40% 98%;
-    --secondary: 224 71% 9%; /* Darker navy for secondary elements */
+    --secondary: 0 0% 6%; /* Dark gray for secondary elements */
     --secondary-foreground: 215 25% 95%;
-    --muted: 224 71% 9%;
+    --muted: 0 0% 6%;
     --muted-foreground: 215 25% 65%; /* Higher contrast for muted text */
-    --accent: 224 71% 9%;
+    --accent: 0 0% 6%;
     --accent-foreground: 215 25% 95%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 224 71% 9%;
-    --input: 224 71% 9%;
-    --ring: 217 91% 60%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
 
-    --gradient-from: 224 71% 10%;
-    --gradient-via: 230 90% 12%;
-    --gradient-to: 240 80% 14%;
+    --gradient-from: 240 40% 8%;
+    --gradient-via: 260 40% 10%;
+    --gradient-to: 280 40% 12%;
 
-    --glass-bg: rgba(0, 0, 10, 0.3);
+    --glass-bg: rgba(0, 0, 0, 0.3);
     --glass-border: rgba(255, 255, 255, 0.1);
     --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   }
@@ -103,31 +103,31 @@
 
 /* Dark theme explicit class */
 .dark {
-  --background: 224 71% 4%; /* Deep, rich navy */
+  --background: 0 0% 0%; /* Pure black */
   --foreground: 215 25% 95%; /* Off-white for comfort */
-  --card: 224 71% 6%; /* Slightly lighter navy for cards */
+  --card: 0 0% 3%; /* Very dark gray for cards */
   --card-foreground: 215 25% 95%;
-  --popover: 224 71% 4%;
+  --popover: 0 0% 0%;
   --popover-foreground: 215 25% 95%;
   --primary: 217 91% 60%; /* Brighter blue for primary actions */
   --primary-foreground: 210 40% 98%;
-  --secondary: 224 71% 9%; /* Darker navy for secondary elements */
+  --secondary: 0 0% 6%; /* Dark gray for secondary elements */
   --secondary-foreground: 215 25% 95%;
-  --muted: 224 71% 9%;
+  --muted: 0 0% 6%;
   --muted-foreground: 215 25% 65%; /* Higher contrast for muted text */
-  --accent: 224 71% 9%;
+  --accent: 0 0% 6%;
   --accent-foreground: 215 25% 95%;
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 0 0% 98%;
-  --border: 224 71% 9%;
-  --input: 224 71% 9%;
-  --ring: 217 91% 60%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --ring: 240 4.9% 83.9%;
 
-  --gradient-from: 224 71% 10%;
-  --gradient-via: 230 90% 12%;
-  --gradient-to: 240 80% 14%;
+  --gradient-from: 240 40% 8%;
+  --gradient-via: 260 40% 10%;
+  --gradient-to: 280 40% 12%;
 
-  --glass-bg: rgba(0, 0, 10, 0.3);
+  --glass-bg: rgba(0, 0, 0, 0.3);
   --glass-border: rgba(255, 255, 255, 0.1);
   --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
@@ -201,8 +201,15 @@ body {
   font-family: var(--font-inter-sans), system-ui, -apple-system, sans-serif;
   font-feature-settings: "rlig" 1, "calt" 1;
   line-height: 1.6;
-  /* Apply the same wine-colored background as hero section */
   position: relative;
+  /* Prevent background color transitions during initial load */
+  transition: none;
+}
+
+/* Ensure immediate background color application */
+html {
+  background: hsl(var(--background));
+  transition: none;
 }
 
 body::before {
@@ -663,17 +670,17 @@ body::after {
 
 /* ===== HERO SECTION SPECIFIC ANIMATIONS ===== */
 .hero-fade-in {
-  animation: heroFadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: heroFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   opacity: 0;
 }
 
 .hero-slide-up {
-  animation: heroSlideUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: heroSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   opacity: 0;
 }
 
 .hero-letter {
-  animation: heroLetterIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: heroLetterIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   opacity: 0;
 }
 
