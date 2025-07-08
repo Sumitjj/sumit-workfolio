@@ -30,6 +30,8 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                         fill
                         className="object-cover"
                         priority
+                        sizes="100vw"
+                        quality={90}
                     />
                     {/* Modern gradient overlay */}
                     <div className="absolute inset-0 bg-gradient-to-br from-[rgb(0,112,210)]/80 via-black/50 to-transparent" />

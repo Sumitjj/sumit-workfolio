@@ -38,6 +38,7 @@ export const personalInfo = {
     bio: "Crafting Scalable E-commerce Solutions with 9+ Years of Salesforce Commerce Cloud Expertise, Delivering high- performance digital commerce experiences tailored for growth.",
     avatar: getOptimizedAvatarImage("Sumit Jangid"),
     resume: "/resume/SumitJangid_Resume_2025.docx",
+    websiteUrl: "https://www.sumitworkfolio.in",
 };
 
 /**

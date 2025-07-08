@@ -1,13 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Fade } from "react-awesome-reveal";
 import {
   Code2,
   Server,
   Monitor,
   Users,
-  ChevronRight
+  ChevronRight,
+  Star,
+  Sparkles
 } from "lucide-react";
 import { skills } from "@/data/portfolio";
 
@@ -45,11 +47,35 @@ interface SkillTagProps {
 }
 
 function SkillTag({ skill, index, isVisible }: SkillTagProps) {
+  // Professional gradient combinations
+  const getGradient = (index: number) => {
+    const gradients = [
+      'from-[#4F46E5] to-[#7C3AED]', // Indigo to Purple
+      'from-[#0EA5E9] to-[#2563EB]', // Sky to Blue
+      'from-[#10B981] to-[#059669]', // Emerald to Green
+      'from-[#F59E0B] to-[#D97706]', // Amber to Yellow
+      'from-[#EC4899] to-[#BE185D]', // Pink to Rose
+      'from-[#6366F1] to-[#4F46E5]'  // Violet to Indigo
+    ];
+    return gradients[index % gradients.length];
+  };
+
+  // Professional background gradients with lower opacity
+  const getBgGradient = (index: number) => {
+    const gradients = [
+      'from-indigo-500/[0.08] to-purple-500/[0.08]',
+      'from-sky-500/[0.08] to-blue-500/[0.08]',
+      'from-emerald-500/[0.08] to-green-500/[0.08]',
+      'from-amber-500/[0.08] to-yellow-500/[0.08]',
+      'from-pink-500/[0.08] to-rose-500/[0.08]',
+      'from-violet-500/[0.08] to-indigo-500/[0.08]'
+    ];
+    return gradients[index % gradients.length];
+  };
+
   return (
     <div
-      className={`group relative transition-all duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] ${isVisible
-        ? 'opacity-100 translate-y-0 scale-100'
-        : 'opacity-0 translate-y-3 scale-95'
+      className={`group relative transition-all duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] ${isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-3 scale-95'
         }`}
       style={{
         transitionDelay: isVisible ? `${index * 30}ms` : '0ms',
@@ -58,15 +84,40 @@ function SkillTag({ skill, index, isVisible }: SkillTagProps) {
       }}
     >
       <div
-        className="relative bg-background/60 backdrop-blur-sm border border-border/40 rounded-lg px-4 py-2.5 transition-all duration-300 hover:bg-background/80 hover:border-border/60 hover:shadow-sm hover:-translate-y-0.5"
+        className={`relative flex items-center h-10 sm:h-11 bg-gradient-to-br ${getBgGradient(index)} 
+          backdrop-blur-sm border border-border/40 rounded-xl px-2.5 sm:px-3
+          transition-all duration-300 hover:border-border/60 group-hover:shadow-[0_8px_24px_-4px_rgba(0,0,0,0.08)] 
+          group-hover:-translate-y-0.5 overflow-hidden`}
         style={{
           transform: 'translateZ(0)',
           backfaceVisibility: 'hidden'
         }}
       >
-        <span className="text-sm font-medium text-foreground/90 group-hover:text-foreground transition-colors duration-200">
+        {/* Icon Container */}
+        <div className="relative shrink-0">
+          <div className={`w-6 h-6 sm:w-7 sm:h-7 bg-gradient-to-br ${getGradient(index)} 
+            rounded-lg sm:rounded-xl flex items-center justify-center shadow-sm`}>
+            <Code2 className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-white" />
+          </div>
+
+          {/* Subtle glow effect */}
+          <div className={`absolute inset-0 bg-gradient-to-br ${getGradient(index)} blur-lg opacity-20 
+            scale-150 transition-opacity duration-300 group-hover:opacity-30`} />
+        </div>
+
+        {/* Skill Name - Now with truncation and better spacing */}
+        <span className="text-[13px] sm:text-sm font-medium text-foreground/90 group-hover:text-foreground 
+          transition-colors duration-200 px-2 sm:px-2.5 truncate">
           {skill.name}
         </span>
+
+        {/* Subtle shine effect */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 
+            transition-opacity duration-700 bg-gradient-to-r from-transparent 
+            via-white/[0.05] to-transparent -skew-x-12 translate-x-[-100%] 
+            group-hover:translate-x-[100%] ease-out" />
+        </div>
       </div>
     </div>
   );
@@ -85,6 +136,38 @@ function CategorySection({ categoryKey, isOpen, onToggle }: CategorySectionProps
   const category = skillCategories[categoryKey];
   const categorySkills = skills.filter(skill => skill.category === categoryKey);
   const IconComponent = category.icon;
+  const [maxHeight, setMaxHeight] = useState<number>(0);
+
+  // Calculate rows based on viewport breakpoints with increased height
+  const calculateMaxHeight = () => {
+    const width = window.innerWidth;
+
+    // Calculate number of columns based on viewport
+    let columns = 4; // default for lg
+    if (width < 640) columns = 2; // mobile
+    else if (width < 1024) columns = 3; // tablet
+
+    // Calculate rows needed
+    const rows = Math.ceil(categorySkills.length / columns);
+    // Each row is 48px (height) + 12px (gap) = 60px, plus extra padding
+    return rows * 60 + 48; // Increased row height and padding
+  };
+
+  // Update height on mount and window resize
+  useEffect(() => {
+    const updateHeight = () => {
+      setMaxHeight(calculateMaxHeight());
+    };
+
+    // Initial calculation
+    updateHeight();
+
+    // Update on resize
+    window.addEventListener('resize', updateHeight);
+
+    // Cleanup
+    return () => window.removeEventListener('resize', updateHeight);
+  }, [categorySkills.length]); // Recalculate if number of skills changes
 
   return (
     <div className="w-full">
@@ -123,26 +206,25 @@ function CategorySection({ categoryKey, isOpen, onToggle }: CategorySectionProps
         </div>
       </button>
 
-      {/* Ultra Smooth Skills Display */}
+      {/* Skills Grid Layout */}
       <div
-        className={`transition-all duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] overflow-hidden ${isOpen ? 'mb-8' : ''
-          }`}
+        className={`transition-all duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] overflow-hidden ${isOpen ? 'mb-12' : ''}`}
         style={{
-          maxHeight: isOpen ? `${Math.ceil(categorySkills.length / 4) * 60 + 100}px` : '0px',
+          maxHeight: isOpen ? maxHeight : 0,
           opacity: isOpen ? 1 : 0,
           transform: 'translateZ(0)',
           backfaceVisibility: 'hidden'
         }}
       >
         <div
-          className={`pt-2 pb-6 transition-all duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]`}
+          className={`py-6 transition-all duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]`}
           style={{
-            transform: isOpen ? 'translateY(0px) scale(1)' : 'translateY(-20px) scale(0.98)',
+            transform: isOpen ? 'translateY(0) scale(1)' : 'translateY(-20px) scale(0.98)',
             transformOrigin: 'top center',
             backfaceVisibility: 'hidden'
           }}
         >
-          <div className="flex flex-wrap gap-2.5">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
             {categorySkills.map((skill, index) => (
               <SkillTag
                 key={skill.name}

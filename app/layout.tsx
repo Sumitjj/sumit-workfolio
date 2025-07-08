@@ -20,6 +20,34 @@ const jetbrainsMono = JetBrains_Mono({
   preload: false, // Only preload main font
 });
 
+// Add structured data for better SEO
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: personalInfo.name,
+  url: personalInfo.websiteUrl || "https://sumitworkfolio.in",
+  image: personalInfo.avatarUrl,
+  sameAs: [
+    personalInfo.githubUrl,
+    personalInfo.linkedinUrl,
+    // Add other social profiles
+  ],
+  jobTitle: personalInfo.title,
+  worksFor: {
+    "@type": "Organization",
+    name: personalInfo.currentCompany
+  },
+  description: personalInfo.bio,
+  knowsAbout: [
+    "Salesforce Commerce Cloud",
+    "Full Stack Development",
+    "UI/UX Design",
+    "React",
+    "Next.js",
+    "TypeScript"
+  ]
+};
+
 // Enhanced metadata for SEO and social sharing
 export const metadata: Metadata = {
   title: {
@@ -118,6 +146,12 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        {/* Add structured data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+
         {/* Preload critical resources */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
@@ -128,6 +162,14 @@ export default function RootLayout({
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
+
+        {/* Preload critical images */}
+        <link
+          rel="preload"
+          as="image"
+          href={personalInfo.avatarUrl}
+          type="image/jpeg"
+        />
       </head>
       <body
         className="min-h-screen bg-background font-sans antialiased smooth-transition"

@@ -70,6 +70,9 @@ function CertificationCard({ certification, index }: CertificationCardProps) {
                                                 backfaceVisibility: 'hidden',
                                                 transform: 'translateZ(0)'
                                             }}
+                                            loading="lazy"
+                                            sizes="(max-width: 640px) 144px, (max-width: 1024px) 160px, 176px"
+                                            quality={85}
                                         />
                                     ) : (
                                         <Award className="w-20 h-20 text-primary transition-transform duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-105" />
