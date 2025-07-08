@@ -1,124 +1,89 @@
 "use client";
 
-import { useState } from "react";
-import { Fade } from "react-awesome-reveal";
-import { Code2, Server, Monitor, Users } from "lucide-react";
+import React, { useState } from "react";
+import { HiChevronRight } from "react-icons/hi";
+import { skillGroups } from "@/data/portfolio";
+import { useInView } from "react-intersection-observer";
+import type { Skill, SkillGroup } from "@/types";
 
-// Salesforce Official Brand Colors - More Vibrant
-const SALESFORCE_BLUE = "#0070d2";
+function SkillCard({ skill }: { skill: Skill }) {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
 
-// Technology categories with minimal structure
-const techCategories = {
-  "E-Commerce & Backend": {
-    icon: Server,
-    technologies: ["Demandware", "SFRA", "Node JS", "Express Js", "REST APIs", "MongoDB"]
-  },
-  "Frontend & UI": {
-    icon: Monitor,
-    technologies: ["JavaScript", "React", "Next.js", "TypeScript", "HTML/CSS", "Tailwind CSS"]
-  },
-  "Leadership & Process": {
-    icon: Users,
-    technologies: ["Team Leadership", "Agile/Scrum", "System Design", "Project Management", "Git", "AWS"]
-  }
-};
+  const Icon = skill.icon;
 
-
-
-/**
- * Technology Badge Component - Ultra Minimal
- */
-interface TechBadgeProps {
-  technology: string;
-  index: number;
-}
-
-function TechBadge({ technology, index }: TechBadgeProps) {
   return (
-    <Fade direction="up" delay={index * 30} triggerOnce>
-      <div
-        className="px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 hover:scale-105 cursor-pointer"
-        style={{
-          backgroundColor: SALESFORCE_BLUE,
-          color: "white",
-          transformOrigin: 'center center',
-          contain: 'layout style'
-        }}
-      >
-        {technology}
+    <div
+      ref={ref}
+      className={`transition-all duration-500 ease-in-out transform ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
+        }`}
+    >
+      <div className="flex items-center space-x-4 p-4 h-14 bg-card rounded-xl border border-border/20 group hover:border-primary/50 hover:shadow-lg transition-all">
+        {Icon && (
+          <div className="flex-shrink-0">
+            <Icon className="w-5 h-5 text-primary group-hover:scale-70 transition-transform" />
+          </div>
+        )}
+        <h4 className="flex-1 font-semibold text-foreground text-sm">{skill.name}</h4>
       </div>
-    </Fade>
+    </div>
   );
 }
 
-/**
- * Minimal Skills Section Component with Tabs
- */
-export function SkillsSection() {
-  const [activeCategory, setActiveCategory] = useState("E-Commerce & Backend");
+function CategorySection({ group, isInitiallyOpen }: { group: SkillGroup, isInitiallyOpen: boolean }) {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+  const [isOpen, setIsOpen] = useState(isInitiallyOpen);
+  const CategoryIcon = group.icon;
 
   return (
-    <section id="skills" className="py-12 sm:py-16">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Compact Header */}
-        <Fade direction="up" triggerOnce>
-          <div className="text-center mb-10">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <div
-                className="p-2 rounded-lg"
-                style={{ backgroundColor: SALESFORCE_BLUE }}
-              >
-                <Code2 className="w-5 h-5 text-white" />
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-foreground">
-                Skill Sets
-              </h2>
-            </div>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Technologies and tools I work with to deliver scalable solutions
-            </p>
-          </div>
-        </Fade>
+    <div ref={ref} className={`transition-opacity duration-700 ${inView ? 'opacity-100' : 'opacity-0'}`}>
+      <div
+        className="flex justify-between items-center cursor-pointer mb-8"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <div className="flex items-center space-x-3 sm:space-x-4">
+          <CategoryIcon className="w-5 h-5 text-primary" />
+          <h3 className="text-lg sm:text-xl">{group.title}</h3>
+        </div>
+        <HiChevronRight
+          className={`w-5 h-5text-muted-foreground transition-transform duration-300 ${isOpen ? "rotate-90" : ""
+            }`}
+        />
+      </div>
+      {isOpen && (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {group.skills.map((skill) => (
+            <SkillCard key={skill.name} skill={skill} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
-        {/* Category Tabs */}
-        <Fade direction="up" delay={100} triggerOnce>
-          <div className="flex flex-wrap justify-center gap-2 mb-8">
-            {Object.entries(techCategories).map(([categoryName, categoryInfo]) => {
-              const IconComponent = categoryInfo.icon;
-              const isActive = activeCategory === categoryName;
-
-              return (
-                <button
-                  key={categoryName}
-                  onClick={() => setActiveCategory(categoryName)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${isActive ? 'text-white' : 'text-muted-foreground hover:text-foreground'
-                    }`}
-                  style={{
-                    backgroundColor: isActive ? SALESFORCE_BLUE : 'transparent',
-                    border: `1px solid ${isActive ? SALESFORCE_BLUE : '#e5e7eb'}`
-                  }}
-                >
-                  <IconComponent className="w-4 h-4" />
-                  {categoryName}
-                </button>
-              );
-            })}
-          </div>
-        </Fade>
-
-        {/* Active Category Technologies */}
-        <Fade direction="up" delay={200} triggerOnce key={activeCategory}>
-          <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto min-h-[120px] items-center">
-            {techCategories[activeCategory as keyof typeof techCategories].technologies.map((tech, index) => (
-              <TechBadge
-                key={tech}
-                technology={tech}
-                index={index}
-              />
-            ))}
-          </div>
-        </Fade>
+export function SkillsSection() {
+  return (
+    <section id="skills" className="py-24 bg-background">
+      <div className="container mx-auto px-8 space-y-12">
+        <div className="text-center">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-foreground mb-4">What’s in My Dev Kit</h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            A showcase of my technical capabilities and tools I use to build modern web solutions.
+          </p>
+        </div>
+        {skillGroups.map((group, index) => (
+          <CategorySection
+            key={group.title}
+            group={group}
+            isInitiallyOpen={index === 0}
+          />
+        ))}
       </div>
     </section>
   );
-} 
+}

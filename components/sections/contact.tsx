@@ -144,7 +144,7 @@ function ContactForm() {
         <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-lg sm:rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 mb-4 sm:mb-6">
           <MessageSquare className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 text-primary" />
         </div>
-        <h3 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-foreground mb-2 sm:mb-3">Let&apos;s Work Together</h3>
+        <h3 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-foreground mb-2 sm:mb-3">Drop Me a Line</h3>
         <p className="text-muted-foreground text-sm sm:text-base lg:text-lg leading-relaxed max-w-sm sm:max-w-md mx-auto px-2 sm:px-0">
           Ready to bring your ideas to life? Drop me a message and let&apos;s create something extraordinary!
         </p>
@@ -377,7 +377,7 @@ export function ContactSection() {
                 <div className="absolute inset-0 w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-primary/20 rounded-full blur-lg animate-pulse" />
               </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground ml-3 sm:ml-4">
-                Contact
+                Let's have a Coffee Together
               </h2>
             </div>
             <p className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-2xl lg:max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">

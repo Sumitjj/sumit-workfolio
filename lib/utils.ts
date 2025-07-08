@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import resumeInfo from './resume-info.json';
 
 /**
  * Utility function to merge Tailwind CSS classes with proper conflict resolution
@@ -20,25 +21,6 @@ export function scrollToElement(elementId: string): void {
             block: "start",
         });
     }
-}
-
-/**
- * Utility function to format date
- */
-export function formatDate(date: Date): string {
-    return new Intl.DateTimeFormat("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-    }).format(date);
-}
-
-/**
- * Utility function to validate email
- */
-export function isValidEmail(email: string): boolean {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
 }
 
 /**
@@ -70,60 +52,17 @@ export function handleEmailClick(email: string, subject?: string, body?: string)
     }
 }
 
-/**
- * Resume format type
- */
-export type ResumeFormat = 'PDF' | 'DOCX';
 
 /**
- * Resume file information
+ * Open resume in new window
  */
-export interface ResumeInfo {
-    url: string;
-    filename: string;
-    format: ResumeFormat;
+export function openResume(): void {
+    window.open(`/resume/${resumeInfo.filename}`, '_blank', 'noopener,noreferrer');
 }
 
 /**
- * Get available resume file dynamically
- * Returns the first available resume file in the public/resume directory
- * This function tries multiple common filename patterns
- */
-export function getAvailableResume(): ResumeInfo {
-    // For now, we'll use the known available file
-    // In a production environment with Node.js backend, you could use fs.readdir
-    const availableFile = 'SumitJangidResume.docx';
-
-    return {
-        url: `/resume/${availableFile}`,
-        filename: availableFile,
-        format: availableFile.endsWith('.pdf') ? 'PDF' : 'DOCX'
-    };
-}
-
-/**
- * Enhanced resume download function
- * Downloads the first available resume file from the resume folder
- */
-export function downloadResume(): void {
-    const resume = getAvailableResume();
-
-    // Create a temporary link element for download
-    const link = document.createElement('a');
-    link.href = resume.url;
-    link.download = resume.filename;
-    link.target = '_blank';
-
-    // Trigger the download
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-}
-
-/**
- * Get formatted resume button text based on available format
+ * Get button text
  */
 export function getResumeButtonText(): string {
-    const resume = getAvailableResume();
-    return `Resume (${resume.format})`;
+    return `Resume`;
 }

@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { ExternalLink, Github, X, Tag, Code2, Layers, Zap } from "lucide-react";
+import { ExternalLink, Github, X, Tag, Code2, Layers, Zap, Calendar, Star, Users, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Modal } from "@/components/ui/modal";
 import { Project } from "@/types";
@@ -14,59 +14,67 @@ interface ProjectModalProps {
 }
 
 /**
- * Clean and professional project modal component with theme-based design
+ * Modern, professional project modal with enhanced design and layout
  */
 export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
     if (!project) return null;
 
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
-            <div className="relative bg-background">
-                {/* Banner Image */}
-                <div className="relative h-72 overflow-hidden">
+            <div className="relative bg-gradient-to-br from-background via-background/98 to-background/95 backdrop-blur-xl">
+                {/* Hero Section with Gradient Overlay */}
+                <div className="relative h-80 overflow-hidden rounded-t-2xl">
                     <Image
                         src={project.image}
                         alt={project.title}
                         fill
                         className="object-cover"
                         priority
+                        sizes="100vw"
+                        quality={90}
                     />
+                    {/* Modern gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-[rgb(0,112,210)]/80 via-black/50 to-transparent" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
-                    {/* Close Button */}
+                    {/* Close Button - Modern floating design */}
                     <Button
                         variant="ghost"
                         size="icon"
                         onClick={onClose}
-                        className="absolute top-6 right-6 h-10 w-10 rounded-full bg-background text-foreground hover:bg-background/90 hover:scale-105 transition-all duration-200 border border-border/50 shadow-lg"
+                        className="absolute top-6 right-6 h-12 w-12 rounded-full bg-white/10 backdrop-blur-xl text-white hover:bg-white/20 hover:scale-110 transition-all duration-300 border border-white/20 shadow-2xl z-20"
                     >
-                        <X className="h-5 w-5" />
+                        <X className="h-6 w-6" />
                     </Button>
 
-                    {/* Featured Badge - Top Center */}
+                    {/* Featured Badge - Modern design */}
                     {project.featured && (
-                        <div className="absolute top-6 left-1/2 transform -translate-x-1/2">
-                            <div className="inline-flex items-center px-4 py-2 rounded-full bg-amber-500 text-white text-sm font-medium shadow-lg">
-                                <span className="mr-2">⭐</span>
+                        <div className="absolute top-6 left-6">
+                            <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-[rgb(0,112,210)] to-[rgb(87,163,240)] text-white text-sm font-semibold shadow-xl backdrop-blur-sm border border-white/20">
+                                <Star className="w-4 h-4 mr-2 fill-current" />
                                 Featured Project
                             </div>
                         </div>
                     )}
 
-                    {/* Project Title & Actions */}
-                    <div className="absolute bottom-0 left-0 right-0 p-6">
+                    {/* Project Info Overlay */}
+                    <div className="absolute bottom-0 left-0 right-0 p-8">
                         <div className="flex items-end justify-between">
                             <div className="flex-1">
-                                <h1 className="text-4xl font-bold text-white mb-4 leading-tight">
+                                <div className="flex items-center gap-2 mb-3">
+                                    <Calendar className="w-4 h-4 text-white/80" />
+                                    <span className="text-white/80 text-sm font-medium">{project.year}</span>
+                                </div>
+                                <h1 className="text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">
                                     {project.title}
                                 </h1>
 
-                                {/* Categories */}
+                                {/* Categories with modern styling */}
                                 <div className="flex flex-wrap gap-2">
                                     {project.categories.map((category) => (
                                         <span
                                             key={category}
-                                            className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-white/20 text-white border border-white/30"
+                                            className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-white/15 text-white border border-white/20 backdrop-blur-sm"
                                         >
                                             {category}
                                         </span>
@@ -74,28 +82,27 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                                 </div>
                             </div>
 
-                            {/* Action Buttons */}
-                            <div className="flex gap-3 ml-6">
+                            {/* Action Buttons - Modern design */}
+                            <div className="flex gap-3 ml-8">
                                 {project.githubUrl && (
                                     <Button
                                         variant="secondary"
-                                        size="sm"
+                                        size="lg"
                                         onClick={() => window.open(project.githubUrl, "_blank")}
-                                        className="bg-background text-foreground hover:bg-background/90 hover:scale-105 transition-all duration-200 border border-border/50 shadow-lg"
+                                        className="bg-white/10 backdrop-blur-xl text-white hover:bg-white/20 hover:scale-105 transition-all duration-300 border border-white/20 shadow-xl"
                                     >
-                                        <Github className="h-4 w-4 mr-2" />
-                                        Code
+                                        <Github className="h-5 w-5 mr-2" />
+                                        View Code
                                     </Button>
                                 )}
                                 {project.liveUrl && (
                                     <Button
-                                        variant="ghost"
-                                        size="icon"
+                                        size="lg"
                                         onClick={() => window.open(project.liveUrl, "_blank")}
-                                        className="h-9 w-9 bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-105 transition-all duration-200 shadow-lg"
-                                        title="Live Demo"
+                                        className="bg-gradient-to-r from-[rgb(0,112,210)] to-[rgb(87,163,240)] text-white hover:scale-105 transition-all duration-300 shadow-xl border border-white/20"
                                     >
-                                        <ExternalLink className="h-4 w-4" />
+                                        <ExternalLink className="h-5 w-5 mr-2" />
+                                        Live Demo
                                     </Button>
                                 )}
                             </div>
@@ -103,40 +110,65 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                     </div>
                 </div>
 
-                {/* Content Sections */}
-                <div className="p-8 space-y-10">
-                    {/* Project Overview */}
-                    <section className="space-y-4">
-                        <div className="flex items-center gap-3 mb-6">
-                            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
-                                <Tag className="w-4 h-4 text-white" />
-                            </div>
-                            <h2 className="text-2xl font-semibold text-foreground">Project Overview</h2>
+                {/* Content Sections - Modern card-based layout */}
+                <div className="p-8 space-y-8">
+                    {/* Stats Row */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div className="text-center p-6 rounded-2xl bg-gradient-to-br from-[rgb(0,112,210)]/10 to-[rgb(87,163,240)]/5 border border-[rgb(0,112,210)]/20">
+                            <TrendingUp className="w-8 h-8 text-[rgb(0,112,210)] mx-auto mb-3" />
+                            <div className="text-2xl font-bold text-foreground mb-1">{project.technologies.length}</div>
+                            <div className="text-sm text-muted-foreground">Technologies</div>
                         </div>
-                        <div className="bg-card rounded-2xl p-6 border border-border/50 shadow-sm">
+                        <div className="text-center p-6 rounded-2xl bg-gradient-to-br from-[rgb(75,202,129)]/10 to-[rgb(75,202,129)]/5 border border-[rgb(75,202,129)]/20">
+                            <Users className="w-8 h-8 text-[rgb(75,202,129)] mx-auto mb-3" />
+                            <div className="text-2xl font-bold text-foreground mb-1">{project.year}</div>
+                            <div className="text-sm text-muted-foreground">Year Built</div>
+                        </div>
+                        <div className="text-center p-6 rounded-2xl bg-gradient-to-br from-[rgb(254,147,57)]/10 to-[rgb(254,147,57)]/5 border border-[rgb(254,147,57)]/20">
+                            <Star className="w-8 h-8 text-[rgb(254,147,57)] mx-auto mb-3" />
+                            <div className="text-2xl font-bold text-foreground mb-1">{project.featured ? 'Featured' : 'Standard'}</div>
+                            <div className="text-sm text-muted-foreground">Project Type</div>
+                        </div>
+                    </div>
+
+                    {/* Project Overview - Enhanced design */}
+                    <section className="space-y-6">
+                        <div className="flex items-center gap-4 mb-6">
+                            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[rgb(0,112,210)] to-[rgb(87,163,240)] flex items-center justify-center shadow-lg">
+                                <Tag className="w-6 h-6 text-white" />
+                            </div>
+                            <div>
+                                <h2 className="text-3xl font-bold text-foreground">Project Overview</h2>
+                                <p className="text-muted-foreground">Detailed description and objectives</p>
+                            </div>
+                        </div>
+                        <div className="bg-gradient-to-br from-card via-card/95 to-card/90 backdrop-blur-sm rounded-2xl p-8 border border-[rgb(0,112,210)]/20 shadow-xl">
                             <p className="text-foreground leading-relaxed text-lg">
                                 {project.longDescription || project.description}
                             </p>
                         </div>
                     </section>
 
-                    {/* Key Features */}
-                    <section className="space-y-4">
-                        <div className="flex items-center gap-3 mb-6">
-                            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center">
-                                <Zap className="w-4 h-4 text-white" />
+                    {/* Key Features - Modern grid layout */}
+                    <section className="space-y-6">
+                        <div className="flex items-center gap-4 mb-6">
+                            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[rgb(75,202,129)] to-[rgb(75,202,129)]/80 flex items-center justify-center shadow-lg">
+                                <Zap className="w-6 h-6 text-white" />
                             </div>
-                            <h2 className="text-2xl font-semibold text-foreground">Key Features</h2>
+                            <div>
+                                <h2 className="text-3xl font-bold text-foreground">Key Features</h2>
+                                <p className="text-muted-foreground">Core functionality and capabilities</p>
+                            </div>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             {getProjectFeatures(project).map((feature, index) => (
                                 <div
                                     key={index}
-                                    className="group p-5 rounded-xl bg-card border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-lg"
+                                    className="group p-6 rounded-2xl bg-gradient-to-br from-card via-card/95 to-card/90 backdrop-blur-sm border border-[rgb(75,202,129)]/20 hover:border-[rgb(75,202,129)]/40 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
                                 >
-                                    <div className="flex items-start space-x-3">
-                                        <div className="w-2 h-2 rounded-full bg-gradient-to-r from-primary to-secondary mt-2.5 flex-shrink-0" />
-                                        <p className="text-foreground leading-relaxed group-hover:text-primary transition-colors duration-300">
+                                    <div className="flex items-start space-x-4">
+                                        <div className="w-3 h-3 rounded-full bg-gradient-to-r from-[rgb(75,202,129)] to-[rgb(75,202,129)]/80 mt-2 flex-shrink-0 shadow-lg" />
+                                        <p className="text-foreground leading-relaxed group-hover:text-[rgb(75,202,129)] transition-colors duration-300 font-medium">
                                             {feature}
                                         </p>
                                     </div>
@@ -145,102 +177,63 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                         </div>
                     </section>
 
-                    {/* Third Party Implementations */}
-                    <section className="space-y-4">
-                        <div className="flex items-center gap-3 mb-6">
-                            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center">
-                                <Code2 className="w-4 h-4 text-white" />
+                    {/* Third Party Integrations - Enhanced cards */}
+                    <section className="space-y-6">
+                        <div className="flex items-center gap-4 mb-6">
+                            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[rgb(254,147,57)] to-[rgb(254,147,57)]/80 flex items-center justify-center shadow-lg">
+                                <Code2 className="w-6 h-6 text-white" />
                             </div>
-                            <h2 className="text-2xl font-semibold text-foreground">Third Party Integrations</h2>
+                            <div>
+                                <h2 className="text-3xl font-bold text-foreground">Third Party Integrations</h2>
+                                <p className="text-muted-foreground">External services and APIs</p>
+                            </div>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {getThirdPartyIntegrations(project).map((integration, index) => (
                                 <div
                                     key={index}
-                                    className="p-4 rounded-xl bg-card border border-border/50 hover:border-accent transition-all duration-300 hover:shadow-md"
+                                    className="p-6 rounded-2xl bg-gradient-to-br from-card via-card/95 to-card/90 backdrop-blur-sm border border-[rgb(254,147,57)]/20 hover:border-[rgb(254,147,57)]/40 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
                                 >
                                     <div className="text-center">
-                                        <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-accent to-accent/80 flex items-center justify-center mx-auto mb-3">
-                                            <span className="text-accent-foreground font-semibold text-sm">
+                                        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[rgb(254,147,57)] to-[rgb(254,147,57)]/80 flex items-center justify-center mx-auto mb-4 shadow-lg">
+                                            <span className="text-white font-bold text-lg">
                                                 {integration.name.charAt(0).toUpperCase()}
                                             </span>
                                         </div>
-                                        <h3 className="font-medium text-foreground mb-1">{integration.name}</h3>
-                                        <p className="text-sm text-muted-foreground">{integration.purpose}</p>
+                                        <h3 className="font-semibold text-foreground mb-2 text-lg">{integration.name}</h3>
+                                        <p className="text-sm text-muted-foreground leading-relaxed">{integration.purpose}</p>
                                     </div>
                                 </div>
                             ))}
                         </div>
                     </section>
 
-                    {/* Technologies */}
-                    <section className="space-y-4">
-                        <div className="flex items-center gap-3 mb-6">
-                            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center">
-                                <Layers className="w-4 h-4 text-white" />
+                    {/* Technologies - Modern tag layout */}
+                    <section className="space-y-6">
+                        <div className="flex items-center gap-4 mb-6">
+                            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[rgb(87,163,240)] to-[rgb(0,112,210)] flex items-center justify-center shadow-lg">
+                                <Layers className="w-6 h-6 text-white" />
                             </div>
-                            <h2 className="text-2xl font-semibold text-foreground">Technologies Used</h2>
+                            <div>
+                                <h2 className="text-3xl font-bold text-foreground">Technologies Used</h2>
+                                <p className="text-muted-foreground">Technical stack and tools</p>
+                            </div>
                         </div>
-                        <div className="space-y-6">
-                            {/* Frontend Technologies */}
-                            {getFrontendTechnologies(project).length > 0 && (
-                                <div className="space-y-3">
-                                    <h3 className="text-lg font-medium text-foreground flex items-center gap-2">
-                                        <div className="w-3 h-3 rounded-full bg-green-500" />
-                                        Frontend
-                                    </h3>
-                                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-                                        {getFrontendTechnologies(project).map((tech) => (
-                                            <div
-                                                key={tech}
-                                                className="flex items-center justify-center p-3 rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800/30 text-green-700 dark:text-green-300 font-medium text-sm hover:scale-105 transition-transform duration-200"
-                                            >
-                                                {tech}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
-
-                            {/* Backend Technologies */}
-                            {getBackendTechnologies(project).length > 0 && (
-                                <div className="space-y-3">
-                                    <h3 className="text-lg font-medium text-foreground flex items-center gap-2">
-                                        <div className="w-3 h-3 rounded-full bg-blue-500" />
-                                        Backend
-                                    </h3>
-                                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-                                        {getBackendTechnologies(project).map((tech) => (
-                                            <div
-                                                key={tech}
-                                                className="flex items-center justify-center p-3 rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800/30 text-blue-700 dark:text-blue-300 font-medium text-sm hover:scale-105 transition-transform duration-200"
-                                            >
-                                                {tech}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
-
-                            {/* Other Technologies */}
-                            {getOtherTechnologies(project).length > 0 && (
-                                <div className="space-y-3">
-                                    <h3 className="text-lg font-medium text-foreground flex items-center gap-2">
-                                        <div className="w-3 h-3 rounded-full bg-purple-500" />
-                                        Tools & Services
-                                    </h3>
-                                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-                                        {getOtherTechnologies(project).map((tech) => (
-                                            <div
-                                                key={tech}
-                                                className="flex items-center justify-center p-3 rounded-lg bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800/30 text-purple-700 dark:text-purple-300 font-medium text-sm hover:scale-105 transition-transform duration-200"
-                                            >
-                                                {tech}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
+                        <div className="bg-gradient-to-br from-card via-card/95 to-card/90 backdrop-blur-sm rounded-2xl p-8 border border-[rgb(87,163,240)]/20 shadow-xl">
+                            <div className="flex flex-wrap gap-3">
+                                {project.technologies.map((tech, index) => (
+                                    <span
+                                        key={tech}
+                                        className="inline-flex items-center px-4 py-2 rounded-xl bg-gradient-to-r from-[rgb(0,112,210)]/10 to-[rgb(87,163,240)]/10 border border-[rgb(0,112,210)]/20 text-[rgb(0,112,210)] font-semibold text-sm hover:scale-105 hover:bg-gradient-to-r hover:from-[rgb(0,112,210)]/20 hover:to-[rgb(87,163,240)]/20 transition-all duration-200 shadow-md"
+                                        style={{
+                                            animationDelay: `${index * 50}ms`,
+                                            animation: 'slideUp 0.5s ease-out forwards'
+                                        }}
+                                    >
+                                        {tech}
+                                    </span>
+                                ))}
+                            </div>
                         </div>
                     </section>
                 </div>
@@ -252,37 +245,37 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
 // Helper functions for enhanced project information
 function getProjectFeatures(project: Project): string[] {
     const features = {
-        "E-Commerce Platform": [
-            "Secure user authentication with multi-factor verification",
-            "Advanced product search with real-time filtering",
-            "Streamlined checkout process with guest options",
-            "Integrated payment gateway with multiple providers",
-            "Real-time inventory tracking and alerts",
-            "Comprehensive admin dashboard with analytics"
+        "Full Beauty Brands": [
+            "Advanced product catalog with smart filtering",
+            "Personalized shopping experiences with AI recommendations",
+            "Seamless checkout with multiple payment options",
+            "Real-time inventory management and alerts",
+            "Comprehensive customer account management",
+            "Mobile-optimized responsive design"
         ],
-        "AI-Powered Dashboard": [
-            "Machine learning data processing engine",
-            "Interactive real-time visualizations",
-            "Predictive analytics with forecasting",
-            "Custom report generation and scheduling",
-            "Multi-tenant architecture support",
-            "Advanced data export capabilities"
+        "Aquasana Water Filters": [
+            "Advanced product configurators for custom solutions",
+            "Subscription management with flexible scheduling",
+            "Integrated customer support and live chat",
+            "Water quality testing and reporting tools",
+            "Installation service booking system",
+            "Educational content and water health resources"
         ],
-        "Mobile Banking App": [
-            "Biometric authentication (Face ID/Fingerprint)",
-            "End-to-end transaction encryption",
-            "Real-time balance and transaction updates",
-            "Integrated bill payment system",
-            "Push notifications for account activity",
-            "Offline mode for basic operations"
+        "Lane Bryant": [
+            "Size-inclusive shopping with advanced fitting guides",
+            "Personalized style recommendations using AI",
+            "Virtual try-on technology for better fit",
+            "Inclusive sizing charts and fit calculators",
+            "Style inspiration and outfit suggestions",
+            "Community features for customer engagement"
         ],
-        "Social Media Platform": [
-            "Real-time messaging with media support",
-            "Video streaming and live broadcasting",
-            "Advanced content moderation system",
-            "Customizable user profiles and feeds",
-            "Scalable media storage and CDN",
-            "Community features and group management"
+        "Loreal": [
+            "Virtual try-on for makeup and hair products",
+            "Skin analysis tools with personalized recommendations",
+            "Beauty consultation booking system",
+            "Tutorial videos and beauty education content",
+            "Loyalty program with exclusive rewards",
+            "Professional product recommendations"
         ]
     };
 
@@ -298,52 +291,47 @@ function getProjectFeatures(project: Project): string[] {
 
 function getThirdPartyIntegrations(project: Project): Array<{ name: string, purpose: string }> {
     const integrations = {
-        "E-Commerce Platform": [
+        "Full Beauty Brands": [
+            { name: "Salesforce", purpose: "Customer Management" },
             { name: "Stripe", purpose: "Payment Processing" },
-            { name: "SendGrid", purpose: "Email Services" },
-            { name: "Cloudinary", purpose: "Image Management" },
-            { name: "Google Analytics", purpose: "User Analytics" }
+            { name: "Klaviyo", purpose: "Email Marketing" },
+            { name: "Yotpo", purpose: "Reviews & Loyalty" },
+            { name: "Bazaarvoice", purpose: "User Generated Content" },
+            { name: "Google Analytics", purpose: "Performance Tracking" }
         ],
-        "AI-Powered Dashboard": [
-            { name: "OpenAI", purpose: "AI/ML Processing" },
-            { name: "Chart.js", purpose: "Data Visualization" },
-            { name: "Redis", purpose: "Caching Layer" },
-            { name: "WebSocket", purpose: "Real-time Updates" }
+        "Aquasana Water Filters": [
+            { name: "Salesforce", purpose: "CRM Integration" },
+            { name: "PayPal", purpose: "Payment Gateway" },
+            { name: "Recurly", purpose: "Subscription Management" },
+            { name: "Zendesk", purpose: "Customer Support" },
+            { name: "Mailchimp", purpose: "Email Campaigns" },
+            { name: "Google Maps", purpose: "Store Locator" }
         ],
-        "Mobile Banking App": [
-            { name: "Plaid", purpose: "Bank Integration" },
-            { name: "Twilio", purpose: "SMS Verification" },
-            { name: "AWS KMS", purpose: "Encryption Keys" },
-            { name: "Firebase", purpose: "Push Notifications" }
+        "Lane Bryant": [
+            { name: "Salesforce", purpose: "Customer Data Platform" },
+            { name: "Adyen", purpose: "Payment Processing" },
+            { name: "Segment", purpose: "Customer Analytics" },
+            { name: "Contentful", purpose: "Content Management" },
+            { name: "Algolia", purpose: "Search & Discovery" },
+            { name: "Optimizely", purpose: "A/B Testing" }
         ],
-        "Social Media Platform": [
-            { name: "AWS S3", purpose: "Media Storage" },
-            { name: "Socket.io", purpose: "Real-time Chat" },
-            { name: "FFmpeg", purpose: "Video Processing" },
-            { name: "Moderator", purpose: "Content Filter" }
+        "Loreal": [
+            { name: "Salesforce", purpose: "Marketing Cloud" },
+            { name: "Cybersource", purpose: "Payment Security" },
+            { name: "ModiFace", purpose: "Virtual Try-On" },
+            { name: "Sephora API", purpose: "Product Integration" },
+            { name: "Adobe", purpose: "Creative Assets" },
+            { name: "Bazaarvoice", purpose: "Reviews Platform" }
         ]
     };
 
     return integrations[project.title as keyof typeof integrations] || [
-        { name: "AWS", purpose: "Cloud Infrastructure" },
+        { name: "Salesforce", purpose: "Commerce Cloud" },
+        { name: "Stripe", purpose: "Payment Processing" },
+        { name: "SendGrid", purpose: "Email Services" },
         { name: "Redis", purpose: "Caching & Sessions" },
-        { name: "Stripe", purpose: "Payment Processing" }
+        { name: "AWS", purpose: "Cloud Infrastructure" },
+        { name: "Google", purpose: "Analytics & Maps" }
     ];
 }
 
-function getFrontendTechnologies(project: Project): string[] {
-    const frontendTechs = ["React", "Next.js", "Vue.js", "Angular", "TypeScript", "JavaScript", "HTML", "CSS", "Tailwind CSS", "SCSS", "Styled Components"];
-    return project.technologies.filter(tech => frontendTechs.includes(tech));
-}
-
-function getBackendTechnologies(project: Project): string[] {
-    const backendTechs = ["Node.js", "Express.js", "PHP", "Laravel", "Python", "Django", "Ruby", "Rails", "Java", "Spring", "C#", ".NET"];
-    return project.technologies.filter(tech => backendTechs.includes(tech));
-}
-
-function getOtherTechnologies(project: Project): string[] {
-    const frontendTechs = ["React", "Next.js", "Vue.js", "Angular", "TypeScript", "JavaScript", "HTML", "CSS", "Tailwind CSS", "SCSS", "Styled Components"];
-    const backendTechs = ["Node.js", "Express.js", "PHP", "Laravel", "Python", "Django", "Ruby", "Rails", "Java", "Spring", "C#", ".NET"];
-    const excludedTechs = [...frontendTechs, ...backendTechs];
-    return project.technologies.filter(tech => !excludedTechs.includes(tech));
-}

@@ -27,6 +27,18 @@ export interface Project {
     liveUrl?: string;
     featured: boolean;
     year: number;
+    organization?: string;
+}
+
+/**
+ * Skill Category types
+ */
+export type SkillCategoryKey = "frontend" | "backend" | "tools" | "other";
+
+export interface SkillCategory {
+    key: SkillCategoryKey;
+    title: string;
+    icon: React.ComponentType<{ className?: string }>;
 }
 
 /**
@@ -34,9 +46,16 @@ export interface Project {
  */
 export interface Skill {
     name: string;
-    level: number; // 1-100
-    category: "frontend" | "backend" | "design" | "tools" | "other";
     icon?: React.ComponentType<{ className?: string }>;
+}
+
+/**
+ * Skill Group data structure
+ */
+export interface SkillGroup {
+    title: string;
+    icon: React.ComponentType<{ className?: string }>;
+    skills: Skill[];
 }
 
 /**
@@ -51,6 +70,7 @@ export interface Experience {
     description: string;
     technologies: string[];
     current: boolean;
+    projects: string[];
 }
 
 /**
@@ -65,7 +85,6 @@ export interface Certification {
     verificationUrl?: string;
     badgeUrl: string;
     description: string;
-    skills: string[];
 }
 
 /**
