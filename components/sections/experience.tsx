@@ -310,7 +310,7 @@ export function ExperienceSection() {
                                 <Briefcase className="w-6 h-6" style={{ color: SALESFORCE_BLUE }} />
                             </div>
                             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground">
-                                Professional Journey
+                                Professional Milestones
                             </h2>
                         </div>
 

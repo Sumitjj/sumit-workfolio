@@ -5,7 +5,8 @@ import Image from "next/image";
 import { ChevronDown, ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { personalInfo, socialLinks } from "@/data/portfolio";
-import { scrollToElement, handleEmailClick } from "@/lib/utils";
+import { handleEmailClick } from "@/lib/utils";
+import { smoothScrollToElement } from "@/lib/scroll";
 
 /**
  * Hero section with CSS animations and modern responsive design
@@ -100,9 +101,9 @@ export function HeroSection() {
             <Button
               size="lg"
               className="group hover-lift w-full sm:w-auto text-sm sm:text-base"
-              onClick={() => scrollToElement("projects")}
+              onClick={() => smoothScrollToElement("projects")}
             >
-              View My Work
+              What I've Built
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>
 
@@ -110,7 +111,7 @@ export function HeroSection() {
               variant="outline"
               size="lg"
               className="hover-lift w-full sm:w-auto text-sm sm:text-base"
-              onClick={() => scrollToElement("contact")}
+              onClick={() => smoothScrollToElement("contact")}
             >
               Get In Touch
             </Button>
@@ -166,7 +167,7 @@ export function HeroSection() {
       {/* Scroll Indicator - Positioned at bottom */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 hero-fade-in" style={{ animationDelay: "0.9s" }}>
         <button
-          onClick={() => scrollToElement("projects")}
+          onClick={() => smoothScrollToElement("projects")}
           className="p-2 text-muted-foreground hover:text-foreground transition-colors animate-bounce"
           aria-label="Scroll to projects section"
         >

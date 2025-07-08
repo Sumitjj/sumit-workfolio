@@ -71,7 +71,7 @@ export function SkillsSection() {
     <section id="skills" className="py-24 bg-background">
       <div className="container mx-auto px-8 space-y-12">
         <div className="text-center">
-          <h2 className="text-4xl md:text-5xl font-extrabold text-foreground mb-4">Skills & Expertise</h2>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-foreground mb-4">What’s in My Dev Kit</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             A showcase of my technical capabilities and tools I use to build modern web solutions.
           </p>

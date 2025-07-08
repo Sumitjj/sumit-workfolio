@@ -74,7 +74,7 @@ export function ProjectsSection() {
         <div className="text-center mb-10 sm:mb-12">
           <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>
-            Projects
+            What I've Built
           </h2>
           <p className={`text-muted-foreground text-lg mt-4 transition-all duration-700 ease-out delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>

@@ -61,7 +61,7 @@ export const projects: Project[] = [
         id: "1",
         longDescription: "Completed multiple brands work on full beauty project with specially work experience on checkout redesign in headless commerce using NextJs, NestJs, OCAPI, SCAPI and many more",
         categories: ["E-Commerce", "Headless Commerce"],
-        title: "FullBeauty Brands",
+        title: "FullBeauty",
         description:
             "Completed multiple brands work on full beauty project with specially work experience on checkout redesign in headless commerce using NextJs, NestJs, OCAPI, SCAPI and many more",
         image: getOptimizedProjectImage("Full Beauty FBB"),

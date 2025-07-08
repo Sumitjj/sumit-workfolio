@@ -156,7 +156,7 @@ export function CertificationsSection() {
                         </div>
 
                         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-                            Salesforce Certifications
+                            Badges & Certifications
                         </h2>
 
                         <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
@@ -181,7 +181,7 @@ export function CertificationsSection() {
                                         </div>
 
                                         {/* Number with animated gradient */}
-                                        <div className="text-4xl sm:text-5xl font-black mb-2">
+                                        <div className="text-4xl sm:text-5xl font-black mb-2 min-h-[3rem] flex items-center justify-center">
                                             <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-clip-text text-transparent bg-300% animate-gradient">
                                                 {certifications.length}X
                                             </span>
@@ -219,7 +219,7 @@ export function CertificationsSection() {
                                         </div>
 
                                         {/* Text with animated gradient */}
-                                        <div className="text-2xl sm:text-3xl font-black mb-2">
+                                        <div className="text-2xl sm:text-3xl font-black mb-2 min-h-[3rem] flex items-center justify-center">
                                             <span className="bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600 bg-clip-text text-transparent bg-300% animate-gradient">
                                                 B2C
                                             </span>
