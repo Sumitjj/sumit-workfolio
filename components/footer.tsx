@@ -5,6 +5,7 @@ import { Heart, Sparkles } from "lucide-react";
 import { contactConfig, footerContent, personalInfo, socialLinks } from "@/data/portfolio";
 import { SocialFloatingDock } from "@/lib/aceternity/social-floating-dock";
 import { FooterSparkles } from "@/lib/aceternity/footer-sparkles";
+import { handleEmailClick } from "@/lib/helpers/utils";
 
 /**
  * Fully Responsive Footer Component with Modern Design
@@ -58,6 +59,26 @@ export function Footer() {
           <div className="flex flex-row gap-x-8 sm:gap-x-10 items-center justify-center">
             {socialLinks.map((social) => {
               const Icon = social.icon;
+              if (social.platform === "Email") {
+                return (
+                  <a
+                    key={social.platform}
+                    href="#"
+                    aria-label={social.platform}
+                    onClick={e => {
+                      e.preventDefault();
+                      handleEmailClick(
+                        contactConfig.recipientEmail,
+                        contactConfig.subjects.default,
+                        contactConfig.defaultBody
+                      );
+                    }}
+                    className="text-neutral-500 dark:text-neutral-300 text-2xl"
+                  >
+                    <Icon />
+                  </a>
+                );
+              }
               return (
                 <a
                   key={social.platform}

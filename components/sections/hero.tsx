@@ -4,9 +4,10 @@ import React from "react";
 import Image from "next/image";
 import { ChevronDown, ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { personalInfo, socialLinks } from "@/data/portfolio";
+import { personalInfo, socialLinks, contactConfig } from "@/data/portfolio";
 import { smoothScrollToElement } from "@/lib/helpers/scroll";
 import { SocialFloatingDock } from "@/lib/aceternity/social-floating-dock";
+import { handleEmailClick } from "@/lib/helpers/utils";
 
 /**
  * Hero section with CSS animations and modern responsive design
@@ -27,6 +28,26 @@ export function HeroSection() {
       <div className="flex flex-row gap-x-8 sm:gap-x-10 justify-center items-center md:hidden">
         {socialLinks.map((social) => {
           const Icon = social.icon;
+          if (social.platform === "Email") {
+            return (
+              <a
+                key={social.platform}
+                href="#"
+                aria-label={social.platform}
+                onClick={e => {
+                  e.preventDefault();
+                  handleEmailClick(
+                    contactConfig.recipientEmail,
+                    contactConfig.subjects.default,
+                    contactConfig.defaultBody
+                  );
+                }}
+                className="text-neutral-500 dark:text-neutral-300 text-2xl hover:text-primary transition-colors duration-300"
+              >
+                <Icon />
+              </a>
+            );
+          }
           return (
             <a
               key={social.platform}
