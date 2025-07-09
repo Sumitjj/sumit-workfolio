@@ -299,7 +299,7 @@ export function ExperienceSection() {
                 {/* Compact Section Header */}
                 <Fade direction="up" triggerOnce>
                     <div className="text-center mb-8">
-                        <div className="flex items-center justify-center gap-3 mb-4">
+                        <div className="flex flex-col items-center justify-center gap-2 mb-4 sm:flex-row sm:gap-3">
                             <div
                                 className="p-2 rounded-xl border"
                                 style={{

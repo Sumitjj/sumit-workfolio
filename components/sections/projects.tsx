@@ -132,42 +132,39 @@ export function ProjectsSection() {
           </div>
         )}
 
-        {/* Professional Highlights with staggered animation */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+        {/* Professional Highlights - Clean Minimal Redesign */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mt-8">
           {[
             {
               icon: Code,
               title: "Expert Development",
               description: "Specialized in Salesforce Commerce Cloud with 9+ years of enterprise experience",
-              color: "primary"
             },
             {
               icon: Award,
               title: "Certified Professional",
               description: "Salesforce B2C Commerce Cloud certified with proven track record",
-              color: "green-500"
             },
             {
               icon: Users,
               title: "Client Success",
               description: "Delivered successful solutions for enterprise clients worldwide",
-              color: "blue-500"
             }
           ].map((item, index) => (
             <div
               key={item.title}
-              className={`text-center p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-background to-muted/20 border border-border/50 hover:border-primary/30 transition-all duration-500 hover:-translate-y-1 ${isVisible
-                ? 'opacity-100 translate-y-0'
-                : 'opacity-0 translate-y-12'
-                }`}
-              style={{
-                transitionDelay: `${1200 + index * 200}ms`
-              }}
+              className={
+                `group flex flex-col items-center text-center p-6 sm:p-8 rounded-2xl bg-white/60 dark:bg-neutral-900/60 backdrop-blur-xl border border-border/30 shadow-md transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl hover:scale-[1.03] hover:rotate-[-1deg]`
+              }
+              style={{ transitionDelay: `${1200 + index * 200}ms` }}
             >
-              <div className={`w-12 h-12 bg-${item.color}/10 rounded-xl flex items-center justify-center mx-auto mb-4`}>
-                <item.icon className={`w-6 h-6 text-${item.color}`} />
+              {/* Icon - no background, no glow */}
+              <div className={`flex items-center justify-center w-14 h-14 mb-4 text-emerald-600 dark:text-emerald-400 transition-all duration-300 group-hover:scale-110`}>
+                <item.icon className={`w-10 h-10 stroke-2`} />
               </div>
-              <h4 className="text-lg font-semibold text-foreground mb-2">{item.title}</h4>
+              <h4 className={`text-xl font-extrabold mb-2 text-emerald-600 dark:text-emerald-400 tracking-tight`}> {/* Larger, bolder title */}
+                {item.title}
+              </h4>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 {item.description}
               </p>
