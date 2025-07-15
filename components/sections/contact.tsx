@@ -36,6 +36,7 @@ interface FormData {
 interface FormErrors {
   name?: string;
   email?: string;
+  subject?: string;
   message?: string;
 }
 
@@ -130,7 +131,7 @@ function ContactForm() {
     name: '',
     email: '',
     company: '',
-    subject: 'general',
+    subject: '',
     message: ''
   });
   const [errors, setErrors] = useState<FormErrors>({});
@@ -148,6 +149,10 @@ function ContactForm() {
       newErrors.email = 'Email is required';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email address';
+    }
+
+    if (!formData.subject) {
+      newErrors.subject = 'Subject is required';
     }
 
     if (!formData.message.trim()) {
@@ -195,7 +200,7 @@ function ContactForm() {
           name: '',
           email: '',
           company: '',
-          subject: 'general',
+          subject: '',
           message: ''
         });
         setSubmissionState('idle');
@@ -316,13 +321,26 @@ function ContactForm() {
             <select
               value={formData.subject}
               onChange={(e) => handleInputChange('subject', e.target.value)}
-              className="w-full px-3 py-3 sm:px-4 sm:py-3 lg:py-4 rounded-lg border border-border/30 hover:border-border/50 transition-all duration-300 bg-background/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary text-sm sm:text-base touch-manipulation"
+              className={cn(
+                "w-full px-3 py-3 sm:px-4 sm:py-3 lg:py-4 rounded-lg border transition-all duration-300",
+                "bg-background/50 backdrop-blur-sm text-sm sm:text-base",
+                "focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary",
+                "touch-manipulation",
+                errors.subject ? "border-red-500" : "border-border/30 hover:border-border/50"
+              )}
             >
+              <option value="">Select a subject</option>
               <option value="general">General Inquiry</option>
               <option value="project">Project Discussion</option>
               <option value="collaboration">Collaboration</option>
               <option value="other">Other</option>
             </select>
+            {errors.subject && (
+              <p className="text-xs sm:text-sm text-red-500 flex items-center">
+                <AlertCircle className="w-3 h-3 mr-1" />
+                {errors.subject}
+              </p>
+            )}
           </div>
         </div>
 
