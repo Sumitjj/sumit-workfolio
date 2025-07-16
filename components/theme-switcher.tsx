@@ -4,7 +4,7 @@ import * as React from "react";
 import { Sun, Moon, Monitor } from "lucide-react";
 import { useTheme } from "@/providers/theme-provider";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/helpers/utils";
 
 /**
  * Theme switcher component with light, dark, and system options

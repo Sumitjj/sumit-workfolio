@@ -1,6 +1,6 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/helpers/utils";
 
 /**
  * Button variants using CVA for consistent styling
@@ -43,7 +43,7 @@ const buttonVariants = cva(
  */
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {}
+  VariantProps<typeof buttonVariants> { }
 
 /**
  * Modern button component with multiple variants and accessibility features

@@ -34,3 +34,31 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Features
+
+### Sparkles Effect Integration
+
+This project includes a beautiful sparkles effect integrated into the footer section with a lightning border line. The effect features:
+
+- **Lightning Border**: Animated border line with custom lightning animations
+- **Particle Effects**: Multiple layers of sparkles inside the footer content area
+- **Responsive Design**: Optimized for all screen sizes
+- **Performance-focused**: Uses lightweight particle system
+- **Customizable**: Multiple layers with different colors and speeds
+- **Accessible**: Non-intrusive and doesn't interfere with user interactions
+
+#### Components
+
+- `components/ui/sparkles.tsx` - Core sparkles component using tsparticles
+- `components/ui/footer-sparkles.tsx` - Specialized footer sparkles with lightning border
+
+#### Dependencies
+
+The sparkles effect requires:
+- `@tsparticles/react` - React wrapper for tsparticles
+- `@tsparticles/engine` - Core particle engine
+- `@tsparticles/slim` - Lightweight particle presets
+- `motion` - Animation library for smooth transitions
+
+All dependencies are already installed and configured in this project.

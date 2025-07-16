@@ -51,8 +51,7 @@ function CategorySection({ group, isInitiallyOpen }: { group: SkillGroup, isInit
           <h3 className="text-lg sm:text-xl">{group.title}</h3>
         </div>
         <HiChevronRight
-          className={`w-5 h-5text-muted-foreground transition-transform duration-300 ${isOpen ? "rotate-90" : ""
-            }`}
+          className={`w-5 h-5 text-muted-foreground transition-transform duration-300${isOpen ? " rotate-90" : ""}`}
         />
       </div>
       {isOpen && (

@@ -26,7 +26,6 @@ export interface Project {
     githubUrl?: string;
     liveUrl?: string;
     featured: boolean;
-    year: number;
     organization?: string;
 }
 

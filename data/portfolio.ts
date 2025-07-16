@@ -15,7 +15,7 @@ import {
     NavItem,
     Certification,
 } from "@/types";
-import { getOptimizedProjectImage, getOptimizedAvatarImage } from "@/lib/images";
+import { getOptimizedProjectImage, getOptimizedAvatarImage } from "@/lib/helpers/images";
 
 /**
  * Navigation items for the portfolio
@@ -68,7 +68,6 @@ export const projects: Project[] = [
         technologies: ["NextJs", "NestJs", "B2C Commerce-SDK", "REST APIs", "SCAPI", "OCAPI", "SFRA", "SGJC"],
         liveUrl: "https://www.fullbeauty.com/",
         featured: true,
-        year: 2024,
         organization: "Merkle",
     },
     {
@@ -82,7 +81,6 @@ export const projects: Project[] = [
         longDescription: "Comprehensive analytics platform featuring machine learning algorithms for predictive analytics, real-time data processing, and interactive visualizations. Built for scalability and performance.",
         categories: ["E-Commerce"],
         featured: false,
-        year: 2024,
         organization: "Merkle",
     },
     {
@@ -96,7 +94,6 @@ export const projects: Project[] = [
         longDescription: "Comprehensive analytics platform featuring machine learning algorithms for predictive analytics, real-time data processing, and interactive visualizations. Built for scalability and performance.",
         categories: ["Web Development", "AI/ML"],
         featured: false,
-        year: 2024,
         organization: "Merkle",
     },
     {
@@ -110,7 +107,6 @@ export const projects: Project[] = [
         longDescription: "Modern social media platform featuring real-time messaging, video sharing, live streaming capabilities, and advanced content moderation. Built for high scalability and performance.",
         categories: ["Web Development", "Real-time"],
         featured: true,
-        year: 2023,
         organization: "Merkle",
     },
     {
@@ -124,7 +120,6 @@ export const projects: Project[] = [
         longDescription: "Comprehensive learning platform with video streaming, interactive quizzes, progress analytics, and certification system. Supports multiple content formats and gamification.",
         categories: ["Web Development", "Education"],
         featured: false,
-        year: 2022,
         organization: "PFSWeb",
     },
     {
@@ -138,7 +133,6 @@ export const projects: Project[] = [
         longDescription: "Enterprise-grade task management platform with team collaboration, Gantt charts, time tracking, and comprehensive reporting. Integrates with popular development tools.",
         categories: ["Web Development", "Productivity"],
         featured: true,
-        year: 2023,
         organization: "Publicis Sapient",
     },
     {
@@ -152,7 +146,6 @@ export const projects: Project[] = [
         longDescription: "Comprehensive learning platform with video streaming, interactive quizzes, progress analytics, and certification system. Supports multiple content formats and gamification.",
         categories: ["Web Development", "Education"],
         featured: false,
-        year: 2022,
         organization: "PFSWeb",
     },
     {
@@ -166,7 +159,6 @@ export const projects: Project[] = [
         longDescription: "Comprehensive learning platform with video streaming, interactive quizzes, progress analytics, and certification system. Supports multiple content formats and gamification.",
         categories: ["Web Development", "Education"],
         featured: false,
-        year: 2022,
         organization: "PFSWeb",
     },
     {
@@ -180,7 +172,6 @@ export const projects: Project[] = [
         longDescription: "Comprehensive learning platform with video streaming, interactive quizzes, progress analytics, and certification system. Supports multiple content formats and gamification.",
         categories: ["Web Development", "Education"],
         featured: false,
-        year: 2022,
         organization: "PFSWeb",
     },
     {
@@ -194,7 +185,6 @@ export const projects: Project[] = [
         longDescription: "Comprehensive analytics platform featuring machine learning algorithms for predictive analytics, real-time data processing, and interactive visualizations. Built for scalability and performance.",
         categories: ["Web Development", "AI/ML"],
         featured: false,
-        year: 2024,
         organization: "Merkle",
     },
     {
@@ -208,7 +198,6 @@ export const projects: Project[] = [
         longDescription: "Full-featured mobile banking application with end-to-end encryption, biometric authentication, real-time transactions, and comprehensive financial management tools.",
         categories: ["Mobile Development", "Fintech"],
         featured: false,
-        year: 2023,
         organization: "Merkle",
     },
     {
@@ -222,7 +211,6 @@ export const projects: Project[] = [
         longDescription: "Full-featured mobile banking application with end-to-end encryption, biometric authentication, real-time transactions, and comprehensive financial management tools.",
         categories: ["Mobile Development", "Fintech"],
         featured: false,
-        year: 2023,
         organization: "Merkle",
     },
     {
@@ -236,7 +224,6 @@ export const projects: Project[] = [
         longDescription: "Full-featured mobile banking application with end-to-end encryption, biometric authentication, real-time transactions, and comprehensive financial management tools.",
         categories: ["Mobile Development", "Fintech"],
         featured: false,
-        year: 2023,
         organization: "Merkle",
     },
     {
@@ -250,7 +237,6 @@ export const projects: Project[] = [
         longDescription: "Comprehensive analytics platform featuring machine learning algorithms for predictive analytics, real-time data processing, and interactive visualizations. Built for scalability and performance.",
         categories: ["Web Development", "AI/ML"],
         featured: true,
-        year: 2024,
         organization: "Merkle",
     },
 ];

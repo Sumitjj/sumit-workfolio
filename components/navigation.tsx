@@ -4,11 +4,11 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 import { Menu, X, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { navigationItems, personalInfo } from "@/data/portfolio";
-import { cn, openResume, getResumeButtonText } from "@/lib/utils";
+import { cn, openResume, getResumeButtonText } from "@/lib/helpers/utils";
 import {
   useScrollPosition,
   createNavigationHandler
-} from "@/lib/scroll";
+} from "@/lib/helpers/scroll";
 
 /**
  * Main navigation component with responsive design and smooth scrolling

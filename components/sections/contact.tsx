@@ -11,11 +11,17 @@ import {
   FileText,
   Send,
   Check,
-  AlertCircle
+  AlertCircle,
+  Clock,
+  Award,
+  Globe,
+  Zap,
+  Sparkles,
+  Coffee
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { contactConfig } from "@/data/portfolio";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/helpers/utils";
 
 // Form data interface
 interface FormData {
@@ -30,11 +36,91 @@ interface FormData {
 interface FormErrors {
   name?: string;
   email?: string;
+  subject?: string;
   message?: string;
 }
 
 // Form submission states
 type SubmissionState = 'idle' | 'sending' | 'success' | 'error';
+
+/**
+ * Highlight metrics component aligned with website theme
+ */
+function HighlightMetrics() {
+  const metrics = [
+    {
+      icon: Clock,
+      value: "< 24h",
+      label: "Quick Response",
+      description: "Fast turnaround time",
+      valueColor: "text-orange-600 dark:text-orange-400"
+    },
+    {
+      icon: Award,
+      value: "9+ Years",
+      label: "Experience",
+      description: "Proven track record",
+      valueColor: "text-emerald-600 dark:text-emerald-400"
+    },
+    {
+      icon: Globe,
+      value: "Global",
+      label: "Remote Ready",
+      description: "Worldwide collaboration",
+      valueColor: "text-blue-600 dark:text-blue-400"
+    }
+  ];
+
+  return (
+    <div className="relative">
+      {/* Theme-aligned background */}
+      <div className="bg-card/50 backdrop-blur-sm rounded-xl border border-border/20 shadow-sm">
+        <div className="p-6 sm:p-8">
+          {/* Header matching website style */}
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 mb-4">
+              <Sparkles className="w-6 h-6 text-primary" />
+            </div>
+            <h4 className="text-lg font-semibold text-foreground mb-2">
+              What you can expect after hitting send button
+            </h4>
+          </div>
+
+          {/* Metrics grid using website card styling */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {metrics.map((metric, index) => (
+              <Fade key={metric.label} direction="up" triggerOnce delay={index * 100}>
+                <div className="group">
+                  <div className="flex flex-col items-center p-4 h-full bg-card rounded-xl border border-border/20 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+                    {/* Icon with website styling */}
+                    <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-primary/10 mb-3 group-hover:scale-110 transition-transform duration-300">
+                      <metric.icon className="w-6 h-6 text-primary" />
+                    </div>
+
+                    {/* Value with catchy colors */}
+                    <div className={`text-2xl font-bold mb-1 ${metric.valueColor}`}>
+                      {metric.value}
+                    </div>
+
+                    {/* Label with website styling */}
+                    <div className="text-sm font-semibold text-foreground mb-1">
+                      {metric.label}
+                    </div>
+
+                    {/* Description */}
+                    <div className="text-xs text-muted-foreground text-center">
+                      {metric.description}
+                    </div>
+                  </div>
+                </div>
+              </Fade>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 /**
  * Beautiful contact form with validation and EmailJS integration
@@ -45,7 +131,7 @@ function ContactForm() {
     name: '',
     email: '',
     company: '',
-    subject: 'general',
+    subject: '',
     message: ''
   });
   const [errors, setErrors] = useState<FormErrors>({});
@@ -63,6 +149,10 @@ function ContactForm() {
       newErrors.email = 'Email is required';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email address';
+    }
+
+    if (!formData.subject) {
+      newErrors.subject = 'Subject is required';
     }
 
     if (!formData.message.trim()) {
@@ -110,7 +200,7 @@ function ContactForm() {
           name: '',
           email: '',
           company: '',
-          subject: 'general',
+          subject: '',
           message: ''
         });
         setSubmissionState('idle');
@@ -207,37 +297,50 @@ function ContactForm() {
           </div>
         </div>
 
-        {/* Company & Subject Row - Responsive */}
+        {/* Company & Subject Row - Responsive Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
           <div className="space-y-2">
             <label className="text-xs sm:text-sm font-medium text-foreground flex items-center">
               <Building className="w-3 h-3 sm:w-4 sm:h-4 mr-2 text-primary" />
-              Company (Optional)
+              Company
             </label>
             <input
               type="text"
               value={formData.company}
               onChange={(e) => handleInputChange('company', e.target.value)}
-              className="w-full px-3 py-3 sm:px-4 sm:py-3 lg:py-4 rounded-lg border border-border/30 hover:border-border/50 transition-all duration-300 bg-background/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary placeholder:text-muted-foreground/60 text-sm sm:text-base touch-manipulation"
-              placeholder="Your company name"
+              className="w-full px-3 py-3 sm:px-4 sm:py-3 lg:py-4 rounded-lg border border-border/30 hover:border-border/50 transition-all duration-300 bg-background/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary text-sm sm:text-base touch-manipulation"
+              placeholder="Your company (optional)"
             />
           </div>
 
           <div className="space-y-2">
             <label className="text-xs sm:text-sm font-medium text-foreground flex items-center">
               <FileText className="w-3 h-3 sm:w-4 sm:h-4 mr-2 text-primary" />
-              Subject
+              Subject *
             </label>
             <select
               value={formData.subject}
               onChange={(e) => handleInputChange('subject', e.target.value)}
-              className="w-full px-3 py-3 sm:px-4 sm:py-3 lg:py-4 rounded-lg border border-border/30 hover:border-border/50 transition-all duration-300 bg-background/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary text-sm sm:text-base touch-manipulation"
+              className={cn(
+                "w-full px-3 py-3 sm:px-4 sm:py-3 lg:py-4 rounded-lg border transition-all duration-300",
+                "bg-background/50 backdrop-blur-sm text-sm sm:text-base",
+                "focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary",
+                "touch-manipulation",
+                errors.subject ? "border-red-500" : "border-border/30 hover:border-border/50"
+              )}
             >
+              <option value="">Select a subject</option>
               <option value="general">General Inquiry</option>
               <option value="project">Project Discussion</option>
               <option value="collaboration">Collaboration</option>
               <option value="other">Other</option>
             </select>
+            {errors.subject && (
+              <p className="text-xs sm:text-sm text-red-500 flex items-center">
+                <AlertCircle className="w-3 h-3 mr-1" />
+                {errors.subject}
+              </p>
+            )}
           </div>
         </div>
 
@@ -307,46 +410,11 @@ function ContactForm() {
           </div>
         </Button>
 
-        {/* Response Promise - Mobile Optimized */}
+        {/* Enhanced Highlight Metrics */}
         <div className="pt-4 sm:pt-6">
-          {/* Response Promise */}
-          <div className="relative">
-            {/* Connection Line - Hidden on small screens */}
-            <div className="hidden sm:block absolute top-0 left-1/2 transform -translate-x-1/2 w-px h-4 bg-gradient-to-b from-border/30 to-transparent" />
-
-            {/* Promise Card - Responsive */}
-            <div className="bg-gradient-to-r from-primary/5 via-background/10 to-secondary/5 backdrop-blur-sm rounded-lg sm:rounded-xl border border-border/20 p-3 sm:p-4 lg:p-6">
-              <div className="text-center mb-3 sm:mb-4">
-                <div className="inline-flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-primary/10 mb-2">
-                  <Check className="w-3 h-3 sm:w-4 sm:h-4 text-primary" />
-                </div>
-                <p className="text-xs sm:text-sm font-medium text-foreground mb-1">Your message matters to me</p>
-                <p className="text-xs text-muted-foreground">Here&apos;s what you can expect after hitting send</p>
-              </div>
-
-              {/* Response Metrics - Mobile Stack */}
-              <div className="grid grid-cols-3 gap-2 sm:gap-4 text-center">
-                <div className="space-y-1">
-                  <div className="text-sm sm:text-lg font-bold text-primary">
-                    &lt; 24h
-                  </div>
-                  <div className="text-xs text-muted-foreground">Quick Response</div>
-                </div>
-                <div className="space-y-1">
-                  <div className="text-sm sm:text-lg font-bold text-green-600">
-                    9+ Years
-                  </div>
-                  <div className="text-xs text-muted-foreground">Experience</div>
-                </div>
-                <div className="space-y-1">
-                  <div className="text-sm sm:text-lg font-bold text-blue-600">
-                    Global
-                  </div>
-                  <div className="text-xs text-muted-foreground">Remote Ready</div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <Fade direction="up" triggerOnce delay={400}>
+            <HighlightMetrics />
+          </Fade>
         </div>
       </form>
     </div>
@@ -371,15 +439,18 @@ export function ContactSection() {
         {/* Responsive Section Header */}
         <Fade direction="up" triggerOnce>
           <div className="text-center mb-8 sm:mb-10 lg:mb-12">
-            <div className="flex items-center justify-center mb-6 sm:mb-8">
-              <div className="relative">
-                <Mail className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-primary" />
-                <div className="absolute inset-0 w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-primary/20 rounded-full blur-lg animate-pulse" />
+            {/* Coffee Icon with Professional Positioning */}
+            <div className="flex justify-center mb-6 sm:mb-8">
+              <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-2xl bg-card border border-border/50 shadow-sm">
+                <Coffee className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-foreground" />
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground ml-3 sm:ml-4">
-                Let's have a Coffee Together
-              </h2>
             </div>
+
+            {/* Title with better spacing */}
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground mb-4 sm:mb-6">
+              Let's have Coffee Together
+            </h2>
+
             <p className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-2xl lg:max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
               Ready to turn your vision into reality? Let&apos;s collaborate and create something extraordinary together.
             </p>
