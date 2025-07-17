@@ -1,4 +1,4 @@
-import { Navigation } from "@/components/navigation";
+import Navigation from "@/components/navigation";
 import { HeroSection } from "@/components/sections/hero";
 import { ProjectsSection } from "@/components/sections/projects";
 import { SkillsSection } from "@/components/sections/skills";
@@ -15,10 +15,10 @@ export default function HomePage() {
       <Navigation />
       <main>
         <HeroSection />
+        <SkillsSection />
         <ProjectsSection />
         <ExperienceSection />
         <CertificationsSection />
-        <SkillsSection />
         <ContactSection />
       </main>
     </>

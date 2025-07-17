@@ -79,7 +79,7 @@ function HighlightMetrics() {
           {/* Header matching website style */}
           <div className="text-center mb-8">
             <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 mb-4">
-              <Sparkles className="w-6 h-6 text-primary" />
+              <Sparkles className="w-6 h-6 text-primary animate-spin-slow" />
             </div>
             <h4 className="text-lg font-semibold text-foreground mb-2">
               What you can expect after hitting send button
@@ -235,9 +235,6 @@ function ContactForm() {
           <MessageSquare className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 text-primary" />
         </div>
         <h3 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-foreground mb-2 sm:mb-3">Drop Me a Line</h3>
-        <p className="text-muted-foreground text-sm sm:text-base lg:text-lg leading-relaxed max-w-sm sm:max-w-md mx-auto px-2 sm:px-0">
-          Ready to bring your ideas to life? Drop me a message and let&apos;s create something extraordinary!
-        </p>
       </div>
 
       {/* Responsive Contact Form */}
@@ -329,9 +326,8 @@ function ContactForm() {
                 errors.subject ? "border-red-500" : "border-border/30 hover:border-border/50"
               )}
             >
-              <option value="">Select a subject</option>
-              <option value="general">General Inquiry</option>
               <option value="project">Project Discussion</option>
+              <option value="general">General Inquiry</option>
               <option value="collaboration">Collaboration</option>
               <option value="other">Other</option>
             </select>
@@ -382,7 +378,7 @@ function ContactForm() {
             submissionState === 'error' && "bg-red-600 hover:bg-red-600"
           )}
         >
-          <div className="flex items-center justify-center space-x-2">
+          <div className="flex items-center justify-center space-x-4">
             {submissionState === 'idle' && (
               <>
                 <Send className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300" />
@@ -448,11 +444,11 @@ export function ContactSection() {
 
             {/* Title with better spacing */}
             <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground mb-4 sm:mb-6">
-              Let's have Coffee Together
+              Let’s Build Together
             </h2>
 
             <p className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-2xl lg:max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
-              Ready to turn your vision into reality? Let&apos;s collaborate and create something extraordinary together.
+              Got an idea or project in mind? I’m always up for meaningful collaborations. Let’s create something impactful and future-ready.
             </p>
           </div>
         </Fade>
