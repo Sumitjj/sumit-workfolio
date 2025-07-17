@@ -13,7 +13,7 @@ import {
 /**
  * Main navigation component with responsive design and smooth scrolling
  */
-export function Navigation() {
+const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const originalOverflow = useRef<string>('');
 
@@ -52,66 +52,6 @@ export function Navigation() {
     ),
     [sections]
   );
-
-  // Enhanced mobile menu management with proper scroll handling
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setIsOpen(false);
-      }
-    };
-
-    const handleResize = () => {
-      // Close mobile menu when resizing to desktop
-      if (window.innerWidth >= 768) {
-        setIsOpen(false);
-      }
-    };
-
-    if (isOpen) {
-      // Store original overflow value
-      originalOverflow.current = document.body.style.overflow || 'auto';
-
-      // Only block scroll on small screens
-      if (window.innerWidth < 768) {
-        document.body.style.overflow = "hidden";
-        document.body.style.position = "fixed";
-        document.body.style.width = "100%";
-        document.body.style.height = "100%";
-      }
-
-      document.addEventListener("keydown", handleEscape);
-      window.addEventListener("resize", handleResize);
-    } else {
-      // Always restore scroll when menu closes
-      document.body.style.overflow = originalOverflow.current || 'auto';
-      document.body.style.position = 'unset';
-      document.body.style.width = 'unset';
-      document.body.style.height = 'unset';
-    }
-
-    return () => {
-      document.removeEventListener("keydown", handleEscape);
-      window.removeEventListener("resize", handleResize);
-      // Ensure scroll is always restored on cleanup
-      document.body.style.overflow = originalOverflow.current || 'auto';
-      document.body.style.position = 'unset';
-      document.body.style.width = 'unset';
-      document.body.style.height = 'unset';
-    };
-  }, [isOpen]);
-
-  // Cleanup on unmount to prevent scroll lock
-  useEffect(() => {
-    return () => {
-      document.body.style.overflow = 'auto';
-      document.body.style.position = 'unset';
-      document.body.style.width = 'unset';
-      document.body.style.height = 'unset';
-    };
-  }, []);
-
-
 
   return (
     <>
@@ -309,3 +249,5 @@ export function Navigation() {
     </>
   );
 }
+
+export default Navigation;

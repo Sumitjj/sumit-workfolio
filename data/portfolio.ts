@@ -21,11 +21,11 @@ import { getOptimizedProjectImage, getOptimizedAvatarImage } from "@/lib/helpers
  * Navigation items for the portfolio
  */
 export const navigationItems: NavItem[] = [
-    { href: "#projects", label: "Projects" },
-    { href: "#experience", label: "Experience" },
-    { href: "#certifications", label: "Certifications" },
-    { href: "#skills", label: "Skills" },
-    { href: "#contact", label: "Contact" },
+    { href: "#skills", label: "Toolkit" },
+    { href: "#projects", label: "Creations" },
+    { href: "#experience", label: "Journey" },
+    { href: "#certifications", label: "Badges" },
+    { href: "#contact", label: "Connect" },
 ];
 
 /**
@@ -319,7 +319,7 @@ export const experiences: Experience[] = [
         id: "2",
         position: "Associate Technology L2",
         company: "Publicis Sapient",
-        startDate: new Date(2019, 0, 1),
+        startDate: new Date(2019, 5, 1),
         endDate: new Date(2021, 2, 31),
         current: false,
         description:
@@ -338,8 +338,8 @@ export const experiences: Experience[] = [
         id: "3",
         position: "Salesforce Commerce Cloud Developer",
         company: "PFSWeb",
-        startDate: new Date(2016, 0, 1),
-        endDate: new Date(2019, 11, 31),
+        startDate: new Date(2016, 1, 1),
+        endDate: new Date(2019, 4, 31),
         current: false,
         description:
             "Delivered multiple SFCC implementations and managed services projects, ensuring robust and scalable solutions.",
@@ -409,11 +409,10 @@ export const contactConfig = {
     emailJsPublicKey: "your_public_key", // Replace with your EmailJS public key
     recipientEmail: personalInfo.email,
     subjects: {
-        general: "Portfolio Contact Form - General Inquiry",
-        project: "Portfolio Contact Form - Project Inquiry",
-        collaboration: "Portfolio Contact Form - Collaboration Opportunity",
-        other: "Portfolio Contact Form - Other",
-        default: "Portfolio Inquiry - Let's Connect"
+        project: "Project Inquiry",
+        general: "General Inquiry",
+        collaboration: "Collaboration Opportunity",
+        default: "Casual Talk",
     },
     defaultBody: "Hi Sumit,\n\nI came across your portfolio and would like to discuss a potential opportunity.\n\nBest regards"
 };
@@ -423,23 +422,23 @@ export const contactConfig = {
  */
 export const socialLinks: SocialLink[] = [
     {
-        platform: "GitHub",
-        url: "https://github.com/Sumitjj",
-        icon: FaGithub,
-    },
-    {
         platform: "LinkedIn",
         url: "https://www.linkedin.com/in/sumit-jangid/",
         icon: FaLinkedin,
     },
     {
-        platform: "Email",
-        url: "mailto:s.jangir129@gmail.com?subject=Portfolio%20Inquiry%20-%20Let's%20Connect&body=Hi%20Sumit,%0D%0A%0D%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20potential%20opportunity.%0D%0A%0D%0ABest%20regards",
-        icon: HiOutlineMail,
+        platform: "GitHub",
+        url: "https://github.com/Sumitjj",
+        icon: FaGithub,
     },
     {
         platform: "Salesforce Profile",
         url: "https://www.salesforce.com/trailblazer/sjangir3",
         icon: HiOutlineCloud,
     },
+    {
+        platform: "Email",
+        url: "mailto:s.jangir129@gmail.com?subject=Portfolio%20Inquiry%20-%20Let's%20Connect&body=Hi%20Sumit,%0D%0A%0D%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20potential%20opportunity.%0D%0A%0D%0ABest%20regards",
+        icon: HiOutlineMail,
+    }
 ];
