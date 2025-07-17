@@ -158,7 +158,7 @@ export function HeroSection() {
                 className="hover-lift w-full sm:w-auto text-sm sm:text-base"
                 onClick={() => smoothScrollToElement("contact")}
               >
-                Get In Touch
+                Let’s Talk
               </Button>
             </div>
 
