@@ -14,12 +14,18 @@ function SkillIcon({ skill }: { skill: Skill }) {
     <motion.div
       whileHover={{ scale: 1.12, boxShadow: "0 4px 24px 0 rgba(99,102,241,0.15)" }}
       whileTap={{ scale: 0.98 }}
-      className="flex flex-col items-center min-w-[80px] max-w-[110px] mx-auto"
+      className="flex flex-col items-center min-w-[80px] max-w-[110px] mx-auto relative group"
     >
       <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-primary/80 to-secondary/80 flex items-center justify-center shadow-md mb-0.5 transition-all">
         {Icon && <Icon className="w-8 h-8 sm:w-10 sm:h-10 text-white" />}
       </div>
-      <span className="text-xs sm:text-sm text-center text-muted-foreground font-medium truncate w-full mt-0">{skill.name}</span>
+      {/* Tooltip */}
+      <div
+        className="absolute left-1/2 -translate-x-1/2 top-12 mt-4 z-50 px-3 py-1 rounded bg-background text-foreground text-xs font-semibold shadow-lg opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap"
+        style={{ minWidth: "max-content" }}
+      >
+        {skill.name}
+      </div>
     </motion.div>
   );
 }
@@ -49,7 +55,7 @@ function SkillCategoryCard({ group, align, singleRow }: { group: SkillGroup, ali
           ))}
         </div>
       ) : (
-        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-x-10 gap-y-4 w-full">
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-5 gap-x-10 gap-y-4 w-full">
           {group.skills.map((skill) => (
             <SkillIcon key={skill.name} skill={skill} />
           ))}

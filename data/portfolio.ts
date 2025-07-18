@@ -6,7 +6,7 @@ import {
     SiJquery, SiNestjs, SiMainwp, SiCodesignal, SiBackendless, SiGoogledataproc
 } from "react-icons/si";
 import { GiDeerHead } from "react-icons/gi";
-
+import { PiLightningFill, PiFileHtmlDuotone } from "react-icons/pi";
 import { DiScrum } from "react-icons/di";
 import { MdManageAccounts } from "react-icons/md";
 import { HiOutlineCloud, HiOutlineMail } from "react-icons/hi";
@@ -39,13 +39,12 @@ export const skillGroups: SkillGroup[] = [
             { name: "SFRA", icon: FaSalesforce },
             { name: "SGJC", icon: FaSalesforce },
             { name: "OCAPI/SCAPI", icon: TbPackages },
-            { name: "Javascript", icon: IoLogoJavascript },
-            { name: "Typescript", icon: BiLogoTypescript },
             { name: "B2C Commerce-SDK", icon: TbSdk },
             { name: "RESTful APIs", icon: TbApi },
             { name: "Node.js", icon: FaNode },
-            { name: "NEST JS", icon: SiNestjs },
+            { name: "Nest JS", icon: SiNestjs },
             { name: "Core Java", icon: FaJava },
+            { name: "PWA Kit", icon: SiPwa },
             { name: "MongoDB", icon: SiMongodb },
         ]
     },
@@ -53,16 +52,16 @@ export const skillGroups: SkillGroup[] = [
         title: "Frontend & Headless",
         icon: GiDeerHead,
         skills: [
-            { name: "React Js", icon: FaReact },
-            { name: "Next Js", icon: TbBrandNextjs },
+            { name: "ISML", icon: PiFileHtmlDuotone },
             { name: "JavaScript", icon: IoLogoJavascript },
             { name: "Typescript", icon: BiLogoTypescript },
+            { name: "React Js", icon: FaReact },
+            { name: "Next Js", icon: TbBrandNextjs },
             { name: "HTML5", icon: FaHtml5 },
             { name: "CSS3", icon: FaCss3Alt },
             { name: "Tailwind CSS", icon: SiTailwindcss },
             { name: "JQuery", icon: SiJquery },
-            { name: "PWA Kit", icon: SiPwa },
-
+            { name: "LWC", icon: PiLightningFill }
         ]
     },
     {
