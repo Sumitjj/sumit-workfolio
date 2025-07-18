@@ -169,9 +169,17 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
             {/* Description */}
             <div className={descriptionClass}>
-              <p className={descriptionTextClass}>
-                {project.description}
-              </p>
+              {Array.isArray(project.description) ? (
+                <ul className="list-disc list-inside space-y-1 text-muted-foreground text-xs sm:text-sm pl-2">
+                  {project.description.map((point, idx) => (
+                    <li key={idx}>{point}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p className={descriptionTextClass}>
+                  {project.description}
+                </p>
+              )}
             </div>
 
             {/* Footer Section - Technologies */}

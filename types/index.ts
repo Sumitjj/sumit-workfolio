@@ -18,8 +18,8 @@ export interface NavItem {
 export interface Project {
     id: string;
     title: string;
-    description: string;
-    longDescription?: string;
+    description: string | string[];
+    longDescription?: string | string[];
     image: string;
     technologies: string[];
     categories: string[];
