@@ -1,7 +1,5 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import resumeInfo from './resume-info.json';
-
 /**
  * Utility function to merge Tailwind CSS classes with proper conflict resolution
  */
@@ -57,7 +55,7 @@ export function handleEmailClick(email: string, subject?: string, body?: string)
  * Open resume in new window
  */
 export function openResume(): void {
-    window.open(`/resume/${resumeInfo.filename}`, '_blank', 'noopener,noreferrer');
+    window.open(`/resume/SumitJangid_SFCC_Resume.docx`, '_blank', 'noopener,noreferrer');
 }
 
 /**

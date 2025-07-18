@@ -65,7 +65,7 @@ export const projects: Project[] = [
         description:
             "Completed multiple brands work on full beauty project with specially work experience on checkout redesign in headless commerce using NextJs, NestJs, OCAPI, SCAPI and many more",
         image: getOptimizedProjectImage("Full Beauty FBB"),
-        technologies: ["NextJs", "NestJs", "B2C Commerce-SDK", "REST APIs", "SCAPI", "OCAPI", "SFRA", "SGJC"],
+        technologies: ["NextJs", "NestJs", "REST APIs", "SCAPI", "OCAPI", "SFRA", "B2C Commerce-SDK", "SGJC"],
         liveUrl: "https://www.fullbeauty.com/",
         featured: true,
         organization: "Merkle",
@@ -76,7 +76,7 @@ export const projects: Project[] = [
         description:
             "Comprehensive water filtration e-commerce platform featuring advanced product configurators, subscription management, and integrated customer support systems.",
         image: getOptimizedProjectImage("Aquasana"),
-        technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
+        technologies: ["SFRA", "OCAPI", "REST APIs", "3rd Party Integrations"],
         liveUrl: "https://www.aquasana.com/",
         longDescription: "Comprehensive analytics platform featuring machine learning algorithms for predictive analytics, real-time data processing, and interactive visualizations. Built for scalability and performance.",
         categories: ["E-Commerce"],
@@ -102,7 +102,7 @@ export const projects: Project[] = [
         description:
             "Fashion retail platform with size-inclusive shopping experience, advanced fitting guides, and personalized style recommendations for plus-size customers.",
         image: getOptimizedProjectImage("LaneBryant"),
-        technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
+        technologies: ["SFRA", "OCAPI", "REST APIs", "3rd-Party Integrations"],
         liveUrl: "https://www.lanebryant.com/",
         longDescription: "Modern social media platform featuring real-time messaging, video sharing, live streaming capabilities, and advanced content moderation. Built for high scalability and performance.",
         categories: ["Web Development", "Real-time"],
@@ -115,7 +115,7 @@ export const projects: Project[] = [
         description:
             "Multi-category retail platform with pharmacy services, electronics, home goods, and health products with integrated loyalty programs.",
         image: getOptimizedProjectImage("LondonDrugs"),
-        technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
+        technologies: ["SFRA", "OCAPI", "REST APIs", "3rd-Party Integrations"],
         liveUrl: "https://www.campingworld.com/",
         longDescription: "Comprehensive learning platform with video streaming, interactive quizzes, progress analytics, and certification system. Supports multiple content formats and gamification.",
         categories: ["Web Development", "Education"],
@@ -128,7 +128,7 @@ export const projects: Project[] = [
         description:
             "Premium beauty and cosmetics platform with virtual try-on features, skin analysis tools, and personalized product recommendations.",
         image: getOptimizedProjectImage("Loreal"),
-        technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
+        technologies: ["SFRA", "OCAPI", "REST APIs", "3rd-Party Integrations"],
         liveUrl: "http://lancome-usa.com/",
         longDescription: "Enterprise-grade task management platform with team collaboration, Gantt charts, time tracking, and comprehensive reporting. Integrates with popular development tools.",
         categories: ["Web Development", "Productivity"],

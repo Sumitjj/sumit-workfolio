@@ -9,10 +9,53 @@ import { smoothScrollToElement } from "@/lib/helpers/scroll";
 import { SocialFloatingDock } from "@/lib/aceternity/social-floating-dock";
 import { handleEmailClick } from "@/lib/helpers/utils";
 
+// Convert HorizontalSocialIconsMobile to arrow function
+const HorizontalSocialIconsMobile = () => {
+  return (
+    <div className="flex flex-row gap-x-8 sm:gap-x-10 justify-center items-center md:hidden">
+      {socialLinks.map((social) => {
+        const Icon = social.icon;
+        if (social.platform === "Email") {
+          return (
+            <a
+              key={social.platform}
+              href="#"
+              aria-label={social.platform}
+              onClick={e => {
+                e.preventDefault();
+                handleEmailClick(
+                  contactConfig.recipientEmail,
+                  contactConfig.subjects.default,
+                  contactConfig.defaultBody
+                );
+              }}
+              className="text-neutral-500 dark:text-neutral-300 text-2xl hover:text-primary transition-colors duration-300"
+            >
+              <Icon />
+            </a>
+          );
+        }
+        return (
+          <a
+            key={social.platform}
+            href={social.url}
+            aria-label={social.platform}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-neutral-500 dark:text-neutral-300 text-2xl hover:text-primary transition-colors duration-300"
+          >
+            <Icon />
+          </a>
+        );
+      })}
+    </div>
+  );
+};
+
 /**
  * Hero section with CSS animations and modern responsive design
  */
-export function HeroSection() {
+export const HeroSection = () => {
   // Predefined values to avoid hydration mismatches
   const floatingElements = [
     { width: 120, height: 120, left: 15, top: 20, delay: 0.5, duration: 4 },
@@ -22,48 +65,6 @@ export function HeroSection() {
     { width: 60, height: 60, left: 45, top: 10, delay: 1.8, duration: 5.5 },
     { width: 90, height: 90, left: 55, top: 85, delay: 2.5, duration: 3.5 },
   ];
-
-  function HorizontalSocialIconsMobile() {
-    return (
-      <div className="flex flex-row gap-x-8 sm:gap-x-10 justify-center items-center md:hidden">
-        {socialLinks.map((social) => {
-          const Icon = social.icon;
-          if (social.platform === "Email") {
-            return (
-              <a
-                key={social.platform}
-                href="#"
-                aria-label={social.platform}
-                onClick={e => {
-                  e.preventDefault();
-                  handleEmailClick(
-                    contactConfig.recipientEmail,
-                    contactConfig.subjects.default,
-                    contactConfig.defaultBody
-                  );
-                }}
-                className="text-neutral-500 dark:text-neutral-300 text-2xl hover:text-primary transition-colors duration-300"
-              >
-                <Icon />
-              </a>
-            );
-          }
-          return (
-            <a
-              key={social.platform}
-              href={social.url}
-              aria-label={social.platform}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-neutral-500 dark:text-neutral-300 text-2xl hover:text-primary transition-colors duration-300"
-            >
-              <Icon />
-            </a>
-          );
-        })}
-      </div>
-    );
-  }
 
   return (
     <section className="relative hero-section overflow-hidden px-4 sm:px-6 lg:px-8">
@@ -178,7 +179,7 @@ export function HeroSection() {
       </div>
 
       {/* Scroll Indicator - Positioned at bottom */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 hero-fade-in" style={{ animationDelay: "0.9s" }}>
+      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-10 hero-fade-in" style={{ animationDelay: "0.9s" }}>
         <button
           onClick={() => smoothScrollToElement("projects")}
           className="p-2 text-muted-foreground hover:text-foreground transition-colors animate-bounce"
@@ -189,4 +190,4 @@ export function HeroSection() {
       </div>
     </section>
   );
-} 
+};

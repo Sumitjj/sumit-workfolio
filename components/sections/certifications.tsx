@@ -141,6 +141,71 @@ function CertificationCard({ certification, index }: CertificationCardProps) {
 }
 
 /**
+ * Reusable stat card for certifications
+ */
+interface CertificationStatCardProps {
+    icon: React.ElementType;
+    iconBg: string;
+    iconColor: string;
+    value: string;
+    valueGradient: string;
+    label: string;
+    starColor: string;
+    sparklesColor: string;
+    bgGradient: string;
+    border: string;
+    hoverBorder: string;
+    hoverShadow: string;
+}
+const CertificationStatCard: React.FC<CertificationStatCardProps> = ({
+    icon: Icon,
+    iconBg,
+    iconColor,
+    value,
+    valueGradient,
+    label,
+    starColor,
+    sparklesColor,
+    bgGradient,
+    border,
+    hoverBorder,
+    hoverShadow,
+}) => (
+    <div className="group cursor-pointer">
+        <div
+            className={`relative ${bgGradient} backdrop-blur-sm border ${border} rounded-3xl p-8 transition-all duration-300 ease-out hover:shadow-xl ${hoverShadow} hover:scale-102 ${hoverBorder}`}
+            style={{ transformOrigin: 'center center', contain: 'layout style' }}
+        >
+            {/* Animated background gradient */}
+            <div className={`absolute inset-0 bg-gradient-to-r ${bgGradient.replace('bg-gradient-to-br', '').replace('bg-gradient-to-r', '')} rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+            <div className="relative text-center">
+                {/* Icon with glow effect */}
+                <div className={`mx-auto mb-4 w-16 h-16 ${iconBg} rounded-2xl flex items-center justify-center shadow-lg transition-all duration-300 ease-out`}>
+                    <Icon className={`w-8 h-8 ${iconColor}`} />
+                </div>
+                {/* Number with animated gradient */}
+                <div className="text-4xl sm:text-5xl font-black mb-2 min-h-[3rem] flex items-center justify-center">
+                    <span className={`${valueGradient} bg-clip-text text-transparent bg-300% animate-gradient`}>
+                        {value}
+                    </span>
+                </div>
+                {/* Label */}
+                <div className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+                    {label}
+                </div>
+            </div>
+            {/* Decorative elements */}
+            <div className={`absolute top-3 right-3 opacity-30 group-hover:opacity-60 transition-opacity`}>
+                <Star className={`w-5 h-5 ${starColor}`} />
+            </div>
+            <div className={`absolute bottom-3 left-3 opacity-20 group-hover:opacity-40 transition-opacity`}>
+                <Sparkles className={`w-4 h-4 ${sparklesColor}`} />
+            </div>
+        </div>
+    </div>
+);
+
+/**
  * Professional Certifications Section
  */
 export function CertificationsSection() {
@@ -165,81 +230,38 @@ export function CertificationsSection() {
 
                         {/* Catchy Achievement Stats */}
                         <div className="flex flex-wrap justify-center items-center gap-8 sm:gap-12">
-                            {/* Total Certifications */}
-                            <div className="group cursor-pointer">
-                                <div
-                                    className="relative bg-gradient-to-br from-blue-500/10 via-blue-600/5 to-purple-600/10 backdrop-blur-sm border border-blue-500/20 rounded-3xl p-8 transition-all duration-300 ease-out hover:shadow-xl hover:shadow-blue-500/15 hover:scale-102 hover:border-blue-500/30"
-                                    style={{ transformOrigin: 'center center', contain: 'layout style' }}
-                                >
-                                    {/* Animated background gradient */}
-                                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500/3 via-purple-500/3 to-blue-500/3 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                                    <div className="relative text-center">
-                                        {/* Icon with glow effect */}
-                                        <div className="mx-auto mb-4 w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-blue-500/40 transition-all duration-300 ease-out">
-                                            <Award className="w-8 h-8 text-white" />
-                                        </div>
-
-                                        {/* Number with animated gradient */}
-                                        <div className="text-4xl sm:text-5xl font-black mb-2 min-h-[3rem] flex items-center justify-center">
-                                            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-clip-text text-transparent bg-300% animate-gradient">
-                                                {certifications.length}X
-                                            </span>
-                                        </div>
-
-                                        {/* Label */}
-                                        <div className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-                                            Certified Expert
-                                        </div>
-                                    </div>
-
-                                    {/* Decorative elements */}
-                                    <div className="absolute top-3 right-3 opacity-30 group-hover:opacity-60 transition-opacity">
-                                        <Star className="w-5 h-5 text-blue-500" />
-                                    </div>
-                                    <div className="absolute bottom-3 left-3 opacity-20 group-hover:opacity-40 transition-opacity">
-                                        <Sparkles className="w-4 h-4 text-purple-500" />
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Commerce Specialization */}
-                            <div className="group cursor-pointer">
-                                <div
-                                    className="relative bg-gradient-to-br from-emerald-500/10 via-green-600/5 to-teal-600/10 backdrop-blur-sm border border-emerald-500/20 rounded-3xl p-8 transition-all duration-300 ease-out hover:shadow-xl hover:shadow-emerald-500/15 hover:scale-102 hover:border-emerald-500/30"
-                                    style={{ transformOrigin: 'center center', contain: 'layout style' }}
-                                >
-                                    {/* Animated background gradient */}
-                                    <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/3 via-teal-500/3 to-emerald-500/3 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                                    <div className="relative text-center">
-                                        {/* Icon with glow effect */}
-                                        <div className="mx-auto mb-4 w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-emerald-500/40 transition-all duration-300 ease-out">
-                                            <Building2 className="w-8 h-8 text-white" />
-                                        </div>
-
-                                        {/* Text with animated gradient */}
-                                        <div className="text-2xl sm:text-3xl font-black mb-2 min-h-[3rem] flex items-center justify-center">
-                                            <span className="bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600 bg-clip-text text-transparent bg-300% animate-gradient">
-                                                B2C
-                                            </span>
-                                        </div>
-
-                                        {/* Label */}
-                                        <div className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-                                            Commerce Expert
-                                        </div>
-                                    </div>
-
-                                    {/* Decorative elements */}
-                                    <div className="absolute top-3 right-3 opacity-30 group-hover:opacity-60 transition-opacity">
-                                        <Star className="w-5 h-5 text-emerald-500" />
-                                    </div>
-                                    <div className="absolute bottom-3 left-3 opacity-20 group-hover:opacity-40 transition-opacity">
-                                        <Sparkles className="w-4 h-4 text-teal-500" />
-                                    </div>
-                                </div>
-                            </div>
+                            {[
+                                {
+                                    icon: Award,
+                                    iconBg: "bg-gradient-to-br from-blue-500 to-purple-600",
+                                    iconColor: "text-white",
+                                    value: `${certifications.length}X`,
+                                    valueGradient: "bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600",
+                                    label: "Certified Expert",
+                                    starColor: "text-blue-500",
+                                    sparklesColor: "text-purple-500",
+                                    bgGradient: "bg-gradient-to-br from-blue-500/10 via-blue-600/5 to-purple-600/10",
+                                    border: "border-blue-500/20",
+                                    hoverBorder: "hover:border-blue-500/30",
+                                    hoverShadow: "hover:shadow-blue-500/15",
+                                },
+                                {
+                                    icon: Building2,
+                                    iconBg: "bg-gradient-to-br from-emerald-500 to-teal-600",
+                                    iconColor: "text-white",
+                                    value: "B2C",
+                                    valueGradient: "bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600",
+                                    label: "Commerce Expert",
+                                    starColor: "text-emerald-500",
+                                    sparklesColor: "text-teal-500",
+                                    bgGradient: "bg-gradient-to-br from-emerald-500/10 via-green-600/5 to-teal-600/10",
+                                    border: "border-emerald-500/20",
+                                    hoverBorder: "hover:border-emerald-500/30",
+                                    hoverShadow: "hover:shadow-emerald-500/15",
+                                }
+                            ].map((stat) => (
+                                <CertificationStatCard key={stat.label} {...stat} />
+                            ))}
                         </div>
                     </div>
                 </Fade>
@@ -257,4 +279,4 @@ export function CertificationsSection() {
             </div>
         </section>
     );
-} 
+}

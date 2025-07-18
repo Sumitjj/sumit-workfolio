@@ -102,9 +102,6 @@ export const PROJECT_IMAGES = {
  */
 export const AVATAR_IMAGES = {
     'Sumit Jangid': '/images/avatars/sumit-jangid.jpg',
-    'Sarah Chen': '/images/avatars/sarah-chen.jpg',
-    'Michael Rodriguez': '/images/avatars/michael-rodriguez.jpg',
-    'Emily Davis': '/images/avatars/emily-davis.jpg'
 } as const;
 
 /**

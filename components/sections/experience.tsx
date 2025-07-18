@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+const SALESFORCE_BLUE = "#0070d2";
 import { Fade } from "react-awesome-reveal";
 import {
     Calendar,
@@ -14,10 +15,6 @@ import {
     Sparkles
 } from "lucide-react";
 import { experiences } from "@/data/portfolio";
-
-
-// Salesforce theme color
-const SALESFORCE_BLUE = "#0070d2";
 
 /**
  * Format date to readable string
@@ -183,7 +180,7 @@ function ExperienceStats() {
     const stats = [
         {
             icon: TrendingUp,
-            label: "Years Experience",
+            label: "Years in Delivery",
             value: "9+",
             color: "#3b82f6",
             gradient: "from-blue-500/10 via-blue-600/5 to-purple-600/10",
@@ -195,7 +192,7 @@ function ExperienceStats() {
         },
         {
             icon: Building2,
-            label: "Organizations",
+            label: "Tech Workplaces",
             value: "3",
             color: "#10b981",
             gradient: "from-emerald-500/10 via-green-600/5 to-teal-600/10",
@@ -219,7 +216,7 @@ function ExperienceStats() {
         },
         {
             icon: Zap,
-            label: "Major Projects",
+            label: "Solutions Delivered",
             value: "15+",
             color: "#f59e0b",
             gradient: "from-amber-500/10 via-orange-600/5 to-yellow-600/10",
