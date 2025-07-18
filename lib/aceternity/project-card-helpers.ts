@@ -157,8 +157,9 @@ export function getDisplayTitle(title: string): string {
     return words.length > 1 ? words[0] : title;
 }
 
-export function getTopTechnologies(technologies: string[], limit: number = 3): string[] {
-    return technologies.slice(0, limit);
+export function getTopTechnologies(technologies: string[], featured: boolean = false, limit?: number): string[] {
+    const max = limit !== undefined ? limit : (featured ? 5 : 3);
+    return technologies.slice(0, max);
 }
 
 // Class name utilities

@@ -169,15 +169,23 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
             {/* Description */}
             <div className={descriptionClass}>
-              <p className={descriptionTextClass}>
-                {project.description}
-              </p>
+              {Array.isArray(project.description) ? (
+                <ul className="list-disc list-inside space-y-1 text-muted-foreground text-xs sm:text-sm pl-2">
+                  {project.description.map((point, idx) => (
+                    <li key={idx}>{point}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p className={descriptionTextClass}>
+                  {project.description}
+                </p>
+              )}
             </div>
 
             {/* Footer Section - Technologies */}
             <div className={footerClass}>
-              <div className="flex gap-1.5 flex-wrap">
-                {getTopTechnologies(project.technologies).map((tech) => (
+              <div className={isFeatured ? "flex flex-nowrap items-center min-h-[1.5rem] justify-evenly w-full" : "flex gap-2.5 flex-wrap"}>
+                {getTopTechnologies(project.technologies, project.featured).map((tech) => (
                   <span
                     key={tech}
                     className={getTagClass(isFeatured)}
@@ -186,14 +194,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                     {tech}
                   </span>
                 ))}
-                {project.technologies.length > 3 && (
-                  <span
-                    className={getAccentTagClass(isFeatured)}
-                    style={accentTagStyles}
-                  >
-                    +{project.technologies.length - 3}
-                  </span>
-                )}
               </div>
             </div>
           </CardContent>
@@ -215,4 +215,4 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 };
 
 // Export for external use
-export default ProjectCard; 
+export default ProjectCard;

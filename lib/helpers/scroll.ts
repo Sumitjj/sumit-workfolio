@@ -109,28 +109,35 @@ export function useActiveSection(sections: string[], offset: number = 120) {
 export function smoothScrollToElement(
     elementId: string,
     headerOffset: number = 80,
-    duration: number = 300
+    duration?: number // Now optional, will be calculated if not provided
 ) {
     const element = document.getElementById(elementId);
     if (!element) return;
 
     const targetPosition = element.getBoundingClientRect().top + window.pageYOffset - headerOffset;
     const startPosition = window.pageYOffset;
-    const distance = targetPosition - startPosition;
+    const distance = Math.abs(targetPosition - startPosition);
+
+    // Dynamically calculate duration if not provided
+    const base = 400; // ms
+    const factor = 0.5; // ms per pixel
+    const maxDuration = 2000; // ms
+    const dynamicDuration = Math.min(base + distance * factor, maxDuration);
+
+    const scrollDuration = duration ?? dynamicDuration;
+
     let startTime: number | null = null;
 
-    // Fast and smooth easing function for responsive scrolling
-    const easeOutExpo = (t: number): number => {
-        return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
-    };
+    const easeInOutCubic = (t: number): number =>
+        t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
     function animation(currentTime: number) {
         if (startTime === null) startTime = currentTime;
         const timeElapsed = currentTime - startTime;
-        const progress = Math.min(timeElapsed / duration, 1);
+        const progress = Math.min(timeElapsed / scrollDuration, 1);
 
-        const easeProgress = easeOutExpo(progress);
-        const currentPosition = startPosition + distance * easeProgress;
+        const easeProgress = easeInOutCubic(progress);
+        const currentPosition = startPosition + (targetPosition - startPosition) * easeProgress;
 
         window.scrollTo(0, currentPosition);
 
@@ -139,7 +146,6 @@ export function smoothScrollToElement(
         }
     }
 
-    // Start animation immediately
     requestAnimationFrame(animation);
 }
 

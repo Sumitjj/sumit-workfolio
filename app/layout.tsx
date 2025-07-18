@@ -27,9 +27,6 @@ const structuredData = {
   name: personalInfo.name,
   url: personalInfo.websiteUrl || "https://sumitworkfolio.in",
   image: personalInfo.avatar,
-  sameAs: [
-    // Remove references to non-existent properties
-  ],
   jobTitle: personalInfo.title,
   worksFor: {
     "@type": "Organization",
@@ -153,7 +150,6 @@ export default function RootLayout({
         {/* Preload critical resources */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link rel="preconnect" href="https://images.unsplash.com" />
 
         {/* Favicon and app icons */}
         <link rel="icon" href="/favicon.ico" sizes="32x32" />

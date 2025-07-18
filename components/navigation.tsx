@@ -15,8 +15,6 @@ import {
  */
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const originalOverflow = useRef<string>('');
-
   // Use optimized scroll hooks for better performance
   const { isScrolled } = useScrollPosition(20);
 

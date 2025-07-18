@@ -1,12 +1,22 @@
 import {
-    FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaGitAlt, FaJava, FaJenkins, FaGithub, FaLinkedin
+    FaReact, FaHtml5, FaCss3Alt, FaGitAlt, FaJava, FaJenkins, FaGithub, FaLinkedin, FaNode
 } from "react-icons/fa";
 import {
-    SiJavascript, SiMongodb, SiTailwindcss, SiExpress, SiJest, SiJira,
-    SiJquery
+    SiPwa, SiMongodb, SiTailwindcss, SiJira,
+    SiJquery, SiNestjs, SiMainwp, SiCodesignal, SiBackendless, SiGoogledataproc
 } from "react-icons/si";
+import { GiDeerHead } from "react-icons/gi";
+
+import { DiScrum } from "react-icons/di";
+import { MdManageAccounts } from "react-icons/md";
+import { HiOutlineCloud, HiOutlineMail } from "react-icons/hi";
+import { TbPackages } from "react-icons/tb";
+import { BiLogoTypescript } from "react-icons/bi";
+import { FaSalesforce } from "react-icons/fa6";
+import { IoLogoJavascript } from "react-icons/io";
+import { TbSdk } from "react-icons/tb";
+import { TbApi } from "react-icons/tb";
 import { TbBrandNextjs } from "react-icons/tb";
-import { HiOutlineCloud, HiOutlineMail, HiOutlineDesktopComputer, HiOutlineServer, HiOutlineUsers } from "react-icons/hi";
 import {
     Project,
     SkillGroup,
@@ -16,6 +26,59 @@ import {
     Certification,
 } from "@/types";
 import { getOptimizedProjectImage, getOptimizedAvatarImage } from "@/lib/helpers/images";
+
+
+/**
+ * Skills and technologies, grouped by category
+ */
+export const skillGroups: SkillGroup[] = [
+    {
+        title: "Backend & E-Commerce",
+        icon: SiBackendless,
+        skills: [
+            { name: "SFRA", icon: FaSalesforce },
+            { name: "SGJC", icon: FaSalesforce },
+            { name: "OCAPI/SCAPI", icon: TbPackages },
+            { name: "Javascript", icon: IoLogoJavascript },
+            { name: "Typescript", icon: BiLogoTypescript },
+            { name: "B2C Commerce-SDK", icon: TbSdk },
+            { name: "RESTful APIs", icon: TbApi },
+            { name: "Node.js", icon: FaNode },
+            { name: "NEST JS", icon: SiNestjs },
+            { name: "Core Java", icon: FaJava },
+            { name: "MongoDB", icon: SiMongodb },
+        ]
+    },
+    {
+        title: "Frontend & Headless",
+        icon: GiDeerHead,
+        skills: [
+            { name: "React Js", icon: FaReact },
+            { name: "Next Js", icon: TbBrandNextjs },
+            { name: "JavaScript", icon: IoLogoJavascript },
+            { name: "Typescript", icon: BiLogoTypescript },
+            { name: "HTML5", icon: FaHtml5 },
+            { name: "CSS3", icon: FaCss3Alt },
+            { name: "Tailwind CSS", icon: SiTailwindcss },
+            { name: "JQuery", icon: SiJquery },
+            { name: "PWA Kit", icon: SiPwa },
+
+        ]
+    },
+    {
+        title: "Leadership & Process",
+        icon: SiGoogledataproc,
+        skills: [
+            { name: "Agile/Scrum", icon: DiScrum },
+            { name: "Team Leadership", icon: SiMainwp },
+            { name: "System Design", icon: SiCodesignal },
+            { name: "Project Management", icon: MdManageAccounts },
+            { name: "Jira", icon: SiJira },
+            { name: "GitHub", icon: FaGitAlt },
+            { name: "Jenkins", icon: FaJenkins },
+        ]
+    }
+];
 
 /**
  * Navigation items for the portfolio
@@ -59,13 +122,21 @@ export const personalInfo = {
 export const projects: Project[] = [
     {
         id: "1",
-        longDescription: "Completed multiple brands work on full beauty project with specially work experience on checkout redesign in headless commerce using NextJs, NestJs, OCAPI, SCAPI and many more",
+        longDescription: [
+            "Worked on multiple brands under FullBeauty, focusing on checkout redesign in headless commerce.",
+            "Implemented solutions using NextJs, NestJs, OCAPI, SCAPI, and more.",
+            "Enhanced performance and scalability for high-traffic e-commerce.",
+            "Collaborated with cross-functional teams for seamless integrations."
+        ],
         categories: ["E-Commerce", "Headless Commerce"],
         title: "FullBeauty",
-        description:
-            "Completed multiple brands work on full beauty project with specially work experience on checkout redesign in headless commerce using NextJs, NestJs, OCAPI, SCAPI and many more",
+        description: [
+            "Checkout redesign in headless commerce.",
+            "NextJs, NestJs, OCAPI, SCAPI expertise.",
+            "Performance and scalability improvements."
+        ],
         image: getOptimizedProjectImage("Full Beauty FBB"),
-        technologies: ["NextJs", "NestJs", "B2C Commerce-SDK", "REST APIs", "SCAPI", "OCAPI", "SFRA", "SGJC"],
+        technologies: ["NextJs", "NestJs", "REST APIs", "SCAPI", "OCAPI", "SFRA", "B2C Commerce-SDK", "SGJC"],
         liveUrl: "https://www.fullbeauty.com/",
         featured: true,
         organization: "Merkle",
@@ -76,7 +147,7 @@ export const projects: Project[] = [
         description:
             "Comprehensive water filtration e-commerce platform featuring advanced product configurators, subscription management, and integrated customer support systems.",
         image: getOptimizedProjectImage("Aquasana"),
-        technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
+        technologies: ["SFRA", "OCAPI", "REST APIs", "3rd Party Integrations"],
         liveUrl: "https://www.aquasana.com/",
         longDescription: "Comprehensive analytics platform featuring machine learning algorithms for predictive analytics, real-time data processing, and interactive visualizations. Built for scalability and performance.",
         categories: ["E-Commerce"],
@@ -102,7 +173,7 @@ export const projects: Project[] = [
         description:
             "Fashion retail platform with size-inclusive shopping experience, advanced fitting guides, and personalized style recommendations for plus-size customers.",
         image: getOptimizedProjectImage("LaneBryant"),
-        technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
+        technologies: ["SFRA", "OCAPI", "REST APIs", "3rd-Party Integrations"],
         liveUrl: "https://www.lanebryant.com/",
         longDescription: "Modern social media platform featuring real-time messaging, video sharing, live streaming capabilities, and advanced content moderation. Built for high scalability and performance.",
         categories: ["Web Development", "Real-time"],
@@ -115,7 +186,7 @@ export const projects: Project[] = [
         description:
             "Multi-category retail platform with pharmacy services, electronics, home goods, and health products with integrated loyalty programs.",
         image: getOptimizedProjectImage("LondonDrugs"),
-        technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
+        technologies: ["SFRA", "OCAPI", "REST APIs", "3rd-Party Integrations"],
         liveUrl: "https://www.campingworld.com/",
         longDescription: "Comprehensive learning platform with video streaming, interactive quizzes, progress analytics, and certification system. Supports multiple content formats and gamification.",
         categories: ["Web Development", "Education"],
@@ -128,7 +199,7 @@ export const projects: Project[] = [
         description:
             "Premium beauty and cosmetics platform with virtual try-on features, skin analysis tools, and personalized product recommendations.",
         image: getOptimizedProjectImage("Loreal"),
-        technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
+        technologies: ["SFRA", "OCAPI", "REST APIs", "3rd-Party Integrations"],
         liveUrl: "http://lancome-usa.com/",
         longDescription: "Enterprise-grade task management platform with team collaboration, Gantt charts, time tracking, and comprehensive reporting. Integrates with popular development tools.",
         categories: ["Web Development", "Productivity"],
@@ -239,56 +310,6 @@ export const projects: Project[] = [
         featured: true,
         organization: "Merkle",
     },
-];
-
-/**
- * Skills and technologies, grouped by category
- */
-export const skillGroups: SkillGroup[] = [
-    {
-        title: "Backend & E-Commerce",
-        icon: HiOutlineServer,
-        skills: [
-            { name: "SFRA", icon: FaNodeJs },
-            { name: "SGJC", icon: FaNodeJs },
-            { name: "OCAPI/SCAPI", icon: FaNodeJs },
-            { name: "Javascript/Typescript", icon: FaNodeJs },
-            { name: "B2C Commerce-SDK", icon: FaNodeJs },
-            { name: "RESTful APIs", icon: FaNodeJs },
-            { name: "Node.js", icon: FaNodeJs },
-            { name: "NEST JS", icon: SiExpress },
-            { name: "Core Java", icon: FaJava },
-            { name: "MongoDB", icon: SiMongodb },
-        ]
-    },
-    {
-        title: "Frontend & Headless",
-        icon: HiOutlineDesktopComputer,
-        skills: [
-            { name: "React Js", icon: FaReact },
-            { name: "Next Js", icon: TbBrandNextjs },
-            { name: "JavaScript/Typescript", icon: SiJavascript },
-            { name: "HTML5", icon: FaHtml5 },
-            { name: "CSS3", icon: FaCss3Alt },
-            { name: "Tailwind CSS", icon: SiTailwindcss },
-            { name: "JQuery", icon: SiJquery },
-            { name: "PWA Kit", icon: FaCss3Alt },
-
-        ]
-    },
-    {
-        title: "Leadership & Process",
-        icon: HiOutlineUsers,
-        skills: [
-            { name: "Agile/Scrum", icon: FaGitAlt },
-            { name: "Team Leadership", icon: SiJira },
-            { name: "System Design", icon: FaJenkins },
-            { name: "Project Management", icon: SiJest },
-            { name: "Jira", icon: SiJira },
-            { name: "GitHub", icon: FaGitAlt },
-            { name: "Jenkins", icon: FaJenkins },
-        ]
-    }
 ];
 
 /**
