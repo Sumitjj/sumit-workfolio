@@ -70,22 +70,16 @@ const Navigation = () => {
         <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 relative">
             {/* Logo/Name */}
-            <div className="flex-shrink-0">
-              <a
-                href="#"
-                onClick={(e) => handleNavClick("#", e)}
-                className="text-xl font-bold tracking-tight text-foreground hover:text-primary transition-all duration-300 hover:scale-105 transform-gpu origin-center"
-                style={{ transformOrigin: 'center center', contain: 'layout style' }}
-              >
-                {personalInfo.name.split(" ").map((word, index) => (
-                  <span key={index}>
-                    {index === 0 ? word : (
-                      <span className="text-primary">{word}</span>
-                    )}
-                    {index < personalInfo.name.split(" ").length - 1 && " "}
-                  </span>
-                ))}
-              </a>
+            <div className="logo flex-shrink-0">
+              {personalInfo.name.split(" ").map((word, index) => (
+                <span key={index}>
+                  {index === 0 ? word : (
+                    <span className="text-primary">{word}</span>
+                  )}
+                  {index < personalInfo.name.split(" ").length - 1 && " "}
+                </span>
+              ))}
+
             </div>
 
             {/* Desktop Navigation */}

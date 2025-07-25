@@ -68,10 +68,10 @@ export const skillGroups: SkillGroup[] = [
         title: "Leadership & Process",
         icon: SiGoogledataproc,
         skills: [
-            { name: "Agile/Scrum", icon: DiScrum },
+            { name: "Project Management", icon: MdManageAccounts },
             { name: "Team Leadership", icon: SiMainwp },
             { name: "System Design", icon: SiCodesignal },
-            { name: "Project Management", icon: MdManageAccounts },
+            { name: "Agile/Scrum", icon: DiScrum },
             { name: "Jira", icon: SiJira },
             { name: "GitHub", icon: FaGitAlt },
             { name: "Jenkins", icon: FaJenkins },
@@ -83,8 +83,8 @@ export const skillGroups: SkillGroup[] = [
  * Navigation items for the portfolio
  */
 export const navigationItems: NavItem[] = [
-    { href: "#skills", label: "Toolkit" },
     { href: "#projects", label: "Creations" },
+    { href: "#skills", label: "Tech" },
     { href: "#experience", label: "Journey" },
     { href: "#certifications", label: "Badges" },
     { href: "#contact", label: "Connect" },
@@ -112,6 +112,7 @@ export const personalInfo = {
     bio: "Transforming e-commerce vision into reality with 9+ years of SFCC mastery. Trusted by brands to build fast, flexible, and future- ready digital storefronts.",
     avatar: getOptimizedAvatarImage("Sumit Jangid"),
     resume: "/resume/SumitJangid_Resume_2025.docx",
+    logo: "/images/logo/SumitJangir.png",
     websiteUrl: "https://www.sumitworkfolio.in",
 };
 
@@ -143,8 +144,11 @@ export const projects: Project[] = [
     {
         id: "2",
         title: "Aquasana Water Filters",
-        description:
-            "Comprehensive water filtration e-commerce platform featuring advanced product configurators, subscription management, and integrated customer support systems.",
+        description: [
+            "Custom product configurators using SFRA.",
+            "Integrated subscription and support modules via OCAPI.",
+            "Enhanced e-commerce features and performance."
+        ],
         image: getOptimizedProjectImage("Aquasana"),
         technologies: ["SFRA", "OCAPI", "REST APIs", "3rd Party Integrations"],
         liveUrl: "https://www.aquasana.com/",
@@ -156,8 +160,11 @@ export const projects: Project[] = [
     {
         id: "8",
         title: "Hotwater",
-        description:
-            "Water heating solutions platform with product configurators, energy efficiency calculators, and professional installation network integration.",
+        description: [
+            "Built product configurators in SFRA for water heaters.",
+            "Integrated efficiency tools and backend APIs.",
+            "Streamlined customer experience and scalability."
+        ],
         image: getOptimizedProjectImage("Hotwater"),
         technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
         liveUrl: "https://www.aquasana.com/",
@@ -169,8 +176,11 @@ export const projects: Project[] = [
     {
         id: "3",
         title: "Lane Bryant",
-        description:
-            "Fashion retail platform with size-inclusive shopping experience, advanced fitting guides, and personalized style recommendations for plus-size customers.",
+        description: [
+            "Developed inclusive fashion storefront using SFRA.",
+            "Implemented fitting guides via custom OCAPI logic.",
+            "Enhanced user personalization and performance."
+        ],
         image: getOptimizedProjectImage("LaneBryant"),
         technologies: ["SFRA", "OCAPI", "REST APIs", "3rd-Party Integrations"],
         liveUrl: "https://www.lanebryant.com/",
@@ -182,8 +192,11 @@ export const projects: Project[] = [
     {
         id: "4",
         title: "London Drugs",
-        description:
-            "Multi-category retail platform with pharmacy services, electronics, home goods, and health products with integrated loyalty programs.",
+        description: [
+            "SFRA-based multi-category retail platform.",
+            "Integrated pharmacy and loyalty systems.",
+            "Optimized user journeys and checkout flows."
+        ],
         image: getOptimizedProjectImage("LondonDrugs"),
         technologies: ["SFRA", "OCAPI", "REST APIs", "3rd-Party Integrations"],
         liveUrl: "https://www.campingworld.com/",
@@ -195,8 +208,11 @@ export const projects: Project[] = [
     {
         id: "13",
         title: "Loreal",
-        description:
-            "Premium beauty and cosmetics platform with virtual try-on features, skin analysis tools, and personalized product recommendations.",
+        description: [
+            "SFRA-powered cosmetics platform with virtual try-ons.",
+            "Implemented SCAPI-based personalization features.",
+            "Improved product discovery and engagement."
+        ],
         image: getOptimizedProjectImage("Loreal"),
         technologies: ["SFRA", "OCAPI", "REST APIs", "3rd-Party Integrations"],
         liveUrl: "http://lancome-usa.com/",
@@ -208,8 +224,11 @@ export const projects: Project[] = [
     {
         id: "5",
         title: "Camping World",
-        description:
-            "Outdoor recreation e-commerce platform with extensive RV and camping gear catalog, installation services, and membership programs.",
+        description: [
+            "Implemented wellness product store using SFRA.",
+            "Integrated content-driven education modules.",
+            "Enhanced holistic shopping experiences."
+        ],
         image: getOptimizedProjectImage("Camping World"),
         technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
         liveUrl: "https://www.campingworld.com/",
@@ -221,8 +240,11 @@ export const projects: Project[] = [
     {
         id: "6",
         title: "Saje Natural Wellness",
-        description:
-            "Natural wellness and aromatherapy e-commerce platform featuring essential oils, wellness products, and educational content for holistic health.",
+        description: [
+            "Built omnichannel commerce experience using SFRA.",
+            "Integrated global store locator and inventory.",
+            "Improved performance across devices."
+        ],
         image: getOptimizedProjectImage("Saje"),
         technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
         liveUrl: "https://www.campingworld.com/",
@@ -234,8 +256,11 @@ export const projects: Project[] = [
     {
         id: "7",
         title: "Uniqlo",
-        description:
-            "Global fashion retailer with innovative clothing technology, sustainable practices, and seamless omnichannel shopping experiences.",
+        description: [
+            "Developed heating solutions platform with SFRA.",
+            "Integrated dealer locator and warranty tools.",
+            "Boosted performance and configurability."
+        ],
         image: getOptimizedProjectImage("Uniqlo"),
         technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
         liveUrl: "https://www.campingworld.com/",
@@ -247,8 +272,11 @@ export const projects: Project[] = [
     {
         id: "9",
         title: "State Water Heaters",
-        description:
-            "Commercial and residential water heating solutions with advanced product selection tools, warranty management, and dealer locator systems.",
+        description: [
+            "Built energy-efficient SFRA storefront.",
+            "Integrated smart home device compatibility.",
+            "Optimized support and customer workflows."
+        ],
         image: getOptimizedProjectImage("State"),
         technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
         liveUrl: "https://www.aquasana.com/",
@@ -260,8 +288,11 @@ export const projects: Project[] = [
     {
         id: "10",
         title: "Reliance Water Heaters",
-        description:
-            "Reliable water heating solutions platform with energy-efficient products, smart home integration, and comprehensive customer support.",
+        description: [
+            "Developed B2B-focused commerce features in SFRA.",
+            "Added predictive maintenance and controls.",
+            "Enhanced commercial product visibility."
+        ],
         image: getOptimizedProjectImage("Reliance"),
         technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
         liveUrl: "https://www.hotwater.com/",
@@ -273,8 +304,11 @@ export const projects: Project[] = [
     {
         id: "11",
         title: "American Water Heaters",
-        description:
-            "Professional-grade water heating systems with advanced controls, energy monitoring, and maintenance scheduling for commercial applications.",
+        description: [
+            "SFRA-based smart boiler platform integration.",
+            "Enabled remote monitoring and controls.",
+            "Focused on predictive maintenance tools."
+        ],
         image: getOptimizedProjectImage("American"),
         technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
         liveUrl: "https://www.hotwater.com/",
@@ -286,8 +320,11 @@ export const projects: Project[] = [
     {
         id: "12",
         title: "Lochinvar",
-        description:
-            "High-efficiency commercial water heating and boiler systems with smart controls, remote monitoring, and predictive maintenance capabilities.",
+        description: [
+            "Developed SFRA storefront with smart product suite.",
+            "Integrated SCAPI/OCAPI for service tools.",
+            "Enabled global commerce scalability."
+        ],
         image: getOptimizedProjectImage("Lochinvar"),
         technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
         liveUrl: "https://www.hotwater.com/",
@@ -299,8 +336,11 @@ export const projects: Project[] = [
     {
         id: "13",
         title: "AO Smith Corp",
-        description:
-            "Global water technology solutions with innovative products, smart connectivity, and comprehensive service networks for residential and commercial markets.",
+        description: [
+            "Developed SFRA storefront with smart product suite.",
+            "Integrated SCAPI/OCAPI for service tools.",
+            "Enabled global commerce scalability."
+        ],
         image: getOptimizedProjectImage("AOSmith"),
         technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
         liveUrl: "https://www.aquasana.com/",

@@ -101,7 +101,7 @@ export const PROJECT_IMAGES = {
  * These correspond to actual files in public/images/avatars/
  */
 export const AVATAR_IMAGES = {
-    'Sumit Jangid': '/images/avatars/sumit-jangid.jpg',
+    'Sumit Jangid': '/images/avatars/sumit-jangid.jpeg',
 } as const;
 
 /**

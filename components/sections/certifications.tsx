@@ -56,7 +56,7 @@ function CertificationCard({ certification, index }: CertificationCardProps) {
                                 }}
                             >
                                 <div className="absolute inset-0 bg-gradient-to-r from-primary/30 to-secondary/30 rounded-3xl blur-2xl opacity-40 group-hover:opacity-70 transition-all duration-700 ease-out" />
-                                <div className="relative w-36 h-36 sm:w-40 sm:h-40 lg:w-44 lg:h-44 rounded-3xl bg-white dark:bg-gray-900 border-2 border-primary/20 shadow-xl flex items-center justify-center overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:shadow-2xl">
+                                <div className="relative w-36 h-36 sm:w-40 sm:h-40 lg:w-44 lg:h-44 rounded-3xl bg-white dark:bg-gray-900 border-2 border-primary/20 shadow-xl flex items-center justify-center overflow-hidden transition-all duration-600">
                                     {!imageError ? (
                                         <Image
                                             src={certification.badgeUrl}
@@ -72,7 +72,7 @@ function CertificationCard({ certification, index }: CertificationCardProps) {
                                             }}
                                             loading="lazy"
                                             sizes="(max-width: 640px) 144px, (max-width: 1024px) 160px, 176px"
-                                            quality={85}
+                                            // quality={85}
                                         />
                                     ) : (
                                         <Award className="w-20 h-20 text-primary transition-transform duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-105" />
