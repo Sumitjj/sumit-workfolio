@@ -1,17 +1,71 @@
 "use client";
 
 import React, { useState, useMemo, useEffect, useRef } from "react";
-import { Code, Award, Users, Briefcase, Zap } from "lucide-react";
+import { Code, Award, Users, Briefcase, Zap, Building2, Star, Sparkles } from "lucide-react";
 import { ProjectCard } from "@/components/project-card";
 import { ProjectModal } from "@/components/project-modal";
 import { projects } from "@/data/portfolio";
 import { Project } from "@/types";
 import { Fade } from "react-awesome-reveal";
-import { Building2, Star, Sparkles } from "lucide-react";
+
 const SALESFORCE_BLUE = "#0070d2";
 
+// Animation configuration constants
+const ANIMATION_CONFIGS = {
+  featured: { baseDelay: 400, increment: 150, duration: 700 },
+  compact: { baseDelay: 850, increment: 80, duration: 700 },
+  highlights: { baseDelay: 1200, increment: 200, duration: 300 }
+} as const;
+
+// Project statistics data
+const PROJECT_STATS = [
+  {
+    icon: Zap,
+    label: "Scalable Projects Architected",
+    color: "#0070d2",
+    gradient: "from-blue-500/10 via-blue-600/5 to-purple-600/10",
+    textGradient: "linear-gradient(to right, #0070d2, #6f42c1, #0070d2)",
+    shadowColor: "#0070d2",
+  },
+  {
+    icon: Users,
+    label: "Global Clients Empowered",
+    color: "#059669",
+    gradient: "from-emerald-500/10 via-green-600/5 to-teal-600/10",
+    textGradient: "linear-gradient(to right, #059669, #14b8a6, #059669)",
+    shadowColor: "#059669",
+  },
+  {
+    icon: Building2,
+    label: "Brands Digitally Transformed",
+    color: "#8b5cf6",
+    gradient: "from-violet-500/10 via-purple-600/5 to-fuchsia-600/10",
+    textGradient: "linear-gradient(to right, #8b5cf6, #d946ef, #8b5cf6)",
+    shadowColor: "#8b5cf6",
+  },
+];
+
+// Professional highlights data
+const PROFESSIONAL_HIGHLIGHTS = [
+  {
+    icon: Code,
+    title: "Expert Development",
+    description: "Specialized in Salesforce Commerce Cloud with 9+ years of enterprise experience",
+  },
+  {
+    icon: Award,
+    title: "Certified Professional",
+    description: "Salesforce B2C Commerce Cloud certified with proven track record",
+  },
+  {
+    icon: Users,
+    title: "Client Success",
+    description: "Delivered successful solutions for enterprise clients worldwide",
+  }
+];
+
 /**
- * Clean and professional projects section with smooth scroll animations
+ * Clean and professional projects section with optimized reusable components
  */
 export function ProjectsSection() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -19,72 +73,26 @@ export function ProjectsSection() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
-  // Get top 3 featured projects
-  const featuredProjects = useMemo(() => {
-    return projects.filter(project => project.featured).slice(0, 3);
-  }, []);
-
-  // Get remaining non-featured projects
-  const remainingProjects = useMemo(() => {
-    return projects.filter(project => !project.featured);
-  }, []);
-
-  const handleProjectClick = (project: Project) => {
-    setSelectedProject(project);
-    setIsModalOpen(true);
+  // Reusable utility functions as arrow functions
+  const getAnimationDelay = (index: number, variant: keyof typeof ANIMATION_CONFIGS): string => {
+    const config = ANIMATION_CONFIGS[variant];
+    return `${config.baseDelay + index * config.increment}ms`;
   };
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setSelectedProject(null);
+  const getAnimationClasses = (isVisible: boolean): string => {
+    return `transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+      }`;
   };
 
-  // Intersection Observer for smooth animations
-  useEffect(() => {
-    const currentRef = sectionRef.current;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      {
-        threshold: 0.1,
-        rootMargin: '50px 0px -50px 0px'
-      }
-    );
-
-    if (currentRef) {
-      observer.observe(currentRef);
-    }
-
-    return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
-      }
-    };
-  }, []);
-
-  // Reusable stat card for project highlights
-  interface ProjectStatCardProps {
+  // Reusable Project Statistics Card component
+  const ProjectStatCard: React.FC<{
     icon: React.ElementType;
     value: number | string;
     label: string;
-    color: string;
     gradient: string;
     textGradient: string;
     shadowColor: string;
-  }
-  const ProjectStatCard: React.FC<ProjectStatCardProps> = ({
-    icon: Icon,
-    value,
-    label,
-    color,
-    gradient,
-    textGradient,
-    shadowColor
-  }) => (
+  }> = ({ icon: Icon, value, label, gradient, textGradient, shadowColor }) => (
     <div className="group cursor-pointer">
       <div
         className={`relative bg-gradient-to-br ${gradient} backdrop-blur-sm border rounded-3xl p-8 transition-all duration-300 ease-out hover:shadow-xl hover:scale-102`}
@@ -128,6 +136,156 @@ export function ProjectsSection() {
     </div>
   );
 
+  // Reusable Animated Project Grid component
+  const AnimatedProjectGrid: React.FC<{
+    projects: Project[];
+    variant: "featured" | "compact";
+    title?: string;
+    className?: string;
+  }> = ({ projects, variant, title, className = "" }) => {
+    const gridLayout = variant === "featured"
+      ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 auto-rows-fr"
+      : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-fr";
+
+    if (projects.length === 0) return null;
+
+    return (
+      <div className={`mb-12 sm:mb-16 lg:mb-20 ${className}`}>
+        {title && (
+          <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground mb-6 sm:mb-8 lg:mb-10 text-center">
+            {title}
+          </h3>
+        )}
+
+        <div className={gridLayout}>
+          {projects.map((project, index) => {
+            // For non-featured projects with 10 items, center the last 2 items in 4-column layout
+            const isLastRowItem = variant === "compact" && projects.length === 10 && index >= 8;
+            const gridColumnClass = isLastRowItem
+              ? (index === 8 ? 'xl:col-start-2' : 'xl:col-start-3')
+              : '';
+
+            return (
+              <div
+                key={project.id}
+                className={`${variant}-project-card ${getAnimationClasses(true)} ${gridColumnClass}`}
+                style={{
+                  transitionDelay: getAnimationDelay(index, variant),
+                  opacity: isVisible ? 1 : 0,
+                  transform: isVisible ? 'translateY(0)' : 'translateY(12px)'
+                }}
+              >
+                <ProjectCard
+                  project={project}
+                  onClick={() => handleProjectClick(project)}
+                  variant={variant}
+                  className="h-full w-full"
+                />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  };
+
+  // Reusable Professional Highlights component
+  const ProfessionalHighlights: React.FC = () => (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 auto-rows-fr">
+      {PROFESSIONAL_HIGHLIGHTS.map((item, index) => (
+        <div
+          key={item.title}
+          className="group flex flex-col items-center text-center p-6 sm:p-8 rounded-2xl bg-white/60 dark:bg-neutral-900/60 backdrop-blur-xl border border-border/30 shadow-md transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl hover:scale-[1.03] hover:rotate-[-1deg]"
+          style={{
+            transitionDelay: getAnimationDelay(index, 'highlights')
+          }}
+        >
+          {/* Icon - no background, no glow */}
+          <div className="flex items-center justify-center w-14 h-14 mb-4 text-emerald-600 dark:text-emerald-400 transition-all duration-300 group-hover:scale-110">
+            <item.icon className="w-10 h-10 stroke-2" />
+          </div>
+          <h4 className="text-xl font-extrabold mb-2 text-white-600 dark:text-white-400 tracking-tight">
+            {item.title}
+          </h4>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            {item.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  );
+
+  // Memoized project filtering
+  const { featuredProjects, remainingProjects, statsWithValues } = useMemo(() => {
+    const featured = projects.filter(project => project.featured).slice(0, 3);
+    const remaining = projects.filter(project => !project.featured);
+
+    // Add dynamic values to stats
+    const statsData = PROJECT_STATS.map((stat, index) => ({
+      ...stat,
+      value: index === 0 ? projects.length + 1 : index === 1 ? "10" : "30"
+    }));
+
+    return {
+      featuredProjects: featured,
+      remainingProjects: remaining,
+      statsWithValues: statsData
+    };
+  }, []);
+
+  // Event handlers
+  const handleProjectClick = (project: Project) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedProject(null);
+  };
+
+  // Intersection Observer for smooth animations - Mobile optimized
+  useEffect(() => {
+    const currentRef = sectionRef.current;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      {
+        threshold: 0.05, // More sensitive threshold for mobile
+        rootMargin: '100px 0px -50px 0px' // Larger root margin for mobile
+      }
+    );
+
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+
+    // Fallback: Set visible after a short delay if observer doesn't trigger
+    const fallbackTimer = setTimeout(() => {
+      setIsVisible(true);
+    }, 500);
+
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+      clearTimeout(fallbackTimer);
+    };
+  }, []);
+
+  // Force visibility on mount for mobile reliability
+  useEffect(() => {
+    const isMobile = window.innerWidth < 768;
+    if (isMobile) {
+      const timer = setTimeout(() => setIsVisible(true), 100);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
   return (
     <section
       id="projects"
@@ -149,7 +307,7 @@ export function ProjectsSection() {
                 <Briefcase className="w-6 h-6" style={{ color: SALESFORCE_BLUE }} />
               </div>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground">
-                What I've Built
+                What I&apos;ve Built
               </h2>
             </div>
 
@@ -159,134 +317,32 @@ export function ProjectsSection() {
           </div>
         </Fade>
 
-        {/* projects Stats */}
+        {/* Project Stats */}
         <Fade direction="up" triggerOnce>
           <div className="text-center mb-12">
             <div className="flex flex-wrap justify-center items-center gap-8 sm:gap-12">
-              {[
-                {
-                  icon: Zap,
-                  value: projects.length + 1,
-                  label: "Scalable Projects Architected",
-                  color: "#0070d2",
-                  gradient: "from-blue-500/10 via-blue-600/5 to-purple-600/10",
-                  textGradient: "linear-gradient(to right, #0070d2, #6f42c1, #0070d2)",
-                  shadowColor: "#0070d2",
-                },
-                {
-                  icon: Users,
-                  value: "10",
-                  label: "Global Clients Empowered",
-                  color: "#059669",
-                  gradient: "from-emerald-500/10 via-green-600/5 to-teal-600/10",
-                  textGradient: "linear-gradient(to right, #059669, #14b8a6, #059669)",
-                  shadowColor: "#059669",
-                },
-                {
-                  icon: Building2,
-                  value: "30",
-                  label: "Brands Digitally Transformed",
-                  color: "#8b5cf6",
-                  gradient: "from-violet-500/10 via-purple-600/5 to-fuchsia-600/10",
-                  textGradient: "linear-gradient(to right, #8b5cf6, #d946ef, #8b5cf6)",
-                  shadowColor: "#8b5cf6",
-                },
-              ].map((stat, idx) => (
+              {statsWithValues.map((stat) => (
                 <ProjectStatCard key={stat.label} {...stat} />
               ))}
             </div>
           </div>
         </Fade>
 
-        {/* Featured Projects Grid - Keep Original Height */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16 grid-equal-height">
-          {featuredProjects.map((project, index) => (
-            <div
-              key={project.id}
-              className={`featured-project-card transition-all duration-700 ease-out ${isVisible
-                ? 'opacity-100 translate-y-0'
-                : 'opacity-0 translate-y-12'
-                }`}
-              style={{
-                transitionDelay: `${400 + index * 150}ms`
-              }}
-            >
-              <ProjectCard
-                project={project}
-                onClick={() => handleProjectClick(project)}
-                className="h-full project-card-wrapper"
-                variant="featured"
-              />
-            </div>
-          ))}
-        </div>
+        {/* Featured Projects Grid */}
+        <AnimatedProjectGrid
+          projects={featuredProjects}
+          variant="featured"
+          title="Featured Projects"
+        />
 
-        {/* Remaining Projects - Smaller Height with Technologies */}
-        {remainingProjects.length > 0 && (
-          <div className="mb-10 sm:mb-12">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-6 grid-equal-height">
-              {remainingProjects.map((project, index) => (
-                <div
-                  key={project.id}
-                  className={`remaining-project-card transition-all duration-700 ease-out ${isVisible
-                    ? 'opacity-100 translate-y-0'
-                    : 'opacity-0 translate-y-12'
-                    }`}
-                  style={{
-                    transitionDelay: `${850 + index * 80}ms`
-                  }}
-                >
-                  <ProjectCard
-                    project={project}
-                    onClick={() => handleProjectClick(project)}
-                    className="h-full project-card-wrapper"
-                    variant="compact"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+        {/* Remaining Projects Grid */}
+        <AnimatedProjectGrid
+          projects={remainingProjects}
+          variant="compact"
+        />
 
-        {/* Professional Highlights - Clean Minimal Redesign */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mt-8">
-          {[
-            {
-              icon: Code,
-              title: "Expert Development",
-              description: "Specialized in Salesforce Commerce Cloud with 9+ years of enterprise experience",
-            },
-            {
-              icon: Award,
-              title: "Certified Professional",
-              description: "Salesforce B2C Commerce Cloud certified with proven track record",
-            },
-            {
-              icon: Users,
-              title: "Client Success",
-              description: "Delivered successful solutions for enterprise clients worldwide",
-            }
-          ].map((item, index) => (
-            <div
-              key={item.title}
-              className={
-                `group flex flex-col items-center text-center p-6 sm:p-8 rounded-2xl bg-white/60 dark:bg-neutral-900/60 backdrop-blur-xl border border-border/30 shadow-md transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl hover:scale-[1.03] hover:rotate-[-1deg]`
-              }
-              style={{ transitionDelay: `${1200 + index * 200}ms` }}
-            >
-              {/* Icon - no background, no glow */}
-              <div className={`flex items-center justify-center w-14 h-14 mb-4 text-emerald-600 dark:text-emerald-400 transition-all duration-300 group-hover:scale-110`}>
-                <item.icon className={`w-10 h-10 stroke-2`} />
-              </div>
-              <h4 className={`text-xl font-extrabold mb-2 text-emerald-600 dark:text-emerald-400 tracking-tight`}> {/* Larger, bolder title */}
-                {item.title}
-              </h4>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {item.description}
-              </p>
-            </div>
-          ))}
-        </div>
+        {/* Professional Highlights */}
+        <ProfessionalHighlights />
       </div>
 
       {/* Project Modal */}

@@ -61,10 +61,12 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                     <div className="absolute bottom-0 left-0 right-0 p-8">
                         <div className="flex items-end justify-between">
                             <div className="flex-1">
-                                <div className="flex items-center gap-2 mb-3">
-                                    <Calendar className="w-4 h-4 text-white/80" />
-                                    <span className="text-white/80 text-sm font-medium">{project.year}</span>
-                                </div>
+                                {project.organization && (
+                                    <div className="flex items-center gap-2 mb-3">
+                                        <Calendar className="w-4 h-4 text-white/80" />
+                                        <span className="text-white/80 text-sm font-medium">{project.organization}</span>
+                                    </div>
+                                )}
                                 <h1 className="text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">
                                     {project.title}
                                 </h1>
@@ -121,8 +123,8 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                         </div>
                         <div className="text-center p-6 rounded-2xl bg-gradient-to-br from-[rgb(75,202,129)]/10 to-[rgb(75,202,129)]/5 border border-[rgb(75,202,129)]/20">
                             <Users className="w-8 h-8 text-[rgb(75,202,129)] mx-auto mb-3" />
-                            <div className="text-2xl font-bold text-foreground mb-1">{project.year}</div>
-                            <div className="text-sm text-muted-foreground">Year Built</div>
+                            <div className="text-2xl font-bold text-foreground mb-1">{project.organization || 'Enterprise'}</div>
+                            <div className="text-sm text-muted-foreground">Organization</div>
                         </div>
                         <div className="text-center p-6 rounded-2xl bg-gradient-to-br from-[rgb(254,147,57)]/10 to-[rgb(254,147,57)]/5 border border-[rgb(254,147,57)]/20">
                             <Star className="w-8 h-8 text-[rgb(254,147,57)] mx-auto mb-3" />

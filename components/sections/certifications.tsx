@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import { Fade } from "react-awesome-reveal";
 import {
     Award,
@@ -13,7 +13,6 @@ import {
     Star
 } from "lucide-react";
 import { certifications } from "@/data/portfolio";
-
 import Image from "next/image";
 
 /**
@@ -27,7 +26,7 @@ function formatDate(date: Date): string {
 }
 
 /**
- * Certification Card Component
+ * Optimized Certification Card Component - keeping original design
  */
 interface CertificationCardProps {
     certification: typeof certifications[0];
@@ -36,6 +35,16 @@ interface CertificationCardProps {
 
 function CertificationCard({ certification, index }: CertificationCardProps) {
     const [imageError, setImageError] = useState(false);
+    const [imageLoaded, setImageLoaded] = useState(false);
+
+    // Memoized handlers for better performance
+    const handleImageError = useCallback(() => {
+        setImageError(true);
+    }, []);
+
+    const handleImageLoad = useCallback(() => {
+        setImageLoaded(true);
+    }, []);
 
     return (
         <Fade direction="up" delay={index * 100} triggerOnce>
@@ -46,36 +55,41 @@ function CertificationCard({ certification, index }: CertificationCardProps) {
                         {/* Centered Extra Large Badge */}
                         <div className="flex justify-center">
                             <div
-                                className="relative transition-all duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-105"
+                                className="relative transition-all duration-500 ease-out group-hover:scale-105"
                                 style={{
                                     transformOrigin: 'center center',
                                     contain: 'layout style',
-                                    willChange: 'transform',
-                                    backfaceVisibility: 'hidden',
-                                    transform: 'translateZ(0)'
                                 }}
                             >
-                                <div className="absolute inset-0 bg-gradient-to-r from-primary/30 to-secondary/30 rounded-3xl blur-2xl opacity-40 group-hover:opacity-70 transition-all duration-700 ease-out" />
-                                <div className="relative w-36 h-36 sm:w-40 sm:h-40 lg:w-44 lg:h-44 rounded-3xl bg-white dark:bg-gray-900 border-2 border-primary/20 shadow-xl flex items-center justify-center overflow-hidden transition-all duration-600">
+                                <div className="absolute inset-0 bg-gradient-to-r from-primary/30 to-secondary/30 rounded-3xl blur-2xl opacity-40 group-hover:opacity-70 transition-all duration-500 ease-out" />
+                                <div className="relative w-36 h-36 sm:w-40 sm:h-40 lg:w-44 lg:h-44 rounded-3xl bg-white dark:bg-gray-900 border-2 border-primary/20 shadow-xl flex items-center justify-center overflow-hidden transition-all duration-500">
                                     {!imageError ? (
-                                        <Image
-                                            src={certification.badgeUrl}
-                                            alt={certification.name}
-                                            width={160}
-                                            height={160}
-                                            className="w-full h-full object-contain p-3 transition-transform duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-105"
-                                            onError={() => setImageError(true)}
-                                            style={{
-                                                willChange: 'transform',
-                                                backfaceVisibility: 'hidden',
-                                                transform: 'translateZ(0)'
-                                            }}
-                                            loading="lazy"
-                                            sizes="(max-width: 640px) 144px, (max-width: 1024px) 160px, 176px"
-                                            // quality={85}
-                                        />
+                                        <>
+                                            {/* Loading placeholder */}
+                                            {!imageLoaded && (
+                                                <div className="absolute inset-0 bg-muted/20 animate-pulse rounded-3xl flex items-center justify-center">
+                                                    <Award className="w-16 h-16 text-muted-foreground/50" />
+                                                </div>
+                                            )}
+                                            <Image
+                                                src={certification.badgeUrl}
+                                                alt={certification.name}
+                                                width={160}
+                                                height={160}
+                                                className={`w-full h-full object-contain p-3 transition-all duration-500 ease-out group-hover:scale-105 ${imageLoaded ? 'opacity-100' : 'opacity-0'
+                                                    }`}
+                                                onError={handleImageError}
+                                                onLoad={handleImageLoad}
+                                                {...(index < 3
+                                                    ? { priority: true }
+                                                    : { loading: 'lazy' as const }
+                                                )}
+                                                sizes="(max-width: 640px) 144px, (max-width: 1024px) 160px, 176px"
+                                                quality={85}
+                                            />
+                                        </>
                                     ) : (
-                                        <Award className="w-20 h-20 text-primary transition-transform duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-105" />
+                                        <Award className="w-20 h-20 text-primary transition-transform duration-500 ease-out group-hover:scale-105" />
                                     )}
                                 </div>
                             </div>
@@ -141,7 +155,7 @@ function CertificationCard({ certification, index }: CertificationCardProps) {
 }
 
 /**
- * Reusable stat card for certifications
+ * Optimized stat card component
  */
 interface CertificationStatCardProps {
     icon: React.ElementType;
@@ -157,7 +171,8 @@ interface CertificationStatCardProps {
     hoverBorder: string;
     hoverShadow: string;
 }
-const CertificationStatCard: React.FC<CertificationStatCardProps> = ({
+
+const CertificationStatCard: React.FC<CertificationStatCardProps> = React.memo(({
     icon: Icon,
     iconBg,
     iconColor,
@@ -203,12 +218,46 @@ const CertificationStatCard: React.FC<CertificationStatCardProps> = ({
             </div>
         </div>
     </div>
-);
+));
+
+CertificationStatCard.displayName = 'CertificationStatCard';
 
 /**
- * Professional Certifications Section
+ * Professional Certifications Section - Original Design Restored
  */
 export function CertificationsSection() {
+    // Memoize stats data to prevent re-computation
+    const statsData = useMemo(() => [
+        {
+            icon: Award,
+            iconBg: "bg-gradient-to-br from-blue-500 to-purple-600",
+            iconColor: "text-white",
+            value: `${certifications.length}X`,
+            valueGradient: "bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600",
+            label: "Certified Expert",
+            starColor: "text-blue-500",
+            sparklesColor: "text-purple-500",
+            bgGradient: "bg-gradient-to-br from-blue-500/10 via-blue-600/5 to-purple-600/10",
+            border: "border-blue-500/20",
+            hoverBorder: "hover:border-blue-500/30",
+            hoverShadow: "hover:shadow-blue-500/15",
+        },
+        {
+            icon: Building2,
+            iconBg: "bg-gradient-to-br from-emerald-500 to-teal-600",
+            iconColor: "text-white",
+            value: "B2C",
+            valueGradient: "bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600",
+            label: "Commerce Expert",
+            starColor: "text-emerald-500",
+            sparklesColor: "text-teal-500",
+            bgGradient: "bg-gradient-to-br from-emerald-500/10 via-green-600/5 to-teal-600/10",
+            border: "border-emerald-500/20",
+            hoverBorder: "hover:border-emerald-500/30",
+            hoverShadow: "hover:shadow-emerald-500/15",
+        }
+    ], []);
+
     return (
         <section id="certifications" className="pt-16 sm:pt-20 lg:pt-24 pb-8 sm:pb-12 lg:pb-16">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -228,38 +277,9 @@ export function CertificationsSection() {
                             Industry-recognized certifications validating expertise in Commerce Cloud architecture and development
                         </p>
 
-                        {/* Catchy Achievement Stats */}
+                        {/* Achievement Stats */}
                         <div className="flex flex-wrap justify-center items-center gap-8 sm:gap-12">
-                            {[
-                                {
-                                    icon: Award,
-                                    iconBg: "bg-gradient-to-br from-blue-500 to-purple-600",
-                                    iconColor: "text-white",
-                                    value: `${certifications.length}X`,
-                                    valueGradient: "bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600",
-                                    label: "Certified Expert",
-                                    starColor: "text-blue-500",
-                                    sparklesColor: "text-purple-500",
-                                    bgGradient: "bg-gradient-to-br from-blue-500/10 via-blue-600/5 to-purple-600/10",
-                                    border: "border-blue-500/20",
-                                    hoverBorder: "hover:border-blue-500/30",
-                                    hoverShadow: "hover:shadow-blue-500/15",
-                                },
-                                {
-                                    icon: Building2,
-                                    iconBg: "bg-gradient-to-br from-emerald-500 to-teal-600",
-                                    iconColor: "text-white",
-                                    value: "B2C",
-                                    valueGradient: "bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600",
-                                    label: "Commerce Expert",
-                                    starColor: "text-emerald-500",
-                                    sparklesColor: "text-teal-500",
-                                    bgGradient: "bg-gradient-to-br from-emerald-500/10 via-green-600/5 to-teal-600/10",
-                                    border: "border-emerald-500/20",
-                                    hoverBorder: "hover:border-emerald-500/30",
-                                    hoverShadow: "hover:shadow-emerald-500/15",
-                                }
-                            ].map((stat) => (
+                            {statsData.map((stat) => (
                                 <CertificationStatCard key={stat.label} {...stat} />
                             ))}
                         </div>
