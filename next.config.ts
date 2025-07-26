@@ -10,7 +10,7 @@ const bundleAnalyzer = withBundleAnalyzer({
 const nextConfig: NextConfig = {
   // Modern experimental features
   experimental: {
-    optimizePackageImports: ['lucide-react', 'class-variance-authority', 'clsx', 'tailwind-merge'],
+    optimizePackageImports: ['class-variance-authority', 'clsx', 'tailwind-merge'],
     optimizeCss: true, // Enable CSS optimization
     scrollRestoration: true, // Better scroll handling
   },

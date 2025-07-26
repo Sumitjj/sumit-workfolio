@@ -118,10 +118,10 @@ export function smoothScrollToElement(
     const startPosition = window.pageYOffset;
     const distance = Math.abs(targetPosition - startPosition);
 
-    // Dynamically calculate duration if not provided
-    const base = 400; // ms
-    const factor = 0.5; // ms per pixel
-    const maxDuration = 2000; // ms
+    // Dynamically calculate duration if not provided - Optimized for speed
+    const base = 150; // ms - Much faster base duration
+    const factor = 0.08; // ms per pixel - Much less time per pixel
+    const maxDuration = 400; // ms - Faster maximum duration
     const dynamicDuration = Math.min(base + distance * factor, maxDuration);
 
     const scrollDuration = duration ?? dynamicDuration;
@@ -200,7 +200,7 @@ export function useInViewport(
 /**
  * Performance-optimized scroll to top
  */
-export function scrollToTop(duration: number = 600) {
+export function scrollToTop(duration: number = 400) {
     smoothScrollToElement('', 0, duration);
 }
 

@@ -1,20 +1,63 @@
 "use client";
 
-import React from "react";
+import React, { memo, useMemo } from "react";
 const SALESFORCE_BLUE = "#0070d2";
 import { Fade } from "react-awesome-reveal";
 import {
-    Calendar,
-    Briefcase,
-    Building2,
-    Clock,
-    TrendingUp,
-    Award,
-    Zap,
-    Star,
-    Sparkles
-} from "lucide-react";
+    FiCalendar,
+    FiHome,
+    FiClock,
+    FiTrendingUp,
+    FiAward,
+    FiZap,
+    FiStar
+} from "react-icons/fi";
+import { FaRoute } from "react-icons/fa";
 import { experiences } from "@/data/portfolio";
+
+// Production-ready constants - Optimized for performance
+const ANIMATION_CONFIG = {
+    CARD_DELAY_BASE: 100, // Reduced from 200ms
+    TECH_DELAY_BASE: 30,  // Reduced from 60ms
+    TECH_DISPLAY_LIMIT: 12,
+    CARD_SPACING: {
+        mobile: 'mb-8',
+        desktop: 'sm:mb-12'
+    }
+} as const;
+
+const STYLING_CONFIG = {
+    COMPANY_ICON_SIZE: {
+        mobile: 'w-12 h-12',
+        desktop: 'sm:w-14 sm:h-14'
+    },
+    BORDER_RADIUS: 'rounded-2xl',
+    SHADOW_HOVER: 'hover:shadow-xl hover:shadow-primary/6' // Reduced shadow intensity
+} as const;
+
+// Enhanced TypeScript interfaces
+interface ExperienceData {
+    id: string;
+    company: string;
+    position: string;
+    description: string;
+    technologies: string[];
+    startDate: Date;
+    endDate?: Date;
+    current: boolean;
+}
+
+interface TimelineNodeProps {
+    isLast: boolean;
+    isCurrent: boolean;
+    index: number;
+}
+
+interface TechnologyTagProps {
+    tech: string;
+    delay: number;
+    index: number;
+}
 
 /**
  * Format date to readable string
@@ -50,128 +93,198 @@ function calculateDuration(startDate: Date, endDate?: Date): string {
 }
 
 /**
- * Modern Experience Card Component
+ * Optimized Timeline Node Component
+ */
+const TimelineNode = memo<TimelineNodeProps>(({ isLast, isCurrent, index }) => (
+    <>
+        {/* Timeline Connection Line */}
+        {!isLast && (
+            <div className="absolute left-8 top-20 w-0.5 h-full bg-gradient-to-b from-neutral-300 via-neutral-200 to-transparent dark:from-neutral-600 dark:via-neutral-700 z-0">
+                <div className="absolute inset-0 bg-gradient-to-b from-neutral-200 via-neutral-100 to-transparent dark:from-neutral-500 dark:via-neutral-600 blur-[1px] opacity-50" />
+            </div>
+        )}
+
+        {/* Optimized Timeline Node */}
+        <div
+            className="absolute left-6 top-8 w-4 h-4 rounded-full border-2 border-primary bg-white dark:bg-neutral-900 z-10 group-hover:scale-110 transition-transform duration-200 shadow-md"
+            style={{ willChange: 'transform' }}
+        >
+            <div className="absolute inset-0 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors duration-200" />
+            {isCurrent && (
+                <div className="absolute -inset-1 rounded-full border-2 border-primary/30 animate-ping" />
+            )}
+        </div>
+    </>
+));
+TimelineNode.displayName = 'TimelineNode';
+
+/**
+ * Optimized Technology Tag with Performance-First Hover Effects
+ */
+const TechnologyTag = memo<TechnologyTagProps>(({ tech, delay, index }) => {
+    const hoverClasses = useMemo(() =>
+        "group/tech relative inline-flex items-center px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-neutral-50 dark:bg-neutral-800 text-xs font-medium text-neutral-700 dark:text-neutral-300 border border-neutral-200/60 dark:border-neutral-700/60 cursor-default opacity-0 animate-fade-in transition-all duration-200 hover:scale-105 hover:bg-primary/8 hover:border-primary/30 hover:text-primary hover:font-medium hover:shadow-md"
+        , []);
+
+    return (
+        <span
+            className={hoverClasses}
+            style={{
+                animationDelay: `${delay}ms`,
+                animationFillMode: 'forwards',
+                willChange: 'transform, opacity' // Optimize for animations
+            }}
+        >
+            {/* Single optimized hover effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-primary/10 opacity-0 group-hover/tech:opacity-100 transition-opacity duration-200 rounded-lg" />
+
+            {/* Optimized text content */}
+            <span className="relative z-10 transition-colors duration-200">
+                {tech}
+            </span>
+        </span>
+    );
+});
+TechnologyTag.displayName = 'TechnologyTag';
+
+/**
+ * Optimized Experience Card Component
  */
 interface ExperienceCardProps {
-    experience: typeof experiences[0];
+    experience: ExperienceData;
     index: number;
     isLast: boolean;
 }
 
-function ExperienceCard({ experience, index, isLast }: ExperienceCardProps) {
-    const duration = calculateDuration(experience.startDate, experience.endDate);
-    const dateRange = `${formatDate(experience.startDate)} - ${experience.current ? 'Present' : formatDate(experience.endDate!)}`;
+const ExperienceCard = memo<ExperienceCardProps>(({ experience, index, isLast }) => {
+    const duration = useMemo(() =>
+        calculateDuration(experience.startDate, experience.endDate),
+        [experience.startDate, experience.endDate]
+    );
+
+    const dateRange = useMemo(() =>
+        `${formatDate(experience.startDate)} - ${experience.current ? 'Present' : formatDate(experience.endDate!)}`,
+        [experience.startDate, experience.endDate, experience.current]
+    );
+
+    const displayTechnologies = useMemo(() =>
+        experience.technologies.slice(0, ANIMATION_CONFIG.TECH_DISPLAY_LIMIT),
+        [experience.technologies]
+    );
+
+    const remainingTechCount = experience.technologies.length - ANIMATION_CONFIG.TECH_DISPLAY_LIMIT;
+
+    const cardClasses = useMemo(() =>
+        `group/card relative bg-white/95 dark:bg-neutral-900/95 backdrop-blur-sm ${STYLING_CONFIG.BORDER_RADIUS} border border-neutral-200/80 dark:border-neutral-700/80 hover:border-primary/40 transition-all duration-300 ${STYLING_CONFIG.SHADOW_HOVER} hover:-translate-y-0.5 overflow-hidden`,
+        []
+    );
 
     return (
-        <Fade direction="up" delay={index * 100} triggerOnce>
+        <Fade direction="up" delay={index * ANIMATION_CONFIG.CARD_DELAY_BASE} triggerOnce cascade={false}>
             <div className="relative group">
-                {/* Timeline Line */}
-                {!isLast && (
-                    <div
-                        className="absolute left-4 top-12 w-0.5 h-full -mb-8"
-                        style={{
-                            background: `linear-gradient(to bottom, ${SALESFORCE_BLUE}, ${SALESFORCE_BLUE}40)`
-                        }}
-                    />
-                )}
+                <TimelineNode
+                    isLast={isLast}
+                    isCurrent={experience.current}
+                    index={index}
+                />
 
-                {/* Timeline Node */}
-                <div className="flex items-start gap-4">
-                    {/* Compact Node */}
-                    <div className="relative flex-shrink-0 mt-3">
-                        <div
-                            className="w-8 h-8 rounded-lg flex items-center justify-center shadow-md relative z-10"
-                            style={{ backgroundColor: SALESFORCE_BLUE }}
-                        >
-                            <Building2 className="w-4 h-4 text-white" />
-                        </div>
-                        {experience.current && (
-                            <div
-                                className="absolute inset-0 w-8 h-8 rounded-lg animate-pulse"
-                                style={{ backgroundColor: `${SALESFORCE_BLUE}30` }}
-                            />
-                        )}
-                    </div>
+                {/* Professional Experience Card */}
+                <div className={`ml-16 ${ANIMATION_CONFIG.CARD_SPACING.mobile} ${ANIMATION_CONFIG.CARD_SPACING.desktop}`}>
+                    <div className={cardClasses} style={{ willChange: 'transform, box-shadow' }}>
 
-                    {/* Compact Experience Card */}
-                    <div className="flex-1 pb-6">
-                        <div className="relative overflow-hidden rounded-xl border border-border/50 bg-card/50 backdrop-blur-sm hover:bg-card/80 transition-all duration-300 group-hover:shadow-lg group-hover:border-primary/30">
+                        {/* Simplified Background Pattern */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-primary/1 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300" />
 
-                            {/* Compact Card Content */}
-                            <div className="p-4 sm:p-5">
-                                {/* Status & Duration - Inline */}
-                                <div className="flex flex-wrap items-center gap-2 mb-3">
+                        {/* Card Header - Company & Position */}
+                        <div className="relative p-4 sm:p-6 pb-3 sm:pb-4 border-b border-neutral-100/80 dark:border-neutral-800/80">
+                            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
+                                {/* Company Info */}
+                                <div className="flex items-center gap-3 sm:gap-4 flex-1">
                                     <div
-                                        className="flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium text-white"
-                                        style={{ backgroundColor: SALESFORCE_BLUE }}
+                                        className={`${STYLING_CONFIG.COMPANY_ICON_SIZE.mobile} ${STYLING_CONFIG.COMPANY_ICON_SIZE.desktop} rounded-xl flex items-center justify-center shadow-md group-hover/card:shadow-lg transition-all duration-300`}
+                                        style={{
+                                            backgroundColor: `${SALESFORCE_BLUE}12`,
+                                            border: `2px solid ${SALESFORCE_BLUE}25`
+                                        }}
                                     >
-                                        <Clock className="w-3 h-3" />
-                                        {duration}
+                                        <FiHome className="w-6 h-6 sm:w-7 sm:h-7" style={{ color: SALESFORCE_BLUE }} />
                                     </div>
+                                    <div className="flex-1 min-w-0">
+                                        <h3 className="text-lg sm:text-xl font-bold text-neutral-900 dark:text-white mb-1 group-hover/card:text-primary transition-colors duration-300 truncate">
+                                            {experience.company}
+                                        </h3>
+                                        <h4 className="text-base sm:text-lg font-semibold text-neutral-600 dark:text-neutral-300 leading-tight">
+                                            {experience.position}
+                                        </h4>
+                                    </div>
+                                </div>
+
+                                {/* Status & Duration - Parallel Layout */}
+                                <div className="flex flex-row sm:flex-row items-center gap-2 flex-shrink-0">
                                     {experience.current && (
-                                        <div className="flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-green-100 dark:bg-green-950/30 text-green-700 dark:text-green-300">
-                                            <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                                            Current
+                                        <div className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800">
+                                            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-500 animate-pulse" />
+                                            <span className="text-xs font-semibold text-emerald-700 dark:text-emerald-400">Current</span>
                                         </div>
                                     )}
-                                </div>
-
-                                {/* Position & Company - Compact */}
-                                <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2 leading-tight">
-                                    {experience.position}
-                                </h3>
-
-                                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-3">
-                                    <div className="flex items-center gap-2">
-                                        <Building2 className="w-4 h-4" style={{ color: SALESFORCE_BLUE }} />
-                                        <span className="font-semibold text-foreground">{experience.company}</span>
-                                    </div>
-                                    <div className="flex items-center gap-1 text-muted-foreground text-sm">
-                                        <Calendar className="w-3 h-3" />
-                                        <span>{dateRange}</span>
+                                    <div className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-xs font-medium text-neutral-600 dark:text-neutral-400 flex items-center gap-1.5">
+                                        <FiClock className="w-3 h-3" />
+                                        <span className="whitespace-nowrap">{duration}</span>
                                     </div>
                                 </div>
+                            </div>
 
-                                {/* Compact Description */}
-                                <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                            {/* Date Range */}
+                            <div className="flex items-center gap-2 text-xs sm:text-sm text-neutral-500 dark:text-neutral-500">
+                                <FiCalendar className="w-3 h-3 sm:w-4 sm:h-4" />
+                                <span className="font-medium">{dateRange}</span>
+                            </div>
+                        </div>
+
+                        {/* Card Content */}
+                        <div className="relative p-4 sm:p-6">
+                            {/* Description */}
+                            <div className="mb-5 sm:mb-6">
+                                <h5 className="text-xs sm:text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-2 uppercase tracking-wide">
+                                    Role Overview
+                                </h5>
+                                <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed text-sm sm:text-base">
                                     {experience.description}
                                 </p>
+                            </div>
 
-                                {/* Compact Technologies */}
-                                <div className="flex flex-wrap gap-1.5">
-                                    {experience.technologies.slice(0, 6).map((tech) => (
-                                        <span
-                                            key={tech}
-                                            className="px-2 py-1 rounded-md text-xs font-medium bg-muted/60 text-muted-foreground hover:bg-primary/10 hover:text-primary transition-all duration-200"
-                                        >
-                                            {tech}
-                                        </span>
+                            {/* Technologies */}
+                            <div className="relative">
+                                <h5 className="text-xs sm:text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-3 uppercase tracking-wide">
+                                    Technologies & Tools
+                                </h5>
+                                <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                                    {displayTechnologies.map((tech, techIndex) => (
+                                        <TechnologyTag
+                                            key={`${experience.id}-${tech}`}
+                                            tech={tech}
+                                            delay={(index * ANIMATION_CONFIG.CARD_DELAY_BASE) + (techIndex * ANIMATION_CONFIG.TECH_DELAY_BASE)}
+                                            index={techIndex}
+                                        />
                                     ))}
-                                    {experience.technologies.length > 6 && (
-                                        <span className="px-2 py-1 rounded-md text-xs font-medium text-muted-foreground">
-                                            +{experience.technologies.length - 6} more
+                                    {remainingTechCount > 0 && (
+                                        <span className="inline-flex items-center px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg text-xs font-medium text-neutral-500 dark:text-neutral-500 bg-neutral-100/50 dark:bg-neutral-800/50">
+                                            +{remainingTechCount} more
                                         </span>
                                     )}
                                 </div>
                             </div>
-
-                            {/* Bottom Accent */}
-                            <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-muted/30">
-                                <div
-                                    className="h-full transition-all duration-1000 ease-out"
-                                    style={{
-                                        backgroundColor: SALESFORCE_BLUE,
-                                        width: '100%'
-                                    }}
-                                />
-                            </div>
                         </div>
+
+                        {/* Subtle Accent Line */}
+                        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
                     </div>
                 </div>
             </div>
         </Fade>
     );
-}
+});
+ExperienceCard.displayName = 'ExperienceCard';
 
 /**
  * Experience Stats Component
@@ -179,7 +292,7 @@ function ExperienceCard({ experience, index, isLast }: ExperienceCardProps) {
 function ExperienceStats() {
     const stats = [
         {
-            icon: TrendingUp,
+            icon: FiTrendingUp,
             label: "Years in Delivery",
             value: "9+",
             color: "#3b82f6",
@@ -191,7 +304,7 @@ function ExperienceStats() {
             textGradient: "linear-gradient(to right, #3b82f6, #8b5cf6, #3b82f6)"
         },
         {
-            icon: Building2,
+            icon: FiHome,
             label: "Tech Workplaces",
             value: "3",
             color: "#10b981",
@@ -203,7 +316,7 @@ function ExperienceStats() {
             textGradient: "linear-gradient(to right, #10b981, #059669, #10b981)"
         },
         {
-            icon: Award,
+            icon: FiAward,
             label: "Leadership Roles",
             value: "3",
             color: "#8b5cf6",
@@ -215,7 +328,7 @@ function ExperienceStats() {
             textGradient: "linear-gradient(to right, #8b5cf6, #d946ef, #8b5cf6)"
         },
         {
-            icon: Zap,
+            icon: FiZap,
             label: "Solutions Delivered",
             value: "15+",
             color: "#f59e0b",
@@ -273,10 +386,10 @@ function ExperienceStats() {
 
                             {/* Decorative elements */}
                             <div className="absolute top-3 right-3 opacity-30 group-hover:opacity-60 transition-opacity">
-                                <Star className="w-4 h-4" style={{ color: stat.color }} />
+                                <FiStar className="w-4 h-4" style={{ color: stat.color }} />
                             </div>
                             <div className="absolute bottom-3 left-3 opacity-20 group-hover:opacity-40 transition-opacity">
-                                <Sparkles className="w-3 h-3" style={{ color: stat.color }} />
+                                <FiStar className="w-3 h-3" style={{ color: stat.color }} />
                             </div>
                         </div>
                     </div>
@@ -287,32 +400,44 @@ function ExperienceStats() {
 }
 
 /**
- * Professional Experience Section - Redesigned
+ * Professional Experience Section - Performance Optimized
  */
 export function ExperienceSection() {
+    const experienceList = useMemo(() =>
+        experiences.map((exp, index) => ({
+            ...exp,
+            isLast: index === experiences.length - 1
+        })),
+        []
+    );
+
     return (
-        <section id="experience" className="py-8 sm:py-12">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                {/* Compact Section Header */}
-                <Fade direction="up" triggerOnce>
-                    <div className="text-center mb-8">
-                        <div className="flex flex-col items-center justify-center gap-2 mb-4 sm:flex-row sm:gap-3">
+        <section id="experience" className="py-16 sm:py-20 lg:py-24 relative overflow-hidden">
+            {/* Optimized Background Pattern */}
+            <div className="absolute inset-0 bg-gradient-to-br from-neutral-50/30 via-transparent to-primary/3 dark:from-neutral-950/30 dark:to-primary/5" />
+
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+                {/* Section Header */}
+                <Fade direction="up" triggerOnce cascade={false} delay={0}>
+                    <div className="text-center mb-12 lg:mb-16">
+                        {/* Icon and Title Container */}
+                        <div className="flex flex-col items-center justify-center mb-6">
+                            {/* Icon Container */}
                             <div
-                                className="p-2 rounded-xl border"
-                                style={{
-                                    backgroundColor: `${SALESFORCE_BLUE}10`,
-                                    borderColor: `${SALESFORCE_BLUE}30`
-                                }}
+                                className="p-3 sm:p-4 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-sm shadow-lg mb-4"
                             >
-                                <Briefcase className="w-6 h-6" style={{ color: SALESFORCE_BLUE }} />
+                                <FaRoute className="w-7 h-7 sm:w-8 sm:h-8 text-primary" />
                             </div>
-                            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground">
-                                Professional Milestones
+
+                            {/* Title */}
+                            <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-neutral-900 dark:text-white mb-3 text-center leading-tight">
+                                Experience Timeline
                             </h2>
                         </div>
 
-                        <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
-                            Transforming e-commerce experiences through innovative Salesforce Commerce Cloud solutions
+                        {/* Description */}
+                        <p className="text-base sm:text-lg lg:text-xl text-neutral-600 dark:text-neutral-400 max-w-4xl mx-auto leading-relaxed px-4">
+                            A progressive journey through enterprise technology, specializing in Salesforce Commerce Cloud solutions and digital transformation initiatives
                         </p>
                     </div>
                 </Fade>
@@ -320,15 +445,16 @@ export function ExperienceSection() {
                 {/* Experience Stats */}
                 <ExperienceStats />
 
-                {/* Experience Timeline */}
-                <div className="max-w-4xl mx-auto">
-                    <div className="relative">
-                        {experiences.map((experience, index) => (
+                {/* Career Journey Timeline - Optimized Loading */}
+                <div className="max-w-5xl mx-auto relative">
+                    {/* Experience Timeline */}
+                    <div className="space-y-0">
+                        {experienceList.map((experience, index) => (
                             <ExperienceCard
                                 key={experience.id}
                                 experience={experience}
                                 index={index}
-                                isLast={index === experiences.length - 1}
+                                isLast={experience.isLast}
                             />
                         ))}
                     </div>

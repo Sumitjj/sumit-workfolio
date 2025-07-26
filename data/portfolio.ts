@@ -6,7 +6,7 @@ import {
     SiJquery, SiNestjs, SiMainwp, SiCodesignal, SiBackendless, SiGoogledataproc
 } from "react-icons/si";
 import { GiDeerHead } from "react-icons/gi";
-
+import { PiLightningFill, PiFileHtmlDuotone } from "react-icons/pi";
 import { DiScrum } from "react-icons/di";
 import { MdManageAccounts } from "react-icons/md";
 import { HiOutlineCloud, HiOutlineMail } from "react-icons/hi";
@@ -39,13 +39,12 @@ export const skillGroups: SkillGroup[] = [
             { name: "SFRA", icon: FaSalesforce },
             { name: "SGJC", icon: FaSalesforce },
             { name: "OCAPI/SCAPI", icon: TbPackages },
-            { name: "Javascript", icon: IoLogoJavascript },
-            { name: "Typescript", icon: BiLogoTypescript },
             { name: "B2C Commerce-SDK", icon: TbSdk },
             { name: "RESTful APIs", icon: TbApi },
             { name: "Node.js", icon: FaNode },
-            { name: "NEST JS", icon: SiNestjs },
+            { name: "Nest JS", icon: SiNestjs },
             { name: "Core Java", icon: FaJava },
+            { name: "PWA Kit", icon: SiPwa },
             { name: "MongoDB", icon: SiMongodb },
         ]
     },
@@ -53,26 +52,26 @@ export const skillGroups: SkillGroup[] = [
         title: "Frontend & Headless",
         icon: GiDeerHead,
         skills: [
-            { name: "React Js", icon: FaReact },
-            { name: "Next Js", icon: TbBrandNextjs },
+            { name: "ISML", icon: PiFileHtmlDuotone },
             { name: "JavaScript", icon: IoLogoJavascript },
             { name: "Typescript", icon: BiLogoTypescript },
+            { name: "React Js", icon: FaReact },
+            { name: "Next Js", icon: TbBrandNextjs },
             { name: "HTML5", icon: FaHtml5 },
             { name: "CSS3", icon: FaCss3Alt },
             { name: "Tailwind CSS", icon: SiTailwindcss },
             { name: "JQuery", icon: SiJquery },
-            { name: "PWA Kit", icon: SiPwa },
-
+            { name: "LWC", icon: PiLightningFill }
         ]
     },
     {
         title: "Leadership & Process",
         icon: SiGoogledataproc,
         skills: [
-            { name: "Agile/Scrum", icon: DiScrum },
+            { name: "Project Management", icon: MdManageAccounts },
             { name: "Team Leadership", icon: SiMainwp },
             { name: "System Design", icon: SiCodesignal },
-            { name: "Project Management", icon: MdManageAccounts },
+            { name: "Agile/Scrum", icon: DiScrum },
             { name: "Jira", icon: SiJira },
             { name: "GitHub", icon: FaGitAlt },
             { name: "Jenkins", icon: FaJenkins },
@@ -84,8 +83,8 @@ export const skillGroups: SkillGroup[] = [
  * Navigation items for the portfolio
  */
 export const navigationItems: NavItem[] = [
-    { href: "#skills", label: "Toolkit" },
     { href: "#projects", label: "Creations" },
+    { href: "#skills", label: "Tech" },
     { href: "#experience", label: "Journey" },
     { href: "#certifications", label: "Badges" },
     { href: "#contact", label: "Connect" },
@@ -113,6 +112,7 @@ export const personalInfo = {
     bio: "Transforming e-commerce vision into reality with 9+ years of SFCC mastery. Trusted by brands to build fast, flexible, and future- ready digital storefronts.",
     avatar: getOptimizedAvatarImage("Sumit Jangid"),
     resume: "/resume/SumitJangid_Resume_2025.docx",
+    logo: "/images/logo/SumitJangir.png",
     websiteUrl: "https://www.sumitworkfolio.in",
 };
 
@@ -129,7 +129,7 @@ export const projects: Project[] = [
             "Collaborated with cross-functional teams for seamless integrations."
         ],
         categories: ["E-Commerce", "Headless Commerce"],
-        title: "FullBeauty",
+        title: "Full Beauty",
         description: [
             "Checkout redesign in headless commerce.",
             "NextJs, NestJs, OCAPI, SCAPI expertise.",
@@ -143,9 +143,12 @@ export const projects: Project[] = [
     },
     {
         id: "2",
-        title: "Aquasana Water Filters",
-        description:
-            "Comprehensive water filtration e-commerce platform featuring advanced product configurators, subscription management, and integrated customer support systems.",
+        title: "Aquasana",
+        description: [
+            "Custom product configurators using SFRA.",
+            "Integrated subscription and support modules via OCAPI.",
+            "Enhanced e-commerce features and performance."
+        ],
         image: getOptimizedProjectImage("Aquasana"),
         technologies: ["SFRA", "OCAPI", "REST APIs", "3rd Party Integrations"],
         liveUrl: "https://www.aquasana.com/",
@@ -157,11 +160,14 @@ export const projects: Project[] = [
     {
         id: "8",
         title: "Hotwater",
-        description:
-            "Water heating solutions platform with product configurators, energy efficiency calculators, and professional installation network integration.",
+        description: [
+            "Built product configurators in SFRA for water heaters.",
+            "Integrated efficiency tools and backend APIs.",
+            "Streamlined customer experience and scalability."
+        ],
         image: getOptimizedProjectImage("Hotwater"),
-        technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
-        liveUrl: "https://www.aquasana.com/",
+        technologies: ["SFRA", "OCAPI", "REST APIs", "Integrations"],
+        liveUrl: "https://www.hotwater.com/",
         longDescription: "Comprehensive analytics platform featuring machine learning algorithms for predictive analytics, real-time data processing, and interactive visualizations. Built for scalability and performance.",
         categories: ["Web Development", "AI/ML"],
         featured: false,
@@ -170,10 +176,13 @@ export const projects: Project[] = [
     {
         id: "3",
         title: "Lane Bryant",
-        description:
-            "Fashion retail platform with size-inclusive shopping experience, advanced fitting guides, and personalized style recommendations for plus-size customers.",
+        description: [
+            "Developed inclusive fashion storefront using SFRA.",
+            "Implemented fitting guides via custom OCAPI logic.",
+            "Enhanced user personalization and performance."
+        ],
         image: getOptimizedProjectImage("LaneBryant"),
-        technologies: ["SFRA", "OCAPI", "REST APIs", "3rd-Party Integrations"],
+        technologies: ["SFRA", "OCAPI", "REST APIs", "Integrations"],
         liveUrl: "https://www.lanebryant.com/",
         longDescription: "Modern social media platform featuring real-time messaging, video sharing, live streaming capabilities, and advanced content moderation. Built for high scalability and performance.",
         categories: ["Web Development", "Real-time"],
@@ -182,12 +191,15 @@ export const projects: Project[] = [
     },
     {
         id: "4",
-        title: "London Drugs",
-        description:
-            "Multi-category retail platform with pharmacy services, electronics, home goods, and health products with integrated loyalty programs.",
+        title: "LondonDrugs",
+        description: [
+            "SFRA-based multi-category retail platform.",
+            "Integrated pharmacy and loyalty systems.",
+            "Optimized user journeys and checkout flows."
+        ],
         image: getOptimizedProjectImage("LondonDrugs"),
-        technologies: ["SFRA", "OCAPI", "REST APIs", "3rd-Party Integrations"],
-        liveUrl: "https://www.campingworld.com/",
+        technologies: ["SFRA", "OCAPI", "REST APIs", "Integrations"],
+        liveUrl: "https://www.londondrugs.com/",
         longDescription: "Comprehensive learning platform with video streaming, interactive quizzes, progress analytics, and certification system. Supports multiple content formats and gamification.",
         categories: ["Web Development", "Education"],
         featured: false,
@@ -196,10 +208,13 @@ export const projects: Project[] = [
     {
         id: "13",
         title: "Loreal",
-        description:
-            "Premium beauty and cosmetics platform with virtual try-on features, skin analysis tools, and personalized product recommendations.",
+        description: [
+            "SFRA-powered cosmetics platform with virtual try-ons.",
+            "Implemented SCAPI-based personalization features.",
+            "Improved product discovery and engagement."
+        ],
         image: getOptimizedProjectImage("Loreal"),
-        technologies: ["SFRA", "OCAPI", "REST APIs", "3rd-Party Integrations"],
+        technologies: ["SFRA", "OCAPI", "REST APIs", "Integrations"],
         liveUrl: "http://lancome-usa.com/",
         longDescription: "Enterprise-grade task management platform with team collaboration, Gantt charts, time tracking, and comprehensive reporting. Integrates with popular development tools.",
         categories: ["Web Development", "Productivity"],
@@ -209,10 +224,13 @@ export const projects: Project[] = [
     {
         id: "5",
         title: "Camping World",
-        description:
-            "Outdoor recreation e-commerce platform with extensive RV and camping gear catalog, installation services, and membership programs.",
+        description: [
+            "Implemented wellness product store using SFRA.",
+            "Integrated content-driven education modules.",
+            "Enhanced holistic shopping experiences."
+        ],
         image: getOptimizedProjectImage("Camping World"),
-        technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
+        technologies: ["SFRA", "OCAPI", "REST APIs", "Integrations"],
         liveUrl: "https://www.campingworld.com/",
         longDescription: "Comprehensive learning platform with video streaming, interactive quizzes, progress analytics, and certification system. Supports multiple content formats and gamification.",
         categories: ["Web Development", "Education"],
@@ -221,12 +239,15 @@ export const projects: Project[] = [
     },
     {
         id: "6",
-        title: "Saje Natural Wellness",
-        description:
-            "Natural wellness and aromatherapy e-commerce platform featuring essential oils, wellness products, and educational content for holistic health.",
+        title: "Saje Wellness",
+        description: [
+            "Built omnichannel commerce experience using SFRA.",
+            "Integrated global store locator and inventory.",
+            "Improved performance across devices."
+        ],
         image: getOptimizedProjectImage("Saje"),
-        technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
-        liveUrl: "https://www.campingworld.com/",
+        technologies: ["SFRA", "OCAPI", "REST APIs", "Integrations"],
+        liveUrl: "https://www.saje.com/",
         longDescription: "Comprehensive learning platform with video streaming, interactive quizzes, progress analytics, and certification system. Supports multiple content formats and gamification.",
         categories: ["Web Development", "Education"],
         featured: false,
@@ -235,11 +256,14 @@ export const projects: Project[] = [
     {
         id: "7",
         title: "Uniqlo",
-        description:
-            "Global fashion retailer with innovative clothing technology, sustainable practices, and seamless omnichannel shopping experiences.",
+        description: [
+            "Developed heating solutions platform with SFRA.",
+            "Integrated dealer locator and warranty tools.",
+            "Boosted performance and configurability."
+        ],
         image: getOptimizedProjectImage("Uniqlo"),
-        technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
-        liveUrl: "https://www.campingworld.com/",
+        technologies: ["SFRA", "OCAPI", "REST APIs", "Integrations"],
+        liveUrl: "https://www.uniqlo.com/us/en/",
         longDescription: "Comprehensive learning platform with video streaming, interactive quizzes, progress analytics, and certification system. Supports multiple content formats and gamification.",
         categories: ["Web Development", "Education"],
         featured: false,
@@ -247,12 +271,15 @@ export const projects: Project[] = [
     },
     {
         id: "9",
-        title: "State Water Heaters",
-        description:
-            "Commercial and residential water heating solutions with advanced product selection tools, warranty management, and dealer locator systems.",
+        title: "State",
+        description: [
+            "Built energy-efficient SFRA storefront.",
+            "Integrated smart home device compatibility.",
+            "Optimized support and customer workflows."
+        ],
         image: getOptimizedProjectImage("State"),
-        technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
-        liveUrl: "https://www.aquasana.com/",
+        technologies: ["SFRA", "OCAPI", "REST APIs", "Integrations"],
+        liveUrl: "https://www.statewaterheaters.com/",
         longDescription: "Comprehensive analytics platform featuring machine learning algorithms for predictive analytics, real-time data processing, and interactive visualizations. Built for scalability and performance.",
         categories: ["Web Development", "AI/ML"],
         featured: false,
@@ -260,12 +287,15 @@ export const projects: Project[] = [
     },
     {
         id: "10",
-        title: "Reliance Water Heaters",
-        description:
-            "Reliable water heating solutions platform with energy-efficient products, smart home integration, and comprehensive customer support.",
+        title: "Reliance",
+        description: [
+            "Developed B2B-focused commerce features in SFRA.",
+            "Added predictive maintenance and controls.",
+            "Enhanced commercial product visibility."
+        ],
         image: getOptimizedProjectImage("Reliance"),
-        technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
-        liveUrl: "https://www.hotwater.com/",
+        technologies: ["SFRA", "OCAPI", "REST APIs", "Integrations"],
+        liveUrl: "https://www.reliancewaterheaters.com/",
         longDescription: "Full-featured mobile banking application with end-to-end encryption, biometric authentication, real-time transactions, and comprehensive financial management tools.",
         categories: ["Mobile Development", "Fintech"],
         featured: false,
@@ -273,12 +303,15 @@ export const projects: Project[] = [
     },
     {
         id: "11",
-        title: "American Water Heaters",
-        description:
-            "Professional-grade water heating systems with advanced controls, energy monitoring, and maintenance scheduling for commercial applications.",
+        title: "American",
+        description: [
+            "SFRA-based smart boiler platform integration.",
+            "Enabled remote monitoring and controls.",
+            "Focused on predictive maintenance tools."
+        ],
         image: getOptimizedProjectImage("American"),
-        technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
-        liveUrl: "https://www.hotwater.com/",
+        technologies: ["SFRA", "OCAPI", "REST APIs", "Integrations"],
+        liveUrl: "https://www.americanwaterheater.com/",
         longDescription: "Full-featured mobile banking application with end-to-end encryption, biometric authentication, real-time transactions, and comprehensive financial management tools.",
         categories: ["Mobile Development", "Fintech"],
         featured: false,
@@ -287,11 +320,14 @@ export const projects: Project[] = [
     {
         id: "12",
         title: "Lochinvar",
-        description:
-            "High-efficiency commercial water heating and boiler systems with smart controls, remote monitoring, and predictive maintenance capabilities.",
+        description: [
+            "Developed SFRA storefront with smart product suite.",
+            "Integrated SCAPI/OCAPI for service tools.",
+            "Enabled global commerce scalability."
+        ],
         image: getOptimizedProjectImage("Lochinvar"),
-        technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
-        liveUrl: "https://www.hotwater.com/",
+        technologies: ["SFRA", "OCAPI", "REST APIs", "Integrations"],
+        liveUrl: "https://www.lochinvar.com/",
         longDescription: "Full-featured mobile banking application with end-to-end encryption, biometric authentication, real-time transactions, and comprehensive financial management tools.",
         categories: ["Mobile Development", "Fintech"],
         featured: false,
@@ -299,12 +335,15 @@ export const projects: Project[] = [
     },
     {
         id: "13",
-        title: "AO Smith Corp",
-        description:
-            "Global water technology solutions with innovative products, smart connectivity, and comprehensive service networks for residential and commercial markets.",
+        title: "AOSmith Corp",
+        description: [
+            "Developed SFRA storefront with smart product suite.",
+            "Integrated SCAPI/OCAPI for service tools.",
+            "Enabled global commerce scalability."
+        ],
         image: getOptimizedProjectImage("AOSmith"),
-        technologies: ["SFRA", "OCAPI", "REST APIs", "Third-Party Integrations"],
-        liveUrl: "https://www.aquasana.com/",
+        technologies: ["SFRA", "OCAPI", "REST APIs", "Integrations"],
+        liveUrl: "https://www.aosmith.com/",
         longDescription: "Comprehensive analytics platform featuring machine learning algorithms for predictive analytics, real-time data processing, and interactive visualizations. Built for scalability and performance.",
         categories: ["Web Development", "AI/ML"],
         featured: true,
@@ -318,7 +357,7 @@ export const projects: Project[] = [
 export const experiences: Experience[] = [
     {
         id: "1",
-        position: "Salesforce Certified B2C Commerce Technical Lead",
+        position: "Certified B2C Commerce Technical Lead",
         company: "Merkle",
         startDate: new Date(2021, 3, 1),
         current: true,
@@ -357,7 +396,7 @@ export const experiences: Experience[] = [
     },
     {
         id: "3",
-        position: "Salesforce Commerce Cloud Developer",
+        position: "B2C Commerce Developer",
         company: "PFSWeb",
         startDate: new Date(2016, 1, 1),
         endDate: new Date(2019, 4, 31),

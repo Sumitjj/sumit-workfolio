@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect, useMemo, useRef } from "react";
-import { Menu, X, Download } from "lucide-react";
+import React, { useState, useEffect, useMemo } from "react";
+import { FiMenu, FiX, FiDownload } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
 import { navigationItems, personalInfo } from "@/data/portfolio";
 import { cn, openResume, getResumeButtonText } from "@/lib/helpers/utils";
@@ -70,22 +70,16 @@ const Navigation = () => {
         <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 relative">
             {/* Logo/Name */}
-            <div className="flex-shrink-0">
-              <a
-                href="#"
-                onClick={(e) => handleNavClick("#", e)}
-                className="text-xl font-bold tracking-tight text-foreground hover:text-primary transition-all duration-300 hover:scale-105 transform-gpu origin-center"
-                style={{ transformOrigin: 'center center', contain: 'layout style' }}
-              >
-                {personalInfo.name.split(" ").map((word, index) => (
-                  <span key={index}>
-                    {index === 0 ? word : (
-                      <span className="text-primary">{word}</span>
-                    )}
-                    {index < personalInfo.name.split(" ").length - 1 && " "}
-                  </span>
-                ))}
-              </a>
+            <div className="logo flex-shrink-0">
+              {personalInfo.name.split(" ").map((word, index) => (
+                <span key={index}>
+                  {index === 0 ? word : (
+                    <span className="text-primary">{word}</span>
+                  )}
+                  {index < personalInfo.name.split(" ").length - 1 && " "}
+                </span>
+              ))}
+
             </div>
 
             {/* Desktop Navigation */}
@@ -114,7 +108,7 @@ const Navigation = () => {
                 className="relative overflow-hidden border-border/30 bg-gradient-to-r from-primary/10 to-secondary/10 backdrop-blur-sm hover:bg-gradient-to-r hover:from-primary hover:to-primary hover:text-primary-foreground hover:border-primary transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/25 transform-gpu group"
                 style={{ transformOrigin: 'center center', contain: 'layout style' }}
               >
-                <Download className="h-4 w-4 mr-2 group-hover:animate-bounce" />
+                <FiDownload className="h-4 w-4 mr-2 group-hover:animate-bounce" />
                 <span className="font-medium">{getResumeButtonText()}</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out" />
               </Button>
@@ -139,9 +133,9 @@ const Navigation = () => {
                   isOpen && "rotate-90"
                 )}>
                   {isOpen ? (
-                    <X className="h-5 w-5 text-foreground" />
+                    <FiX className="h-5 w-5 text-foreground" />
                   ) : (
-                    <Menu className="h-5 w-5 text-foreground" />
+                    <FiMenu className="h-5 w-5 text-foreground" />
                   )}
                 </div>
               </button>
@@ -237,7 +231,7 @@ const Navigation = () => {
                   e.currentTarget.style.color = 'rgba(255, 255, 255, 0.9)';
                 }}
               >
-                <Download className="h-4 w-4" />
+                <FiDownload className="h-4 w-4" />
                 <span>{getResumeButtonText()}</span>
               </button>
             </div>
