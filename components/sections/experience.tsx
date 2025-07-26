@@ -4,16 +4,15 @@ import React, { memo, useMemo } from "react";
 const SALESFORCE_BLUE = "#0070d2";
 import { Fade } from "react-awesome-reveal";
 import {
-    Calendar,
-    Briefcase,
-    Building2,
-    Clock,
-    TrendingUp,
-    Award,
-    Zap,
-    Star,
-    Sparkles
-} from "lucide-react";
+    FiCalendar,
+    FiHome,
+    FiClock,
+    FiTrendingUp,
+    FiAward,
+    FiZap,
+    FiStar
+} from "react-icons/fi";
+import { FaRoute } from "react-icons/fa";
 import { experiences } from "@/data/portfolio";
 
 // Production-ready constants - Optimized for performance
@@ -208,7 +207,7 @@ const ExperienceCard = memo<ExperienceCardProps>(({ experience, index, isLast })
                                             border: `2px solid ${SALESFORCE_BLUE}25`
                                         }}
                                     >
-                                        <Building2 className="w-6 h-6 sm:w-7 sm:h-7" style={{ color: SALESFORCE_BLUE }} />
+                                        <FiHome className="w-6 h-6 sm:w-7 sm:h-7" style={{ color: SALESFORCE_BLUE }} />
                                     </div>
                                     <div className="flex-1 min-w-0">
                                         <h3 className="text-lg sm:text-xl font-bold text-neutral-900 dark:text-white mb-1 group-hover/card:text-primary transition-colors duration-300 truncate">
@@ -229,7 +228,7 @@ const ExperienceCard = memo<ExperienceCardProps>(({ experience, index, isLast })
                                         </div>
                                     )}
                                     <div className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-xs font-medium text-neutral-600 dark:text-neutral-400 flex items-center gap-1.5">
-                                        <Clock className="w-3 h-3" />
+                                        <FiClock className="w-3 h-3" />
                                         <span className="whitespace-nowrap">{duration}</span>
                                     </div>
                                 </div>
@@ -237,7 +236,7 @@ const ExperienceCard = memo<ExperienceCardProps>(({ experience, index, isLast })
 
                             {/* Date Range */}
                             <div className="flex items-center gap-2 text-xs sm:text-sm text-neutral-500 dark:text-neutral-500">
-                                <Calendar className="w-3 h-3 sm:w-4 sm:h-4" />
+                                <FiCalendar className="w-3 h-3 sm:w-4 sm:h-4" />
                                 <span className="font-medium">{dateRange}</span>
                             </div>
                         </div>
@@ -293,7 +292,7 @@ ExperienceCard.displayName = 'ExperienceCard';
 function ExperienceStats() {
     const stats = [
         {
-            icon: TrendingUp,
+            icon: FiTrendingUp,
             label: "Years in Delivery",
             value: "9+",
             color: "#3b82f6",
@@ -305,7 +304,7 @@ function ExperienceStats() {
             textGradient: "linear-gradient(to right, #3b82f6, #8b5cf6, #3b82f6)"
         },
         {
-            icon: Building2,
+            icon: FiHome,
             label: "Tech Workplaces",
             value: "3",
             color: "#10b981",
@@ -317,7 +316,7 @@ function ExperienceStats() {
             textGradient: "linear-gradient(to right, #10b981, #059669, #10b981)"
         },
         {
-            icon: Award,
+            icon: FiAward,
             label: "Leadership Roles",
             value: "3",
             color: "#8b5cf6",
@@ -329,7 +328,7 @@ function ExperienceStats() {
             textGradient: "linear-gradient(to right, #8b5cf6, #d946ef, #8b5cf6)"
         },
         {
-            icon: Zap,
+            icon: FiZap,
             label: "Solutions Delivered",
             value: "15+",
             color: "#f59e0b",
@@ -387,10 +386,10 @@ function ExperienceStats() {
 
                             {/* Decorative elements */}
                             <div className="absolute top-3 right-3 opacity-30 group-hover:opacity-60 transition-opacity">
-                                <Star className="w-4 h-4" style={{ color: stat.color }} />
+                                <FiStar className="w-4 h-4" style={{ color: stat.color }} />
                             </div>
                             <div className="absolute bottom-3 left-3 opacity-20 group-hover:opacity-40 transition-opacity">
-                                <Sparkles className="w-3 h-3" style={{ color: stat.color }} />
+                                <FiStar className="w-3 h-3" style={{ color: stat.color }} />
                             </div>
                         </div>
                     </div>
@@ -427,7 +426,7 @@ export function ExperienceSection() {
                             <div
                                 className="p-3 sm:p-4 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-sm shadow-lg mb-4"
                             >
-                                <Briefcase className="w-7 h-7 sm:w-8 sm:h-8" />
+                                <FaRoute className="w-7 h-7 sm:w-8 sm:h-8 text-primary" />
                             </div>
 
                             {/* Title */}

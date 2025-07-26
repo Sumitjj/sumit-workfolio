@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { ChevronDown, ArrowRight, Sparkles } from "lucide-react";
+import { FiChevronDown, FiArrowRight, FiStar } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
 import { personalInfo, socialLinks, contactConfig } from "@/data/portfolio";
 import { smoothScrollToElement } from "@/lib/helpers/scroll";
@@ -104,7 +104,7 @@ export const HeroSection = () => {
 
               {/* Sparkle Icon */}
               <div className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 p-1.5 sm:p-2 bg-primary text-primary-foreground rounded-full shadow-lg animate-spin-slow">
-                <Sparkles className="w-3 h-3 sm:w-4 sm:h-4" />
+                <FiStar className="w-3 h-3 sm:w-4 sm:h-4" />
               </div>
             </div>
           </div>
@@ -149,8 +149,8 @@ export const HeroSection = () => {
                 className="group hover-lift w-full sm:w-auto text-sm sm:text-base"
                 onClick={() => smoothScrollToElement("projects")}
               >
-                What I've Built
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                What I&apos;ve Built
+                <FiArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Button>
 
               <Button
@@ -185,7 +185,7 @@ export const HeroSection = () => {
           className="p-2 text-muted-foreground hover:text-foreground transition-colors animate-bounce"
           aria-label="Scroll to projects section"
         >
-          <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6" />
+          <FiChevronDown className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
       </div>
     </section>

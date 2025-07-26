@@ -4,21 +4,20 @@ import React, { useState, useCallback, useRef } from "react";
 import { Fade } from "react-awesome-reveal";
 import emailjs from "@emailjs/browser";
 import {
-  MessageSquare,
-  Mail,
-  User,
-  Building,
-  FileText,
-  Send,
-  Check,
-  AlertCircle,
-  Clock,
-  Award,
-  Globe,
-  Zap,
-  Sparkles,
-  Coffee
-} from "lucide-react";
+  FiMessageSquare,
+  FiMail,
+  FiUser,
+  FiHome,
+  FiFile,
+  FiSend,
+  FiCheck,
+  FiAlertCircle,
+  FiClock,
+  FiAward,
+  FiGlobe,
+  FiStar,
+  FiCoffee
+} from "react-icons/fi";
 import { Button } from "@/components/ui/button";
 import { contactConfig } from "@/data/portfolio";
 import { cn } from "@/lib/helpers/utils";
@@ -49,21 +48,21 @@ type SubmissionState = 'idle' | 'sending' | 'success' | 'error';
 function HighlightMetrics() {
   const metrics = [
     {
-      icon: Clock,
+      icon: FiClock,
       value: "< 24h",
       label: "Quick Response",
       description: "Fast turnaround time",
       valueColor: "text-orange-600 dark:text-orange-400"
     },
     {
-      icon: Award,
+      icon: FiAward,
       value: "9+ Years",
       label: "Experience",
       description: "Proven track record",
       valueColor: "text-emerald-600 dark:text-emerald-400"
     },
     {
-      icon: Globe,
+      icon: FiGlobe,
       value: "Global",
       label: "Remote Ready",
       description: "Worldwide collaboration",
@@ -79,7 +78,7 @@ function HighlightMetrics() {
           {/* Header matching website style */}
           <div className="text-center mb-8">
             <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 mb-4">
-              <Sparkles className="w-6 h-6 text-primary animate-spin-slow" />
+              <FiStar className="w-6 h-6 text-primary animate-spin-slow" />
             </div>
             <h4 className="text-lg font-semibold text-foreground mb-2">
               What you can expect after hitting send button
@@ -232,7 +231,7 @@ function ContactForm() {
       {/* Responsive Form Header */}
       <div className="text-center mb-6 sm:mb-8 lg:mb-10">
         <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-lg sm:rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 mb-4 sm:mb-6">
-          <MessageSquare className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 text-primary" />
+          <FiMessageSquare className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 text-primary" />
         </div>
         <h3 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-foreground mb-2 sm:mb-3">Drop Me a Line</h3>
       </div>
@@ -243,7 +242,7 @@ function ContactForm() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
           <div className="space-y-2">
             <label className="text-xs sm:text-sm font-medium text-foreground flex items-center">
-              <User className="w-3 h-3 sm:w-4 sm:h-4 mr-2 text-primary" />
+              <FiUser className="w-3 h-3 sm:w-4 sm:h-4 mr-2 text-primary" />
               Full Name *
             </label>
             <input
@@ -261,7 +260,7 @@ function ContactForm() {
             />
             {errors.name && (
               <p className="text-xs sm:text-sm text-red-500 flex items-center">
-                <AlertCircle className="w-3 h-3 mr-1" />
+                <FiAlertCircle className="w-3 h-3 mr-1" />
                 {errors.name}
               </p>
             )}
@@ -269,7 +268,7 @@ function ContactForm() {
 
           <div className="space-y-2">
             <label className="text-xs sm:text-sm font-medium text-foreground flex items-center">
-              <Mail className="w-3 h-3 sm:w-4 sm:h-4 mr-2 text-primary" />
+              <FiMail className="w-3 h-3 sm:w-4 sm:h-4 mr-2 text-primary" />
               Email Address *
             </label>
             <input
@@ -287,7 +286,7 @@ function ContactForm() {
             />
             {errors.email && (
               <p className="text-xs sm:text-sm text-red-500 flex items-center">
-                <AlertCircle className="w-3 h-3 mr-1" />
+                <FiAlertCircle className="w-3 h-3 mr-1" />
                 {errors.email}
               </p>
             )}
@@ -298,7 +297,7 @@ function ContactForm() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
           <div className="space-y-2">
             <label className="text-xs sm:text-sm font-medium text-foreground flex items-center">
-              <Building className="w-3 h-3 sm:w-4 sm:h-4 mr-2 text-primary" />
+              <FiHome className="w-3 h-3 sm:w-4 sm:h-4 mr-2 text-primary" />
               Company
             </label>
             <input
@@ -312,7 +311,7 @@ function ContactForm() {
 
           <div className="space-y-2">
             <label className="text-xs sm:text-sm font-medium text-foreground flex items-center">
-              <FileText className="w-3 h-3 sm:w-4 sm:h-4 mr-2 text-primary" />
+              <FiFile className="w-3 h-3 sm:w-4 sm:h-4 mr-2 text-primary" />
               Subject *
             </label>
             <select
@@ -333,7 +332,7 @@ function ContactForm() {
             </select>
             {errors.subject && (
               <p className="text-xs sm:text-sm text-red-500 flex items-center">
-                <AlertCircle className="w-3 h-3 mr-1" />
+                <FiAlertCircle className="w-3 h-3 mr-1" />
                 {errors.subject}
               </p>
             )}
@@ -343,7 +342,7 @@ function ContactForm() {
         {/* Message - Responsive */}
         <div className="space-y-2">
           <label className="text-xs sm:text-sm font-medium text-foreground flex items-center">
-            <MessageSquare className="w-3 h-3 sm:w-4 sm:h-4 mr-2 text-primary" />
+            <FiMessageSquare className="w-3 h-3 sm:w-4 sm:h-4 mr-2 text-primary" />
             Message *
           </label>
           <textarea
@@ -361,7 +360,7 @@ function ContactForm() {
           />
           {errors.message && (
             <p className="text-xs sm:text-sm text-red-500 flex items-center">
-              <AlertCircle className="w-3 h-3 mr-1" />
+              <FiAlertCircle className="w-3 h-3 mr-1" />
               {errors.message}
             </p>
           )}
@@ -381,7 +380,7 @@ function ContactForm() {
           <div className="flex items-center justify-center space-x-4">
             {submissionState === 'idle' && (
               <>
-                <Send className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                <FiSend className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300" />
                 <span>Send Message</span>
               </>
             )}
@@ -393,13 +392,13 @@ function ContactForm() {
             )}
             {submissionState === 'success' && (
               <>
-                <Check className="w-4 h-4 sm:w-5 sm:h-5" />
+                <FiCheck className="w-4 h-4 sm:w-5 sm:h-5" />
                 <span>Message Sent!</span>
               </>
             )}
             {submissionState === 'error' && (
               <>
-                <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5" />
+                <FiAlertCircle className="w-4 h-4 sm:w-5 sm:h-5" />
                 <span>Failed to Send</span>
               </>
             )}
@@ -438,7 +437,7 @@ export function ContactSection() {
             {/* Coffee Icon with Professional Positioning */}
             <div className="flex justify-center mb-6 sm:mb-8">
               <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-2xl bg-card border border-border/50 shadow-sm">
-                <Coffee className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-foreground" />
+                <FiCoffee className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-foreground" />
               </div>
             </div>
 

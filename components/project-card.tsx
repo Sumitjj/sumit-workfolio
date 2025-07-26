@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
-import { Sparkles, ExternalLink, Zap } from "lucide-react";
+import { FaStar, FaExternalLinkAlt, FaBolt } from "react-icons/fa";
 import { CardBody, CardContainer, CardItem } from "@/lib/aceternity/3d-card";
 import { Project } from "@/types";
 import { cn } from "@/lib/helpers/utils";
@@ -97,7 +97,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-amber-400/8 to-orange-400/8 rounded-full blur-[1px] group-hover/featured:blur-[2px] transition-all duration-300"></div>
                 <div className="relative w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/40 dark:to-orange-900/40 border border-amber-200/60 dark:border-amber-700/60 hover:scale-110 transition-all duration-300 backdrop-blur-sm">
-                  <Sparkles className="w-4 h-4 text-amber-600 dark:text-amber-400" />
+                  <FaStar className="w-4 h-4 text-amber-600 dark:text-amber-400" />
                 </div>
               </div>
             </div>
@@ -106,7 +106,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-emerald-400/8 to-teal-400/8 rounded-full blur-[1px] group-hover/project:blur-[2px] transition-all duration-300"></div>
                 <div className="relative w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/40 dark:to-teal-900/40 border border-emerald-200/60 dark:border-emerald-700/60 hover:scale-110 transition-all duration-300 backdrop-blur-sm">
-                  <Zap className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                  <FaBolt className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                 </div>
               </div>
             </div>
@@ -121,7 +121,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-400/8 to-cyan-400/8 rounded-full blur-[1px] group-hover/live:blur-[2px] transition-all duration-300"></div>
                 <div className="relative w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-900/40 dark:to-cyan-900/40 border border-blue-200/60 dark:border-blue-700/60 hover:scale-110 transition-all duration-300 backdrop-blur-sm">
-                  <ExternalLink className="w-4 h-4 text-blue-600 dark:text-blue-400 group-hover/live:rotate-12 transition-transform duration-300" />
+                  <FaExternalLinkAlt className="w-4 h-4 text-blue-600 dark:text-blue-400 group-hover/live:rotate-12 transition-transform duration-300" />
                 </div>
               </div>
             </div>

@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { ExternalLink, Github, X, Tag, Code2, Layers, Zap, Calendar, Star, Users, TrendingUp } from "lucide-react";
+import { FiX } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
 import { Modal } from "@/components/ui/modal";
 import { Project } from "@/types";
@@ -44,14 +44,14 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                         onClick={onClose}
                         className="absolute top-6 right-6 h-12 w-12 rounded-full bg-white/10 backdrop-blur-xl text-white hover:bg-white/20 hover:scale-110 transition-all duration-300 border border-white/20 shadow-2xl z-20"
                     >
-                        <X className="h-6 w-6" />
+                        <FiX className="h-6 w-6" />
                     </Button>
 
                     {/* Featured Badge - Modern design */}
                     {project.featured && (
                         <div className="absolute top-6 left-6">
                             <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-[rgb(0,112,210)] to-[rgb(87,163,240)] text-white text-sm font-semibold shadow-xl backdrop-blur-sm border border-white/20">
-                                <Star className="w-4 h-4 mr-2 fill-current" />
+                                <FaStar className="w-4 h-4 mr-2 fill-current" />
                                 Featured Project
                             </div>
                         </div>
@@ -63,7 +63,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                             <div className="flex-1">
                                 {project.organization && (
                                     <div className="flex items-center gap-2 mb-3">
-                                        <Calendar className="w-4 h-4 text-white/80" />
+                                        <FaCalendar className="w-4 h-4 text-white/80" />
                                         <span className="text-white/80 text-sm font-medium">{project.organization}</span>
                                     </div>
                                 )}
@@ -93,7 +93,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                                         onClick={() => window.open(project.githubUrl, "_blank")}
                                         className="bg-white/10 backdrop-blur-xl text-white hover:bg-white/20 hover:scale-105 transition-all duration-300 border border-white/20 shadow-xl"
                                     >
-                                        <Github className="h-5 w-5 mr-2" />
+                                        <FaGithub className="h-5 w-5 mr-2" />
                                         View Code
                                     </Button>
                                 )}
@@ -103,7 +103,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                                         onClick={() => window.open(project.liveUrl, "_blank")}
                                         className="bg-gradient-to-r from-[rgb(0,112,210)] to-[rgb(87,163,240)] text-white hover:scale-105 transition-all duration-300 shadow-xl border border-white/20"
                                     >
-                                        <ExternalLink className="h-5 w-5 mr-2" />
+                                        <FaExternalLinkAlt className="h-5 w-5 mr-2" />
                                         Live Demo
                                     </Button>
                                 )}
@@ -117,17 +117,17 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                     {/* Stats Row */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div className="text-center p-6 rounded-2xl bg-gradient-to-br from-[rgb(0,112,210)]/10 to-[rgb(87,163,240)]/5 border border-[rgb(0,112,210)]/20">
-                            <TrendingUp className="w-8 h-8 text-[rgb(0,112,210)] mx-auto mb-3" />
+                            <FaChartLine className="w-8 h-8 text-[rgb(0,112,210)] mx-auto mb-3" />
                             <div className="text-2xl font-bold text-foreground mb-1">{project.technologies.length}</div>
                             <div className="text-sm text-muted-foreground">Technologies</div>
                         </div>
                         <div className="text-center p-6 rounded-2xl bg-gradient-to-br from-[rgb(75,202,129)]/10 to-[rgb(75,202,129)]/5 border border-[rgb(75,202,129)]/20">
-                            <Users className="w-8 h-8 text-[rgb(75,202,129)] mx-auto mb-3" />
+                            <FaUsers className="w-8 h-8 text-[rgb(75,202,129)] mx-auto mb-3" />
                             <div className="text-2xl font-bold text-foreground mb-1">{project.organization || 'Enterprise'}</div>
                             <div className="text-sm text-muted-foreground">Organization</div>
                         </div>
                         <div className="text-center p-6 rounded-2xl bg-gradient-to-br from-[rgb(254,147,57)]/10 to-[rgb(254,147,57)]/5 border border-[rgb(254,147,57)]/20">
-                            <Star className="w-8 h-8 text-[rgb(254,147,57)] mx-auto mb-3" />
+                            <FaStar className="w-8 h-8 text-[rgb(254,147,57)] mx-auto mb-3" />
                             <div className="text-2xl font-bold text-foreground mb-1">{project.featured ? 'Featured' : 'Standard'}</div>
                             <div className="text-sm text-muted-foreground">Project Type</div>
                         </div>
@@ -137,7 +137,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                     <section className="space-y-6">
                         <div className="flex items-center gap-4 mb-6">
                             <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[rgb(0,112,210)] to-[rgb(87,163,240)] flex items-center justify-center shadow-lg">
-                                <Tag className="w-6 h-6 text-white" />
+                                <FaTag className="w-6 h-6 text-white" />
                             </div>
                             <div>
                                 <h2 className="text-3xl font-bold text-foreground">Project Overview</h2>
@@ -155,7 +155,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                     <section className="space-y-6">
                         <div className="flex items-center gap-4 mb-6">
                             <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[rgb(75,202,129)] to-[rgb(75,202,129)]/80 flex items-center justify-center shadow-lg">
-                                <Zap className="w-6 h-6 text-white" />
+                                <FaBolt className="w-6 h-6 text-white" />
                             </div>
                             <div>
                                 <h2 className="text-3xl font-bold text-foreground">Key Features</h2>
@@ -183,7 +183,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                     <section className="space-y-6">
                         <div className="flex items-center gap-4 mb-6">
                             <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[rgb(254,147,57)] to-[rgb(254,147,57)]/80 flex items-center justify-center shadow-lg">
-                                <Code2 className="w-6 h-6 text-white" />
+                                <FaCode className="w-6 h-6 text-white" />
                             </div>
                             <div>
                                 <h2 className="text-3xl font-bold text-foreground">Third Party Integrations</h2>
@@ -214,7 +214,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                     <section className="space-y-6">
                         <div className="flex items-center gap-4 mb-6">
                             <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[rgb(87,163,240)] to-[rgb(0,112,210)] flex items-center justify-center shadow-lg">
-                                <Layers className="w-6 h-6 text-white" />
+                                <FaLayerGroup className="w-6 h-6 text-white" />
                             </div>
                             <div>
                                 <h2 className="text-3xl font-bold text-foreground">Technologies Used</h2>

@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { Heart, Sparkles } from "lucide-react";
-import { contactConfig, footerContent, personalInfo, socialLinks } from "@/data/portfolio";
+import { FiStar } from "react-icons/fi";
+import { contactConfig, socialLinks } from "@/data/portfolio";
 import { SocialFloatingDock } from "@/lib/aceternity/social-floating-dock";
 import { FooterSparkles } from "@/lib/aceternity/footer-sparkles";
 import { handleEmailClick } from "@/lib/helpers/utils";
@@ -13,27 +13,7 @@ import { handleEmailClick } from "@/lib/helpers/utils";
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
-  function HorizontalSocialDockMobile() {
-    return (
-      <div className="flex flex-row gap-x-4 justify-center items-center md:hidden mt-4">
-        {socialLinks.map((social) => {
-          const Icon = social.icon;
-          return (
-            <a
-              key={social.platform}
-              href={social.url}
-              aria-label={social.platform}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-neutral-500 dark:text-neutral-300 text-2xl"
-            >
-              <Icon />
-            </a>
-          );
-        })}
-      </div>
-    );
-  }
+
 
   return (
     <footer className="relative mt-auto overflow-hidden">
@@ -95,9 +75,9 @@ export function Footer() {
           </div>
           <div className="mt-6" />
           <div className="flex items-center justify-center space-x-2 text-xs text-muted-foreground">
-            <Sparkles className="w-3 h-3 text-primary" />
+            <FiStar className="w-3 h-3 text-primary" />
             <span>Always learning, always building.</span>
-            <Sparkles className="w-3 h-3 text-primary" />
+            <FiStar className="w-3 h-3 text-primary" />
           </div>
         </div>
         {/* Desktop layout: 3 columns, message centered below */}
@@ -122,9 +102,9 @@ export function Footer() {
           </div>
           <div className="w-full flex justify-center mt-8 mb-2">
             <div className="flex items-center justify-center space-x-2 text-xs text-muted-foreground">
-              <Sparkles className="w-3 h-3 text-primary" />
+              <FiStar className="w-3 h-3 text-primary" />
               <span>Always learning, always building.</span>
-              <Sparkles className="w-3 h-3 text-primary" />
+              <FiStar className="w-3 h-3 text-primary" />
             </div>
           </div>
         </div>

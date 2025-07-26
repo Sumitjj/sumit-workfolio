@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Sun, Moon, Monitor } from "lucide-react";
+import { FiSun, FiMoon, FiMonitor } from "react-icons/fi";
 import { useTheme } from "@/providers/theme-provider";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/helpers/utils";
@@ -13,9 +13,9 @@ export function ThemeSwitcher({ className }: { className?: string }) {
   const { theme, setTheme } = useTheme();
 
   const themes = [
-    { value: "light", icon: Sun, label: "Light" },
-    { value: "dark", icon: Moon, label: "Dark" },
-    { value: "system", icon: Monitor, label: "System" },
+    { value: "light", icon: FiSun, label: "Light" },
+    { value: "dark", icon: FiMoon, label: "Dark" },
+    { value: "system", icon: FiMonitor, label: "System" },
   ] as const;
 
   return (
@@ -78,7 +78,7 @@ export function ThemeToggle({ className }: { className?: string }) {
       type="button"
     >
       {/* Sun Icon - Day Mode */}
-      <Sun
+      <FaSun
         className={cn(
           "h-5 w-5 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2",
           "transition-all duration-600 ease-in-out transform-gpu",
@@ -94,7 +94,7 @@ export function ThemeToggle({ className }: { className?: string }) {
       />
 
       {/* Moon Icon - Night Mode */}
-      <Moon
+      <FaMoon
         className={cn(
           "h-5 w-5 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2",
           "transition-all duration-600 ease-in-out transform-gpu",

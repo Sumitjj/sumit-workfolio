@@ -1,14 +1,13 @@
 "use client";
 
 import React, { useState, useMemo, useEffect, useRef } from "react";
-import { Code, Award, Users, Briefcase, Zap, Building2, Star, Sparkles } from "lucide-react";
+import { FiCode, FiAward, FiUsers, FiZap, FiHome, FiStar } from "react-icons/fi";
+import { FiMonitor } from "react-icons/fi";
 import { ProjectCard } from "@/components/project-card";
 import { ProjectModal } from "@/components/project-modal";
 import { projects } from "@/data/portfolio";
 import { Project } from "@/types";
 import { Fade } from "react-awesome-reveal";
-
-const SALESFORCE_BLUE = "#0070d2";
 
 // Animation configuration constants
 const ANIMATION_CONFIGS = {
@@ -20,7 +19,7 @@ const ANIMATION_CONFIGS = {
 // Project statistics data
 const PROJECT_STATS = [
   {
-    icon: Zap,
+    icon: FiZap,
     label: "Scalable Projects Architected",
     color: "#0070d2",
     gradient: "from-blue-500/10 via-blue-600/5 to-purple-600/10",
@@ -28,7 +27,7 @@ const PROJECT_STATS = [
     shadowColor: "#0070d2",
   },
   {
-    icon: Users,
+    icon: FiUsers,
     label: "Global Clients Empowered",
     color: "#059669",
     gradient: "from-emerald-500/10 via-green-600/5 to-teal-600/10",
@@ -36,7 +35,7 @@ const PROJECT_STATS = [
     shadowColor: "#059669",
   },
   {
-    icon: Building2,
+    icon: FiHome,
     label: "Brands Digitally Transformed",
     color: "#8b5cf6",
     gradient: "from-violet-500/10 via-purple-600/5 to-fuchsia-600/10",
@@ -48,17 +47,17 @@ const PROJECT_STATS = [
 // Professional highlights data
 const PROFESSIONAL_HIGHLIGHTS = [
   {
-    icon: Code,
+    icon: FiCode,
     title: "Expert Development",
     description: "Specialized in Salesforce Commerce Cloud with 9+ years of enterprise experience",
   },
   {
-    icon: Award,
+    icon: FiAward,
     title: "Certified Professional",
     description: "Salesforce B2C Commerce Cloud certified with proven track record",
   },
   {
-    icon: Users,
+    icon: FiUsers,
     title: "Client Success",
     description: "Delivered successful solutions for enterprise clients worldwide",
   }
@@ -127,10 +126,10 @@ export function ProjectsSection() {
         </div>
         {/* Decorative elements */}
         <div className="absolute top-3 right-3 opacity-30 group-hover:opacity-60 transition-opacity">
-          <Star className="w-5 h-5" style={{ color: shadowColor }} />
+          <FiStar className="w-5 h-5" style={{ color: shadowColor }} />
         </div>
         <div className="absolute bottom-3 left-3 opacity-20 group-hover:opacity-40 transition-opacity">
-          <Sparkles className="w-4 h-4" style={{ color: shadowColor }} />
+          <FiStar className="w-4 h-4" style={{ color: shadowColor }} />
         </div>
       </div>
     </div>
@@ -296,22 +295,16 @@ export function ProjectsSection() {
         {/* Compact Section Header */}
         <Fade direction="up" triggerOnce>
           <div className="text-center mb-8">
-            <div className="flex flex-col items-center justify-center gap-2 mb-4 sm:flex-row sm:gap-3">
-              <div
-                className="p-2 rounded-xl border"
-                style={{
-                  backgroundColor: `${SALESFORCE_BLUE}10`,
-                  borderColor: `${SALESFORCE_BLUE}30`
-                }}
-              >
-                <Briefcase className="w-6 h-6" style={{ color: SALESFORCE_BLUE }} />
+            <div className="flex flex-col items-center justify-center mb-6">
+              <div className="p-3 sm:p-4 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-sm shadow-lg mb-4">
+                <FiMonitor className="w-7 h-7 sm:w-8 sm:h-8 text-primary" />
               </div>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground">
                 What I&apos;ve Built
               </h2>
             </div>
 
-            <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
               A showcase of innovations, certifications, and commerce-driven solutions.
             </p>
           </div>

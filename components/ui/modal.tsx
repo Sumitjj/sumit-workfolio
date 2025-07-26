@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { X } from "lucide-react";
+import { FiX } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/helpers/utils";
 
@@ -111,7 +111,7 @@ export function Modal({ isOpen, onClose, title, children, className }: ModalProp
               onClick={onClose}
               className="hover:bg-accent rounded-full transition-all duration-200 hover:scale-110"
             >
-              <X className="h-5 w-5" />
+              <FiX className="h-5 w-5" />
             </Button>
           </div>
         )}
