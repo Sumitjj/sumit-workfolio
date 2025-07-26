@@ -6,10 +6,7 @@
 // Image categories for organization
 export const IMAGE_CATEGORIES = {
     PROJECTS: 'projects',
-    AVATARS: 'avatars',
-    THUMBNAILS: 'thumbnails',
-    BANNERS: 'banners',
-    ICONS: 'icons'
+    AVATARS: 'avatars'
 } as const;
 
 type ImageCategory = typeof IMAGE_CATEGORIES[keyof typeof IMAGE_CATEGORIES];
@@ -52,26 +49,7 @@ export function getAvatarImage(name: string, extension: string = 'jpg'): string 
     return getImagePath('avatars', name, extension);
 }
 
-/**
- * Get banner image with optimized path
- */
-export function getBannerImage(name: string, extension: string = 'jpg'): string {
-    return getImagePath('banners', name, extension);
-}
 
-/**
- * Get thumbnail image with optimized path
- */
-export function getThumbnailImage(name: string, extension: string = 'jpg'): string {
-    return getImagePath('thumbnails', name, extension);
-}
-
-/**
- * Get icon image with optimized path
- */
-export function getIconImage(name: string, extension: string = 'svg'): string {
-    return getImagePath('icons', name, extension);
-}
 
 /**
  * Pre-built image paths for current portfolio projects
@@ -82,8 +60,6 @@ export const PROJECT_IMAGES = {
     'Aquasana': '/images/projects/aquasana.jpeg',
     'AOSmith': '/images/projects/aosmith.jpg',
     'LaneBryant': '/images/projects/lanebryant.jpg',
-    'AOSmith Hotwater': '/images/projects/aosmith-hotwater.jpg',
-    'Ascena LaneBryant': '/images/projects/ascena-lanebryant.jpg',
     'Loreal': '/images/projects/loreal.webp',
     'Camping World': '/images/projects/campingworld.webp',
     'Saje': '/images/projects/saje.jpg',
