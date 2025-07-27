@@ -2,7 +2,6 @@
 
 import React, { useState, useCallback, useRef } from "react";
 import { Fade } from "react-awesome-reveal";
-import emailjs from "@emailjs/browser";
 import {
   FiMessageSquare,
   FiMail,
@@ -122,7 +121,7 @@ function HighlightMetrics() {
 }
 
 /**
- * Beautiful contact form with validation and EmailJS integration
+ * Beautiful contact form with validation and Gmail SMTP integration via Nodemailer
  */
 function ContactForm() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -130,7 +129,7 @@ function ContactForm() {
     name: '',
     email: '',
     company: '',
-    subject: '',
+    subject: 'project',
     message: ''
   });
   const [errors, setErrors] = useState<FormErrors>({});
@@ -167,44 +166,56 @@ function ContactForm() {
   // Handle form submission
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
+    e.stopPropagation();
+
+    // Prevent multiple submissions
+    if (submissionState === 'sending') return;
 
     if (!validateForm()) return;
 
     setSubmissionState('sending');
 
     try {
-      // Prepare template parameters for EmailJS
-      const templateParams = {
-        from_name: formData.name,
-        from_email: formData.email,
-        company: formData.company || 'Not specified',
-        subject: contactConfig.subjects[formData.subject as keyof typeof contactConfig.subjects],
-        message: formData.message,
-        to_email: contactConfig.recipientEmail,
-      };
+      // Send email via our new API route
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          company: formData.company || '',
+          subject: formData.subject,
+          message: formData.message,
+        }),
+      });
 
-      // Send email via EmailJS
-      await emailjs.send(
-        contactConfig.emailJsServiceId,
-        contactConfig.emailJsTemplateId,
-        templateParams,
-        contactConfig.emailJsPublicKey
-      );
+      const result = await response.json();
 
-      setSubmissionState('success');
+      if (result.success) {
+        setSubmissionState('success');
 
-      // Reset form after success
-      setTimeout(() => {
-        setFormData({
-          name: '',
-          email: '',
-          company: '',
-          subject: '',
-          message: ''
-        });
-        setSubmissionState('idle');
-      }, 3000);
+        // Reset form after success
+        setTimeout(() => {
+          setFormData({
+            name: '',
+            email: '',
+            company: '',
+            subject: 'project',
+            message: ''
+          });
+          setSubmissionState('idle');
+        }, 3000);
+      } else {
+        setSubmissionState('error');
+        console.error('Email sending failed:', result.message);
 
+        // Reset error state after 5 seconds
+        setTimeout(() => {
+          setSubmissionState('idle');
+        }, 5000);
+      }
     } catch (error) {
       console.error('Error sending email:', error);
       setSubmissionState('error');
@@ -214,7 +225,7 @@ function ContactForm() {
         setSubmissionState('idle');
       }, 5000);
     }
-  }, [formData, validateForm]);
+  }, [formData]);
 
   // Handle input changes
   const handleInputChange = useCallback((field: keyof FormData, value: string) => {
@@ -370,6 +381,13 @@ function ContactForm() {
         <Button
           type="submit"
           disabled={submissionState === 'sending'}
+          onClick={(e) => {
+            // Additional click handler to prevent multiple submissions
+            if (submissionState === 'sending') {
+              e.preventDefault();
+              e.stopPropagation();
+            }
+          }}
           className={cn(
             "w-full py-3 sm:py-4 lg:py-5 text-sm sm:text-base font-medium relative overflow-hidden transition-all duration-500 group touch-manipulation",
             "min-h-[48px] sm:min-h-[52px]", // Ensure good touch target size
@@ -443,11 +461,11 @@ export function ContactSection() {
 
             {/* Title with better spacing */}
             <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground mb-4 sm:mb-6">
-              Let’s Build Together
+              Let&apos;s Build Together
             </h2>
 
             <p className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-2xl lg:max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
-              Got an idea or project in mind? I’m always up for meaningful collaborations. Let’s create something impactful and future-ready.
+              Got an idea or project in mind? I&apos;m always up for meaningful collaborations. Let&apos;s create something impactful and future-ready.
             </p>
           </div>
         </Fade>
