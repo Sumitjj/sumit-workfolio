@@ -7,10 +7,9 @@ Highly optimized image management system serving directly from the public folder
 ```
 public/images/
 ├── projects/           # Project showcase images
-├── avatars/           # Profile and testimonial avatars
-├── thumbnails/        # Smaller preview images
-├── banners/           # Hero and section banner images
-└── icons/             # Custom icons and logos
+├── avatars/           # Profile avatars
+├── badges/            # Certification badge images
+└── logo/              # Brand logo files
 ```
 
 ## Required Images
@@ -19,21 +18,40 @@ public/images/
 
 | Project Title | Required Filename |
 |---------------|-------------------|
-| Full Beauty FBB | `full-beauty-fbb.jpg` |
+| Full Beauty FBB | `fullbeauty.jpg` |
+| Aquasana | `aquasana.jpeg` |
 | AOSmith | `aosmith.jpg` |
-| AOSmith Hotwater | `aosmith-hotwater.jpg` |
-| Ascena LaneBryant | `ascena-lanebryant.jpg` |
-| Loreal | `loreal.jpg` |
-| Camping World | `camping-world.jpg` |
+| LaneBryant | `lanebryant.jpg` |
+| Loreal | `loreal.webp` |
+| Camping World | `campingworld.webp` |
+| Saje | `saje.jpg` |
+| Hotwater | `hotwater.jpg` |
+| State | `state.webp` |
+| Reliance | `reliance.jpg` |
+| American | `american.png` |
+| Lochinvar | `lochinvar.jpeg` |
+| LondonDrugs | `londondrugs.jpg` |
+| Uniqlo | `uniqlo.jpeg` |
 
 ### Avatar Images (`public/images/avatars/`)
 
 | Person Name | Required Filename |
 |-------------|-------------------|
-| Sumit Jangid | `sumit-jangid.jpg` |
-| Sarah Chen | `sarah-chen.jpg` |
-| Michael Rodriguez | `michael-rodriguez.jpg` |
-| Emily Davis | `emily-davis.jpg` |
+| Sumit Jangid | `sumit-jangid.jpeg` |
+
+### Badge Images (`public/images/badges/`)
+
+| Badge Name | Required Filename |
+|------------|-------------------|
+| B2C Developer | `B2CDeveloperBadge.png` |
+| B2C Architect | `B2CArchitectBadge.png` |
+| Salesforce AgentForce | `SalesforceAgentForce.png` |
+
+### Logo Images (`public/images/logo/`)
+
+| Logo Name | Required Filename |
+|-----------|-------------------|
+| Sumit Jangir | `SumitJangir.png` |
 
 ## Image Specifications
 

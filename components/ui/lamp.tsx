@@ -27,7 +27,7 @@ export const LampContainer = ({
                         duration: 0.8,
                         ease: "easeInOut",
                     }}
-                    className="absolute top-1 left-1/2 -translate-x-1/2 h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent z-50"
+                    className="absolute top-1 left-1/2 -translate-x-1/2 h-0.5 bg-gradient-to-r from-transparent via-blue-400 to-transparent z-50"
                 ></motion.div>
 
                 {/* Lamp Bar Glow */}
@@ -39,7 +39,7 @@ export const LampContainer = ({
                         duration: 0.8,
                         ease: "easeInOut",
                     }}
-                    className="absolute top-0 left-1/2 -translate-x-1/2 h-2 bg-gradient-to-r from-transparent via-cyan-300/60 to-transparent blur-sm z-40"
+                    className="absolute top-0 left-1/2 -translate-x-1/2 h-2 bg-gradient-to-r from-transparent via-blue-300/60 to-transparent blur-sm z-40"
                 ></motion.div>
 
                 {/* Natural Light Cone Spread */}

@@ -1,64 +1,213 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Workfolio - Portfolio Website
 
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+A modern, responsive portfolio website built with Next.js 15, TypeScript, and Tailwind CSS.
 
 ## Features
 
-### Sparkles Effect Integration
+- 🚀 Next.js 15 with App Router
+- 💎 TypeScript for type safety
+- 🎨 Tailwind CSS for styling
+- 📱 Fully responsive design
+- 🌙 Dark/Light theme support
+- 📧 Contact form with Gmail integration
+- ⚡ Optimized performance
+- 🔍 SEO optimized
 
-This project includes a beautiful sparkles effect integrated into the footer section with a lightning border line. The effect features:
+## Quick Start
 
-- **Lightning Border**: Animated border line with custom lightning animations
-- **Particle Effects**: Multiple layers of sparkles inside the footer content area
-- **Responsive Design**: Optimized for all screen sizes
-- **Performance-focused**: Uses lightweight particle system
-- **Customizable**: Multiple layers with different colors and speeds
-- **Accessible**: Non-intrusive and doesn't interfere with user interactions
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd workfolio/headless
+   ```
 
-#### Components
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-- `components/ui/sparkles.tsx` - Core sparkles component using tsparticles
-- `components/ui/footer-sparkles.tsx` - Specialized footer sparkles with lightning border
+3. **Set up environment variables**
+   ```bash
+   cp .env.example .env.local
+   ```
 
-#### Dependencies
+4. **Configure Gmail SMTP (see Gmail Setup section below)**
 
-The sparkles effect requires:
-- `@tsparticles/react` - React wrapper for tsparticles
-- `@tsparticles/engine` - Core particle engine
-- `@tsparticles/slim` - Lightweight particle presets
-- `motion` - Animation library for smooth transitions
+5. **Run the development server**
+   ```bash
+   npm run dev
+   ```
 
-All dependencies are already installed and configured in this project.
+6. **Open [http://localhost:3000](http://localhost:3000)**
+
+## Gmail SMTP Setup for Contact Form
+
+The contact form uses Gmail SMTP with Nodemailer for sending emails. Follow these steps:
+
+### 1. Enable 2-Factor Authentication
+- Go to your [Google Account settings](https://myaccount.google.com/)
+- Navigate to "Security" → "2-Step Verification"
+- Enable 2-factor authentication if not already enabled
+
+### 2. Generate App Password
+- In Google Account settings, go to "Security"
+- Click "2-Step Verification"
+- Scroll down and click "App passwords"
+- Select "Mail" and "Other (Custom name)"
+- Enter "Portfolio Contact Form"
+- Copy the 16-character password generated
+
+### 3. Configure Environment Variables
+Create or update your `.env.local` file:
+
+```env
+# Gmail SMTP Configuration
+GMAIL_USER=your-gmail@gmail.com
+GMAIL_APP_PASSWORD=your-16-character-app-password
+
+# Application URL
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+```
+
+### 4. Update Portfolio Configuration
+In `data/portfolio.ts`, ensure your email is correctly set:
+
+```typescript
+export const contactConfig = {
+  fromEmail: "your-gmail@gmail.com",
+  recipientEmail: "your-gmail@gmail.com",
+  // ... other config
+};
+```
+
+### 5. Features
+
+✅ **Main Contact Email**: You receive detailed contact information with stunning design
+✅ **Auto-Reply Email**: Sender gets a professional thank you confirmation
+✅ **Email Validation**: Client and server-side validation
+✅ **Error Handling**: Comprehensive error handling with user-friendly messages
+✅ **Security**: Uses Gmail App Password (not your main password)
+✅ **Professional Design**: Beautiful HTML email templates
+
+### 6. Email Templates
+
+The contact form sends two emails:
+- **Contact Email**: Sent to you with the inquiry details
+- **Auto-Reply**: Sent to the sender confirming receipt
+
+Both emails feature:
+- Modern, professional design
+- Mobile-responsive layout
+- Excellent readability
+- Branded styling
+
+### 7. Troubleshooting
+
+**"Invalid login" error:**
+- Verify your Gmail address in `GMAIL_USER`
+- Ensure you're using the App Password, not your regular password
+- Check that 2-factor authentication is enabled
+
+**"Connection refused" error:**
+- Check your internet connection
+- Verify Gmail SMTP settings (smtp.gmail.com:587)
+
+**Emails not received:**
+- Check spam/junk folder
+- Verify recipient email in `portfolio.ts`
+- Check Gmail quota limits
+
+## Development
+
+### Available Scripts
+
+```bash
+# Development server
+npm run dev
+
+# Production build
+npm run build
+
+# Start production server
+npm start
+
+# Linting
+npm run lint
+
+# Type checking
+npm run type-check
+```
+
+### Project Structure
+
+```
+headless/
+├── app/                    # Next.js App Router
+│   ├── api/               # API routes
+│   │   └── contact/       # Contact form API
+│   ├── globals.css        # Global styles
+│   ├── layout.tsx         # Root layout
+│   └── page.tsx          # Home page
+├── components/            # React components
+│   ├── email-templates/   # Email HTML templates
+│   ├── sections/         # Page sections
+│   └── ui/               # UI components
+├── data/                 # Static data
+│   └── portfolio.ts      # Portfolio configuration
+├── lib/                  # Utility libraries
+├── public/              # Static assets
+└── types/               # TypeScript types
+```
+
+## Customization
+
+### Portfolio Content
+Edit `data/portfolio.ts` to customize:
+- Personal information
+- Projects and experience
+- Skills and certifications
+- Contact information
+- Email templates
+
+### Styling
+- Global styles: `app/globals.css`
+- Component styles: Tailwind CSS classes
+- Theme configuration: `tailwind.config.ts`
+
+### Email Templates
+Customize email design in `components/email-templates/contact-email.tsx`:
+- HTML structure and styling
+- Email subjects and content
+- Branding and colors
+
+## Deployment
+
+### Vercel (Recommended)
+1. Push your code to GitHub
+2. Connect your repository to Vercel
+3. Add environment variables in Vercel dashboard
+4. Deploy
+
+### Other Platforms
+The application works on any platform supporting Node.js:
+- Netlify
+- Railway
+- DigitalOcean App Platform
+- AWS Amplify
+
+## Technologies Used
+
+- **Framework**: Next.js 15
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Email**: Nodemailer + Gmail SMTP
+- **Icons**: React Icons
+- **Deployment**: Vercel
+
+## License
+
+MIT License - feel free to use this project for your own portfolio!
+
+---
+
+Built with ❤️ by Sumit Jangid

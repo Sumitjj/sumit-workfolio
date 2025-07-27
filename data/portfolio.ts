@@ -105,9 +105,9 @@ export const footerContent = {
  */
 export const personalInfo = {
     name: "Sumit Jangid",
-    title: "Salesforce Certified B2C Commerce Lead",
+    title: "Salesforce Certified B2C Co mmerce Lead",
     location: "Bengaluru, India",
-    email: "s.jangir129@gmail.com",
+    email: "s.jangir129fl@gmail.com",
     phone: "+91 (995) 079-4448",
     bio: "Transforming e-commerce vision into reality with 9+ years of SFCC mastery. Trusted by brands to build fast, flexible, and future- ready digital storefronts.",
     avatar: getOptimizedAvatarImage("Sumit Jangid"),
@@ -448,32 +448,34 @@ export const certifications: Certification[] = [
 ];
 
 /**
- * Contact configuration for email functionality
- *
- * To set up EmailJS:
- * 1. Go to https://www.emailjs.com/ and create a free account
- * 2. Create a new service (Gmail, Outlook, etc.)
- * 3. Create an email template with these variables:
- *    - {{from_name}} - Sender's name
- *    - {{from_email}} - Sender's email
- *    - {{company}} - Sender's company
- *    - {{subject}} - Email subject
- *    - {{message}} - Message content
- *    - {{to_email}} - Your email (recipient)
- * 4. Get your Service ID, Template ID, and Public Key from EmailJS dashboard
- * 5. Replace the values below with your actual EmailJS credentials
+ * Contact configuration for email services
  */
 export const contactConfig = {
-    emailJsServiceId: "service_your_service_id", // Replace with your EmailJS service ID
-    emailJsTemplateId: "template_your_template_id", // Replace with your EmailJS template ID
-    emailJsPublicKey: "your_public_key", // Replace with your EmailJS public key
-    recipientEmail: personalInfo.email,
+    // Gmail SMTP Configuration for Nodemailer
+    smtp: {
+        host: "smtp.gmail.com",
+        port: 587,
+        secure: false, // true for 465, false for other ports
+        auth: {
+            user: process.env.GMAIL_USER || "",
+            pass: process.env.GMAIL_APP_PASSWORD || "",
+        },
+    },
+
+    // Email Configuration
+    fromEmail: process.env.GMAIL_USER || "s.jangir129fl@gmail.com",
+    fromName: "Sumit Jangid Portfolio",
+    recipientEmail: "s.jangir129fl@gmail.com",
+
+    // Email Templates and Subjects
     subjects: {
         project: "Project Inquiry",
         general: "General Inquiry",
         collaboration: "Collaboration Opportunity",
-        default: "Casual Talk",
+        other: "Other Inquiry",
+        default: "Portfolio Contact",
     },
+
     defaultBody: "Hi Sumit,\n\nI came across your portfolio and would like to discuss a potential opportunity.\n\nBest regards"
 };
 
@@ -498,7 +500,7 @@ export const socialLinks: SocialLink[] = [
     },
     {
         platform: "Email",
-        url: "mailto:s.jangir129@gmail.com?subject=Portfolio%20Inquiry%20-%20Let's%20Connect&body=Hi%20Sumit,%0D%0A%0D%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20potential%20opportunity.%0D%0A%0D%0ABest%20regards",
+        url: "mailto:s.jangir129fl@gmail.com?subject=Portfolio%20Inquiry%20-%20Let's%20Connect&body=Hi%20Sumit,%0D%0A%0D%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20potential%20opportunity.%0D%0A%0D%0ABest%20regards",
         icon: HiOutlineMail,
     }
 ];

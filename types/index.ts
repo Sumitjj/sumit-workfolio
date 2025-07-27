@@ -87,41 +87,10 @@ export interface Certification {
 }
 
 /**
- * Testimonial data structure
- */
-export interface Testimonial {
-    id: string;
-    name: string;
-    position: string;
-    company: string;
-    avatar: string;
-    content: string;
-    rating: number;
-}
-
-/**
  * Social media link structure
  */
 export interface SocialLink {
     platform: string;
     url: string;
     icon: React.ComponentType<{ className?: string }>;
-}
-
-/**
- * Contact form data structure
- */
-export interface ContactFormData {
-    name: string;
-    email: string;
-    subject: string;
-    message: string;
-}
-
-/**
- * Animation variants for Framer Motion
- */
-export interface AnimationVariants {
-    hidden: Record<string, any>;
-    visible: Record<string, any>;
 } 

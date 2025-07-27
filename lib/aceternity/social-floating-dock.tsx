@@ -20,7 +20,7 @@ export function SocialFloatingDock({
                 icon: <IconComponent className="h-full w-full text-neutral-500 dark:text-neutral-300" />,
                 href: "#",
                 onClick: () => handleEmailClick(
-                    "s.jangir129@gmail.com",
+                    "s.jangir129fl@gmail.com",
                     "Portfolio Inquiry - Let's Connect",
                     "Hi Sumit,\n\nI came across your portfolio and would like to discuss a potential opportunity.\n\nBest regards"
                 )
