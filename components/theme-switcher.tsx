@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { FiSun, FiMoon, FiMonitor } from "react-icons/fi";
+import { FaSun, FaMoon } from "react-icons/fa";
 import { useTheme } from "@/providers/theme-provider";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/helpers/utils";

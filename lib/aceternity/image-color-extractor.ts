@@ -291,7 +291,9 @@ function manageCache(cacheKey: string, value: ExtractedColors): void {
     // Remove oldest entries if cache is full
     if (colorCache.size >= MAX_CACHE_SIZE) {
         const firstKey = colorCache.keys().next().value;
-        colorCache.delete(firstKey);
+        if (firstKey) {
+            colorCache.delete(firstKey);
+        }
     }
 
     colorCache.set(cacheKey, value);

@@ -1,12 +1,11 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 import Image from "next/image";
 import { FaStar, FaExternalLinkAlt, FaBolt } from "react-icons/fa";
 import { CardBody, CardContainer, CardItem } from "@/lib/aceternity/3d-card";
 import { Project } from "@/types";
 import { cn } from "@/lib/helpers/utils";
-import { getProjectColorsFromImage, type ExtractedColors } from "@/lib/aceternity/image-color-extractor";
 
 interface ProjectCardProps {
   project: Project;
@@ -29,24 +28,6 @@ const getResponsiveClasses = (variant: 'featured' | 'compact', type: 'height' | 
   }
 };
 
-// Custom hook logic as arrow function
-const useProjectColors = (projectTitle: string, projectImage: string) => {
-  const [projectColors, setProjectColors] = useState<ExtractedColors | null>(null);
-
-  useEffect(() => {
-    const extractColors = async () => {
-      try {
-        const colors = await getProjectColorsFromImage(projectTitle, projectImage);
-        setProjectColors(colors);
-      } catch (error) {
-        console.warn(`Color extraction failed for ${projectTitle}:`, error);
-      }
-    };
-    extractColors();
-  }, [projectTitle, projectImage]);
-
-  return { projectColors };
-};
 
 /**
  * 3D Project Card using Aceternity UI effect
@@ -77,9 +58,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   };
 
   return (
-    <CardContainer className="inter-var w-full h-full">
+    <CardContainer className="inter-var w-full h-full" onClick={onClick}>
       <CardBody className={cn(
-        "bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-full rounded-xl p-6 border flex flex-col",
+        "bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-full rounded-xl p-6 border flex flex-col cursor-pointer",
         heightClasses,
         className
       )}>

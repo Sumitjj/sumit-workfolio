@@ -105,7 +105,7 @@ export const footerContent = {
  */
 export const personalInfo = {
     name: "Sumit Jangid",
-    title: "Salesforce Certified B2C Co mmerce Lead",
+    title: "Salesforce Certified B2C Commerce Lead",
     location: "Bengaluru, India",
     email: "s.jangir129fl@gmail.com",
     phone: "+91 (995) 079-4448",

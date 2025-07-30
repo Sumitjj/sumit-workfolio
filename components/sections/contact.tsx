@@ -18,7 +18,6 @@ import {
   FiCoffee
 } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
-import { contactConfig } from "@/data/portfolio";
 import { cn } from "@/lib/helpers/utils";
 
 // Form data interface
@@ -225,7 +224,7 @@ function ContactForm() {
         setSubmissionState('idle');
       }, 5000);
     }
-  }, [formData]);
+  }, [formData, submissionState, validateForm]);
 
   // Handle input changes
   const handleInputChange = useCallback((field: keyof FormData, value: string) => {

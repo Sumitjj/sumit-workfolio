@@ -3,6 +3,18 @@
 import React from "react";
 import Image from "next/image";
 import { FiX } from "react-icons/fi";
+import {
+    FaStar,
+    FaCalendar,
+    FaGithub,
+    FaExternalLinkAlt,
+    FaChartLine,
+    FaUsers,
+    FaTag,
+    FaBolt,
+    FaCode,
+    FaLayerGroup
+} from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { Modal } from "@/components/ui/modal";
 import { Project } from "@/types";
