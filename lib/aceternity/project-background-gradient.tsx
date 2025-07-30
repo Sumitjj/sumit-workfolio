@@ -34,9 +34,9 @@ const gradientVariants = {
         backgroundPosition: "0 50%",
     },
     animate: {
-        backgroundPosition: ["0, 50%", "100% 50%", "0 50%"],
+        backgroundPosition: ["0 50%", "100% 50%", "0 50%"],
     },
-} as const;
+};
 
 // Default fallback colors
 const DEFAULT_FALLBACK: ExtractedColors = {
@@ -89,17 +89,6 @@ export const ProjectBackgroundGradient: React.FC<ProjectBackgroundGradientProps>
         extractColors();
     }, [extractColors]);
 
-    // Memoized animation configuration
-    const animationConfig = useMemo(() => ({
-        variants: animate ? gradientVariants : undefined,
-        initial: animate ? "initial" : undefined,
-        animate: animate ? "animate" : undefined,
-        transition: animate ? {
-            duration: ANIMATION_DURATION,
-            repeat: Infinity,
-            repeatType: "reverse" as const,
-        } : undefined,
-    }), [animate]);
 
     // Memoized style objects
     const animatedGradientStyle = useMemo(() => ({
@@ -133,19 +122,34 @@ export const ProjectBackgroundGradient: React.FC<ProjectBackgroundGradientProps>
         );
     }
 
-    const currentColors = colors || fallbackColors;
-
     return (
         <div className={cn("relative group", containerClassName)} style={{ padding: GRADIENT_PADDING }}>
             {/* Animated gradient background */}
-            <motion.div
-                {...animationConfig}
-                style={animatedGradientStyle}
-                className={cn(
-                    "absolute inset-0 rounded-xl z-[1] opacity-0 group-hover:opacity-100 blur-xl",
-                    "transition-all duration-700 will-change-transform group-hover:scale-105"
-                )}
-            />
+            {animate ? (
+                <motion.div
+                    variants={gradientVariants}
+                    initial="initial"
+                    animate="animate"
+                    transition={{
+                        duration: ANIMATION_DURATION,
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                    }}
+                    style={animatedGradientStyle}
+                    className={cn(
+                        "absolute inset-0 rounded-xl z-[1] opacity-0 group-hover:opacity-100 blur-xl",
+                        "transition-all duration-700 will-change-transform group-hover:scale-105"
+                    )}
+                />
+            ) : (
+                <div
+                    style={animatedGradientStyle}
+                    className={cn(
+                        "absolute inset-0 rounded-xl z-[1] opacity-0 group-hover:opacity-100 blur-xl",
+                        "transition-all duration-700 will-change-transform group-hover:scale-105"
+                    )}
+                />
+            )}
 
             {/* Static gradient border */}
             <div

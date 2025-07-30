@@ -95,7 +95,7 @@ function calculateDuration(startDate: Date, endDate?: Date): string {
 /**
  * Optimized Timeline Node Component
  */
-const TimelineNode = memo<TimelineNodeProps>(({ isLast, isCurrent, index }) => (
+const TimelineNode = memo<TimelineNodeProps>(({ isLast, isCurrent }) => (
     <>
         {/* Timeline Connection Line */}
         {!isLast && (
@@ -121,7 +121,7 @@ TimelineNode.displayName = 'TimelineNode';
 /**
  * Optimized Technology Tag with Performance-First Hover Effects
  */
-const TechnologyTag = memo<TechnologyTagProps>(({ tech, delay, index }) => {
+const TechnologyTag = memo<TechnologyTagProps>(({ tech, delay }) => {
     const hoverClasses = useMemo(() =>
         "group/tech relative inline-flex items-center px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-neutral-50 dark:bg-neutral-800 text-xs font-medium text-neutral-700 dark:text-neutral-300 border border-neutral-200/60 dark:border-neutral-700/60 cursor-default opacity-0 animate-fade-in transition-all duration-200 hover:scale-105 hover:bg-primary/8 hover:border-primary/30 hover:text-primary hover:font-medium hover:shadow-md"
         , []);
