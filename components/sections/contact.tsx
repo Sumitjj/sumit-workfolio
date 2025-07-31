@@ -78,7 +78,7 @@ function HighlightMetrics() {
             <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 mb-4">
               <FiStar className="w-6 h-6 text-primary animate-spin-slow" />
             </div>
-            <h4 className="text-lg font-semibold text-foreground mb-2">
+            <h4 className="text-lg font-semibold text-foreground mb-2 dark:text-emerald-300">
               What you can expect after hitting send button
             </h4>
           </div>
@@ -241,7 +241,7 @@ function ContactForm() {
       {/* Responsive Form Header */}
       <div className="text-center mb-6 sm:mb-8 lg:mb-10">
         <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-lg sm:rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 mb-4 sm:mb-6">
-          <FiMessageSquare className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 text-primary" />
+          <FiMessageSquare className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 text-primary dark:text-emerald-300" />
         </div>
         <h3 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-foreground mb-2 sm:mb-3">Drop Me a Line</h3>
       </div>
@@ -251,7 +251,7 @@ function ContactForm() {
         {/* Name & Email Row - Responsive Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
           <div className="space-y-2">
-            <label className="text-xs sm:text-sm font-medium text-foreground flex items-center">
+            <label className="text-xs sm:text-sm font-medium text-foreground flex items-center dark:text-emerald-300">
               <FiUser className="w-3 h-3 sm:w-4 sm:h-4 mr-2 text-primary" />
               Full Name *
             </label>
@@ -277,7 +277,7 @@ function ContactForm() {
           </div>
 
           <div className="space-y-2">
-            <label className="text-xs sm:text-sm font-medium text-foreground flex items-center">
+            <label className="text-xs sm:text-sm font-medium text-foreground flex items-center dark:text-emerald-300">
               <FiMail className="w-3 h-3 sm:w-4 sm:h-4 mr-2 text-primary" />
               Email Address *
             </label>
@@ -306,7 +306,7 @@ function ContactForm() {
         {/* Company & Subject Row - Responsive Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
           <div className="space-y-2">
-            <label className="text-xs sm:text-sm font-medium text-foreground flex items-center">
+            <label className="text-xs sm:text-sm font-medium text-foreground flex items-center dark:text-emerald-300">
               <FiHome className="w-3 h-3 sm:w-4 sm:h-4 mr-2 text-primary" />
               Company
             </label>
@@ -320,7 +320,7 @@ function ContactForm() {
           </div>
 
           <div className="space-y-2">
-            <label className="text-xs sm:text-sm font-medium text-foreground flex items-center">
+            <label className="text-xs sm:text-sm font-medium text-foreground flex items-center dark:text-emerald-300">
               <FiFile className="w-3 h-3 sm:w-4 sm:h-4 mr-2 text-primary" />
               Subject *
             </label>
@@ -351,7 +351,7 @@ function ContactForm() {
 
         {/* Message - Responsive */}
         <div className="space-y-2">
-          <label className="text-xs sm:text-sm font-medium text-foreground flex items-center">
+          <label className="text-xs sm:text-sm font-medium text-foreground flex items-center dark:text-emerald-300">
             <FiMessageSquare className="w-3 h-3 sm:w-4 sm:h-4 mr-2 text-primary" />
             Message *
           </label>
@@ -454,7 +454,7 @@ export function ContactSection() {
             {/* Coffee Icon with Professional Positioning */}
             <div className="flex justify-center mb-6 sm:mb-8">
               <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-2xl bg-card border border-border/50 shadow-sm">
-                <FiCoffee className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-foreground" />
+                <FiCoffee className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-foreground dark:text-amber-600" />
               </div>
             </div>
 

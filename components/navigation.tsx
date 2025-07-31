@@ -51,6 +51,17 @@ const Navigation = () => {
     [sections]
   );
 
+  // Handle logo click to scroll to top
+  const handleLogoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    // Use native smooth scroll for better performance and reliability
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+    setIsOpen(false); // Close mobile menu if open
+  };
+
   return (
     <>
       {/* Main Navigation Header */}
@@ -69,8 +80,13 @@ const Navigation = () => {
       >
         <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 relative">
-            {/* Logo/Name */}
-            <div className="logo flex-shrink-0">
+            {/* Logo/Name - Now clickable without boundary */}
+            <button
+              onClick={handleLogoClick}
+              className="logo flex-shrink-0 cursor-pointer transition-all duration-300 transform-gpu hover:scale-105 focus:outline-none border-none bg-transparent p-0"
+              aria-label="Navigate to top of page"
+              style={{ transformOrigin: 'center center', contain: 'layout style' }}
+            >
               {personalInfo.name.split(" ").map((word, index) => (
                 <span key={index}>
                   {index === 0 ? word : (
@@ -79,8 +95,7 @@ const Navigation = () => {
                   {index < personalInfo.name.split(" ").length - 1 && " "}
                 </span>
               ))}
-
-            </div>
+            </button>
 
             {/* Desktop Navigation */}
             <div className="hidden md:block">
@@ -90,7 +105,7 @@ const Navigation = () => {
                     key={item.href}
                     href={item.href}
                     onClick={(e) => handleNavClick(item.href, e)}
-                    className="relative px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 transform-gpu hover:scale-105 hover:shadow-lg backdrop-blur-sm text-muted-foreground hover:text-foreground hover:bg-background/80 hover:shadow-md"
+                    className="relative px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 transform-gpu hover:scale-105 backdrop-blur-sm text-muted-foreground hover:text-foreground hover:bg-background/80 hover:shadow-md"
                     style={{ transformOrigin: 'center center', contain: 'layout style' }}
                   >
                     {item.label}

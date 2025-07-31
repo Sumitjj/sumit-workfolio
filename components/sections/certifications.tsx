@@ -125,7 +125,7 @@ function CertificationCard({ certification, index }: CertificationCardProps) {
                         </div>
 
                         {/* View Button - Enhanced */}
-                        <div className="mt-auto">
+                        <div className="mt-auto dark:text-emerald-300">
                             {certification.verificationUrl && (
                                 <a
                                     href={certification.verificationUrl}
@@ -265,7 +265,7 @@ export function CertificationsSection() {
                     <div className="text-center mb-12">
                         <div className="flex flex-col items-center justify-center mb-6">
                             <div className="p-3 sm:p-4 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-sm shadow-lg mb-4">
-                                <FaMedal className="w-7 h-7 sm:w-8 sm:h-8 text-primary" />
+                                <FaMedal className="w-7 h-7 sm:w-8 sm:h-8 text-primary dark:text-blue-400" />
                             </div>
                             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground">
                                 Badges & Certifications

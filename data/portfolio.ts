@@ -36,45 +36,45 @@ export const skillGroups: SkillGroup[] = [
         title: "Backend & E-Commerce",
         icon: SiBackendless,
         skills: [
-            { name: "SFRA", icon: FaSalesforce },
-            { name: "SGJC", icon: FaSalesforce },
-            { name: "OCAPI/SCAPI", icon: TbPackages },
-            { name: "B2C Commerce-SDK", icon: TbSdk },
-            { name: "RESTful APIs", icon: TbApi },
-            { name: "Node.js", icon: FaNode },
-            { name: "Nest JS", icon: SiNestjs },
-            { name: "Core Java", icon: FaJava },
-            { name: "PWA Kit", icon: SiPwa },
-            { name: "MongoDB", icon: SiMongodb },
+            { name: "SFRA", icon: FaSalesforce, color: "#FFFFFF" },
+            { name: "SGJC", icon: FaSalesforce, color: "#FFFFFF" },
+            { name: "OCAPI/SCAPI", icon: TbPackages, color: "#FFFFFF" },
+            { name: "B2C Commerce-SDK", icon: TbSdk, color: "#FFFFFF" },
+            { name: "RESTful APIs", icon: TbApi, color: "#FFFFFF" },
+            { name: "Node.js", icon: FaNode, color: "#FFFFFF" },
+            { name: "Nest JS", icon: SiNestjs, color: "#FFFFFF" },
+            { name: "Core Java", icon: FaJava, color: "#FFFFFF" },
+            { name: "PWA Kit", icon: SiPwa, color: "#FFFFFF" },
+            { name: "MongoDB", icon: SiMongodb, color: "#FFFFFF" },
         ]
     },
     {
         title: "Frontend & Headless",
         icon: GiDeerHead,
         skills: [
-            { name: "ISML", icon: PiFileHtmlDuotone },
-            { name: "JavaScript", icon: IoLogoJavascript },
-            { name: "Typescript", icon: BiLogoTypescript },
-            { name: "React Js", icon: FaReact },
-            { name: "Next Js", icon: TbBrandNextjs },
-            { name: "HTML5", icon: FaHtml5 },
-            { name: "CSS3", icon: FaCss3Alt },
-            { name: "Tailwind CSS", icon: SiTailwindcss },
-            { name: "JQuery", icon: SiJquery },
-            { name: "LWC", icon: PiLightningFill }
+            { name: "ISML", icon: PiFileHtmlDuotone, color: "#FFFFFF" },
+            { name: "JavaScript", icon: IoLogoJavascript, color: "#FFFFFF" },
+            { name: "Typescript", icon: BiLogoTypescript, color: "#FFFFFF" },
+            { name: "React Js", icon: FaReact, color: "#FFFFFF" },
+            { name: "Next Js", icon: TbBrandNextjs, color: "#FFFFFF" },
+            { name: "HTML5", icon: FaHtml5, color: "#FFFFFF" },
+            { name: "CSS3", icon: FaCss3Alt, color: "#FFFFFF" },
+            { name: "Tailwind CSS", icon: SiTailwindcss, color: "#FFFFFF" },
+            { name: "JQuery", icon: SiJquery, color: "#FFFFFF" },
+            { name: "LWC", icon: PiLightningFill, color: "#FFFFFF" }
         ]
     },
     {
         title: "Leadership & Process",
         icon: SiGoogledataproc,
         skills: [
-            { name: "Project Management", icon: MdManageAccounts },
-            { name: "Team Leadership", icon: SiMainwp },
-            { name: "System Design", icon: SiCodesignal },
-            { name: "Agile/Scrum", icon: DiScrum },
-            { name: "Jira", icon: SiJira },
-            { name: "GitHub", icon: FaGitAlt },
-            { name: "Jenkins", icon: FaJenkins },
+            { name: "Project Management", icon: MdManageAccounts, color: "#FFFFFF" },
+            { name: "Team Leadership", icon: SiMainwp, color: "#FFFFFF" },
+            { name: "System Design", icon: SiCodesignal, color: "#FFFFFF" },
+            { name: "Agile/Scrum", icon: DiScrum, color: "#FFFFFF" },
+            { name: "Jira", icon: SiJira, color: "#FFFFFF" },
+            { name: "GitHub", icon: FaGitAlt, color: "#FFFFFF" },
+            { name: "Jenkins", icon: FaJenkins, color: "#FFFFFF" },
         ]
     }
 ];
@@ -357,21 +357,21 @@ export const projects: Project[] = [
 export const experiences: Experience[] = [
     {
         id: "1",
-        position: "Certified B2C Commerce Technical Lead",
+        position: "B2C Commerce Technical Lead",
         company: "Merkle",
         startDate: new Date(2021, 3, 1),
         current: true,
         description:
-            "Results-driven Salesforce B2C Commerce Cloud Technical Lead with 9+ years of experience in designing and implementing scalable, high- performing eCommerce solutions",
+            "Results-oriented technical leader with over 9 years of experience in architecting and delivering scalable, high-performance eCommerce solutions. Proven expertise in driving end-to-end implementations and optimizing support engagements across multiple global brands. Strong hands-on experience with Salesforce SFRA and SGJC frameworks, with a growing focus on modern headless architectures leveraging SCAPI, OCAPI, and the B2C Commerce SDK.",
         technologies: [
             "SFRA",
-            "SGJC",
-            "Node.js",
-            "NestJs",
+            "SCAPI",
+            "OCAPI",
+            "B2C Commerce SDK",
+            "Nest Js",
             "JavaScript/TypeScript",
-            "NextJs",
-            "Commerce SDK",
-            "SCAPI/OCAPI"
+            "Next Js",
+            "Third Party Integrations"
         ],
         projects: ["FullBeauty Brands", "Aquasana Water Filters", "Hotwater", "State Water Heaters", "Reliance Water Heaters", "American Water Heaters", "Lochinvar", "AO Smith Corp", "Lane Bryant"]
     },
@@ -383,14 +383,14 @@ export const experiences: Experience[] = [
         endDate: new Date(2021, 2, 31),
         current: false,
         description:
-            "Managed dedicated support for L'Oréal, handling major issue resolution and enhancement requests. ",
+            "Contributed to the successful support and enhancement of over 50+ brands under the L’Oréal portfolio as part of a dedicated Managed Services team. Played a key role in issue resolution, performance optimization, and the implementation of enhancement requests across multiple brands. Led and executed the migration of several brands from legacy SGJC implementations to the LORA architecture, built on top of the SFRA framework, ensuring improved scalability, maintainability, and performance.",
         technologies: [
             "SFCC",
-            "SGJC",
+            "SFRA",
             "JavaScript",
+            "OCAPI",
             "SCSS",
-            "Webpack",
-            "SFRA"
+            "Third Party Integrations"
         ],
         projects: ["Loreal"]
     },
@@ -402,13 +402,15 @@ export const experiences: Experience[] = [
         endDate: new Date(2019, 4, 31),
         current: false,
         description:
-            "Delivered multiple SFCC implementations and managed services projects, ensuring robust and scalable solutions.",
+            "Began eCommerce journey by successfully delivering multiple projects on the Demandware and SGJC architecture, laying a strong foundation in scalable Salesforce B2C Commerce Cloud (SFCC) solutions. Designed and implemented high-performing, maintainable architectures across both implementation and managed services projects, ensuring reliability, scalability, and optimal performance. Over the past 3 years, demonstrated deep expertise in SFCC and SGJC by leading critical solution design, performance tuning, and architectural improvements for enterprise - grade eCommerce platforms, contributing to increased stability and business agility.",
         technologies: [
             "SFCC",
             "Demandware",
             "SGJC",
             "Javascript",
             "JQuery",
+            "Third Party Integrations",
+            "Pipelines"
         ],
         projects: ["Camping World", "Saje Natural Wellness", "London Drugs", "Uniqlo"]
     },

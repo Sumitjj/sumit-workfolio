@@ -45,7 +45,8 @@ export interface SkillCategory {
  */
 export interface Skill {
     name: string;
-    icon?: React.ComponentType<{ className?: string }>;
+    icon?: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
+    color?: string;
 }
 
 /**
