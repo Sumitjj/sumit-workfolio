@@ -1,17 +1,17 @@
 "use client";
 
 import React, { memo, useMemo } from "react";
-const SALESFORCE_BLUE = "#0070d2";
 import { Fade } from "react-awesome-reveal";
 import {
     FiCalendar,
-    FiHome,
     FiClock,
     FiTrendingUp,
     FiAward,
     FiZap,
     FiStar
 } from "react-icons/fi";
+import { HiBuildingOffice2 } from "react-icons/hi2";
+
 import { FaRoute } from "react-icons/fa";
 import { experiences } from "@/data/portfolio";
 
@@ -162,10 +162,7 @@ const ExperienceCard = memo<ExperienceCardProps>(({ experience, index, isLast })
         [experience.startDate, experience.endDate]
     );
 
-    const dateRange = useMemo(() =>
-        `${formatDate(experience.startDate)} - ${experience.current ? 'Present' : formatDate(experience.endDate!)}`,
-        [experience.startDate, experience.endDate, experience.current]
-    );
+    const dateRange = `${formatDate(experience.startDate)} - ${experience.current ? 'Present' : formatDate(experience.endDate!)}`;
 
     const displayTechnologies = useMemo(() =>
         experience.technologies.slice(0, ANIMATION_CONFIG.TECH_DISPLAY_LIMIT),
@@ -202,18 +199,14 @@ const ExperienceCard = memo<ExperienceCardProps>(({ experience, index, isLast })
                                 <div className="flex items-center gap-3 sm:gap-4 flex-1">
                                     <div
                                         className={`${STYLING_CONFIG.COMPANY_ICON_SIZE.mobile} ${STYLING_CONFIG.COMPANY_ICON_SIZE.desktop} rounded-xl flex items-center justify-center shadow-md group-hover/card:shadow-lg transition-all duration-300`}
-                                        style={{
-                                            backgroundColor: `${SALESFORCE_BLUE}12`,
-                                            border: `2px solid ${SALESFORCE_BLUE}25`
-                                        }}
                                     >
-                                        <FiHome className="w-6 h-6 sm:w-7 sm:h-7" style={{ color: SALESFORCE_BLUE }} />
+                                        <HiBuildingOffice2 className="w-6 h-6 sm:w-7 sm:h-7" />
                                     </div>
-                                    <div className="flex-1 min-w-0">
-                                        <h3 className="text-lg sm:text-xl font-bold text-neutral-900 dark:text-white mb-1 group-hover/card:text-primary transition-colors duration-300 truncate">
+                                    <div className="flex-1 min-w-0 ">
+                                        <h3 className="text-lg sm:text-xl font-bold text-neutral-900 mb-1 group-hover/card:text-primary transition-colors duration-300 truncate dark:text-emerald-300">
                                             {experience.company}
                                         </h3>
-                                        <h4 className="text-base sm:text-lg font-semibold text-neutral-600 dark:text-neutral-300 leading-tight">
+                                        <h4 className="text-base sm:text-lg font-semibold text-neutral-600 leading-tight dark:text-emerald-300">
                                             {experience.position}
                                         </h4>
                                     </div>
@@ -222,14 +215,14 @@ const ExperienceCard = memo<ExperienceCardProps>(({ experience, index, isLast })
                                 {/* Status & Duration - Parallel Layout */}
                                 <div className="flex flex-row sm:flex-row items-center gap-2 flex-shrink-0">
                                     {experience.current && (
-                                        <div className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800">
+                                        <div className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-emerald-50  dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800">
                                             <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-500 animate-pulse" />
                                             <span className="text-xs font-semibold text-emerald-700 dark:text-emerald-400">Current</span>
                                         </div>
                                     )}
                                     <div className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-xs font-medium text-neutral-600 dark:text-neutral-400 flex items-center gap-1.5">
-                                        <FiClock className="w-3 h-3" />
-                                        <span className="whitespace-nowrap">{duration}</span>
+                                        <FiClock className="w-3 h-3 dark:text-white" />
+                                        <span className="whitespace-nowrap dark:text-white">{duration}</span>
                                     </div>
                                 </div>
                             </div>
@@ -245,7 +238,7 @@ const ExperienceCard = memo<ExperienceCardProps>(({ experience, index, isLast })
                         <div className="relative p-4 sm:p-6">
                             {/* Description */}
                             <div className="mb-5 sm:mb-6">
-                                <h5 className="text-xs sm:text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-2 uppercase tracking-wide">
+                                <h5 className="text-xs sm:text-sm font-semibold text-neutral-700 dark:text-emerald-300 mb-2 uppercase tracking-wide">
                                     Role Overview
                                 </h5>
                                 <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed text-sm sm:text-base">
@@ -255,7 +248,7 @@ const ExperienceCard = memo<ExperienceCardProps>(({ experience, index, isLast })
 
                             {/* Technologies */}
                             <div className="relative">
-                                <h5 className="text-xs sm:text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-3 uppercase tracking-wide">
+                                <h5 className="text-xs sm:text-sm font-semibold text-neutral-700 dark:text-emerald-300 mb-3 uppercase tracking-wide">
                                     Technologies & Tools
                                 </h5>
                                 <div className="flex flex-wrap gap-1.5 sm:gap-2">
@@ -304,7 +297,7 @@ function ExperienceStats() {
             textGradient: "linear-gradient(to right, #3b82f6, #8b5cf6, #3b82f6)"
         },
         {
-            icon: FiHome,
+            icon: HiBuildingOffice2,
             label: "Tech Workplaces",
             value: "3",
             color: "#10b981",
@@ -426,7 +419,7 @@ export function ExperienceSection() {
                             <div
                                 className="p-3 sm:p-4 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-sm shadow-lg mb-4"
                             >
-                                <FaRoute className="w-7 h-7 sm:w-8 sm:h-8 text-primary" />
+                                <FaRoute className="w-7 h-7 sm:w-8 sm:h-8 text-primary dark:text-emerald-300" />
                             </div>
 
                             {/* Title */}

@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { Footer } from "@/components/footer";
 import { personalInfo } from "@/data/portfolio";
+import { generateMetadata } from "@/lib/seo/metadata";
 
 // Optimized font loading with display swap for better performance
 const interSans = Inter({
@@ -20,100 +21,8 @@ const jetbrainsMono = JetBrains_Mono({
   preload: false, // Only preload main font
 });
 
-// Add structured data for better SEO
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: personalInfo.name,
-  url: personalInfo.websiteUrl || "https://sumitworkfolio.in",
-  image: personalInfo.avatar,
-  jobTitle: personalInfo.title,
-  worksFor: {
-    "@type": "Organization",
-    name: "Freelance" // Use a default value since currentCompany doesn't exist
-  },
-  description: personalInfo.bio,
-  knowsAbout: [
-    "Salesforce Commerce Cloud",
-    "Full Stack Development",
-    "UI/UX Design",
-    "React",
-    "Next.js",
-    "TypeScript"
-  ]
-};
-
 // Enhanced metadata for SEO and social sharing
-export const metadata: Metadata = {
-  title: {
-    default: `${personalInfo.name} - ${personalInfo.title}`,
-    template: `%s | ${personalInfo.name}`,
-  },
-  description: personalInfo.bio,
-  keywords: [
-    "full-stack developer",
-    "salesforce commerce cloud",
-    "salesforce b2c commerce",
-    "salesforce b2c commerce cloud",
-    "salesforce b2c commerce cloud developer",
-    "salesforce b2c commerce cloud architect",
-    "salesforce b2c commerce cloud technical lead",
-    "salesforce b2c commerce cloud solution architect",
-    "SFCC",
-    "demandware",
-    "agentforce",
-    "UI/UX designer",
-    "React",
-    "Next.js",
-    "TypeScript",
-    "web development",
-    "portfolio",
-    personalInfo.name.toLowerCase().replace(" ", "-"),
-  ],
-  authors: [{ name: personalInfo.name }],
-  creator: personalInfo.name,
-  metadataBase: new URL("https://sumitworkfolio.in"), // Replace with your domain
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://sumitworkfolio.in", // Replace with your domain
-    title: `${personalInfo.name} - ${personalInfo.title}`,
-    description: personalInfo.bio,
-    siteName: `${personalInfo.name} Workfolio`,
-    images: [
-      {
-        url: "/og-image.jpg", // You'll want to add this
-        width: 1200,
-        height: 630,
-        alt: `${personalInfo.name} - Workfolio`,
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: `${personalInfo.name} - ${personalInfo.title}`,
-    description: personalInfo.bio,
-    images: ["/og-image.jpg"], // You'll want to add this
-    creator: "@sumitjangid", // Replace with your Twitter handle
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  verification: {
-    google: "your-google-verification-code", // Add your Google verification code
-  },
-};
+export const metadata: Metadata = generateMetadata();
 
 // Viewport configuration for responsive design
 export const viewport: Viewport = {
@@ -141,21 +50,30 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        {/* Add structured data */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-        />
-
         {/* Preload critical resources */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
         {/* Favicon and app icons */}
-        <link rel="icon" href="/favicon.ico" sizes="32x32" />
-        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="manifest" href="/manifest.json" />
+        <link rel="icon" type="image/x-icon" href="/images/avatars/favicon/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/images/avatars/favicon/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/avatars/favicon/favicon-16x16.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/avatars/favicon/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/images/avatars/favicon/sumit-192x192.png" />
+        <link rel="icon" type="image/png" sizes="512x512" href="/images/avatars/favicon/sumit-512x512.png" />
+        <link rel="manifest" href="/images/avatars/favicon/site.webmanifest" />
+
+        {/* PWA and mobile meta tags */}
+        <meta name="theme-color" content="#000000" />
+        <meta name="msapplication-TileColor" content="#000000" />
+        <meta name="msapplication-config" content="/images/avatars/favicon/browserconfig.xml" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Sumit Jangid Portfolio" />
+        <meta name="application-name" content="Sumit Jangid Portfolio" />
+        <meta name="mobile-web-app-capable" content="yes" />
 
         {/* Preload critical images */}
         <link
@@ -163,6 +81,15 @@ export default function RootLayout({
           as="image"
           href={personalInfo.avatar}
           type="image/jpeg"
+        />
+
+        {/* Preload critical fonts */}
+        <link
+          rel="preload"
+          href="/fonts/inter-var.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
         />
       </head>
       <body

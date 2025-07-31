@@ -5,7 +5,6 @@ import Image from "next/image";
 import { FiX } from "react-icons/fi";
 import {
     FaStar,
-    FaCalendar,
     FaGithub,
     FaExternalLinkAlt,
     FaChartLine,
@@ -73,12 +72,6 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                     <div className="absolute bottom-0 left-0 right-0 p-8">
                         <div className="flex items-end justify-between">
                             <div className="flex-1">
-                                {project.organization && (
-                                    <div className="flex items-center gap-2 mb-3">
-                                        <FaCalendar className="w-4 h-4 text-white/80" />
-                                        <span className="text-white/80 text-sm font-medium">{project.organization}</span>
-                                    </div>
-                                )}
                                 <h1 className="text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">
                                     {project.title}
                                 </h1>
