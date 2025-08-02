@@ -3,7 +3,7 @@
 import React, { useMemo } from "react";
 import Image from "next/image";
 
-import { Sun, SquareArrowOutUpRight, Star, Sparkle } from "lucide-react";
+import { SquareArrowOutUpRight, Star, Sparkle } from "lucide-react";
 import { CardBody, CardContainer, CardItem } from "@/lib/aceternity/3d-card";
 import { Project } from "@/types";
 import { cn } from "@/lib/helpers/utils";

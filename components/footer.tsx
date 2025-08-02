@@ -6,7 +6,7 @@ import { contactConfig, socialLinks } from "@/data/portfolio";
 import { SocialFloatingDock } from "@/lib/aceternity/social-floating-dock";
 import { FooterSparkles } from "@/lib/aceternity/footer-sparkles";
 import { handleEmailClick } from "@/lib/helpers/utils";
-import { Sparkle, Star } from "lucide-react";
+import { Sparkle } from "lucide-react";
 
 /**
  * Fully Responsive Footer Component with Modern Design
