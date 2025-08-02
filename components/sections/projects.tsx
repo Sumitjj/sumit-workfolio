@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useMemo, useEffect, useRef } from "react";
-import { FiCode, FiAward, FiUsers, FiZap, FiHome, FiStar } from "react-icons/fi";
+import { FiCode, FiAward, FiUsers, FiZap, FiHome } from "react-icons/fi";
+import { Sparkles } from "lucide-react";
 import { FiMonitor } from "react-icons/fi";
 import { ProjectCard } from "@/components/project-card";
 import { ProjectModal } from "@/components/project-modal";
@@ -125,11 +126,11 @@ export function ProjectsSection() {
           </div>
         </div>
         {/* Decorative elements */}
-        <div className="absolute top-3 right-3 opacity-30 group-hover:opacity-60 transition-opacity">
-          <FiStar className="w-5 h-5" style={{ color: shadowColor }} />
+        <div className="absolute top-3 right-3 opacity-50 group-hover:opacity-60 transition-opacity animate-spin-slow">
+          <Sparkles className="w-5 h-5" style={{ color: shadowColor }} />
         </div>
-        <div className="absolute bottom-3 left-3 opacity-20 group-hover:opacity-40 transition-opacity">
-          <FiStar className="w-4 h-4" style={{ color: shadowColor }} />
+        <div className="absolute bottom-3 left-3 opacity-40 group-hover:opacity-40 transition-opacity animate-spin-slow">
+          <Sparkles className="w-4 h-4" style={{ color: shadowColor }} />
         </div>
       </div>
     </div>
@@ -139,9 +140,8 @@ export function ProjectsSection() {
   const AnimatedProjectGrid: React.FC<{
     projects: Project[];
     variant: "featured" | "compact";
-    title?: string;
     className?: string;
-  }> = ({ projects, variant, title, className = "" }) => {
+  }> = ({ projects, variant, className = "" }) => {
     const gridLayout = variant === "featured"
       ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 auto-rows-fr"
       : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-fr";
@@ -150,12 +150,6 @@ export function ProjectsSection() {
 
     return (
       <div className={`mb-12 sm:mb-16 lg:mb-20 ${className}`}>
-        {title && (
-          <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground mb-6 sm:mb-8 lg:mb-10 text-center">
-            {title}
-          </h3>
-        )}
-
         <div className={gridLayout}>
           {projects.map((project, index) => {
             // For non-featured projects with 10 items, center the last 2 items in 4-column layout
@@ -199,9 +193,11 @@ export function ProjectsSection() {
             transitionDelay: getAnimationDelay(index, 'highlights')
           }}
         >
-          {/* Icon - no background, no glow */}
-          <div className="flex items-center justify-center w-14 h-14 mb-4 text-emerald-600 dark:text-emerald-400 transition-all duration-300 group-hover:scale-110">
-            <item.icon className="w-10 h-10 stroke-2" />
+          <div className="flex items-center justify-center w-14 h-14 mb-4 transition-all duration-300 group-hover:scale-110">
+            <item.icon className={`w-10 h-10 stroke-2 ${index === 0 ? 'text-green-500' :
+              index === PROFESSIONAL_HIGHLIGHTS.length - 1 ? 'text-orange-500' :
+                'text-blue-500'
+              }`} />
           </div>
           <h4 className="text-xl font-extrabold mb-2 text-white-600 dark:text-white-400 tracking-tight">
             {item.title}
@@ -325,7 +321,6 @@ export function ProjectsSection() {
         <AnimatedProjectGrid
           projects={featuredProjects}
           variant="featured"
-          title="Featured Projects"
         />
 
         {/* Remaining Projects Grid */}

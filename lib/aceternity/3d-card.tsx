@@ -42,8 +42,8 @@ export const CardContainer: React.FC<CardContainerProps> = ({
     const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
         if (!containerRef.current) return;
         const { left, top, width, height } = containerRef.current.getBoundingClientRect();
-        const x = (e.clientX - left - width / 2) / 50;
-        const y = (e.clientY - top - height / 2) / 50;
+        const x = (e.clientX - left - width / 2) / 40;
+        const y = (e.clientY - top - height / 2) / 40;
         containerRef.current.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
     };
 

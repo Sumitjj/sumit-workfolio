@@ -5,6 +5,7 @@ import {
     SiPwa, SiMongodb, SiTailwindcss, SiJira,
     SiJquery, SiNestjs, SiMainwp, SiCodesignal, SiBackendless, SiGoogledataproc
 } from "react-icons/si";
+import { Cpu } from "lucide-react";
 import { GiDeerHead } from "react-icons/gi";
 import { PiLightningFill, PiFileHtmlDuotone } from "react-icons/pi";
 import { DiScrum } from "react-icons/di";
@@ -34,7 +35,7 @@ import { getOptimizedProjectImage, getOptimizedAvatarImage } from "@/lib/helpers
 export const skillGroups: SkillGroup[] = [
     {
         title: "Backend & E-Commerce",
-        icon: SiBackendless,
+        icon: Cpu,
         skills: [
             { name: "SFRA", icon: FaSalesforce, color: "#FFFFFF" },
             { name: "SGJC", icon: FaSalesforce, color: "#FFFFFF" },
@@ -112,7 +113,7 @@ export const personalInfo = {
     bio: "Transforming e-commerce vision into reality with 9+ years of SFCC mastery. Trusted by brands to build fast, flexible, and future- ready digital storefronts.",
     avatar: getOptimizedAvatarImage("Sumit Jangid"),
     resume: "/resume/SumitJangid_Resume_2025.docx",
-    logo: "/images/logo/SumitJangir.png",
+    logo: "/images/logo/Sumitj.png",
     websiteUrl: "https://www.sumitworkfolio.in",
 };
 

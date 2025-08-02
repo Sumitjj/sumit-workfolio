@@ -205,7 +205,7 @@ function ContactForm() {
             message: ''
           });
           setSubmissionState('idle');
-        }, 3000);
+        }, 100);
       } else {
         setSubmissionState('error');
         console.error('Email sending failed:', result.message);
@@ -243,7 +243,7 @@ function ContactForm() {
         <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-lg sm:rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 mb-4 sm:mb-6">
           <FiMessageSquare className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 text-primary dark:text-emerald-300" />
         </div>
-        <h3 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-foreground mb-2 sm:mb-3">Drop Me a Line</h3>
+        <h3 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-foreground mb-2 sm:mb-3 dark:text-emerald-300">Drop Me a Line</h3>
       </div>
 
       {/* Responsive Contact Form */}
@@ -454,7 +454,7 @@ export function ContactSection() {
             {/* Coffee Icon with Professional Positioning */}
             <div className="flex justify-center mb-6 sm:mb-8">
               <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-2xl bg-card border border-border/50 shadow-sm">
-                <FiCoffee className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-foreground dark:text-amber-600" />
+                <FiCoffee className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-foreground" />
               </div>
             </div>
 

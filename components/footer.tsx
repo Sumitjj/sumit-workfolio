@@ -6,6 +6,7 @@ import { contactConfig, socialLinks } from "@/data/portfolio";
 import { SocialFloatingDock } from "@/lib/aceternity/social-floating-dock";
 import { FooterSparkles } from "@/lib/aceternity/footer-sparkles";
 import { handleEmailClick } from "@/lib/helpers/utils";
+import { Sparkle, Star } from "lucide-react";
 
 /**
  * Fully Responsive Footer Component with Modern Design
@@ -13,13 +14,11 @@ import { handleEmailClick } from "@/lib/helpers/utils";
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
-
-
   return (
     <footer className="relative mt-auto overflow-hidden">
       {/* Premium Background */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-t from-primary/5 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-primary/5 via-transparent to-transparent " />
       </div>
 
       {/* Footer Sparkles Effect with Lightning Border */}
@@ -75,9 +74,9 @@ export function Footer() {
           </div>
           <div className="mt-6" />
           <div className="flex items-center justify-center space-x-2 text-xs text-muted-foreground">
-            <FiStar className="w-3 h-3 text-primary" />
+            <FiStar className="w-3 h-3" />
             <span>Always learning, always building.</span>
-            <FiStar className="w-3 h-3 text-primary" />
+            <FiStar className="w-3 h-3" />
           </div>
         </div>
         {/* Desktop layout: 3 columns, message centered below */}
@@ -90,7 +89,7 @@ export function Footer() {
             {/* Center: Crafted with */}
             <div className="flex justify-center flex-1">
               <div className="text-center text-sm text-muted-foreground mt-4">
-                Crafted with <span className="font-bold text-red-500">❤️</span> <span className="font-medium text-orange-500">Next.js</span> <span className="text-muted-foreground/60">•</span> <span className="font-medium text-primary">TypeScript</span> <span className="text-muted-foreground/60">•</span> <span className="font-medium text-green-500">Tailwind</span>
+                Crafted with <span className="font-bold text-red-500">❤️</span> <span>in </span><span className="font-medium text-orange-500">Next.js</span> <span className="text-muted-foreground/60">•</span> <span className="font-medium text-primary">TypeScript</span> <span className="text-muted-foreground/60">•</span> <span className="font-medium text-green-500">Tailwind</span>
               </div>
             </div>
             {/* Right: Social Icons */}
@@ -102,9 +101,9 @@ export function Footer() {
           </div>
           <div className="w-full flex justify-center mt-8 mb-2">
             <div className="flex items-center justify-center space-x-2 text-xs text-muted-foreground">
-              <FiStar className="w-3 h-3 text-primary" />
-              <span>Always learning, always building.</span>
-              <FiStar className="w-3 h-3 text-primary" />
+              <Sparkle className="w-3 h-3" />
+              <span className="bg-gradient-to-r from-[#FF9933] via-[#FFFFFF] to-[#046A38] bg-clip-text text-transparent animate-gradient font-semibold">Always learning, always building.</span>
+              <Sparkle className="w-3 h-3" />
             </div>
           </div>
         </div>

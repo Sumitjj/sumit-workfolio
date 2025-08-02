@@ -2,7 +2,8 @@
 
 import React from "react";
 import Image from "next/image";
-import { FiChevronDown, FiArrowRight, FiStar } from "react-icons/fi";
+import { FiChevronDown, FiArrowRight } from "react-icons/fi";
+import { Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { personalInfo, socialLinks, contactConfig } from "@/data/portfolio";
 import { smoothScrollToElement } from "@/lib/helpers/scroll";
@@ -104,7 +105,7 @@ export const HeroSection = () => {
 
               {/* Sparkle Icon */}
               <div className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 p-1.5 sm:p-2 bg-primary text-primary-foreground rounded-full shadow-lg animate-spin-slow">
-                <FiStar className="w-3 h-3 sm:w-4 sm:h-4" />
+                <Sparkles className="w-3 h-3 sm:w-4 sm:h-4" />
               </div>
             </div>
           </div>
@@ -146,7 +147,7 @@ export const HeroSection = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
               <Button
                 size="lg"
-                className="group hover-lift w-full sm:w-auto text-sm sm:text-base"
+                className="group hover-lift w-full sm:w-auto text-sm sm:text-base dark:text-emerald-300"
                 onClick={() => smoothScrollToElement("projects")}
               >
                 What I&apos;ve Built
@@ -156,7 +157,7 @@ export const HeroSection = () => {
               <Button
                 variant="outline"
                 size="lg"
-                className="hover-lift w-full sm:w-auto text-sm sm:text-base"
+                className="hover-lift w-full sm:w-auto text-sm sm:text-base dark:text-emerald-300"
                 onClick={() => smoothScrollToElement("contact")}
               >
                 Let’s Talk
