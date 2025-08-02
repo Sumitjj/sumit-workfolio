@@ -22,16 +22,16 @@ export function FooterSparkles({ className }: FooterSparklesProps) {
                 >
                     <defs>
                         <linearGradient id="footerLineGradient" x1="0" y1="4" x2="1000" y2="4" gradientUnits="userSpaceOnUse">
-                            <stop offset="20%" stopColor="rgba(80,120,255,0)" />
-                            <stop offset="40%" stopColor="rgba(80,120,255,0.7)" />
-                            <stop offset="50%" stopColor="rgba(80,120,255,1)" />
-                            <stop offset="60%" stopColor="rgba(80,120,255,0.7)" />
-                            <stop offset="100%" stopColor="rgba(80,120,255,0)" />
+                            <stop offset="20%" stopColor="rgba(110,231,183,0)" />
+                            <stop offset="40%" stopColor="rgba(110,231,183,0.4)" />
+                            <stop offset="50%" stopColor="rgba(110,231,183,1)" />
+                            <stop offset="60%" stopColor="rgba(110,231,183,0.5)" />
+                            <stop offset="100%" stopColor="rgba(110,231,183,0)" />
                         </linearGradient>
                         <radialGradient id="footerLineGlow" cx="50%" cy="50%" r="50%">
-                            <stop offset="20%" stopColor="rgba(80,120,255,0.4)" />
-                            <stop offset="60%" stopColor="rgba(80,120,255,0.08)" />
-                            <stop offset="100%" stopColor="rgba(80,120,255,0)" />
+                            <stop offset="20%" stopColor="rgba(110,231,183,0.5)" />
+                            <stop offset="60%" stopColor="rgba(110,231,183,0.1)" />
+                            <stop offset="100%" stopColor="rgba(110,231,183,0)" />
                         </radialGradient>
                     </defs>
                     {/* Glow */}
@@ -42,7 +42,7 @@ export function FooterSparkles({ className }: FooterSparklesProps) {
             </div>
             {/* Sparkles effect, below the line, curved density, masked */}
             <div
-                className="absolute left-1/2 -translate-x-1/2 top-6 w-[28rem] max-w-full h-20"
+                className="absolute left-1/2 -translate-x-1/2 top-6 w-[45rem] max-w-full h-20"
                 style={{
                     maskImage: 'radial-gradient(ellipse 80% 60% at 50% 0%, white 80%, transparent 100%)',
                     WebkitMaskImage: 'radial-gradient(ellipse 80% 60% at 50% 0%, white 80%, transparent 100%)',
@@ -50,7 +50,7 @@ export function FooterSparkles({ className }: FooterSparklesProps) {
             >
                 <SparklesCore
                     background="transparent"
-                    minSize={0.4}
+                    minSize={0.6}
                     maxSize={1}
                     particleDensity={500}
                     className="w-full h-full"
@@ -59,4 +59,4 @@ export function FooterSparkles({ className }: FooterSparklesProps) {
             </div>
         </div>
     );
-} 
+}

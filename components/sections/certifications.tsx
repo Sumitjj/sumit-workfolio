@@ -7,9 +7,9 @@ import {
     FiCalendar,
     FiExternalLink,
     FiHome,
-    FiShield,
     FiStar
 } from "react-icons/fi";
+import { ShieldCheck } from "lucide-react";
 import { FaMedal } from "react-icons/fa";
 import { certifications } from "@/data/portfolio";
 import Image from "next/image";
@@ -97,7 +97,7 @@ function CertificationCard({ certification, index }: CertificationCardProps) {
                         {/* Active Badge - Subtle position below image */}
                         <div className="flex justify-center mt-4">
                             <div className="flex items-center gap-1.5 px-2.5 py-1 bg-gradient-to-r from-green-700 to-emerald-700 text-white rounded-full shadow-md text-xs">
-                                <FiShield className="w-3 h-3" />
+                                <ShieldCheck className="w-3 h-3" />
                                 <span className="font-medium">Active</span>
                             </div>
                         </div>
@@ -265,7 +265,7 @@ export function CertificationsSection() {
                     <div className="text-center mb-12">
                         <div className="flex flex-col items-center justify-center mb-6">
                             <div className="p-3 sm:p-4 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-sm shadow-lg mb-4">
-                                <FaMedal className="w-7 h-7 sm:w-8 sm:h-8 text-primary dark:text-blue-400" />
+                                <FaMedal className="w-7 h-7 sm:w-8 sm:h-8 text-primary" />
                             </div>
                             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground">
                                 Badges & Certifications

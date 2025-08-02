@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useMemo } from "react";
+import Image from "next/image";
 import { FiMenu, FiX, FiDownload } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
 import { navigationItems, personalInfo } from "@/data/portfolio";
@@ -87,14 +88,23 @@ const Navigation = () => {
               aria-label="Navigate to top of page"
               style={{ transformOrigin: 'center center', contain: 'layout style' }}
             >
-              {personalInfo.name.split(" ").map((word, index) => (
+              {/* {personalInfo.name.split(" ").map((word, index) => (
                 <span key={index}>
                   {index === 0 ? word : (
                     <span className="text-primary">{word}</span>
                   )}
                   {index < personalInfo.name.split(" ").length - 1 && " "}
                 </span>
-              ))}
+              ))} */}
+              <Image
+                src={personalInfo.logo}
+                alt={personalInfo.name}
+                width={100}
+                height={100}
+                className="transition-transform duration-300 transform-gpu hover:scale-105"
+                style={{ contain: 'layout style' }}
+                priority
+              />
             </button>
 
             {/* Desktop Navigation */}
