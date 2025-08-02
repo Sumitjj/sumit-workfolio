@@ -1,5 +1,6 @@
 import {
-    FaReact, FaHtml5, FaCss3Alt, FaGitAlt, FaJava, FaJenkins, FaGithub, FaLinkedin, FaNode
+    FaReact, FaHtml5, FaCss3Alt, FaGitAlt, FaJava, FaJenkins, FaGithub, FaLinkedin, FaNode,
+    FaBitbucket
 } from "react-icons/fa";
 import {
     SiPwa, SiMongodb, SiTailwindcss, SiJira,
@@ -76,6 +77,7 @@ export const skillGroups: SkillGroup[] = [
             { name: "Jira", icon: SiJira, color: "#FFFFFF" },
             { name: "GitHub", icon: FaGitAlt, color: "#FFFFFF" },
             { name: "Jenkins", icon: FaJenkins, color: "#FFFFFF" },
+            { name: "Bitbucket", icon: FaBitbucket, color: "#FFFFFF" },
         ]
     }
 ];
