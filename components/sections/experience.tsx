@@ -13,7 +13,7 @@ import {
 import { HiBuildingOffice2 } from "react-icons/hi2";
 
 import { FaRoute } from "react-icons/fa";
-import { experiences } from "@/data/portfolio";
+import { experiences } from "@/data/experienceData";
 
 // Production-ready constants - Optimized for performance
 const ANIMATION_CONFIG = {

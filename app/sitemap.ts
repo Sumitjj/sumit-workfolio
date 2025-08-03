@@ -1,4 +1,4 @@
-import { personalInfo } from "@/data/portfolio";
+import { personalInfo } from "@/data/personalData";
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {

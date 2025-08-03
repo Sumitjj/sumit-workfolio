@@ -3,7 +3,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { Footer } from "@/components/footer";
-import { personalInfo } from "@/data/portfolio";
+import { personalInfo } from "@/data/personalData";
 import { generateMetadata, generateStructuredData } from "@/lib/seo/metadata";
 
 // Optimized font loading with display swap for better performance

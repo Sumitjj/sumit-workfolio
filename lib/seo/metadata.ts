@@ -1,5 +1,8 @@
 import { Metadata } from "next";
-import { personalInfo, projects, experiences, certifications, socialLinks } from "@/data/portfolio";
+import { personalInfo, socialLinks } from "@/data/personalData";
+import { projects } from "@/data/projectsData";
+import { experiences } from "@/data/experienceData";
+import { certifications } from "@/data/certificationData";
 
 // Base URL configuration
 const baseUrl = "https://www.sumitworkfolio.in";

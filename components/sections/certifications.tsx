@@ -11,7 +11,7 @@ import {
 } from "react-icons/fi";
 import { ShieldCheck } from "lucide-react";
 import { FaMedal } from "react-icons/fa";
-import { certifications } from "@/data/portfolio";
+import { certifications } from "@/data/certificationData";
 import Image from "next/image";
 
 /**

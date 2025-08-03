@@ -1,6 +1,6 @@
 import React from "react";
 import { FloatingDock } from "@/lib/aceternity/floating-dock";
-import { socialLinks } from "@/data/portfolio";
+import { socialLinks } from "@/data/personalData";
 import { handleEmailClick } from "@/lib/helpers/utils";
 
 export function SocialFloatingDock({

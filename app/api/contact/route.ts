@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { generateContactEmailHtml, generateAutoReplyEmailHtml, emailTemplates } from "@/components/email-templates/contact-email";
-import { contactConfig, personalInfo } from "@/data/portfolio";
+import { personalInfo } from "@/data/personalData";
+import { contactConfig } from "@/data/contactData";
 
 // Create reusable transporter object using Gmail SMTP
 const createTransporter = () => {

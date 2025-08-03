@@ -4,12 +4,24 @@ import React, { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 import { FiMenu, FiX, FiDownload } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
-import { navigationItems, personalInfo } from "@/data/portfolio";
+import { personalInfo } from "@/data/personalData";
 import { cn, openResume, getResumeButtonText } from "@/lib/helpers/utils";
 import {
   useScrollPosition,
   createNavigationHandler
 } from "@/lib/helpers/scroll";
+import { NavItem } from "@/types";
+
+/**
+ * Navigation items for the portfolio
+ */
+export const navigationItems: NavItem[] = [
+  { href: "#projects", label: "Creations" },
+  { href: "#skills", label: "Tech" },
+  { href: "#experience", label: "Journey" },
+  { href: "#certifications", label: "Badges" },
+  { href: "#contact", label: "Connect" },
+];
 
 /**
  * Main navigation component with responsive design and smooth scrolling
