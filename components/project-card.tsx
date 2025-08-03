@@ -59,7 +59,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   };
 
   return (
-    <CardContainer className="inter-var w-full h-full" onClick={onClick}>
+    <CardContainer className="inter-var w-full h-full">
       <CardBody className={cn(
         "bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-full rounded-xl p-6 border flex flex-col cursor-pointer",
         heightClasses,
