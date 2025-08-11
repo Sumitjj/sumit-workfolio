@@ -50,7 +50,6 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <title>Sumit Jangid | Salesforce B2C Commerce Architect | Next.js Developer</title>
         {/* Preload critical resources */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
@@ -70,23 +69,14 @@ export default function RootLayout({
         <meta name="msapplication-TileImage" content="/images/avatars/favicon/sumit-192x192.png" />
         <meta name="msapplication-TileColor" content="#000000" />
 
-        {/* PWA and mobile meta tags */}
-        <meta name="description" content="Official portfolio of Sumit Jangid – Salesforce B2C Commerce Cloud Architect with 9+ years expertise in SFCC, Next.js, React, and scalable eCommerce solutions. Explore projects, skills, certifications, and contact info for hiring." />
-        <meta name="keywords" content="SFCC, SFCC portfolio, SFCC developer, SFCC architect, Salesforce B2C Commerce Lead, Salesforce B2C Commerce Architect, Ecommerce Architect, Next.js Developer, React Developer, TypeScript Developer, Full Stack Developer India, Sumit Portfolio, Sumit Jangid Portfolio, Sumit Jangid Workfolio, Sumit workfolio, sfcc workfolio, Bengaluru Developer, Remote Developer, Freelance Developer, Contract Developer, Senior Developer, Lead Developer, Technical Lead, Solution Architect, System Architect, Software Architect, Developer Portfolio, Web Developer Portfolio, Full Stack Portfolio, React Portfolio, Next.js Portfolio, Salesforce Portfolio, OCAPI Developer, SCAPI Developer, B2C Commerce SDK, Salesforce Integration, API Development, Microservices, Cloud Architecture, AWS Developer, Technology Consultant, Digital Transformation, Agile Development, Scrum Master, Project Management, Team Leadership, Progressive Web Apps, Mobile Responsive, Performance Optimization, SEO Optimization, RESTful APIs, GraphQL, Docker, Kubernetes, CI/CD, DevOps, Unit Testing, Integration Testing, E2E Testing, Jest, Cypress, Playwright, MongoDB, PostgreSQL, Redis, Git, GitHub, Bitbucket, Tailwind CSS, Bootstrap, HTML5, CSS3, SASS, LESS, Salesforce Certified, B2C Commerce Developer, B2C Commerce Architect, Professional Certification, Salesforce Partner, Custom Development, Web Application Development, Mobile App Development, API Integration, Third-party Integration, Legacy System Migration, Retail E-commerce, Fashion E-commerce, Electronics E-commerce, Healthcare E-commerce, Finance E-commerce, Education E-commerce, Enterprise Solutions, SMB Solutions, Startup Development, Scale-up Solutions, Enterprise Architecture, Global Developer, International Projects, Cross-border E-commerce, Multi-language Support, Multi-currency Support, 9+ Years Experience, Senior Level, Expert Level, Veteran Developer, Seasoned Professional, Portfolio Projects, Case Studies, Success Stories, Client Testimonials, Project Showcase, Hire Developer, Freelance Work, Contract Work, Consultation, Technical Consultation, Architecture Review, Client Reviews, Project Success, Technical Excellence, Problem Solver, Innovation Leader, Emerging Technologies, AI Integration, Machine Learning, Blockchain, IoT Solutions, Progressive Web Apps" />
+        {/* PWA and mobile meta tags (SEO-critical tags like title/description/OG are handled by Next metadata) */}
         <meta name="author" content="Sumit Jangid" />
-        <meta name="theme-color" content="#000000" />
-        <meta name="msapplication-TileColor" content="#000000" />
         <meta name="msapplication-config" content="/images/avatars/favicon/browserconfig.xml" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Sumit Jangid Portfolio" />
         <meta name="application-name" content="Sumit Jangid Portfolio" />
         <meta name="mobile-web-app-capable" content="yes" />
-
-        {/* Additional SEO meta tags */}
-        <meta name="robots" content="index, follow" />
-        <meta name="googlebot" content="index, follow" />
-        <link rel="canonical" href="https://www.sumitworkfolio.in" />
 
         {/* Structured Data for SEO */}
         <script
@@ -96,16 +86,6 @@ export default function RootLayout({
           }}
         />
 
-        <meta property="og:title" content="Sumit Jangid – Salesforce B2C Architect & Developer" />
-        <meta property="og:description" content="Explore my projects, skills, and experiences as a Salesforce Commerce Cloud Architect and Next.js developer." />
-        <meta property="og:image" content={personalInfo.avatar} />
-        <meta property="og:url" content="https://www.sumitworkfolio.in" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Sumit Jangid – Salesforce B2C Architect & Developer" />
-        <meta name="twitter:description" content="Explore my projects, skills, and experiences as a Salesforce Commerce Cloud Architect and Next.js developer." />
-        <meta name="twitter:image" content={personalInfo.avatar} />
-        <meta name="twitter:url" content="https://www.sumitworkfolio.in" />
-
         {/* Preload critical images */}
         <link
           rel="preload"
@@ -114,14 +94,6 @@ export default function RootLayout({
           type="image/jpeg"
         />
 
-        {/* Preload critical fonts */}
-        <link
-          rel="preload"
-          href="/fonts/inter-var.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
       </head>
       <body
         className="min-h-screen bg-background font-sans antialiased smooth-transition"

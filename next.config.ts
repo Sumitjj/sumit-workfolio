@@ -93,6 +93,34 @@ const nextConfig: NextConfig = {
     ];
   },
 
+  // Canonical host redirect: non-www -> www (and http -> https)
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'sumitworkfolio.in',
+          },
+        ],
+        destination: 'https://www.sumitworkfolio.in/:path*',
+        permanent: true,
+      },
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'http://www.sumitworkfolio.in',
+          },
+        ],
+        destination: 'https://www.sumitworkfolio.in/:path*',
+        permanent: true,
+      },
+    ];
+  },
+
   // Compression and optimization
   compress: true,
   poweredByHeader: false,
