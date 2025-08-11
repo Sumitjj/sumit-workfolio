@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { skillGroups } from "@/data/portfolio";
+import { skillGroups } from "@/data/skillsData";
 import type { Skill, SkillGroup } from "@/types";
 import { motion } from "framer-motion";
 import { FiTool } from "react-icons/fi";

@@ -2,7 +2,8 @@
 
 import React from "react";
 import { FiStar } from "react-icons/fi";
-import { contactConfig, socialLinks } from "@/data/portfolio";
+import { socialLinks } from "@/data/personalData";
+import { contactConfig } from "@/data/contactData";
 import { SocialFloatingDock } from "@/lib/aceternity/social-floating-dock";
 import { FooterSparkles } from "@/lib/aceternity/footer-sparkles";
 import { handleEmailClick } from "@/lib/helpers/utils";

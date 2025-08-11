@@ -6,7 +6,7 @@ import { Sparkles } from "lucide-react";
 import { FiMonitor } from "react-icons/fi";
 import { ProjectCard } from "@/components/project-card";
 import { ProjectModal } from "@/components/project-modal";
-import { projects } from "@/data/portfolio";
+import { projects } from "@/data/projectsData";
 import { Project } from "@/types";
 import { Fade } from "react-awesome-reveal";
 

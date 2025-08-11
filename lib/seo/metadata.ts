@@ -1,5 +1,8 @@
 import { Metadata } from "next";
-import { personalInfo, projects, experiences, certifications, socialLinks } from "@/data/portfolio";
+import { personalInfo, socialLinks } from "@/data/personalData";
+import { projects } from "@/data/projectsData";
+import { experiences } from "@/data/experienceData";
+import { certifications } from "@/data/certificationData";
 
 // Base URL configuration
 const baseUrl = "https://www.sumitworkfolio.in";
@@ -32,6 +35,14 @@ export const generateStructuredData = () => {
             "SFCC Architect",
             "SFRA Development",
             "Headless Commerce",
+            "Sumit workfolio",
+            "Sumit portfolio",
+            "Sumit jangid",
+            "Sumit jangid workfolio",
+            "Sumit jangid portfolio",
+            "Sumit jangid developer",
+            "Sumit jangid sfcc",
+            "Sumit jangid sfcc developer",
             "Next.js",
             "React",
             "TypeScript",
@@ -79,11 +90,7 @@ export const generateStructuredData = () => {
             "DevOps",
             "Testing",
             "Unit Testing",
-            "Integration Testing",
-            "E2E Testing",
-            "Jest",
-            "Cypress",
-            "Playwright"
+            "Integration Testing"
         ],
         hasCredential: certifications.map(cert => ({
             "@type": "EducationalOccupationalCredential",
@@ -173,6 +180,8 @@ export const generateStructuredData = () => {
             "Microservices",
             "Cloud Architecture",
             "AWS Developer",
+            "Sumit Portfolio",
+            "Sumit Workfolio",
             "Sumit Jangid",
             "Sumit Jangid Portfolio",
             "Sumit Jangid Developer",
@@ -348,201 +357,13 @@ export const generateMetadata = (page?: string): Metadata => {
             template: `%s | ${personalInfo.name}`,
         },
         description,
+        // Keep keywords concise; Google largely ignores the meta keywords tag
         keywords: [
-            // Primary Keywords
             "Salesforce B2C Commerce Cloud Architect",
             "SFCC Developer",
-            "SFCC Architect",
-            "Salesforce Commerce Cloud Expert",
-            "B2C Commerce Cloud Developer",
-            "Demandware Developer",
-            "SFRA Developer",
-            "Commerce Cloud Specialist",
-
-            // Technology Keywords
-            "Next.js Developer",
-            "React Developer",
-            "TypeScript Developer",
-            "Full Stack Developer",
-            "Frontend Developer",
-            "Backend Developer",
-            "Node.js Developer",
-            "JavaScript Developer",
-
-            // E-commerce Keywords
-            "E-commerce Developer",
-            "E-commerce Architect",
-            "Digital Commerce Expert",
-            "Headless Commerce Developer",
-            "E-commerce Solutions",
-            "Online Store Development",
-            "B2C E-commerce",
-            "B2B E-commerce",
-
-            // Location Keywords
-            "Bengaluru Developer",
-            "Bangalore Developer",
-            "India Developer",
-            "Remote Developer",
-            "Freelance Developer",
-            "Contract Developer",
-
-            // Experience Keywords
-            "Senior Developer",
-            "Lead Developer",
-            "Technical Lead",
-            "Solution Architect",
-            "System Architect",
-            "Software Architect",
-
-            // Portfolio Keywords
-            "Developer Portfolio",
-            "Web Developer Portfolio",
-            "Full Stack Portfolio",
-            "React Portfolio",
+            "Salesforce Commerce Cloud",
             "Next.js Portfolio",
-            "Salesforce Portfolio",
-
-            // Specific Skills
-            "OCAPI Developer",
-            "SCAPI Developer",
-            "B2C Commerce SDK",
-            "Salesforce Integration",
-            "API Development",
-            "Microservices",
-            "Cloud Architecture",
-            "AWS Developer",
-
-            // Personal Brand
-            "Sumit Jangid",
-            "Sumit Jangid Portfolio",
-            "Sumit Jangid Developer",
-            "Sumit Jangid SFCC",
-            "Sumit Workfolio",
-            "Sumit Jangid Workfolio",
-
-            // Industry Keywords
-            "Technology Consultant",
-            "Digital Transformation",
-            "Agile Development",
-            "Scrum Master",
-            "Project Management",
-            "Team Leadership",
-
-            // Modern Development
-            "Progressive Web Apps",
-            "Mobile Responsive",
-            "Performance Optimization",
-            "SEO Optimization",
-            "RESTful APIs",
-            "GraphQL",
-            "Docker",
-            "Kubernetes",
-            "CI/CD",
-            "DevOps",
-
-            // Testing & Quality
-            "Unit Testing",
-            "Integration Testing",
-            "E2E Testing",
-            "Jest",
-            "Cypress",
-            "Playwright",
-
-            // Database & Tools
-            "MongoDB",
-            "PostgreSQL",
-            "Redis",
-            "Git",
-            "GitHub",
-            "Bitbucket",
-
-            // Framework Keywords
-            "Tailwind CSS",
-            "Bootstrap",
-            "HTML5",
-            "CSS3",
-            "SASS",
-            "LESS",
-
-            // Certification Keywords
-            "Salesforce Certified",
-            "B2C Commerce Developer",
-            "B2C Commerce Architect",
-            "Professional Certification",
-            "Salesforce Partner",
-
-            // Service Keywords
-            "Custom Development",
-            "Web Application Development",
-            "Mobile App Development",
-            "API Integration",
-            "Third-party Integration",
-            "Legacy System Migration",
-
-            // Industry Verticals
-            "Retail E-commerce",
-            "Fashion E-commerce",
-            "Electronics E-commerce",
-            "Healthcare E-commerce",
-            "Finance E-commerce",
-            "Education E-commerce",
-
-            // Company Size Keywords
-            "Enterprise Solutions",
-            "SMB Solutions",
-            "Startup Development",
-            "Scale-up Solutions",
-            "Enterprise Architecture",
-
-            // Geographic Keywords
-            "Global Developer",
-            "International Projects",
-            "Cross-border E-commerce",
-            "Multi-language Support",
-            "Multi-currency Support",
-
-            // Time-based Keywords
-            "9+ Years Experience",
-            "Senior Level",
-            "Expert Level",
-            "Veteran Developer",
-            "Seasoned Professional",
-
-            // Project Keywords
-            "Portfolio Projects",
-            "Case Studies",
-            "Success Stories",
-            "Client Testimonials",
-            "Project Showcase",
-
-            // Contact Keywords
-            "Hire Developer",
-            "Freelance Work",
-            "Contract Work",
-            "Consultation",
-            "Technical Consultation",
-            "Architecture Review",
-
-            // Social Proof
-            "Client Reviews",
-            "Project Success",
-            "Technical Excellence",
-            "Problem Solver",
-            "Innovation Leader",
-
-            // Future-focused
-            "Emerging Technologies",
-            "AI Integration",
-            "Machine Learning",
-            "Blockchain",
-            "IoT Solutions",
-            "Progressive Web Apps",
-
-            // Personal Brand Variations
-            personalInfo.name.toLowerCase().replace(" ", "-"),
-            personalInfo.name.toLowerCase().replace(" ", ""),
-            personalInfo.name.toLowerCase().replace(" ", "_"),
+            personalInfo.name,
         ],
         authors: [{ name: personalInfo.name }],
         creator: personalInfo.name,
@@ -560,10 +381,10 @@ export const generateMetadata = (page?: string): Metadata => {
             siteName: `${personalInfo.name} Workfolio`,
             images: [
                 {
-                    url: `${baseUrl}${personalInfo.avatar}`,
-                    width: 400,
-                    height: 400,
-                    alt: `${personalInfo.name} - Professional Photo`,
+                    url: `${baseUrl}/images/logo/SumitJangir.png`,
+                    width: 1200,
+                    height: 630,
+                    alt: `${personalInfo.name} – Salesforce B2C Commerce Cloud Architect`,
                 }
             ],
         },
@@ -571,7 +392,7 @@ export const generateMetadata = (page?: string): Metadata => {
             card: "summary_large_image",
             title,
             description,
-            images: [`${baseUrl}${personalInfo.avatar}`],
+            images: [`${baseUrl}/images/logo/SumitJangir.png`],
             creator: "@sumitjangid",
             site: "@sumitjangid",
         },

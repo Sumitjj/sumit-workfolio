@@ -10,7 +10,7 @@ import { cn } from "@/lib/helpers/utils";
 
 interface ProjectCardProps {
   project: Project;
-  onClick: () => void;
+  onClick?: () => void;
   className?: string;
   variant?: "featured" | "compact";
 }
@@ -36,7 +36,6 @@ const getResponsiveClasses = (variant: 'featured' | 'compact', type: 'height' | 
  */
 export const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
-  onClick,
   className,
   variant = "featured",
 }) => {
