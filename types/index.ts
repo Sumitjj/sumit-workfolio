@@ -27,6 +27,52 @@ export interface Project {
     liveUrl?: string;
     featured: boolean;
     organization?: string;
+    /** Optional alternative banner image for modal hero. Falls back to `image` when not provided */
+    bannerImage?: string;
+    /** Key SFCC-centric customizations implemented for the project */
+    customizations?: CustomizationItem[];
+    /** Third-party integrations used within the solution */
+    integrations?: IntegrationItem[];
+}
+
+/**
+ * Salesforce Commerce Cloud architectural layer involved in a customization
+ */
+export type SfccLayer =
+    | "SFRA"
+    | "OCAPI"
+    | "SCAPI"
+    | "BM" // Business Manager
+    | "Cartridge"
+    | "Frontend"
+    | "Backend";
+
+/** Describes a major customization delivered in the project */
+export interface CustomizationItem {
+    title: string;
+    description: string;
+    layer: SfccLayer;
+}
+
+/** Describes a third-party integration used in the project */
+export interface IntegrationItem {
+    name: string;
+    purpose: string;
+    type?:
+    | "Payment"
+    | "Analytics"
+    | "Email"
+    | "Search"
+    | "CDP"
+    | "CMS"
+    | "Reviews"
+    | "Loyalty"
+    | "Support"
+    | "Maps"
+    | "Security"
+    | "Subscriptions"
+    | "A/B Testing"
+    | "Other";
 }
 
 /**

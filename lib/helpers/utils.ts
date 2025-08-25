@@ -55,7 +55,7 @@ export function handleEmailClick(email: string, subject?: string, body?: string)
  * Open resume in new window
  */
 export function openResume(): void {
-    window.open(`/resume/SumitJangid_SFCC_Resume.docx`, '_blank', 'noopener,noreferrer');
+    window.open(`/resume/SumitJangid_Resume.pdf`, '_blank', 'noopener,noreferrer');
 }
 
 /**

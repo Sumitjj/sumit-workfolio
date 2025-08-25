@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
-import { FiMenu, FiX, FiDownload } from "react-icons/fi";
+import { FiMenu, FiX, FiEye } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
 import { personalInfo } from "@/data/personalData";
 import { cn, openResume, getResumeButtonText } from "@/lib/helpers/utils";
@@ -145,7 +145,7 @@ const Navigation = () => {
                 className="relative overflow-hidden border-border/30 bg-gradient-to-r from-primary/10 to-secondary/10 backdrop-blur-sm hover:bg-gradient-to-r hover:from-primary hover:to-primary hover:text-primary-foreground hover:border-primary transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/25 transform-gpu group"
                 style={{ transformOrigin: 'center center', contain: 'layout style' }}
               >
-                <FiDownload className="h-4 w-4 mr-2 group-hover:animate-bounce" />
+                <FiEye className="h-4 w-4 mr-2 group-hover:animate-bounce" />
                 <span className="font-medium">{getResumeButtonText()}</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out" />
               </Button>
@@ -268,7 +268,7 @@ const Navigation = () => {
                   e.currentTarget.style.color = 'rgba(255, 255, 255, 0.9)';
                 }}
               >
-                <FiDownload className="h-4 w-4" />
+                <FiEye className="h-4 w-4" />
                 <span>{getResumeButtonText()}</span>
               </button>
             </div>
