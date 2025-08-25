@@ -158,7 +158,7 @@ export const projects: Project[] = [
         ]
     },
     {
-        id: "2",
+        id: "4",
         title: "Aquasana",
         description: [
             "Built on SFRA architecture to deliver a high performance and scalable e-Commerce platform.",
@@ -190,7 +190,7 @@ export const projects: Project[] = [
         ]
     },
     {
-        id: "8",
+        id: "5",
         title: "Hotwater",
         description: [
             "Hotwater implementation on SFRA architecure to provide a water heater solutions and services."
@@ -221,7 +221,7 @@ export const projects: Project[] = [
         ]
     },
     {
-        id: "4",
+        id: "6",
         title: "LondonDrugs",
         description: [
             "Built on SFRA a multi brand retail platform with pharmacy and electronics store and many more."
@@ -252,7 +252,7 @@ export const projects: Project[] = [
         ]
     },
     {
-        id: "5",
+        id: "7",
         title: "Camping World",
         description: [
             "Camping world delivers the best camping experience with a wide range of products and services."
@@ -277,7 +277,7 @@ export const projects: Project[] = [
         ]
     },
     {
-        id: "6",
+        id: "8",
         title: "Saje Wellness",
         description: [
             "Saje wellness is a leading wellness brand that provides a wide range of Essential oils and diffusers."
@@ -302,7 +302,7 @@ export const projects: Project[] = [
         ]
     },
     {
-        id: "7",
+        id: "9",
         title: "Uniqlo",
         description: [
             "Uniqlo is a leading global fashion brand that provides a wide range of products and services in appreal."
@@ -327,7 +327,7 @@ export const projects: Project[] = [
         ]
     },
     {
-        id: "9",
+        id: "10",
         title: "State",
         description: [
             "State water heaters is a leading brand that provides a wide range of water heaters and services."
@@ -352,7 +352,7 @@ export const projects: Project[] = [
         ]
     },
     {
-        id: "10",
+        id: "11",
         title: "Reliance",
         description: [
             "Reliance water heaters is a leading brand that provides a wide range of water heaters and services."
@@ -377,7 +377,7 @@ export const projects: Project[] = [
         ]
     },
     {
-        id: "11",
+        id: "12",
         title: "American",
         description: [
             "American water heaters is a leading brand that provides a wide range of water heaters and services."
@@ -402,7 +402,7 @@ export const projects: Project[] = [
         ]
     },
     {
-        id: "12",
+        id: "13",
         title: "Lochinvar",
         description: [
             "Lochinvar is a leading brand that provides a wide range of water heaters and services."
@@ -427,7 +427,7 @@ export const projects: Project[] = [
         ]
     },
     {
-        id: "13",
+        id: "14",
         title: "AOSmith Corp",
         description: [
             "Developed SFRA storefront with smart product suite.",
