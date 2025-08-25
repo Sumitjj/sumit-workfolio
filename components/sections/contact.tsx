@@ -14,11 +14,11 @@ import {
   FiClock,
   FiAward,
   FiGlobe,
-  FiStar,
   FiCoffee
 } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/helpers/utils";
+import { Sparkles } from "lucide-react";
 
 // Form data interface
 interface FormData {
@@ -76,7 +76,7 @@ function HighlightMetrics() {
           {/* Header matching website style */}
           <div className="text-center mb-8">
             <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 mb-4">
-              <FiStar className="w-6 h-6 text-primary animate-spin-slow" />
+              <Sparkles className="w-6 h-6 text-primary" />
             </div>
             <h4 className="text-lg font-semibold text-foreground mb-2 dark:text-emerald-300">
               What you can expect after hitting send button
