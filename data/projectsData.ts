@@ -1,49 +1,5 @@
-// Stats and Heading informations imports
-import { FiZap, FiUsers, FiCode, FiAward } from "react-icons/fi";
 import { getOptimizedProjectImage } from "@/lib/helpers/images";
 import { Project } from "@/types";
-
-
-// All the sections stats and heading informations
-export const PROJECT_STATS = [
-    {
-        icon: FiZap,
-        label: "SCALABLE PROJECTS ARCHITECTED",
-        value: "15+",
-        color: "#0070d2",
-        gradient: "from-blue-500/10 via-blue-600/5 to-purple-600/10",
-        textGradient: "linear-gradient(to right, #0070d2, #6f42c1, #0070d2)",
-        shadowColor: "#0070d2",
-    },
-    {
-        icon: FiUsers,
-        label: "GLOBAL CLIENTS EMPOWERED",
-        value: "10+",
-        color: "#059669",
-        gradient: "from-emerald-500/10 via-green-600/5 to-teal-600/10",
-        textGradient: "linear-gradient(to right, #059669, #14b8a6, #059669)",
-        shadowColor: "#059669",
-    }
-];
-
-// Professional highlights data
-export const PROFESSIONAL_HIGHLIGHTS = [
-    {
-        icon: FiCode,
-        title: "Expert Development",
-        description: "Specialized in Salesforce Commerce Cloud with 10+ years of enterprise experience",
-    },
-    {
-        icon: FiAward,
-        title: "Certified Professional",
-        description: "Salesforce B2C Commerce Cloud certified with proven track record",
-    },
-    {
-        icon: FiUsers,
-        title: "Client Success",
-        description: "Delivered successful solutions for enterprise clients worldwide",
-    }
-];
 
 
 /**

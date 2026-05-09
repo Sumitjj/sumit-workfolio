@@ -81,8 +81,8 @@ export function ProjectsSection() {
     return `${config.baseDelay + index * config.increment}ms`;
   };
 
-  const getAnimationClasses = (isVisible: boolean): string => {
-    return `transition-opacity duration-200 ${isVisible ? 'opacity-100' : 'opacity-100'}`;
+  const getAnimationClasses = (): string => {
+    return "transition-opacity duration-200 opacity-100";
   };
 
   // Reusable Animated Project Grid component
@@ -110,7 +110,7 @@ export function ProjectsSection() {
             return (
               <div
                 key={project.id}
-                className={`${variant}-project-card section-reveal ${getAnimationClasses(true)} ${gridColumnClass}`}
+                className={`${variant}-project-card section-reveal ${getAnimationClasses()} ${gridColumnClass}`}
                 style={{
                   transitionDelay: getAnimationDelay(index, variant),
                   opacity: 1,

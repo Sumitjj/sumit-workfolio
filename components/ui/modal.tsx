@@ -124,8 +124,9 @@ export function Modal({ isOpen, onClose, title, children, className, contentStyl
 
         {/* Content - Enhanced scrolling with better visibility */}
         <div
-          className="overflow-y-auto max-h-[90vh] bg-background/95 backdrop-blur-md scroll-smooth"
+          className="overflow-y-auto bg-background/95 backdrop-blur-md scroll-smooth"
           style={{
+            maxHeight: title ? "calc(90vh - 88px)" : "90vh",
             scrollbarWidth: 'thin',
             scrollbarColor: 'hsl(var(--primary)) hsl(var(--muted))',
             animation: 'modalContentFadeIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both',

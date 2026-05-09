@@ -35,7 +35,7 @@ export const certifications: Certification[] = [
         id: "4",
         name: "Salesforce Certified JavaScript Developer",
         issuer: "Salesforce",
-        dateEarned: new Date(2026, 5, 1),
+        dateEarned: new Date(2026, 4, 1),
         verificationUrl: "https://www.salesforce.com/trailblazer/sjangir3",
         badgeUrl: "/images/badges/JavascriptBadge.png",
         description: "Validates modern JavaScript expertise for scalable Salesforce implementations, including asynchronous patterns, modular architecture, and high-quality frontend delivery."
