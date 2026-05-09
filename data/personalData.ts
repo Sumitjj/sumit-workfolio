@@ -12,9 +12,9 @@ export const personalInfo = {
     location: "Bengaluru, India",
     email: "s.jangir129fl@gmail.com",
     phone: "+91 (995) 079-4448",
-    bio: "Transforming e-commerce vision into reality with 9+ years of SFCC mastery. Trusted by brands to build fast, flexible, and future- ready digital storefronts.",
+    bio: "Transforming e-commerce vision into reality with 10+ years of SFCC mastery. Trusted by brands to build fast, flexible, and future- ready digital storefronts.",
     avatar: getOptimizedAvatarImage("Sumit Jangid"),
-    resume: "/resume/SumitJangid_Resume_2025.docx",
+    resume: "/resume/SumitJangid_SFCC_Resume_2026.docx",
     logo: "/images/logo/Sumitj.png",
     websiteUrl: "https://www.sumitworkfolio.in",
 };
@@ -54,4 +54,3 @@ export const footerContent = {
     connectWith: "Connect with me",
     alwaysLearning: "Always learning, always building",
 };
-

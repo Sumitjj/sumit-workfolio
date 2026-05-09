@@ -4,11 +4,7 @@ import { cn } from "@/lib/helpers/utils";
 
 import React, {
     createContext,
-    useState,
     useContext,
-    useRef,
-    useEffect,
-    useCallback,
 } from "react";
 
 import type {
@@ -16,7 +12,6 @@ import type {
     ElementType,
     Dispatch,
     SetStateAction,
-    MouseEvent,
 } from "react";
 
 interface MouseEnterContextType {
@@ -36,44 +31,17 @@ export const CardContainer: React.FC<CardContainerProps> = ({
     containerClassName,
     ...props
 }) => {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const [isMouseEntered, setIsMouseEntered] = useState(false);
-
-    const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-        if (!containerRef.current) return;
-        const { left, top, width, height } = containerRef.current.getBoundingClientRect();
-        const x = (e.clientX - left - width / 2) / 40;
-        const y = (e.clientY - top - height / 2) / 40;
-        containerRef.current.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
-    };
-
-    const handleMouseEnter = () => {
-        setIsMouseEntered(true);
-    };
-
-    const handleMouseLeave = () => {
-        if (!containerRef.current) return;
-        setIsMouseEntered(false);
-        containerRef.current.style.transform = `rotateY(0deg) rotateX(0deg)`;
-    };
-
     return (
-        <MouseEnterContext.Provider value={{ isMouseEntered, setIsMouseEntered }}>
+        <MouseEnterContext.Provider value={{ isMouseEntered: false, setIsMouseEntered: () => undefined }}>
             <div
                 className={cn("flex items-center justify-center", containerClassName)}
-                style={{ perspective: "1000px" }}
                 {...props}
             >
                 <div
-                    ref={containerRef}
-                    onMouseEnter={handleMouseEnter}
-                    onMouseMove={handleMouseMove}
-                    onMouseLeave={handleMouseLeave}
                     className={cn(
-                        "flex items-center justify-center relative transition-all duration-200 ease-linear",
+                        "flex items-center justify-center relative",
                         className
                     )}
-                    style={{ transformStyle: "preserve-3d" }}
                 >
                     {children}
                 </div>
@@ -90,7 +58,6 @@ export const CardBody: React.FC<HTMLAttributes<HTMLDivElement>> = ({
     return (
         <div
             className={cn(
-                "[transform-style:preserve-3d] [&>*]:[transform-style:preserve-3d]",
                 className
             )}
             {...props}
@@ -114,34 +81,24 @@ export const CardItem: React.FC<CardItemProps> = ({
     as: Tag = "div",
     children,
     className,
-    translateX = 0,
-    translateY = 0,
-    translateZ = 0,
-    rotateX = 0,
-    rotateY = 0,
-    rotateZ = 0,
+    translateX: _translateX = 0,
+    translateY: _translateY = 0,
+    translateZ: _translateZ = 0,
+    rotateX: _rotateX = 0,
+    rotateY: _rotateY = 0,
+    rotateZ: _rotateZ = 0,
     ...rest
 }) => {
-    const ref = useRef<HTMLElement>(null);
-    const { isMouseEntered } = useMouseEnter();
-
-    const handleAnimations = useCallback(() => {
-        if (!ref.current) return;
-        if (isMouseEntered) {
-            ref.current.style.transform = `translateX(${translateX}px) translateY(${translateY}px) translateZ(${translateZ}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`;
-        } else {
-            ref.current.style.transform = `translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;
-        }
-    }, [isMouseEntered, translateX, translateY, translateZ, rotateX, rotateY, rotateZ]);
-
-    useEffect(() => {
-        handleAnimations();
-    }, [handleAnimations]);
+    void _translateX;
+    void _translateY;
+    void _translateZ;
+    void _rotateX;
+    void _rotateY;
+    void _rotateZ;
 
     return (
         <Tag
-            ref={ref}
-            className={cn("w-fit transition duration-200 ease-linear", className)}
+            className={cn("w-fit", className)}
             {...rest}
         >
             {children}

@@ -8,7 +8,7 @@ export const certifications: Certification[] = [
         id: "1",
         name: "Salesforce Certified B2C Commerce Developer",
         issuer: "Salesforce",
-        dateEarned: new Date(2018, 3, 15), // September 15, 2018
+        dateEarned: new Date(2018, 3, 15),
         verificationUrl: "https://www.salesforce.com/trailblazer/sjangir3",
         badgeUrl: "/images/badges/B2CDeveloperBadge.png",
         description: "Demonstrates expertise in developing and customizing Salesforce B2C Commerce Cloud solutions, including storefront development, business logic implementation, and integration capabilities."
@@ -17,7 +17,7 @@ export const certifications: Certification[] = [
         id: "2",
         name: "Salesforce Certified B2C Commerce Architect",
         issuer: "Salesforce",
-        dateEarned: new Date(2025, 0, 22), // June 22, 2021
+        dateEarned: new Date(2025, 0, 22),
         verificationUrl: "https://www.salesforce.com/trailblazer/sjangir3",
         badgeUrl: "/images/badges/B2CArchitectBadge.png",
         description: "Validates advanced skills in designing and implementing complex B2C Commerce Cloud solutions, including architecture decisions, performance optimization, and enterprise-level integrations."
@@ -26,9 +26,18 @@ export const certifications: Certification[] = [
         id: "3",
         name: "Salesforce Certified Agentforce Specialist",
         issuer: "Salesforce",
-        dateEarned: new Date(2025, 6, 10), // March 10, 2020
+        dateEarned: new Date(2025, 6, 10),
         verificationUrl: "https://www.salesforce.com/trailblazer/sjangir3",
         badgeUrl: "/images/badges/SalesforceAgentForce.png",
         description: "Certifies proficiency in JavaScript programming within the Salesforce ecosystem, including modern JavaScript features, asynchronous programming, and Lightning Web Components development."
+    },
+    {
+        id: "4",
+        name: "Salesforce Certified JavaScript Developer",
+        issuer: "Salesforce",
+        dateEarned: new Date(2026, 4, 1),
+        verificationUrl: "https://www.salesforce.com/trailblazer/sjangir3",
+        badgeUrl: "/images/badges/JavascriptBadge.png",
+        description: "Validates modern JavaScript expertise for scalable Salesforce implementations, including asynchronous patterns, modular architecture, and high-quality frontend delivery."
     }
 ];

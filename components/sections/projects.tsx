@@ -1,14 +1,15 @@
 "use client";
 
-import React, { useState, useMemo, useEffect, useRef } from "react";
-import { FiCode, FiAward, FiUsers, FiZap, FiHome } from "react-icons/fi";
-import { Sparkles } from "lucide-react";
-import { FiMonitor } from "react-icons/fi";
+import React, { useState, useMemo } from "react";
+import { FiUsers, FiZap, FiHome } from "react-icons/fi";
+import { Handshake, PanelsTopLeft, Rocket, ShieldCheck } from "lucide-react";
 import { ProjectCard } from "@/components/project-card";
 import { ProjectModal } from "@/components/project-modal";
+import { MetricCard } from "@/components/ui/metric-card";
 import { projects } from "@/data/projectsData";
 import { Project } from "@/types";
-import { Fade } from "react-awesome-reveal";
+
+const Fade = ({ children }: { children: React.ReactNode; [key: string]: unknown }) => <>{children}</>;
 
 // Animation configuration constants
 const ANIMATION_CONFIGS = {
@@ -48,19 +49,22 @@ const PROJECT_STATS = [
 // Professional highlights data
 const PROFESSIONAL_HIGHLIGHTS = [
   {
-    icon: FiCode,
+    icon: Rocket,
     title: "Expert Development",
-    description: "Specialized in Salesforce Commerce Cloud with 9+ years of enterprise experience",
+    description: "Specialized in Salesforce Commerce Cloud with 10+ years of enterprise experience",
+    accent: "#22d3ee",
   },
   {
-    icon: FiAward,
+    icon: ShieldCheck,
     title: "Certified Professional",
     description: "Salesforce B2C Commerce Cloud certified with proven track record",
+    accent: "#10b981",
   },
   {
-    icon: FiUsers,
+    icon: Handshake,
     title: "Client Success",
     description: "Delivered successful solutions for enterprise clients worldwide",
+    accent: "#8b5cf6",
   }
 ];
 
@@ -70,8 +74,6 @@ const PROFESSIONAL_HIGHLIGHTS = [
 export function ProjectsSection() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
 
   // Reusable utility functions as arrow functions
   const getAnimationDelay = (index: number, variant: keyof typeof ANIMATION_CONFIGS): string => {
@@ -79,62 +81,9 @@ export function ProjectsSection() {
     return `${config.baseDelay + index * config.increment}ms`;
   };
 
-  const getAnimationClasses = (isVisible: boolean): string => {
-    return `transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-      }`;
+  const getAnimationClasses = (): string => {
+    return "transition-opacity duration-200 opacity-100";
   };
-
-  // Reusable Project Statistics Card component
-  const ProjectStatCard: React.FC<{
-    icon: React.ElementType;
-    value: number | string;
-    label: string;
-    gradient: string;
-    textGradient: string;
-    shadowColor: string;
-  }> = ({ icon: Icon, value, label, gradient, textGradient, shadowColor }) => (
-    <div className="group cursor-pointer">
-      <div
-        className={`relative bg-gradient-to-br ${gradient} backdrop-blur-sm border rounded-3xl p-8 transition-all duration-300 ease-out hover:shadow-xl hover:scale-102`}
-        style={{
-          transformOrigin: 'center center',
-          contain: 'layout style',
-          boxShadow: `0 8px 24px -8px ${shadowColor}40`
-        }}
-      >
-        <div className={`absolute inset-0 bg-gradient-to-r ${gradient} rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-        <div className="relative text-center">
-          <div
-            className="mx-auto mb-4 w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg transition-all duration-300 ease-out"
-            style={{
-              background: textGradient,
-              boxShadow: `0 8px 24px -8px ${shadowColor}40`
-            }}
-          >
-            <Icon className="w-8 h-8 text-white" />
-          </div>
-          <div className="text-4xl sm:text-5xl font-black mb-2 min-h-[3rem] flex items-center justify-center">
-            <span
-              className="bg-gradient-to-r bg-clip-text text-transparent bg-300% animate-gradient"
-              style={{ backgroundImage: textGradient }}
-            >
-              {value}+
-            </span>
-          </div>
-          <div className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-            {label}
-          </div>
-        </div>
-        {/* Decorative elements */}
-        <div className="absolute top-3 right-3 opacity-50 group-hover:opacity-60 transition-opacity animate-spin-slow">
-          <Sparkles className="w-5 h-5" style={{ color: shadowColor }} />
-        </div>
-        <div className="absolute bottom-3 left-3 opacity-40 group-hover:opacity-40 transition-opacity animate-spin-slow">
-          <Sparkles className="w-4 h-4" style={{ color: shadowColor }} />
-        </div>
-      </div>
-    </div>
-  );
 
   // Reusable Animated Project Grid component
   const AnimatedProjectGrid: React.FC<{
@@ -149,7 +98,7 @@ export function ProjectsSection() {
     if (projects.length === 0) return null;
 
     return (
-      <div className={`mb-12 sm:mb-16 lg:mb-20 ${className}`}>
+      <div className={`mb-10 sm:mb-12 lg:mb-14 ${className}`}>
         <div className={gridLayout}>
           {projects.map((project, index) => {
             // For non-featured projects with 10 items, center the last 2 items in 4-column layout
@@ -161,11 +110,10 @@ export function ProjectsSection() {
             return (
               <div
                 key={project.id}
-                className={`${variant}-project-card ${getAnimationClasses(true)} ${gridColumnClass}`}
+                className={`${variant}-project-card section-reveal ${getAnimationClasses()} ${gridColumnClass}`}
                 style={{
                   transitionDelay: getAnimationDelay(index, variant),
-                  opacity: isVisible ? 1 : 0,
-                  transform: isVisible ? 'translateY(0)' : 'translateY(12px)'
+                  opacity: 1,
                 }}
               >
                 <ProjectCard
@@ -184,22 +132,24 @@ export function ProjectsSection() {
 
   // Reusable Professional Highlights component
   const ProfessionalHighlights: React.FC = () => (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 auto-rows-fr">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mt-10 sm:mt-12 auto-rows-fr">
       {PROFESSIONAL_HIGHLIGHTS.map((item, index) => (
         <div
           key={item.title}
-          className="group flex flex-col items-center text-center p-6 sm:p-8 rounded-2xl bg-white/60 dark:bg-neutral-900/60 backdrop-blur-xl border border-border/30 shadow-md transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl hover:scale-[1.03] hover:rotate-[-1deg]"
+          className="group motion-card relative overflow-hidden rounded-2xl border border-border/30 bg-card/70 p-6 text-left shadow-lg shadow-black/5 transition-[border-color,box-shadow,transform,background-color] duration-200 ease-out hover:-translate-y-1 hover:border-primary/30 hover:shadow-xl"
           style={{
-            transitionDelay: getAnimationDelay(index, 'highlights')
+            transitionDelay: getAnimationDelay(index, 'highlights'),
+            boxShadow: `0 18px 42px -34px ${item.accent}`
           }}
         >
-          <div className="flex items-center justify-center w-14 h-14 mb-4 transition-all duration-300 group-hover:scale-110">
-            <item.icon className={`w-10 h-10 stroke-2 ${index === 0 ? 'text-green-500' :
-              index === PROFESSIONAL_HIGHLIGHTS.length - 1 ? 'text-orange-500' :
-                'text-blue-500'
-              }`} />
+          <div className="absolute inset-x-0 top-0 h-1" style={{ backgroundColor: item.accent }} />
+          <div className="mb-5 flex items-center justify-between">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-background/70" style={{ color: item.accent }}>
+              <item.icon className="h-6 w-6 stroke-2" />
+            </div>
+            <span className="text-xs font-bold uppercase tracking-[0.18em] text-muted-foreground">0{index + 1}</span>
           </div>
-          <h4 className="text-xl font-extrabold mb-2 text-white-600 dark:text-white-400 tracking-tight">
+          <h4 className="text-xl font-extrabold mb-2 text-foreground tracking-tight">
             {item.title}
           </h4>
           <p className="text-sm text-muted-foreground leading-relaxed">
@@ -239,61 +189,18 @@ export function ProjectsSection() {
     setSelectedProject(null);
   };
 
-  // Intersection Observer for smooth animations - Mobile optimized
-  useEffect(() => {
-    const currentRef = sectionRef.current;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      {
-        threshold: 0.05, // More sensitive threshold for mobile
-        rootMargin: '100px 0px -50px 0px' // Larger root margin for mobile
-      }
-    );
-
-    if (currentRef) {
-      observer.observe(currentRef);
-    }
-
-    // Fallback: Set visible after a short delay if observer doesn't trigger
-    const fallbackTimer = setTimeout(() => {
-      setIsVisible(true);
-    }, 500);
-
-    return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
-      }
-      clearTimeout(fallbackTimer);
-    };
-  }, []);
-
-  // Force visibility on mount for mobile reliability
-  useEffect(() => {
-    const isMobile = window.innerWidth < 768;
-    if (isMobile) {
-      const timer = setTimeout(() => setIsVisible(true), 100);
-      return () => clearTimeout(timer);
-    }
-  }, []);
-
   return (
     <section
       id="projects"
-      ref={sectionRef}
-      className="py-16 sm:py-20 lg:py-24"
+      className="py-12 sm:py-16 lg:py-20"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Compact Section Header */}
         <Fade direction="up" triggerOnce>
           <div className="text-center mb-8">
             <div className="flex flex-col items-center justify-center mb-6">
-              <div className="p-3 sm:p-4 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-sm shadow-lg mb-4">
-                <FiMonitor className="w-7 h-7 sm:w-8 sm:h-8 text-primary" />
+              <div className="section-icon-mono motion-icon relative p-3 sm:p-4 rounded-2xl border mb-4">
+                <PanelsTopLeft className="relative w-7 h-7 sm:w-8 sm:h-8 text-foreground" />
               </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground">
                 What I&apos;ve Built
@@ -309,9 +216,15 @@ export function ProjectsSection() {
         {/* Project Stats */}
         <Fade direction="up" triggerOnce>
           <div className="text-center mb-12">
-            <div className="flex flex-wrap justify-center items-center gap-8 sm:gap-12">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 max-w-5xl mx-auto">
               {statsWithValues.map((stat) => (
-                <ProjectStatCard key={stat.label} {...stat} />
+                <MetricCard
+                  key={stat.label}
+                  icon={stat.icon}
+                  value={`${stat.value}+`}
+                  label={stat.label}
+                  accent={stat.color}
+                />
               ))}
             </div>
           </div>

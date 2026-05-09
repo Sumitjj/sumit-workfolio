@@ -4,10 +4,9 @@ import {
 } from "react-icons/fa";
 import {
     SiPwa, SiMongodb, SiTailwindcss, SiJira,
-    SiJquery, SiNestjs, SiMainwp, SiCodesignal, SiGoogledataproc
+    SiJquery, SiNestjs, SiMainwp, SiCodesignal
 } from "react-icons/si";
-import { Cpu } from "lucide-react";
-import { GiDeerHead } from "react-icons/gi";
+import { MonitorSmartphone, ServerCog, Workflow } from "lucide-react";
 import { PiLightningFill, PiFileHtmlDuotone } from "react-icons/pi";
 import { DiScrum } from "react-icons/di";
 import { MdManageAccounts } from "react-icons/md";
@@ -26,7 +25,7 @@ import { SkillGroup } from "@/types";
 export const skillGroups: SkillGroup[] = [
     {
         title: "Backend & E-Commerce",
-        icon: Cpu,
+        icon: ServerCog,
         skills: [
             { name: "SFRA", icon: FaSalesforce, color: "#FFFFFF" },
             { name: "SGJC", icon: FaSalesforce, color: "#FFFFFF" },
@@ -42,7 +41,7 @@ export const skillGroups: SkillGroup[] = [
     },
     {
         title: "Frontend & Headless",
-        icon: GiDeerHead,
+        icon: MonitorSmartphone,
         skills: [
             { name: "ISML", icon: PiFileHtmlDuotone, color: "#FFFFFF" },
             { name: "JavaScript", icon: IoLogoJavascript, color: "#FFFFFF" },
@@ -58,7 +57,7 @@ export const skillGroups: SkillGroup[] = [
     },
     {
         title: "Leadership & Process",
-        icon: SiGoogledataproc,
+        icon: Workflow,
         skills: [
             { name: "Project Management", icon: MdManageAccounts, color: "#FFFFFF" },
             { name: "Team Leadership", icon: SiMainwp, color: "#FFFFFF" },

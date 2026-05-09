@@ -1,22 +1,20 @@
 import { cn } from "@/lib/helpers/utils";
 import { IconLayoutNavbarCollapse } from "@tabler/icons-react";
-import {
-    AnimatePresence,
-    MotionValue,
-    motion,
-    useMotionValue,
-    useSpring,
-    useTransform,
-} from "motion/react";
+import { useState } from "react";
 
-import { useRef, useState } from "react";
+type DockItem = {
+    title: string;
+    icon: React.ReactNode;
+    href: string;
+    onClick?: () => void;
+};
 
 export const FloatingDock = ({
     items,
     desktopClassName,
     mobileClassName,
 }: {
-    items: { title: string; icon: React.ReactNode; href: string; onClick?: () => void }[];
+    items: DockItem[];
     desktopClassName?: string;
     mobileClassName?: string;
 }) => {
@@ -28,55 +26,59 @@ export const FloatingDock = ({
     );
 };
 
+const DockLink = ({ item, className }: { item: DockItem; className?: string }) => {
+    const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+        if (item.onClick) {
+            event.preventDefault();
+            item.onClick();
+        }
+    };
+
+    const isExternal = !item.onClick && item.href && item.href !== "#";
+
+    return (
+        <a
+            href={item.href}
+            aria-label={item.title}
+            title={item.title}
+            onClick={handleClick}
+            {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            className={cn(
+                "flex aspect-square items-center justify-center rounded-full border border-border/30 bg-card/60 text-neutral-500 shadow-sm",
+                "transition-[color,background-color,border-color,transform] duration-200 ease-out",
+                "hover:-translate-y-0.5 hover:border-primary/40 hover:bg-primary/10 hover:text-primary dark:text-neutral-300",
+                className
+            )}
+        >
+            <span className="flex h-5 w-5 items-center justify-center">{item.icon}</span>
+        </a>
+    );
+};
+
 const FloatingDockMobile = ({
     items,
     className,
 }: {
-    items: { title: string; icon: React.ReactNode; href: string; onClick?: () => void }[];
+    items: DockItem[];
     className?: string;
 }) => {
     const [open, setOpen] = useState(false);
+
     return (
         <div className={cn("relative block md:hidden", className)}>
-            <AnimatePresence>
-                {open && (
-                    <motion.div
-                        layoutId="nav"
-                        className="absolute inset-x-0 bottom-full mb-2 flex flex-col gap-2"
-                    >
-                        {items.map((item, idx) => (
-                            <motion.div
-                                key={item.title}
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{
-                                    opacity: 1,
-                                    y: 0,
-                                }}
-                                exit={{
-                                    opacity: 0,
-                                    y: 10,
-                                    transition: {
-                                        delay: idx * 0.05,
-                                    },
-                                }}
-                                transition={{ delay: (items.length - 1 - idx) * 0.05 }}
-                            >
-                                <a
-                                    href={item.href}
-                                    key={item.title}
-                                    onClick={item.onClick ? (e) => { e.preventDefault(); item.onClick!(); } : undefined}
-                                    className="flex h-14 w-14 items-center justify-center rounded-full"
-                                >
-                                    <div className="h-6 w-6">{item.icon}</div>
-                                </a>
-                            </motion.div>
-                        ))}
-                    </motion.div>
-                )}
-            </AnimatePresence>
+            {open && (
+                <div className="absolute inset-x-0 bottom-full mb-2 flex flex-col gap-2">
+                    {items.map((item) => (
+                        <DockLink key={item.title} item={item} className="h-12 w-12" />
+                    ))}
+                </div>
+            )}
             <button
-                onClick={() => setOpen(!open)}
-                className="flex h-14 w-14 items-center justify-center rounded-full"
+                type="button"
+                aria-expanded={open}
+                aria-label="Toggle social links"
+                onClick={() => setOpen((current) => !current)}
+                className="flex h-12 w-12 items-center justify-center rounded-full border border-border/30 bg-card/70"
             >
                 <IconLayoutNavbarCollapse className="h-5 w-5 text-neutral-500 dark:text-neutral-400" />
             </button>
@@ -88,103 +90,14 @@ const FloatingDockDesktop = ({
     items,
     className,
 }: {
-    items: { title: string; icon: React.ReactNode; href: string; onClick?: () => void }[];
+    items: DockItem[];
     className?: string;
 }) => {
-    const mouseX = useMotionValue(Infinity);
     return (
-        <motion.div
-            onMouseMove={(e) => mouseX.set(e.pageX)}
-            onMouseLeave={() => mouseX.set(Infinity)}
-            className={cn(
-                "mx-auto hidden h-10 items-end gap-2 md:flex",
-                className,
-            )}
-        >
+        <div className={cn("mx-auto hidden items-center gap-3 md:flex", className)}>
             {items.map((item) => (
-                <IconContainer mouseX={mouseX} key={item.title} {...item} />
+                <DockLink key={item.title} item={item} className="h-10 w-10" />
             ))}
-        </motion.div>
+        </div>
     );
 };
-
-function IconContainer({
-    mouseX,
-    icon,
-    href,
-    onClick,
-}: {
-    mouseX: MotionValue;
-    icon: React.ReactNode;
-    href: string;
-    onClick?: () => void;
-}) {
-    const ref = useRef<HTMLDivElement>(null);
-
-    const distance = useTransform(mouseX, (val) => {
-        const bounds = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 };
-
-        return val - bounds.x - bounds.width / 2;
-    });
-
-    const widthTransform = useTransform(distance, [-150, 0, 150], [60, 120, 60]);
-    const heightTransform = useTransform(distance, [-150, 0, 150], [60, 120, 60]);
-
-    const widthTransformIcon = useTransform(distance, [-150, 0, 150], [28, 56, 28]);
-    const heightTransformIcon = useTransform(
-        distance,
-        [-150, 0, 150],
-        [28, 56, 28],
-    );
-
-    const width = useSpring(widthTransform, {
-        mass: 0.1,
-        stiffness: 150,
-        damping: 12,
-    });
-    const height = useSpring(heightTransform, {
-        mass: 0.1,
-        stiffness: 150,
-        damping: 12,
-    });
-
-    const widthIcon = useSpring(widthTransformIcon, {
-        mass: 0.1,
-        stiffness: 150,
-        damping: 12,
-    });
-    const heightIcon = useSpring(heightTransformIcon, {
-        mass: 0.1,
-        stiffness: 150,
-        damping: 12,
-    });
-
-    const handleClick = (e: React.MouseEvent) => {
-        if (onClick) {
-            e.preventDefault();
-            onClick();
-        }
-    };
-
-    const isExternal = !onClick && href && href !== "#";
-    return (
-        <a
-            href={href}
-            onClick={handleClick}
-            {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-        >
-            <motion.div
-                ref={ref}
-                style={{ width, height }}
-                className="relative flex aspect-square items-center justify-center rounded-full"
-            >
-                <motion.div
-                    style={{ width: widthIcon, height: heightIcon }}
-                    className="flex items-center justify-center"
-                >
-                    {icon}
-                </motion.div>
-            </motion.div>
-        </a>
-    );
-} 

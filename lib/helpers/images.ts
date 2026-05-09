@@ -57,8 +57,9 @@ export function getAvatarImage(name: string, extension: string = 'jpg'): string 
  */
 export const PROJECT_IMAGES = {
     'Full Beauty FBB': '/images/projects/fullbeauty.jpg',
+    'RalphLauren': '/images/projects/rl.png',
     'Aquasana': '/images/projects/aquasana.jpeg',
-    'AOSmith': '/images/projects/aosmith.jpg',
+    'AOSmith': '/images/projects/hotwater.jpg',
     'LaneBryant': '/images/projects/lanebryant.jpg',
     'Loreal': '/images/projects/loreal.webp',
     'Camping World': '/images/projects/campingworld.webp',

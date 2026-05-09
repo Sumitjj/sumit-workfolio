@@ -1,19 +1,20 @@
 "use client";
 
 import React, { memo, useMemo } from "react";
-import { Fade } from "react-awesome-reveal";
 import {
     FiCalendar,
     FiClock,
     FiTrendingUp,
     FiAward,
-    FiZap,
-    FiStar
+    FiZap
 } from "react-icons/fi";
 import { HiBuildingOffice2 } from "react-icons/hi2";
 
-import { FaRoute } from "react-icons/fa";
+import { Milestone } from "lucide-react";
 import { experiences } from "@/data/experienceData";
+import { MetricCard } from "@/components/ui/metric-card";
+
+const Fade = ({ children }: { children: React.ReactNode;[key: string]: unknown }) => <>{children}</>;
 
 // Production-ready constants - Optimized for performance
 const ANIMATION_CONFIG = {
@@ -287,13 +288,10 @@ function ExperienceStats() {
         {
             icon: FiTrendingUp,
             label: "Years in Delivery",
-            value: "9+",
+            value: "10+",
             color: "#3b82f6",
             gradient: "from-blue-500/10 via-blue-600/5 to-purple-600/10",
             border: "border-blue-500/20",
-            hoverBorder: "hover:border-blue-500/30",
-            hoverShadow: "hover:shadow-blue-500/15",
-            iconGradient: "from-blue-500 to-purple-600",
             textGradient: "linear-gradient(to right, #3b82f6, #8b5cf6, #3b82f6)"
         },
         {
@@ -303,9 +301,6 @@ function ExperienceStats() {
             color: "#10b981",
             gradient: "from-emerald-500/10 via-green-600/5 to-teal-600/10",
             border: "border-emerald-500/20",
-            hoverBorder: "hover:border-emerald-500/30",
-            hoverShadow: "hover:shadow-emerald-500/15",
-            iconGradient: "from-emerald-500 to-green-600",
             textGradient: "linear-gradient(to right, #10b981, #059669, #10b981)"
         },
         {
@@ -315,9 +310,6 @@ function ExperienceStats() {
             color: "#8b5cf6",
             gradient: "from-violet-500/10 via-purple-600/5 to-fuchsia-600/10",
             border: "border-violet-500/20",
-            hoverBorder: "hover:border-violet-500/30",
-            hoverShadow: "hover:shadow-violet-500/15",
-            iconGradient: "from-violet-500 to-fuchsia-600",
             textGradient: "linear-gradient(to right, #8b5cf6, #d946ef, #8b5cf6)"
         },
         {
@@ -327,9 +319,6 @@ function ExperienceStats() {
             color: "#f59e0b",
             gradient: "from-amber-500/10 via-orange-600/5 to-yellow-600/10",
             border: "border-amber-500/20",
-            hoverBorder: "hover:border-amber-500/30",
-            hoverShadow: "hover:shadow-amber-500/15",
-            iconGradient: "from-amber-500 to-orange-600",
             textGradient: "linear-gradient(to right, #f59e0b, #d97706, #f59e0b)"
         }
     ];
@@ -338,54 +327,13 @@ function ExperienceStats() {
         <Fade direction="up" delay={100} triggerOnce>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
                 {stats.map((stat) => (
-                    <div
+                    <MetricCard
                         key={stat.label}
-                        className="group cursor-pointer"
-                    >
-                        <div
-                            className={`relative bg-gradient-to-br ${stat.gradient} backdrop-blur-sm border ${stat.border} rounded-3xl p-6 transition-all duration-300 ease-out hover:shadow-xl ${stat.hoverShadow} hover:scale-[1.02] ${stat.hoverBorder}`}
-                            style={{ transformOrigin: 'center center', contain: 'layout style' }}
-                        >
-                            {/* Animated background gradient */}
-                            <div className={`absolute inset-0 bg-gradient-to-r ${stat.gradient} rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-
-                            <div className="relative text-center">
-                                {/* Icon with glow effect */}
-                                <div
-                                    className="mx-auto mb-4 w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg transition-all duration-300 ease-out"
-                                    style={{
-                                        background: stat.textGradient,
-                                        boxShadow: `0 8px 24px -8px ${stat.color}40`
-                                    }}
-                                >
-                                    <stat.icon className="w-7 h-7 text-white" />
-                                </div>
-
-                                {/* Number with animated gradient */}
-                                <div className="text-3xl sm:text-4xl font-black mb-2">
-                                    <span
-                                        className="bg-gradient-to-r bg-clip-text text-transparent bg-300% animate-gradient"
-                                        style={{ backgroundImage: stat.textGradient }}
-                                    >
-                                        {stat.value}
-                                    </span>
-                                </div>
-
-                                {/* Label */}
-                                <div className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-                                    {stat.label}
-                                </div>
-                            </div>
-
-                            {/* Decorative elements */}
-                            <div className="absolute top-3 right-3 opacity-30 group-hover:opacity-60 transition-opacity">
-                                <FiStar className="w-4 h-4" style={{ color: stat.color }} />
-                            </div>
-                            <div className="absolute bottom-3 left-3 opacity-20 group-hover:opacity-40 transition-opacity">
-                                <FiStar className="w-3 h-3" style={{ color: stat.color }} />
-                            </div>
-                        </div>
-                    </div>
+                        icon={stat.icon}
+                        value={stat.value}
+                        label={stat.label}
+                        accent={stat.color}
+                    />
                 ))}
             </div>
         </Fade>
@@ -405,7 +353,7 @@ export function ExperienceSection() {
     );
 
     return (
-        <section id="experience" className="py-16 sm:py-20 lg:py-24 relative overflow-hidden">
+        <section id="experience" className="py-12 sm:py-16 lg:py-20 relative overflow-hidden">
             {/* Optimized Background Pattern */}
             <div className="absolute inset-0 bg-gradient-to-br from-neutral-50/30 via-transparent to-primary/3 dark:from-neutral-950/30 dark:to-primary/5" />
 
@@ -417,9 +365,9 @@ export function ExperienceSection() {
                         <div className="flex flex-col items-center justify-center mb-6">
                             {/* Icon Container */}
                             <div
-                                className="p-3 sm:p-4 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-sm shadow-lg mb-4"
+                                className="section-icon-mono motion-icon relative p-3 sm:p-4 rounded-2xl border mb-4"
                             >
-                                <FaRoute className="w-7 h-7 sm:w-8 sm:h-8 text-primary" />
+                                <Milestone className="relative w-7 h-7 sm:w-8 sm:h-8 text-foreground" />
                             </div>
 
                             {/* Title */}

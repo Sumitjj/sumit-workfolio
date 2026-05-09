@@ -11,7 +11,6 @@ const nextConfig: NextConfig = {
   // Modern experimental features
   experimental: {
     optimizePackageImports: ['class-variance-authority', 'clsx', 'tailwind-merge'],
-    optimizeCss: true, // Enable CSS optimization
     scrollRestoration: true, // Better scroll handling
   },
 
@@ -49,14 +48,32 @@ const nextConfig: NextConfig = {
       },
     ],
     formats: ['image/webp', 'image/avif'],
-    minimumCacheTTL: 60,
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    minimumCacheTTL: 31536000,
+    deviceSizes: [640, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
 
   // Enhanced security headers
   async headers() {
     return [
+      {
+        source: '/images/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable'
+          }
+        ],
+      },
+      {
+        source: '/resume/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable'
+          }
+        ],
+      },
       {
         source: '/(.*)',
         headers: [
