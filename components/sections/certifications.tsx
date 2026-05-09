@@ -1,18 +1,18 @@
 "use client";
 
 import React, { useState, useCallback, useMemo } from "react";
-import { Fade } from "react-awesome-reveal";
 import {
     FiAward,
     FiCalendar,
     FiExternalLink,
-    FiHome,
-    FiStar
+    FiHome
 } from "react-icons/fi";
-import { ShieldCheck } from "lucide-react";
-import { FaMedal } from "react-icons/fa";
+import { BadgeCheck, ShieldCheck } from "lucide-react";
 import { certifications } from "@/data/certificationData";
 import Image from "next/image";
+import { MetricCard } from "@/components/ui/metric-card";
+
+const Fade = ({ children }: { children: React.ReactNode; [key: string]: unknown }) => <>{children}</>;
 
 /**
  * Format date to readable string with month and year
@@ -47,10 +47,10 @@ function CertificationCard({ certification, index }: CertificationCardProps) {
 
     return (
         <Fade direction="up" delay={index * 100} triggerOnce>
-            <div className="group relative h-full">
+            <div className="group section-reveal relative h-full" style={{ animationDelay: `${index * 70}ms` }}>
                 <div className="relative h-full bg-gradient-to-br from-card via-card to-card/95 rounded-2xl border border-border/50 overflow-hidden transition-all duration-300 ease-out hover:shadow-xl hover:border-primary/25 flex flex-col">
                     {/* Enhanced Badge Section */}
-                    <div className="relative p-8 pb-6 bg-gradient-to-br from-primary/5 via-transparent to-transparent">
+                    <div className="relative p-5 pb-5 sm:p-6 md:p-4 xl:p-8 xl:pb-6 bg-gradient-to-br from-primary/5 via-transparent to-transparent">
                         {/* Centered Extra Large Badge */}
                         <div className="flex justify-center">
                             <div
@@ -61,7 +61,7 @@ function CertificationCard({ certification, index }: CertificationCardProps) {
                                 }}
                             >
                                 <div className="absolute inset-0 bg-gradient-to-r from-primary/30 to-secondary/30 rounded-3xl blur-2xl opacity-40 group-hover:opacity-70 transition-all duration-500 ease-out" />
-                                <div className="relative w-36 h-36 sm:w-40 sm:h-40 lg:w-44 lg:h-44 rounded-3xl bg-white dark:bg-gray-900 border-2 border-primary/20 shadow-xl flex items-center justify-center overflow-hidden transition-all duration-500">
+                                <div className="relative w-28 h-28 sm:w-32 sm:h-32 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-40 xl:h-40 rounded-3xl bg-white dark:bg-gray-900 border-2 border-primary/20 shadow-xl flex items-center justify-center overflow-hidden transition-all duration-500">
                                     {!imageError ? (
                                         <>
                                             {/* Loading placeholder */}
@@ -104,21 +104,21 @@ function CertificationCard({ certification, index }: CertificationCardProps) {
                     </div>
 
                     {/* Content Section - Improved Layout */}
-                    <div className="flex-1 p-6 pt-2 flex flex-col">
+                    <div className="flex-1 p-4 sm:p-5 md:p-4 xl:p-6 pt-2 flex flex-col">
                         {/* Title - More Prominent */}
-                        <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-4 text-center leading-tight min-h-[3.5rem] flex items-center justify-center">
+                        <h3 className="text-lg sm:text-xl md:text-[0.95rem] lg:text-base xl:text-2xl font-bold text-foreground mb-4 text-center leading-tight min-h-[3.5rem] md:min-h-[4.5rem] xl:min-h-[3.5rem] flex items-center justify-center">
                             {certification.name}
                         </h3>
 
                         {/* Issuer and Date Row - Left and Right Aligned */}
-                        <div className="flex items-center justify-between mb-6 px-3 py-2 bg-muted/20 rounded-lg border border-border/30">
-                            <div className="flex items-center gap-2">
-                                <FiHome className="w-4 h-4 text-primary" />
-                                <span className="text-sm font-medium text-muted-foreground">{certification.issuer}</span>
+                        <div className="mb-6 mx-auto grid w-full max-w-sm gap-2 rounded-xl border border-border/35 bg-muted/20 px-4 py-3 sm:max-w-none">
+                            <div className="grid grid-cols-[1.25rem_1fr] items-center gap-3">
+                                <FiHome className="h-5 w-5 text-primary" />
+                                <span className="min-w-0 text-sm font-medium text-muted-foreground">{certification.issuer}</span>
                             </div>
-                            <div className="flex items-center gap-2">
-                                <FiCalendar className="w-4 h-4 text-primary/70" />
-                                <span className="text-sm font-medium text-foreground/80">
+                            <div className="grid grid-cols-[1.25rem_1fr] items-center gap-3">
+                                <FiCalendar className="h-5 w-5 text-primary/70" />
+                                <span className="min-w-0 text-sm font-medium text-foreground/80">
                                     {formatDate(certification.dateEarned)}
                                 </span>
                             </div>
@@ -131,7 +131,7 @@ function CertificationCard({ certification, index }: CertificationCardProps) {
                                     href={certification.verificationUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-primary/10 to-primary/20 hover:from-primary hover:to-primary/90 hover:text-primary-foreground rounded-xl text-sm font-semibold transition-all duration-300 group/link border border-primary/20 hover:border-primary hover:shadow-lg hover:shadow-primary/20"
+                                    className="w-full inline-flex items-center justify-center gap-2 px-3 xl:px-4 py-2.5 xl:py-3 bg-gradient-to-r from-primary/10 to-primary/20 hover:from-primary hover:to-primary/90 hover:text-primary-foreground rounded-xl text-xs lg:text-sm font-semibold transition-all duration-300 group/link border border-primary/20 hover:border-primary hover:shadow-lg hover:shadow-primary/20"
                                 >
                                     View Credential
                                     <FiExternalLink className="w-4 h-4 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
@@ -154,74 +154,6 @@ function CertificationCard({ certification, index }: CertificationCardProps) {
 }
 
 /**
- * Optimized stat card component
- */
-interface CertificationStatCardProps {
-    icon: React.ElementType;
-    iconBg: string;
-    iconColor: string;
-    value: string;
-    valueGradient: string;
-    label: string;
-    starColor: string;
-    sparklesColor: string;
-    bgGradient: string;
-    border: string;
-    hoverBorder: string;
-    hoverShadow: string;
-}
-
-const CertificationStatCard: React.FC<CertificationStatCardProps> = React.memo(({
-    icon: Icon,
-    iconBg,
-    iconColor,
-    value,
-    valueGradient,
-    label,
-    starColor,
-    sparklesColor,
-    bgGradient,
-    border,
-    hoverBorder,
-    hoverShadow,
-}) => (
-    <div className="group cursor-pointer">
-        <div
-            className={`relative ${bgGradient} backdrop-blur-sm border ${border} rounded-3xl p-8 transition-all duration-300 ease-out hover:shadow-xl ${hoverShadow} hover:scale-102 ${hoverBorder}`}
-            style={{ transformOrigin: 'center center', contain: 'layout style' }}
-        >
-            {/* Animated background gradient */}
-            <div className={`absolute inset-0 bg-gradient-to-r ${bgGradient.replace('bg-gradient-to-br', '').replace('bg-gradient-to-r', '')} rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-            <div className="relative text-center">
-                {/* Icon with glow effect */}
-                <div className={`mx-auto mb-4 w-16 h-16 ${iconBg} rounded-2xl flex items-center justify-center shadow-lg transition-all duration-300 ease-out`}>
-                    <Icon className={`w-8 h-8 ${iconColor}`} />
-                </div>
-                {/* Number with animated gradient */}
-                <div className="text-4xl sm:text-5xl font-black mb-2 min-h-[3rem] flex items-center justify-center">
-                    <span className={`${valueGradient} bg-clip-text text-transparent bg-300% animate-gradient`}>
-                        {value}
-                    </span>
-                </div>
-                {/* Label */}
-                <div className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-                    {label}
-                </div>
-            </div>
-            {/* Decorative elements */}
-            <div className={`absolute top-3 right-3 opacity-30 group-hover:opacity-60 transition-opacity`}>
-                <FiStar className={`w-5 h-5 ${starColor}`} />
-            </div>
-            <div className={`absolute bottom-3 left-3 opacity-20 group-hover:opacity-40 transition-opacity`}>
-                <FiStar className={`w-4 h-4 ${sparklesColor}`} />
-            </div>
-        </div>
-    </div>
-));
-
-CertificationStatCard.displayName = 'CertificationStatCard';
-
-/**
  * Professional Certifications Section - Original Design Restored
  */
 export function CertificationsSection() {
@@ -232,7 +164,7 @@ export function CertificationsSection() {
             iconBg: "bg-gradient-to-br from-blue-500 to-purple-600",
             iconColor: "text-white",
             value: `${certifications.length}X`,
-            valueGradient: "bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600",
+            accent: "#3b82f6",
             label: "Certified Expert",
             starColor: "text-blue-500",
             sparklesColor: "text-purple-500",
@@ -246,7 +178,7 @@ export function CertificationsSection() {
             iconBg: "bg-gradient-to-br from-emerald-500 to-teal-600",
             iconColor: "text-white",
             value: "B2C",
-            valueGradient: "bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600",
+            accent: "#10b981",
             label: "Commerce Expert",
             starColor: "text-emerald-500",
             sparklesColor: "text-teal-500",
@@ -258,14 +190,14 @@ export function CertificationsSection() {
     ], []);
 
     return (
-        <section id="certifications" className="pt-16 sm:pt-20 lg:pt-24 pb-8 sm:pb-12 lg:pb-16">
+        <section id="certifications" className="pt-12 sm:pt-16 lg:pt-20 pb-8 sm:pb-10 lg:pb-14">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
                 <Fade direction="up" triggerOnce>
                     <div className="text-center mb-12">
                         <div className="flex flex-col items-center justify-center mb-6">
-                            <div className="p-3 sm:p-4 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-sm shadow-lg mb-4">
-                                <FaMedal className="w-7 h-7 sm:w-8 sm:h-8 text-primary" />
+                            <div className="section-icon-mono motion-icon relative p-3 sm:p-4 rounded-2xl border mb-4">
+                                <BadgeCheck className="relative w-7 h-7 sm:w-8 sm:h-8 text-foreground" />
                             </div>
                             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground">
                                 Badges & Certifications
@@ -277,16 +209,22 @@ export function CertificationsSection() {
                         </p>
 
                         {/* Achievement Stats */}
-                        <div className="flex flex-wrap justify-center items-center gap-8 sm:gap-12">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 max-w-3xl mx-auto">
                             {statsData.map((stat) => (
-                                <CertificationStatCard key={stat.label} {...stat} />
+                                <MetricCard
+                                    key={stat.label}
+                                    icon={stat.icon}
+                                    value={stat.value}
+                                    label={stat.label}
+                                    accent={stat.accent}
+                                />
                             ))}
                         </div>
                     </div>
                 </Fade>
 
                 {/* Certifications Grid - Responsive with Same Heights */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 sm:gap-6 xl:gap-8 max-w-7xl mx-auto">
                     {certifications.map((certification, index) => (
                         <CertificationCard
                             key={certification.id}

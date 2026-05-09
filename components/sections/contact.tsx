@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useState, useCallback, useRef } from "react";
-import { Fade } from "react-awesome-reveal";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import {
   FiMessageSquare,
   FiMail,
@@ -17,8 +16,11 @@ import {
   FiCoffee
 } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
+import { MetricCard } from "@/components/ui/metric-card";
 import { cn } from "@/lib/helpers/utils";
-import { Sparkles } from "lucide-react";
+import { ChevronDown, Sparkles } from "lucide-react";
+
+const Fade = ({ children }: { children: React.ReactNode;[key: string]: unknown }) => <>{children}</>;
 
 // Form data interface
 interface FormData {
@@ -40,6 +42,13 @@ interface FormErrors {
 // Form submission states
 type SubmissionState = 'idle' | 'sending' | 'success' | 'error';
 
+const SUBJECT_OPTIONS = [
+  { value: "project", label: "Project Discussion" },
+  { value: "general", label: "General Inquiry" },
+  { value: "collaboration", label: "Collaboration" },
+  { value: "other", label: "Other" },
+] as const;
+
 /**
  * Highlight metrics component aligned with website theme
  */
@@ -50,67 +59,52 @@ function HighlightMetrics() {
       value: "< 24h",
       label: "Quick Response",
       description: "Fast turnaround time",
-      valueColor: "text-orange-600 dark:text-orange-400"
+      accent: "#f59e0b"
     },
     {
       icon: FiAward,
-      value: "9+ Years",
-      label: "Experience",
+      value: "10+",
+      label: "Years Experience",
       description: "Proven track record",
-      valueColor: "text-emerald-600 dark:text-emerald-400"
+      accent: "#10b981"
     },
     {
       icon: FiGlobe,
       value: "Global",
       label: "Remote Ready",
       description: "Worldwide collaboration",
-      valueColor: "text-blue-600 dark:text-blue-400"
+      accent: "#3b82f6"
     }
   ];
 
   return (
     <div className="relative">
       {/* Theme-aligned background */}
-      <div className="bg-card/50 backdrop-blur-sm rounded-xl border border-border/20 shadow-sm">
-        <div className="p-6 sm:p-8">
+      <div className="rounded-2xl border border-border/25 bg-card/55 shadow-lg shadow-black/5">
+        <div className="p-4 sm:p-8">
           {/* Header matching website style */}
-          <div className="text-center mb-8">
+          <div className="text-center mb-6 sm:mb-8">
             <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 mb-4">
               <Sparkles className="w-6 h-6 text-primary" />
             </div>
-            <h4 className="text-lg font-semibold text-foreground mb-2 dark:text-emerald-300">
+            <h4 className="mx-auto max-w-sm text-base font-semibold leading-snug text-foreground sm:text-lg dark:text-emerald-300">
               What you can expect after hitting send button
             </h4>
           </div>
 
           {/* Metrics grid using website card styling */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {metrics.map((metric, index) => (
-              <Fade key={metric.label} direction="up" triggerOnce delay={index * 100}>
-                <div className="group">
-                  <div className="flex flex-col items-center p-4 h-full bg-card rounded-xl border border-border/20 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
-                    {/* Icon with website styling */}
-                    <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-primary/10 mb-3 group-hover:scale-110 transition-transform duration-300">
-                      <metric.icon className="w-6 h-6 text-primary" />
-                    </div>
-
-                    {/* Value with catchy colors */}
-                    <div className={`text-2xl font-bold mb-1 ${metric.valueColor}`}>
-                      {metric.value}
-                    </div>
-
-                    {/* Label with website styling */}
-                    <div className="text-sm font-semibold text-foreground mb-1">
-                      {metric.label}
-                    </div>
-
-                    {/* Description */}
-                    <div className="text-xs text-muted-foreground text-center">
-                      {metric.description}
-                    </div>
-                  </div>
-                </div>
-              </Fade>
+          <div className="grid grid-cols-1 items-stretch gap-4 md:grid-cols-3 md:auto-rows-fr">
+            {metrics.map((metric) => (
+              <div key={metric.label} className="h-full">
+                <MetricCard
+                  icon={metric.icon}
+                  value={metric.value}
+                  label={metric.label}
+                  caption={metric.description}
+                  accent={metric.accent}
+                  className="min-h-[104px] md:min-h-[158px]"
+                />
+              </div>
             ))}
           </div>
         </div>
@@ -124,6 +118,7 @@ function HighlightMetrics() {
  */
 function ContactForm() {
   const formRef = useRef<HTMLFormElement>(null);
+  const subjectDropdownRef = useRef<HTMLDivElement>(null);
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -133,6 +128,32 @@ function ContactForm() {
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [submissionState, setSubmissionState] = useState<SubmissionState>('idle');
+  const [isSubjectOpen, setIsSubjectOpen] = useState(false);
+
+  const selectedSubject = SUBJECT_OPTIONS.find(option => option.value === formData.subject) ?? SUBJECT_OPTIONS[0];
+  const fieldClassName = "w-full min-h-[58px] sm:min-h-[62px] lg:min-h-[68px] px-3 py-3 sm:px-4 sm:py-3 lg:py-4 rounded-xl border border-border/30 bg-background/70 text-sm sm:text-base transition-[border-color,box-shadow,background-color] duration-200 placeholder:text-muted-foreground/60 touch-manipulation focus:outline-none focus:border-emerald-400/85 focus:ring-2 focus:ring-emerald-400/35 focus:bg-background/85 hover:border-emerald-300/45";
+
+  useEffect(() => {
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!subjectDropdownRef.current?.contains(event.target as Node)) {
+        setIsSubjectOpen(false);
+      }
+    };
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsSubjectOpen(false);
+      }
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
 
   // Validate form fields
   const validateForm = useCallback((): boolean => {
@@ -237,11 +258,11 @@ function ContactForm() {
   }, [errors]);
 
   return (
-    <div className="relative p-4 sm:p-6 lg:p-8 xl:p-10 rounded-xl sm:rounded-2xl backdrop-blur-xl border border-border/30 bg-gradient-to-br from-background/80 to-background/40 shadow-2xl h-full flex flex-col">
+    <div className="relative p-4 sm:p-6 lg:p-8 xl:p-10 rounded-xl sm:rounded-2xl border border-border/30 bg-gradient-to-br from-background/90 to-background/60 shadow-2xl h-full flex flex-col">
       {/* Responsive Form Header */}
       <div className="text-center mb-6 sm:mb-8 lg:mb-10">
-        <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-lg sm:rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 mb-4 sm:mb-6">
-          <FiMessageSquare className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 text-primary dark:text-emerald-300" />
+        <div className="section-icon-mono relative inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-lg sm:rounded-xl border mb-4 sm:mb-6">
+          <FiMessageSquare className="relative w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 text-foreground" />
         </div>
         <h3 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-foreground mb-2 sm:mb-3 dark:text-emerald-300">Drop Me a Line</h3>
       </div>
@@ -260,11 +281,8 @@ function ContactForm() {
               value={formData.name}
               onChange={(e) => handleInputChange('name', e.target.value)}
               className={cn(
-                "w-full px-3 py-3 sm:px-4 sm:py-3 lg:py-4 rounded-lg border transition-all duration-300",
-                "bg-background/50 backdrop-blur-sm text-sm sm:text-base",
-                "focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary",
-                "placeholder:text-muted-foreground/60 touch-manipulation",
-                errors.name ? "border-red-500" : "border-border/30 hover:border-border/50"
+                fieldClassName,
+                errors.name && "border-red-500 focus:border-red-500 focus:ring-red-500/35"
               )}
               placeholder="Your full name"
             />
@@ -286,11 +304,8 @@ function ContactForm() {
               value={formData.email}
               onChange={(e) => handleInputChange('email', e.target.value)}
               className={cn(
-                "w-full px-3 py-3 sm:px-4 sm:py-3 lg:py-4 rounded-lg border transition-all duration-300",
-                "bg-background/50 backdrop-blur-sm text-sm sm:text-base",
-                "focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary",
-                "placeholder:text-muted-foreground/60 touch-manipulation",
-                errors.email ? "border-red-500" : "border-border/30 hover:border-border/50"
+                fieldClassName,
+                errors.email && "border-red-500 focus:border-red-500 focus:ring-red-500/35"
               )}
               placeholder="your.email@example.com"
             />
@@ -314,7 +329,7 @@ function ContactForm() {
               type="text"
               value={formData.company}
               onChange={(e) => handleInputChange('company', e.target.value)}
-              className="w-full px-3 py-3 sm:px-4 sm:py-3 lg:py-4 rounded-lg border border-border/30 hover:border-border/50 transition-all duration-300 bg-background/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary text-sm sm:text-base touch-manipulation"
+              className={fieldClassName}
               placeholder="Your company (optional)"
             />
           </div>
@@ -324,22 +339,63 @@ function ContactForm() {
               <FiFile className="w-3 h-3 sm:w-4 sm:h-4 mr-2 text-primary" />
               Subject *
             </label>
-            <select
-              value={formData.subject}
-              onChange={(e) => handleInputChange('subject', e.target.value)}
-              className={cn(
-                "w-full px-3 py-3 sm:px-4 sm:py-3 lg:py-4 rounded-lg border transition-all duration-300",
-                "bg-background/50 backdrop-blur-sm text-sm sm:text-base",
-                "focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary",
-                "touch-manipulation",
-                errors.subject ? "border-red-500" : "border-border/30 hover:border-border/50"
+            <div ref={subjectDropdownRef} className="relative">
+              <button
+                type="button"
+                aria-haspopup="listbox"
+                aria-expanded={isSubjectOpen}
+                onClick={() => setIsSubjectOpen(prev => !prev)}
+                onKeyDown={(event) => {
+                  if (event.key === "ArrowDown" || event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    setIsSubjectOpen(true);
+                  }
+                }}
+                className={cn(
+                  fieldClassName,
+                  "text-left flex items-center justify-between gap-3",
+                  "shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]",
+                  errors.subject && "border-red-500 focus:border-red-500 focus:ring-red-500/35"
+                )}
+              >
+                <span className="font-medium text-foreground/90">{selectedSubject.label}</span>
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-emerald-300/25 bg-emerald-400/10 text-emerald-300">
+                  <ChevronDown className={cn("h-4 w-4 transition-transform duration-300", isSubjectOpen && "rotate-180")} />
+                </span>
+              </button>
+
+              {isSubjectOpen && (
+                <div className="mt-2 overflow-hidden rounded-xl border border-primary/20 bg-background/95 shadow-2xl shadow-primary/10">
+                  <div className="p-1" role="listbox" aria-label="Subject">
+                    {SUBJECT_OPTIONS.map((option) => {
+                      const isSelected = option.value === formData.subject;
+
+                      return (
+                        <button
+                          key={option.value}
+                          type="button"
+                          role="option"
+                          aria-selected={isSelected}
+                          onClick={() => {
+                            handleInputChange('subject', option.value);
+                            setIsSubjectOpen(false);
+                          }}
+                          className={cn(
+                            "flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left text-sm sm:text-base transition-colors duration-200",
+                            isSelected
+                              ? "bg-gradient-to-r from-primary/20 to-emerald-500/15 text-foreground shadow-sm"
+                              : "text-muted-foreground hover:bg-primary/10 hover:text-foreground"
+                          )}
+                        >
+                          <span className="font-medium">{option.label}</span>
+                          {isSelected && <FiCheck className="h-4 w-4 text-primary" />}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
               )}
-            >
-              <option value="project">Project Discussion</option>
-              <option value="general">General Inquiry</option>
-              <option value="collaboration">Collaboration</option>
-              <option value="other">Other</option>
-            </select>
+            </div>
             {errors.subject && (
               <p className="text-xs sm:text-sm text-red-500 flex items-center">
                 <FiAlertCircle className="w-3 h-3 mr-1" />
@@ -360,11 +416,9 @@ function ContactForm() {
             onChange={(e) => handleInputChange('message', e.target.value)}
             rows={5}
             className={cn(
-              "w-full px-3 py-3 sm:px-4 sm:py-3 lg:py-4 rounded-lg border transition-all duration-300 resize-none text-sm sm:text-base",
-              "bg-background/50 backdrop-blur-sm",
-              "focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary",
-              "placeholder:text-muted-foreground/60 touch-manipulation",
-              errors.message ? "border-red-500" : "border-border/30 hover:border-border/50"
+              fieldClassName,
+              "min-h-[150px] resize-none",
+              errors.message && "border-red-500 focus:border-red-500 focus:ring-red-500/35"
             )}
             placeholder="Tell me about your project, ideas, or how we can work together..."
           />
@@ -388,16 +442,21 @@ function ContactForm() {
             }
           }}
           className={cn(
-            "w-full py-3 sm:py-4 lg:py-5 text-sm sm:text-base font-medium relative overflow-hidden transition-all duration-500 group touch-manipulation",
-            "min-h-[48px] sm:min-h-[52px]", // Ensure good touch target size
+            "w-full min-h-[64px] sm:min-h-[72px] px-5 py-4 text-base sm:text-lg font-extrabold relative overflow-hidden transition-[color,background-color,border-color,box-shadow,transform] duration-200 group touch-manipulation",
+            "rounded-2xl border border-emerald-300/45 bg-gradient-to-r from-emerald-500/15 via-card to-cyan-500/10 text-foreground shadow-xl shadow-emerald-500/15",
+            "hover:-translate-y-0.5 hover:border-emerald-300/80 hover:from-emerald-400/20 hover:to-cyan-400/15 hover:shadow-2xl hover:shadow-emerald-500/20",
+            "focus-visible:ring-2 focus-visible:ring-emerald-400/70 focus-visible:ring-offset-0",
+            "before:absolute before:inset-x-4 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-emerald-200/90 before:to-transparent",
             submissionState === 'success' && "bg-green-600 hover:bg-green-600",
             submissionState === 'error' && "bg-red-600 hover:bg-red-600"
           )}
         >
-          <div className="flex items-center justify-center space-x-4">
+          <div className="relative z-10 flex items-center justify-center gap-3">
             {submissionState === 'idle' && (
               <>
-                <FiSend className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-emerald-300/25 bg-emerald-300/15 text-emerald-200 shadow-inner transition-transform duration-200 group-hover:translate-x-0.5">
+                  <FiSend className="h-4 w-4 sm:h-5 sm:w-5" />
+                </span>
                 <span>Send Message</span>
               </>
             )}
@@ -438,13 +497,10 @@ function ContactForm() {
  */
 export function ContactSection() {
   return (
-    <section id="contact" className="relative pt-8 sm:pt-12 lg:pt-16 pb-8 sm:pb-12 lg:pb-16 overflow-hidden">
+    <section id="contact" className="relative pt-10 sm:pt-12 lg:pt-16 pb-8 sm:pb-10 lg:pb-14 overflow-hidden">
       {/* Premium Gradient Background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5" />
-        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-background/3 to-transparent" />
-        <div className="absolute top-0 left-1/4 w-64 h-64 sm:w-96 sm:h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-0 right-1/4 w-64 h-64 sm:w-96 sm:h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -453,8 +509,8 @@ export function ContactSection() {
           <div className="text-center mb-8 sm:mb-10 lg:mb-12">
             {/* Coffee Icon with Professional Positioning */}
             <div className="flex justify-center mb-6 sm:mb-8">
-              <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-2xl bg-card border border-border/50 shadow-sm">
-                <FiCoffee className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-foreground" />
+              <div className="section-icon-mono motion-icon ambient-float relative inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-2xl border">
+                <FiCoffee className="relative w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-foreground" />
               </div>
             </div>
 
@@ -476,11 +532,6 @@ export function ContactSection() {
             {/* Primary Background Gradient */}
             <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-background/5 to-secondary/8" />
 
-            {/* Responsive Decorative Gradient Orbs */}
-            <div className="absolute top-0 left-0 w-48 h-48 sm:w-64 sm:h-64 lg:w-96 lg:h-96 bg-gradient-to-br from-primary/15 to-transparent rounded-full blur-3xl opacity-60" />
-            <div className="absolute bottom-0 right-0 w-40 h-40 sm:w-56 sm:h-56 lg:w-80 lg:h-80 bg-gradient-to-tl from-secondary/15 to-transparent rounded-full blur-3xl opacity-60" />
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 sm:w-48 sm:h-48 lg:w-64 lg:h-64 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full blur-2xl opacity-40" />
-
             {/* Subtle Pattern Overlay */}
             <div className="absolute inset-0 opacity-[0.02]">
               <div className="absolute inset-0" style={{
@@ -490,16 +541,12 @@ export function ContactSection() {
               }} />
             </div>
 
-            {/* Responsive Geometric Elements */}
-            <div className="absolute top-4 right-4 sm:top-8 sm:right-8 w-12 h-12 sm:w-16 sm:h-16 lg:w-24 lg:h-24 border border-primary/20 rounded-full animate-pulse" />
-            <div className="absolute bottom-4 left-4 sm:bottom-8 sm:left-8 w-8 h-8 sm:w-12 sm:h-12 lg:w-16 lg:h-16 border border-secondary/20 rounded-lg rotate-45 animate-pulse" style={{ animationDelay: '1s' }} />
-            <div className="absolute top-1/3 right-1/4 w-1 h-1 sm:w-2 sm:h-2 bg-primary/30 rounded-full animate-ping" style={{ animationDelay: '2s' }} />
-            <div className="absolute bottom-1/3 left-1/4 w-1 h-1 sm:w-2 sm:h-2 bg-secondary/30 rounded-full animate-ping" style={{ animationDelay: '3s' }} />
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
           </div>
 
           {/* Responsive Contact Form Container */}
           <div className="relative flex justify-center p-4 sm:p-6 lg:p-8 xl:p-12">
-            <div className="w-full max-w-lg sm:max-w-xl lg:max-w-2xl xl:max-w-3xl">
+            <div className="w-full max-w-lg sm:max-w-2xl md:max-w-4xl xl:max-w-5xl">
               <Fade direction="up" triggerOnce delay={200}>
                 <ContactForm />
               </Fade>

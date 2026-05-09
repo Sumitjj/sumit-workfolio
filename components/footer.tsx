@@ -4,8 +4,6 @@ import React from "react";
 import { FiStar } from "react-icons/fi";
 import { socialLinks } from "@/data/personalData";
 import { contactConfig } from "@/data/contactData";
-import { SocialFloatingDock } from "@/lib/aceternity/social-floating-dock";
-import { FooterSparkles } from "@/lib/aceternity/footer-sparkles";
 import { handleEmailClick } from "@/lib/helpers/utils";
 import { Sparkle } from "lucide-react";
 
@@ -19,11 +17,20 @@ export function Footer() {
     <footer className="relative mt-auto overflow-hidden">
       {/* Premium Background */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-t from-primary/5 via-transparent to-transparent " />
+        <div className="absolute inset-0 bg-gradient-to-t from-emerald-500/5 via-transparent to-transparent " />
       </div>
 
-      {/* Footer Sparkles Effect with Lightning Border */}
-      <FooterSparkles className="z-0" />
+      <div
+        className="footer-lightning-line absolute inset-x-0 top-0 h-px"
+        style={{
+          background: "linear-gradient(90deg, rgba(16,185,129,0.38), rgba(52,211,153,0.9), rgba(16,185,129,0.38))",
+        }}
+      />
+      <div className="footer-sparkles pointer-events-none absolute inset-x-0 top-0 h-10" aria-hidden="true">
+        <span className="left-[22%]" />
+        <span className="left-[48%]" />
+        <span className="left-[74%]" />
+      </div>
 
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-8 z-20">
         {/* Responsive Footer Layout */}
@@ -76,7 +83,7 @@ export function Footer() {
           <div className="mt-6" />
           <div className="flex items-center justify-center space-x-2 text-xs text-muted-foreground">
             <FiStar className="w-3 h-3" />
-            <span className="bg-gradient-to-r from-[#FF9933] via-[#FFFFFF] to-[#046A38] bg-clip-text text-transparent animate-gradient font-semibold">Always learning, always building.</span>
+            <span className="bg-gradient-to-r from-[#FF9933] via-[#FFFFFF] to-[#046A38] bg-clip-text text-transparent font-semibold">Always learning, always building.</span>
             <FiStar className="w-3 h-3" />
           </div>
         </div>
@@ -96,23 +103,57 @@ export function Footer() {
             {/* Right: Social Icons */}
             <div className="flex justify-end flex-1">
               <div className="flex flex-row gap-x-4 items-center justify-end">
-                <SocialFloatingDock />
+                {socialLinks.map((social) => {
+                  const Icon = social.icon;
+                  const sharedClasses = "flex h-10 w-10 items-center justify-center rounded-full border border-border/30 bg-card/60 text-neutral-500 shadow-sm transition-[color,background-color,border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:bg-primary/10 hover:text-primary dark:text-neutral-300";
+
+                  if (social.platform === "Email") {
+                    return (
+                      <a
+                        key={social.platform}
+                        href="#"
+                        aria-label={social.platform}
+                        onClick={e => {
+                          e.preventDefault();
+                          handleEmailClick(
+                            contactConfig.recipientEmail,
+                            contactConfig.subjects.default,
+                            contactConfig.defaultBody
+                          );
+                        }}
+                        className={sharedClasses}
+                      >
+                        <Icon className="h-5 w-5" />
+                      </a>
+                    );
+                  }
+
+                  return (
+                    <a
+                      key={social.platform}
+                      href={social.url}
+                      aria-label={social.platform}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={sharedClasses}
+                    >
+                      <Icon className="h-5 w-5" />
+                    </a>
+                  );
+                })}
               </div>
             </div>
           </div>
           <div className="w-full flex justify-center mt-8 mb-2">
             <div className="flex items-center justify-center space-x-2 text-xs text-muted-foreground">
               <Sparkle className="w-3 h-3" />
-              <span className="bg-gradient-to-r from-[#FF9933] via-[#FFFFFF] to-[#046A38] bg-clip-text text-transparent animate-gradient font-semibold">Always learning, always building.</span>
+              <span className="bg-gradient-to-r from-[#FF9933] via-[#FFFFFF] to-[#046A38] bg-clip-text text-transparent font-semibold">Always learning, always building.</span>
               <Sparkle className="w-3 h-3" />
             </div>
           </div>
         </div>
       </div>
 
-      {/* Responsive Decorative Elements */}
-      <div className="absolute top-0 left-1/4 w-24 h-24 sm:w-32 sm:h-32 bg-primary/5 rounded-full blur-3xl opacity-60" />
-      <div className="absolute bottom-0 right-1/4 w-20 h-20 sm:w-24 sm:h-24 bg-secondary/5 rounded-full blur-2xl opacity-60" />
     </footer>
   );
 }

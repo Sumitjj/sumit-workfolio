@@ -31,7 +31,7 @@ export const PROFESSIONAL_HIGHLIGHTS = [
     {
         icon: FiCode,
         title: "Expert Development",
-        description: "Specialized in Salesforce Commerce Cloud with 9+ years of enterprise experience",
+        description: "Specialized in Salesforce Commerce Cloud with 10+ years of enterprise experience",
     },
     {
         icon: FiAward,
@@ -67,7 +67,7 @@ export const projects: Project[] = [
         image: getOptimizedProjectImage("Full Beauty FBB"),
         technologies: ["NextJs", "NestJs", "REST APIs", "SCAPI", "OCAPI", "SFRA", "B2C Commerce-SDK", "SGJC"],
         liveUrl: "https://www.fullbeauty.com/",
-        featured: true,
+        featured: false,
         organization: "Merkle",
         customizations: [
             {
@@ -91,6 +91,40 @@ export const projects: Project[] = [
             { name: "Klaviyo", purpose: "Email campaigns and flows", type: "Email" },
             { name: "Algolia", purpose: "Search & merchandising", type: "Search" },
             { name: "Segment", purpose: "Unified analytics tracking", type: "Analytics" }
+        ]
+    },
+    {
+        id: "15",
+        title: "RalphLauren",
+        description: [
+            "Delivered premium Salesforce Commerce Cloud storefront enhancements for a luxury fashion experience, focusing on responsive merchandising, refined customer journeys, and enterprise-scale commerce reliability."
+        ],
+        image: getOptimizedProjectImage("RalphLauren"),
+        technologies: ["SFRA", "OCAPI", "SCAPI", "REST APIs", "Integrations"],
+        liveUrl: "https://www.ralphlauren.com/",
+        longDescription: [
+            "Supported a premium retail implementation for Ralph Lauren with Salesforce Commerce Cloud patterns tuned for brand-rich merchandising and reliable seasonal campaign delivery.",
+            "Improved storefront experiences across PDP, PLP, and checkout touchpoints with responsive UI behavior and clean integration contracts."
+        ],
+        categories: ["E-Commerce", "Luxury Retail"],
+        featured: true,
+        organization: "Merkle",
+        bannerImage: getOptimizedProjectImage("RalphLauren"),
+        customizations: [
+            {
+                title: "Premium Storefront Enhancements",
+                description: "Refined responsive storefront components for high-end merchandising and campaign-led experiences.",
+                layer: "SFRA"
+            },
+            {
+                title: "Commerce API Orchestration",
+                description: "Coordinated OCAPI and service integration flows for consistent basket, product, and customer experiences.",
+                layer: "OCAPI"
+            }
+        ],
+        integrations: [
+            { name: "Salesforce Commerce Cloud", purpose: "Enterprise commerce storefront", type: "Other" },
+            { name: "Analytics", purpose: "Customer journey and conversion measurement", type: "Analytics" }
         ]
     },
     {
@@ -439,7 +473,7 @@ export const projects: Project[] = [
         liveUrl: "https://www.aosmith.com/",
         longDescription: "Comprehensive analytics platform featuring machine learning algorithms for predictive analytics, real-time data processing, and interactive visualizations. Built for scalability and performance.",
         categories: ["Web Development", "AI/ML"],
-        featured: true,
+        featured: false,
         organization: "Merkle",
         bannerImage: getOptimizedProjectImage("AOSmith"),
         customizations: [

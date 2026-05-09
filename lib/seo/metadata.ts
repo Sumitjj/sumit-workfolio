@@ -249,7 +249,7 @@ export const generateStructuredData = () => {
             "Cross-border E-commerce",
             "Multi-language Support",
             "Multi-currency Support",
-            "9+ Years Experience",
+            "10+ Years Experience",
             "Senior Level",
             "Expert Level",
             "Veteran Developer",

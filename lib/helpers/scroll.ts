@@ -42,15 +42,13 @@ function throttle<T extends (...args: never[]) => void>(
  * Custom hook for optimized scroll position tracking
  */
 export function useScrollPosition(threshold: number = 50) {
-    const [scrollY, setScrollY] = useState(0);
     const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
         const updateScrollPosition = throttle(() => {
-            const newScrollY = window.scrollY;
-            setScrollY(newScrollY);
-            setIsScrolled(newScrollY > threshold);
-        }, 16); // ~60fps
+            const nextIsScrolled = window.scrollY > threshold;
+            setIsScrolled(previous => previous === nextIsScrolled ? previous : nextIsScrolled);
+        }, 100);
 
         window.addEventListener('scroll', updateScrollPosition, { passive: true });
 
@@ -60,7 +58,7 @@ export function useScrollPosition(threshold: number = 50) {
         return () => window.removeEventListener('scroll', updateScrollPosition);
     }, [threshold]);
 
-    return { scrollY, isScrolled };
+    return { isScrolled };
 }
 
 /**
@@ -92,7 +90,7 @@ export function useActiveSection(sections: string[], offset: number = 120) {
                     }
                 }
             }
-        }, 16);
+        }, 120);
 
         window.addEventListener('scroll', updateActiveSection, { passive: true });
         updateActiveSection(); // Initial check

@@ -11,12 +11,17 @@ interface ModalProps {
   title?: string;
   children: React.ReactNode;
   className?: string;
+  /**
+   * Optional inline styles applied to the modal content container.
+   * Useful for setting dynamic transform-origin or other inline properties.
+   */
+  contentStyle?: React.CSSProperties;
 }
 
 /**
  * Reusable modal component with enhanced backdrop blur and animations
  */
-export function Modal({ isOpen, onClose, title, children, className }: ModalProps) {
+export function Modal({ isOpen, onClose, title, children, className, contentStyle }: ModalProps) {
   // Handle escape key and body scroll management
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -26,7 +31,6 @@ export function Modal({ isOpen, onClose, title, children, className }: ModalProp
     };
 
     if (isOpen) {
-      // Simple scroll prevention without position manipulation
       document.addEventListener("keydown", handleEscape);
       document.body.classList.add("modal-open");
       document.body.style.overflow = "hidden";
@@ -66,7 +70,7 @@ export function Modal({ isOpen, onClose, title, children, className }: ModalProp
     >
       {/* Enhanced Backdrop with heavy blur and solid background */}
       <div
-        className="absolute inset-0 bg-black/80 backdrop-blur-2xl transition-all duration-500 ease-out animate-fade-in"
+        className="absolute inset-0 z-40 bg-black/80 backdrop-blur-2xl transition-all duration-500 ease-out animate-fade-in"
         onClick={onClose}
         style={{
           backdropFilter: 'blur(20px) saturate(180%)',
@@ -79,7 +83,7 @@ export function Modal({ isOpen, onClose, title, children, className }: ModalProp
       {/* Modal Content - Enhanced visibility */}
       <div
         className={cn(
-          "relative w-full max-w-4xl max-h-[90vh] overflow-hidden",
+          "relative z-50 w-full max-w-4xl max-h-[90vh] overflow-hidden",
           "bg-background/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-border/50",
           "transform-gpu will-change-transform transition-all duration-500",
           "ring-2 ring-primary/20 dark:ring-primary/30",
@@ -93,7 +97,9 @@ export function Modal({ isOpen, onClose, title, children, className }: ModalProp
           backgroundColor: 'hsl(var(--background) / 0.98)',
           backdropFilter: 'blur(16px) saturate(180%)',
           WebkitBackdropFilter: 'blur(16px) saturate(180%)',
-          animation: 'modalContentIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards'
+          animation: 'modalContentIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards',
+          transformOrigin: contentStyle?.transformOrigin || undefined,
+          ...contentStyle,
         }}
       >
         {/* Header */}
@@ -118,11 +124,14 @@ export function Modal({ isOpen, onClose, title, children, className }: ModalProp
 
         {/* Content - Enhanced scrolling with better visibility */}
         <div
-          className="overflow-y-auto max-h-[calc(90vh-140px)] bg-background/95 backdrop-blur-md scroll-smooth"
+          className="overflow-y-auto max-h-[90vh] bg-background/95 backdrop-blur-md scroll-smooth"
           style={{
             scrollbarWidth: 'thin',
             scrollbarColor: 'hsl(var(--primary)) hsl(var(--muted))',
-            animation: 'modalContentFadeIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both'
+            animation: 'modalContentFadeIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both',
+            WebkitOverflowScrolling: 'touch',
+            overscrollBehavior: 'contain',
+            touchAction: 'pan-y'
           }}
         >
           {children}

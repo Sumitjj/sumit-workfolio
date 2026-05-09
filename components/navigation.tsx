@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import Image from "next/image";
 import { FiMenu, FiX, FiDownload } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
@@ -31,22 +31,7 @@ const Navigation = () => {
   // Use optimized scroll hooks for better performance
   const { isScrolled } = useScrollPosition(20);
 
-  // Debug: Alternative scroll detection as fallback
-  const [debugScrolled, setDebugScrolled] = useState(false);
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      setDebugScrolled(scrollPosition > 20); // More sensitive scroll detection
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Initial check
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Use either hook result or fallback
-  const headerScrolled = isScrolled || debugScrolled;
+  const headerScrolled = isScrolled;
 
   // Get sections from navigation items (memoized for performance)
   const sections = useMemo(
@@ -80,8 +65,7 @@ const Navigation = () => {
       {/* Main Navigation Header */}
       <header
         className={cn(
-          "sticky top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out",
-          "backdrop-blur-md will-change-transform",
+          "sticky top-0 left-0 right-0 z-50 transition-colors duration-200 ease-in-out",
           headerScrolled
             ? "bg-background/95 shadow-lg supports-[backdrop-filter]:bg-background/80 transform translate-y-0"
             : "bg-background/5 supports-[backdrop-filter]:bg-background/5 transform translate-y-0"
@@ -96,7 +80,7 @@ const Navigation = () => {
             {/* Logo/Name - Now clickable without boundary */}
             <button
               onClick={handleLogoClick}
-              className="logo flex-shrink-0 cursor-pointer transition-all duration-300 transform-gpu hover:scale-105 focus:outline-none border-none bg-transparent p-0"
+              className="logo flex-shrink-0 cursor-pointer transition-colors duration-200 focus:outline-none border-none bg-transparent p-0"
               aria-label="Navigate to top of page"
               style={{ transformOrigin: 'center center', contain: 'layout style' }}
             >
@@ -113,7 +97,7 @@ const Navigation = () => {
                 alt={personalInfo.name}
                 width={100}
                 height={100}
-                className="transition-transform duration-300 transform-gpu hover:scale-105"
+                className="transition-opacity duration-200 hover:opacity-85"
                 style={{ contain: 'layout style' }}
                 priority
               />
@@ -127,7 +111,7 @@ const Navigation = () => {
                     key={item.href}
                     href={item.href}
                     onClick={(e) => handleNavClick(item.href, e)}
-                    className="relative px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 transform-gpu hover:scale-105 backdrop-blur-sm text-muted-foreground hover:text-foreground hover:bg-background/80 hover:shadow-md"
+                    className="relative px-4 py-2.5 rounded-lg text-sm font-medium transition-colors duration-200 text-muted-foreground hover:text-foreground hover:bg-background/80"
                     style={{ transformOrigin: 'center center', contain: 'layout style' }}
                   >
                     {item.label}
@@ -142,10 +126,10 @@ const Navigation = () => {
                 variant="outline"
                 size="sm"
                 onClick={openResume}
-                className="relative overflow-hidden border-border/30 bg-gradient-to-r from-primary/10 to-secondary/10 backdrop-blur-sm hover:bg-gradient-to-r hover:from-primary hover:to-primary hover:text-primary-foreground hover:border-primary transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/25 transform-gpu group"
+                className="relative overflow-hidden border-border/30 bg-primary/10 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-colors duration-200 group"
                 style={{ transformOrigin: 'center center', contain: 'layout style' }}
               >
-                <FiDownload className="h-4 w-4 mr-2 group-hover:animate-bounce" />
+                <FiDownload className="h-4 w-4 mr-2" />
                 <span className="font-medium">{getResumeButtonText()}</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out" />
               </Button>
@@ -158,9 +142,9 @@ const Navigation = () => {
                 aria-label="Toggle navigation menu"
                 aria-expanded={isOpen}
                 className={cn(
-                  "relative p-2 rounded-lg transition-all duration-300 transform-gpu",
-                  "bg-background/90 backdrop-blur-sm border border-border/50",
-                  "hover:bg-background hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/50",
+                  "relative p-2 rounded-lg transition-colors duration-200",
+                  "bg-background/90 border border-border/50",
+                  "hover:bg-background focus:outline-none focus:ring-2 focus:ring-primary/50",
                   isOpen && "bg-background border-primary/50 scale-105"
                 )}
                 style={{ transformOrigin: 'center center', contain: 'layout style' }}
@@ -184,13 +168,8 @@ const Navigation = () => {
       {/* Mobile Navigation Menu - Completely redesigned for responsive only */}
       {isOpen && (
         <div className="md:hidden">
-          {/* Backdrop with blur */}
           <div
-            className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
-            style={{
-              backdropFilter: 'blur(8px)',
-              WebkitBackdropFilter: 'blur(8px)',
-            }}
+            className="fixed inset-0 z-40 bg-black/60"
             onClick={() => setIsOpen(false)}
             aria-hidden="true"
           />
@@ -214,7 +193,7 @@ const Navigation = () => {
                     key={item.href}
                     href={item.href}
                     onClick={(e) => handleNavClick(item.href, e)}
-                    className="block px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 transform-gpu hover:scale-105"
+                    className="block px-4 py-3 rounded-lg text-base font-medium transition-colors duration-200"
                     style={{
                       color: 'rgba(255, 255, 255, 0.9)',
                       backgroundColor: 'transparent',
@@ -249,7 +228,7 @@ const Navigation = () => {
                   openResume();
                   setIsOpen(false);
                 }}
-                className="w-full px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 transform-gpu hover:scale-105 flex items-center justify-center space-x-2"
+                className="w-full px-4 py-3 rounded-lg text-base font-medium transition-colors duration-200 flex items-center justify-center space-x-2"
                 style={{
                   background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05))',
                   border: '1px solid rgba(255, 255, 255, 0.2)',
