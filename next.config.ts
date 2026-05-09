@@ -11,7 +11,6 @@ const nextConfig: NextConfig = {
   // Modern experimental features
   experimental: {
     optimizePackageImports: ['class-variance-authority', 'clsx', 'tailwind-merge'],
-    optimizeCss: true, // Enable CSS optimization
     scrollRestoration: true, // Better scroll handling
   },
 
