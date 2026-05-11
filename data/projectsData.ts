@@ -6,6 +6,10 @@ import { Project } from "@/types";
  * Featured projects with placeholder content
  */
 export const projects: Project[] = [
+    /*
+     * Full Beauty is intentionally hidden from the portfolio project list.
+     * Keep the data here for future reuse without rendering it on the site.
+     *
     {
         id: "1",
         bannerImage: getOptimizedProjectImage("Full Beauty FBB"),
@@ -49,6 +53,7 @@ export const projects: Project[] = [
             { name: "Segment", purpose: "Unified analytics tracking", type: "Analytics" }
         ]
     },
+    */
     {
         id: "15",
         title: "RalphLauren",

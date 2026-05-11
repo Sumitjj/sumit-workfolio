@@ -51,8 +51,6 @@ export const skillGroups: SkillGroup[] = [
             { name: "HTML5", icon: FaHtml5, color: "#FFFFFF" },
             { name: "CSS3", icon: FaCss3Alt, color: "#FFFFFF" },
             { name: "Tailwind CSS", icon: SiTailwindcss, color: "#FFFFFF" },
-            { name: "JQuery", icon: SiJquery, color: "#FFFFFF" },
-            { name: "LWC", icon: PiLightningFill, color: "#FFFFFF" }
         ]
     },
     {
@@ -62,10 +60,8 @@ export const skillGroups: SkillGroup[] = [
             { name: "Project Management", icon: MdManageAccounts, color: "#FFFFFF" },
             { name: "Team Leadership", icon: SiMainwp, color: "#FFFFFF" },
             { name: "System Design", icon: SiCodesignal, color: "#FFFFFF" },
-            { name: "Agile/Scrum", icon: DiScrum, color: "#FFFFFF" },
             { name: "Jira", icon: SiJira, color: "#FFFFFF" },
             { name: "GitHub", icon: FaGitAlt, color: "#FFFFFF" },
-            { name: "Jenkins", icon: FaJenkins, color: "#FFFFFF" },
             { name: "Bitbucket", icon: FaBitbucket, color: "#FFFFFF" },
         ]
     }
